@@ -93,9 +93,10 @@ macro_rules! __endpoints_without_custom__ {
             deps: ::cosmwasm_std::DepsMut,
             env: ::cosmwasm_std::Env,
             msg: <$app_type as $crate::sdk::base::MigrateEndpoint>::MigrateMsg,
+            info: ::cosmwasm_std::MigrateInfo,
         ) -> Result<::cosmwasm_std::Response, <$app_type as $crate::sdk::base::Handler>::Error> {
             use $crate::sdk::base::MigrateEndpoint;
-            $app_const.migrate(deps, env, msg)
+            $app_const.migrate(deps, env, msg, info)
         }
 
         // Reply entrypoint
@@ -132,7 +133,7 @@ mod test {
     };
     use abstract_sdk::base::CustomExecuteHandler;
     use abstract_testing::prelude::*;
-    use cosmwasm_std::{Binary, SubMsgResult};
+    use cosmwasm_std::{Binary, MessageInfo, MigrateInfo, SubMsgResult};
 
     #[coverage_helper::test]
     fn exports_endpoints() {
@@ -190,8 +191,18 @@ mod test {
             base: app::BaseMigrateMsg {},
             module: MockMigrateMsg,
         };
-        let actual_migrate = migrate(deps.as_mut(), env.clone(), migrate_msg.clone());
-        let expected_migrate = MOCK_APP_WITH_DEP.migrate(deps.as_mut(), env.clone(), migrate_msg);
+        let migrate_info = MigrateInfo {
+            sender: abstr.owner,
+            old_migrate_version: None,
+        };
+        let actual_migrate = migrate(
+            deps.as_mut(),
+            env.clone(),
+            migrate_msg.clone(),
+            migrate_info.clone(),
+        );
+        let expected_migrate =
+            MOCK_APP_WITH_DEP.migrate(deps.as_mut(), env.clone(), migrate_msg, migrate_info);
         assert_eq!(actual_migrate, expected_migrate);
 
         // sudo
@@ -322,8 +333,18 @@ mod test {
             base: app::BaseMigrateMsg {},
             module: MockMigrateMsg,
         };
-        let actual_migrate = migrate(deps.as_mut(), env.clone(), migrate_msg.clone());
-        let expected_migrate = MOCK_APP_WITH_DEP.migrate(deps.as_mut(), env.clone(), migrate_msg);
+        let migrate_info = MigrateInfo {
+            sender: abstr.owner,
+            old_migrate_version: None,
+        };
+        let actual_migrate = migrate(
+            deps.as_mut(),
+            env.clone(),
+            migrate_msg.clone(),
+            migrate_info.clone(),
+        );
+        let expected_migrate =
+            MOCK_APP_WITH_DEP.migrate(deps.as_mut(), env.clone(), migrate_msg, migrate_info);
         assert_eq!(actual_migrate, expected_migrate);
 
         // sudo

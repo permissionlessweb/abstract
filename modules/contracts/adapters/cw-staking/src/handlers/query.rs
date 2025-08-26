@@ -29,7 +29,7 @@ pub fn query_handler(
             } else {
                 // the query can be executed on the local chain
                 let mut provider = resolver::resolve_local_provider(&local_provider_name)
-                    .map_err(|e| StdError::generic_err(e.to_string()))?;
+                    .map_err(|e| StdError::msg(e.to_string()))?;
                 provider.fetch_data(
                     deps,
                     env,
@@ -55,7 +55,7 @@ pub fn query_handler(
             } else {
                 // the query can be executed on the local chain
                 let mut provider = resolver::resolve_local_provider(&local_provider_name)
-                    .map_err(|e| StdError::generic_err(e.to_string()))?;
+                    .map_err(|e| StdError::msg(e.to_string()))?;
                 provider.fetch_data(
                     deps,
                     env,
@@ -84,7 +84,7 @@ pub fn query_handler(
             } else {
                 // the query can be executed on the local chain
                 let mut provider = resolver::resolve_local_provider(&local_provider_name)
-                    .map_err(|e| StdError::generic_err(e.to_string()))?;
+                    .map_err(|e| StdError::msg(e.to_string()))?;
                 provider.fetch_data(
                     deps,
                     env,
@@ -110,7 +110,7 @@ pub fn query_handler(
             } else {
                 // the query can be executed on the local chain
                 let mut provider = resolver::resolve_local_provider(&local_provider_name)
-                    .map_err(|e| StdError::generic_err(e.to_string()))?;
+                    .map_err(|e| StdError::msg(e.to_string()))?;
                 provider.fetch_data(
                     deps,
                     env,

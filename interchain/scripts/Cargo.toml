@@ -32,7 +32,7 @@ tokio                 = { workspace = true, features = ["full"] }
 url                   = "2.4.1"
 
 clap             = { workspace = true }
-cosmos-sdk-proto = { version = "0.24.0", features = ["grpc-transport", "cosmwasm"] }
+cosmos-sdk-proto = { version = "0.27.0", features = ["grpc-transport", "cosmwasm"] }
 dirs             = "5.0.1"
 serde-cw-value   = "0.7.0"
 sha256           = "1"
@@ -56,7 +56,7 @@ bitcoin     = { version = "0.32.2" }
 cosmrs      = { version = "0.19.0", features = ["dev", "cosmwasm", "grpc"] }
 prost       = { version = "0.13" }
 prost-types = { version = "0.13" }
-tonic       = { version = "0.12.2", features = ["tls"] }
+tonic       = { version = "0.13.1" }
 
 cosmwasm-schema.workspace = true
 cw-orch-core              = "2.0.0"

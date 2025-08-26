@@ -4,13 +4,27 @@ use super::*;
 
 use cosmwasm_std::{Addr, SubMsgResponse, Uint64};
 
+/// Wrapper for query results to work with cosmwasm-schema 3.0
+#[cw_serde]
+pub enum QueryCallbackResult {
+    Success(Vec<Binary>),
+    Error(ErrorResponse),
+}
+
+/// Wrapper for execution results to work with cosmwasm-schema 3.0
+#[cw_serde]
+pub enum ExecutionCallbackResult {
+    Success(ExecutionResponse),
+    Error(String),
+}
+
 #[cw_serde]
 pub enum Callback {
     /// Result of executing the requested query, or an error.
     ///
     /// result[i] corresponds to the i'th query and contains the
     /// base64 encoded query response.
-    Query(Result<Vec<Binary>, ErrorResponse>),
+    Query(QueryCallbackResult),
 
     /// Result of executing the requested messages, or an error.
     ///
@@ -20,7 +34,7 @@ pub enum Callback {
     /// error string will only tell you the error's codespace. for
     /// example, an out-of-gas error is code 11 and looks like
     /// `codespace: sdk, code: 11`.
-    Execute(Result<ExecutionResponse, String>),
+    Execute(ExecutionCallbackResult),
 
     /// An error occured that could not be recovered from. The only
     /// known way that this can occur is message handling running out

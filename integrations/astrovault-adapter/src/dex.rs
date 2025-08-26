@@ -56,7 +56,7 @@ impl Astrovault {
                 is_xasset: config.pool_settings.unwrap().xasset_mode_minter.is_some(),
             }),
             config if config.factory == RATIO_POOL_FACTORY => Ok(AstrovaultPoolType::Ratio),
-            _ => Err(DexError::Std(StdError::generic_err(
+            _ => Err(DexError::Std(StdError::msg(
                 "Couldn't query the astrovault pool type",
             ))),
         }

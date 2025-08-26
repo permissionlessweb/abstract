@@ -3,7 +3,7 @@ use abstract_std::account::MigrateMsg;
 use abstract_std::objects::module_version::assert_contract_upgrade;
 
 use abstract_std::AbstractError;
-use cosmwasm_std::{DepsMut, Env};
+use cosmwasm_std::{DepsMut, Env, MigrateInfo};
 use cw2::{get_contract_version, set_contract_version};
 use semver::Version;
 
@@ -14,7 +14,7 @@ use crate::contract::{AccountResponse, AccountResult, CONTRACT_VERSION};
 /// - XION Account, to allow upgrading their account to a more feature rich account (second part of the function)
 /// All other contracts cannot be migrated to this version
 #[cfg_attr(feature = "export", cosmwasm_std::entry_point)]
-pub fn migrate(deps: DepsMut, _env: Env, _msg: MigrateMsg) -> AccountResult {
+pub fn migrate(deps: DepsMut, _env: Env, _msg: MigrateMsg, _info: MigrateInfo) -> AccountResult {
     let version: Version = CONTRACT_VERSION.parse().unwrap();
 
     let current_contract_version = get_contract_version(deps.storage)?;
@@ -158,7 +158,15 @@ mod tests {
 
         let version: Version = CONTRACT_VERSION.parse().unwrap();
 
-        let res = super::migrate(deps.as_mut(), env, MigrateMsg { code_id: None });
+        let res = super::migrate(
+            deps.as_mut(),
+            env,
+            MigrateMsg { code_id: None },
+            MigrateInfo {
+                sender: deps.api.addr_make("jimi"),
+                old_migrate_version: None,
+            },
+        );
 
         assert_eq!(
             res,
@@ -186,7 +194,15 @@ mod tests {
 
         let version: Version = CONTRACT_VERSION.parse().unwrap();
 
-        let res = super::migrate(deps.as_mut(), env, MigrateMsg { code_id: None });
+        let res = super::migrate(
+            deps.as_mut(),
+            env,
+            MigrateMsg { code_id: None },
+            MigrateInfo {
+                sender: deps.api.addr_make("bob"),
+                old_migrate_version: None,
+            },
+        );
 
         assert_eq!(
             res,
@@ -213,7 +229,15 @@ mod tests {
         let old_name = "old:contract";
         set_contract_version(deps.as_mut().storage, old_name, old_version)?;
 
-        let res = super::migrate(deps.as_mut(), env, MigrateMsg { code_id: None });
+        let res = super::migrate(
+            deps.as_mut(),
+            env,
+            MigrateMsg { code_id: None },
+            MigrateInfo {
+                sender: deps.api.addr_make("oz"),
+                old_migrate_version: None,
+            },
+        );
 
         assert_eq!(
             res,
@@ -245,7 +269,15 @@ mod tests {
 
         set_contract_version(deps.as_mut().storage, ACCOUNT, small_version)?;
 
-        let res = super::migrate(deps.as_mut(), env, MigrateMsg { code_id: None })?;
+        let res = super::migrate(
+            deps.as_mut(),
+            env,
+            MigrateMsg { code_id: None },
+            MigrateInfo {
+                sender: deps.api.addr_make("billie"),
+                old_migrate_version: None,
+            },
+        )?;
         assert!(res.messages.is_empty());
 
         assert_eq!(

@@ -16,7 +16,7 @@ use crate::{
     AbstractResult,
 };
 
-#[derive(Error, Debug, PartialEq)]
+#[derive(Error, Debug)]
 pub enum AnsHostError {
     // contract not found
     #[error("Contract {contract} not found in ans_host {ans_host}.")]
@@ -64,6 +64,10 @@ pub enum AnsHostError {
         method_name: String,
         error: cosmwasm_std::StdError,
     },
+
+    // Query method failed
+    #[error("Parsing error for AnsHost: {error} ")]
+    ParseError { error: cosmwasm_std::StdError },
 }
 
 pub type AnsHostResult<T> = Result<T, AnsHostError>;

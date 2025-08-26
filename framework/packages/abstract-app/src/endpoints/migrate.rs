@@ -26,6 +26,7 @@ impl<
         deps: cosmwasm_std::DepsMut,
         env: cosmwasm_std::Env,
         msg: Self::MigrateMsg,
+        info: cosmwasm_std::MigrateInfo,
     ) -> Result<cosmwasm_std::Response, Self::Error> {
         let (name, version_string, metadata) = self.info();
         let to_version = version_string.parse().unwrap();
@@ -39,7 +40,7 @@ impl<
         )?;
         set_contract_version(deps.storage, name, version_string)?;
         if let Some(migrate_fn) = self.maybe_migrate_handler() {
-            return migrate_fn(deps, env, self, msg.module);
+            return migrate_fn(deps, env, self, msg.module, info);
         }
         Ok(Response::default())
     }

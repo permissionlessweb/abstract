@@ -51,11 +51,10 @@ use cosmwasm_std::{
 use cw_storage_plus::{Bound, Item, Map};
 use thiserror::Error;
 
-#[derive(Error, Debug, PartialEq)]
+#[derive(Error, Debug)]
 pub enum VoteError {
     #[error("Std error encountered while handling voting object: {0}")]
     Std(#[from] StdError),
-
     #[error("Tried to add duplicate voter addresses")]
     DuplicateAddrs {},
 
@@ -148,7 +147,7 @@ impl SimpleVoting<'_> {
             &ProposalInfo::new(initial_voters.len() as u32, config, end),
         )?;
         for voter in initial_voters {
-            self.proposals.save(store, (proposal_id, voter), &None)?;
+            self.proposals.save(store, (proposal_id, voter), &None)?
         }
         Ok(proposal_id)
     }
@@ -532,14 +531,14 @@ mod tests {
             .is_ok());
 
         assert_eq!(
-            Threshold::Percentage(Decimal::percent(101)).validate_percentage(),
-            Err(VoteError::ThresholdError(
+            Threshold::Percentage(Decimal::percent(101)).validate_percentage().unwrap_err().to_string(),
+            VoteError::ThresholdError(
                 "not possible to reach >100% votes".to_owned()
-            ))
+            ).to_string()
         );
         assert_eq!(
-            Threshold::Percentage(Decimal::zero()).validate_percentage(),
-            Err(VoteError::ThresholdError("can't be 0%".to_owned()))
+            Threshold::Percentage(Decimal::zero()).validate_percentage().unwrap_err().to_string(),
+            VoteError::ThresholdError("can't be 0%".to_owned()).to_string()
         );
     }
 
@@ -564,10 +563,10 @@ mod tests {
         // Not active
         proposal.status = ProposalStatus::VetoPeriod(end_timestamp.plus_seconds(10));
         assert_eq!(
-            proposal.assert_active_proposal().unwrap_err(),
+            proposal.assert_active_proposal().unwrap_err().to_string(),
             VoteError::ProposalNotActive(ProposalStatus::VetoPeriod(
                 end_timestamp.plus_seconds(10)
-            ))
+            )).to_string()
         );
     }
 
@@ -652,7 +651,7 @@ mod tests {
                 &[Addr::unchecked("alice"), Addr::unchecked("alice")],
             )
             .unwrap_err();
-        assert_eq!(err, VoteError::DuplicateAddrs {});
+        assert_eq!(err.to_string(), VoteError::DuplicateAddrs {}.to_string());
     }
 
     #[coverage_helper::test]
@@ -701,8 +700,8 @@ mod tests {
             .cancel_proposal(storage, &env.block, proposal_id)
             .unwrap_err();
         assert_eq!(
-            err,
-            VoteError::ProposalNotActive(ProposalStatus::Finished(ProposalOutcome::Canceled))
+            err.to_string(),
+            VoteError::ProposalNotActive(ProposalStatus::Finished(ProposalOutcome::Canceled)).to_string()
         );
     }
 
@@ -981,7 +980,7 @@ mod tests {
                 },
             )
             .unwrap_err();
-        assert_eq!(err, VoteError::Unauthorized {});
+        assert_eq!(err.to_string(), VoteError::Unauthorized {}.to_string());
 
         // Vote during veto
         env.block.time = end_timestamp;
@@ -1000,10 +999,10 @@ mod tests {
             )
             .unwrap_err();
         assert_eq!(
-            err,
+            err.to_string(),
             VoteError::ProposalNotActive(ProposalStatus::VetoPeriod(
                 env.block.time.plus_seconds(10)
-            ))
+            )).to_string()
         );
 
         env.block.time = env.block.time.plus_seconds(10);
@@ -1022,8 +1021,8 @@ mod tests {
             )
             .unwrap_err();
         assert_eq!(
-            err,
-            VoteError::ProposalNotActive(ProposalStatus::WaitingForCount)
+            err.to_string(),
+            VoteError::ProposalNotActive(ProposalStatus::WaitingForCount).to_string()
         );
 
         // Post-finish votes
@@ -1043,8 +1042,8 @@ mod tests {
             )
             .unwrap_err();
         assert_eq!(
-            err,
-            VoteError::ProposalNotActive(ProposalStatus::Finished(ProposalOutcome::Failed))
+            err.to_string(),
+            VoteError::ProposalNotActive(ProposalStatus::Finished(ProposalOutcome::Failed)).to_string()
         );
     }
 

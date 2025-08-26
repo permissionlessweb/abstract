@@ -12,7 +12,7 @@ impl StandaloneContract {
     pub fn migrate(&self, deps: cosmwasm_std::DepsMut) -> AbstractResult<()> {
         let base_state = self.base_state.load(deps.storage)?;
         if !base_state.is_migratable {
-            return Err(StdError::generic_err("Migration is not enabled on contract").into());
+            return Err(StdError::msg("Migration is not enabled on contract").into());
         }
 
         let (name, version_string, metadata) = self.info;

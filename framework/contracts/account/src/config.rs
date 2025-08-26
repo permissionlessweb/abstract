@@ -90,7 +90,7 @@ pub fn update_internal_config(
             Ok(AccountResponse::action("update_whitelist"))
         }
         _ => Err(AccountError::InvalidConfigAction {
-            error: StdError::generic_err("Unknown config action"),
+            error: StdError::msg("Unknown config action"),
         }),
     }
 }
@@ -458,7 +458,7 @@ mod tests {
 
             let res = execute_as(&mut deps, &owner, update_info_msg);
 
-            assert_eq!(res, Err(AccountError::AccountSuspended {}));
+            assert_eq!(res.unwrap_err().to_string(), AccountError::AccountSuspended {}.to_string());
 
             Ok(())
         }
@@ -531,8 +531,8 @@ mod tests {
             let res = execute_as(&mut deps, &bad_sender, msg.clone());
 
             assert_eq!(
-                res,
-                Err(AccountError::Ownership(GovOwnershipError::NotOwner))
+                res.unwrap_err().to_string(),
+                AccountError::Ownership(GovOwnershipError::NotOwner).to_string()
             );
 
             let vc_res = execute_as(&mut deps, &abstr.registry, msg.clone());
@@ -563,7 +563,7 @@ mod tests {
                     to_remove: vec![],
                 });
             let too_many = execute_as(&mut deps, &owner, too_many_msg).unwrap_err();
-            assert_eq!(too_many, AccountError::ModuleLimitReached {});
+            assert_eq!(too_many.to_string(), AccountError::ModuleLimitReached {}.to_string());
 
             // Exact amount
             to_add.pop();
@@ -586,7 +586,7 @@ mod tests {
                 }),
             )
             .unwrap_err();
-            assert_eq!(module_limit_reached, AccountError::ModuleLimitReached {});
+            assert_eq!(module_limit_reached.to_string(), AccountError::ModuleLimitReached {}.to_string());
 
             Ok(())
         }
@@ -610,8 +610,8 @@ mod tests {
 
             let duplicate_err = execute_as(&mut deps, &owner, msg).unwrap_err();
             assert_eq!(
-                duplicate_err,
-                AccountError::AlreadyWhitelisted(to_add[0].clone())
+                duplicate_err.to_string(),
+                AccountError::AlreadyWhitelisted(to_add[0].clone()).to_string()
             );
 
             // duplicate inside add
@@ -625,8 +625,8 @@ mod tests {
             });
             let duplicate_err = execute_as(&mut deps, &owner, msg).unwrap_err();
             assert_eq!(
-                duplicate_err,
-                AccountError::AlreadyWhitelisted(to_add[0].clone())
+                duplicate_err.to_string(),
+                AccountError::AlreadyWhitelisted(to_add[0].clone()).to_string()
             );
 
             Ok(())
@@ -657,7 +657,7 @@ mod tests {
                 to_remove,
             });
             let not_whitelisted = execute_as(&mut deps, &owner, msg.clone()).unwrap_err();
-            assert_eq!(not_whitelisted, AccountError::NotWhitelisted {});
+            assert_eq!(not_whitelisted.to_string(), AccountError::NotWhitelisted {}.to_string());
 
             // Remove same twice
             let to_add: Vec<String> = vec![deps.api.addr_make("module").to_string()];
@@ -670,7 +670,7 @@ mod tests {
                 to_remove: to_remove.clone(),
             });
             let not_whitelisted = execute_as(&mut deps, &owner, msg.clone()).unwrap_err();
-            assert_eq!(not_whitelisted, AccountError::NotWhitelisted {});
+            assert_eq!(not_whitelisted.to_string(), AccountError::NotWhitelisted {}.to_string());
 
             Ok(())
         }

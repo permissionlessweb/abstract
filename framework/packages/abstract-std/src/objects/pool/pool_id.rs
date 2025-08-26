@@ -18,7 +18,7 @@ impl<T> PoolAddressBase<T> {
     pub fn contract<C: Into<T>>(contract: C) -> Self {
         Self::Contract(contract.into())
     }
-    pub fn id<N: Into<u64>>(id: N) -> Self {
+    pub fn pool_id<N: Into<u64>>(id: N) -> Self {
         Self::Id(id.into())
     }
 }
@@ -77,7 +77,7 @@ impl FromStr for UncheckedPoolAddress {
                 let parsed_id_res = words[1].parse::<u64>();
                 match parsed_id_res {
                     Ok(id) => Ok(UncheckedPoolAddress::Id(id)),
-                    Err(err) => Err(StdError::generic_err(err.to_string()).into()),
+                    Err(err) => Err(StdError::msg(err.to_string()).into()),
                 }
             }
             _unknown => Err(AbstractError::FormattingError {

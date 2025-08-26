@@ -47,7 +47,7 @@ pub fn add_account(
     let maybe_acc_module_info = ModuleInfo::try_from(contract_info)?;
 
     ensure!(
-        maybe_acc_module_info.id() == ACCOUNT,
+        maybe_acc_module_info.module_id() == ACCOUNT,
         RegistryError::NotAccountInfo {
             caller_info: maybe_acc_module_info
         }
@@ -871,8 +871,8 @@ mod tests {
         let not_owner = deps.api.addr_make("not_owner");
         let res = execute_as(deps, &not_owner, msg);
         assert_eq!(
-            res,
-            Err(RegistryError::Ownership(OwnershipError::NotOwner {}))
+            res.unwrap_err().to_string(),
+            RegistryError::Ownership(OwnershipError::NotOwner {}).to_string()
         );
 
         Ok(())
@@ -990,7 +990,10 @@ mod tests {
             };
 
             let res = execute_as(&mut deps, account.addr(), msg);
-            assert_eq!(res, Err(RegistryError::Ownership(OwnershipError::NotOwner)));
+            assert_eq!(
+                res.unwrap_err().to_string(),
+                RegistryError::Ownership(OwnershipError::NotOwner).to_string()
+            );
 
             Ok(())
         }
@@ -1027,30 +1030,32 @@ mod tests {
             // Fail, no fee at all
             let res = execute_as(&mut deps, &abstr.owner, msg.clone());
             assert_eq!(
-                res,
-                Err(RegistryError::Abstract(AbstractError::Fee(format!(
+                res.unwrap_err().to_string(),
+                RegistryError::Abstract(AbstractError::Fee(format!(
                     "Invalid fee payment sent. Expected {}, sent {:?}",
                     Coin {
                         denom: one_namespace_fee.denom.clone(),
                         amount: one_namespace_fee.amount,
                     },
                     Vec::<Coin>::new()
-                ))))
+                )))
+                .to_string()
             );
 
             // Fail, not enough fee
             let sent_coins = coins(5, "ujunox");
             let res = execute_as_with_funds(&mut deps, &abstr.owner, msg.clone(), &sent_coins);
             assert_eq!(
-                res,
-                Err(RegistryError::Abstract(AbstractError::Fee(format!(
+                res.unwrap_err().to_string(),
+                RegistryError::Abstract(AbstractError::Fee(format!(
                     "Invalid fee payment sent. Expected {}, sent {:?}",
                     Coin {
                         denom: one_namespace_fee.denom.clone(),
                         amount: one_namespace_fee.amount,
                     },
                     sent_coins
-                ))))
+                )))
+                .to_string()
             );
 
             // Success
@@ -1082,11 +1087,12 @@ mod tests {
             let other = deps.api.addr_make(TEST_OTHER);
             let res = execute_as(&mut deps, &other, msg);
             assert_eq!(
-                res,
-                Err(RegistryError::AccountOwnerMismatch {
+                res.unwrap_err().to_string(),
+                RegistryError::AccountOwnerMismatch {
                     sender: other,
                     owner: abstr.owner,
-                })
+                }
+                .to_string()
             );
             Ok(())
         }
@@ -1113,11 +1119,12 @@ mod tests {
             };
             let res = execute_as(&mut deps, &abstr.owner, msg);
             assert_eq!(
-                res,
-                Err(RegistryError::NamespaceOccupied {
+                res.unwrap_err().to_string(),
+                RegistryError::NamespaceOccupied {
                     namespace: new_namespace1.to_string(),
                     id: FIRST_TEST_ACCOUNT_ID,
-                })
+                }
+                .to_string()
             );
             Ok(())
         }
@@ -1164,7 +1171,10 @@ mod tests {
 
             let other = deps.api.addr_make(TEST_OTHER);
             let res = execute_as(&mut deps, &other, msg);
-            assert_eq!(res, Err(RegistryError::Ownership(OwnershipError::NotOwner)));
+            assert_eq!(
+                res.unwrap_err().to_string(),
+                RegistryError::Ownership(OwnershipError::NotOwner).to_string()
+            );
 
             Ok(())
         }
@@ -1209,7 +1219,10 @@ mod tests {
 
             let other = deps.api.addr_make(TEST_OTHER);
             let res = execute_as(&mut deps, &other, msg);
-            assert_eq!(res, Err(RegistryError::Ownership(OwnershipError::NotOwner)));
+            assert_eq!(
+                res.unwrap_err().to_string(),
+                RegistryError::Ownership(OwnershipError::NotOwner).to_string()
+            );
 
             Ok(())
         }
@@ -1327,11 +1340,12 @@ mod tests {
             let other = deps.api.addr_make(TEST_OTHER);
             let res = execute_as(&mut deps, &other, msg);
             assert_eq!(
-                res,
-                Err(RegistryError::AccountOwnerMismatch {
+                res.unwrap_err().to_string(),
+                RegistryError::AccountOwnerMismatch {
                     sender: other,
                     owner: abstr.owner,
-                })
+                }
+                .to_string()
             );
             Ok(())
         }
@@ -1610,7 +1624,10 @@ mod tests {
 
             // assert we got admin must be none error
             let res = execute_as(&mut deps, &abstr.owner, msg);
-            assert_eq!(res, Err(RegistryError::AdminMustBeNone));
+            assert_eq!(
+                res.unwrap_err().to_string(),
+                RegistryError::AdminMustBeNone.to_string()
+            );
 
             Ok(())
         }
@@ -1826,11 +1843,12 @@ mod tests {
             let other = deps.api.addr_make(TEST_OTHER);
             let res = execute_as(&mut deps, &other, msg);
             assert_eq!(
-                res,
-                Err(RegistryError::AccountOwnerMismatch {
+                res.unwrap_err().to_string(),
+                RegistryError::AccountOwnerMismatch {
                     sender: other,
                     owner: abstr.owner,
-                })
+                }
+                .to_string()
             );
 
             Ok(())
@@ -2231,7 +2249,10 @@ mod tests {
             };
             let res = execute_as(&mut deps, &abstr.owner, msg);
 
-            assert_eq!(res, Err(RegistryError::ModuleNotFound(new_module)));
+            assert_eq!(
+                res.unwrap_err().to_string(),
+                RegistryError::ModuleNotFound(new_module).to_string()
+            );
             Ok(())
         }
 
@@ -2390,7 +2411,10 @@ mod tests {
                 abstr.account.addr().clone(),
                 &account_id,
             );
-            assert_eq!(res, Err(RegistryError::NoAccountOwner { account_id }));
+            assert_eq!(
+                res.unwrap_err().to_string(),
+                RegistryError::NoAccountOwner { account_id }.to_string()
+            );
             Ok(())
         }
     }

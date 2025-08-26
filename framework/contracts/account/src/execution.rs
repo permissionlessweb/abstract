@@ -165,7 +165,7 @@ pub fn ica_action(
     let ica_client_address = ACCOUNT_MODULES
         .may_load(deps.storage, ICA_CLIENT)?
         .ok_or_else(|| {
-            StdError::generic_err(format!(
+            StdError::msg(format!(
                 "ica_client not found on account. Add it under the {ICA_CLIENT} name."
             ))
         })?;
@@ -291,7 +291,7 @@ mod test {
             // We simulate it's still an admin call
             AUTH_ADMIN.save(deps.as_mut().storage, &true)?;
             let res = execute_from_res(deps.as_mut(), env, res);
-            assert_eq!(res, Err(AccountError::CantChainAdminCalls {}));
+            assert_eq!(res.unwrap_err().to_string(), AccountError::CantChainAdminCalls {}.to_string());
             Ok(())
         }
 
@@ -307,7 +307,7 @@ mod test {
             let env = mock_env_validated(deps.api);
 
             let res = execute(deps.as_mut(), env, info, msg);
-            assert_eq!(res, Err(AccountError::SenderNotWhitelistedOrOwner {}));
+            assert_eq!(res.unwrap_err().to_string(), AccountError::SenderNotWhitelistedOrOwner {}.to_string());
             Ok(())
         }
 

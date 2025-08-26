@@ -1,8 +1,9 @@
 //! # AnsHost Entry
 //! An entry (value) in the ans_host key-value store.
 
+use abstract_std::objects::ans_host::AnsHostError;
 use abstract_std::objects::{ans_host::AnsHostResult, AnsEntryConvertor};
-use cosmwasm_std::{Addr, QuerierWrapper};
+use cosmwasm_std::{Addr, QuerierWrapper, Uint128};
 use cw_asset::{Asset, AssetInfo};
 
 use crate::std::objects::{
@@ -95,7 +96,11 @@ impl Resolve for Asset {
     fn resolve(&self, querier: &QuerierWrapper, ans_host: &AnsHost) -> AnsHostResult<Self::Output> {
         Ok(AnsAsset {
             name: self.info.resolve(querier, ans_host)?,
-            amount: self.amount,
+            amount: self
+                .amount
+                .to_string()
+                .parse::<Uint128>()
+                .map_err(|error| AnsHostError::ParseError { error })?,
         })
     }
 }
@@ -243,11 +248,14 @@ mod tests {
                 .build();
 
             let res = test_resolve(&ans_host, &querier, &test_asset_entry);
-            assert_eq!(res, Ok(expected_value));
+            assert_eq!(res.unwrap().to_string(), expected_value.to_string());
 
             let ans_asset_res =
                 test_resolve(&ans_host, &querier, &AnsAsset::new("aoeu", 52256u128));
-            assert_eq!(ans_asset_res, Ok(Asset::cw20(expected_addr, 52256u128)));
+            assert_eq!(
+                ans_asset_res.unwrap().to_string(),
+                Asset::cw20(expected_addr, 52256u128).to_string()
+            );
         }
 
         #[coverage_helper::test]
@@ -290,7 +298,7 @@ mod tests {
 
             let res = keys.resolve(&wrap_querier(&querier), &ans_host);
 
-            assert_eq!(res, Ok(values));
+            assert_eq!(res.unwrap(), values);
         }
     }
 
@@ -317,7 +325,7 @@ mod tests {
                 .build();
 
             let res = test_resolve(&ans_host, &querier, &test_lp_token);
-            assert_eq!(res, Ok(expected_value));
+            assert_eq!(res.unwrap(), expected_value);
         }
 
         #[coverage_helper::test]
@@ -371,7 +379,7 @@ mod tests {
             };
 
             let res = test_resolve(&ans_host, &querier, &test_pool_metadata);
-            assert_eq!(res, Ok(expected_value));
+            assert_eq!(res.unwrap(), expected_value);
         }
 
         #[coverage_helper::test]
@@ -424,7 +432,7 @@ mod tests {
                 .build();
 
             let unique_pool_id_res = test_resolve(&ans_host, &querier, &unique_pool_id);
-            assert_eq!(unique_pool_id_res, Ok(pool_metadata));
+            assert_eq!(unique_pool_id_res.unwrap(), pool_metadata);
         }
 
         #[coverage_helper::test]
@@ -463,7 +471,7 @@ mod tests {
 
             let res = test_resolve(&ans_host, &querier, &test_contract_entry);
 
-            assert_eq!(res, Ok(expected_value));
+            assert_eq!(res.unwrap(), expected_value);
         }
 
         #[coverage_helper::test]
@@ -516,7 +524,7 @@ mod tests {
 
             let res = keys.resolve(&wrap_querier(&querier), &ans_host);
 
-            assert_eq!(res, Ok(values));
+            assert_eq!(res.unwrap(), values);
         }
     }
 
@@ -549,7 +557,7 @@ mod tests {
 
             let res = test_resolve(&ans_host, &querier, &test_channel_entry);
 
-            assert_eq!(res, Ok(expected_value));
+            assert_eq!(res.unwrap(), expected_value);
         }
 
         #[coverage_helper::test]
@@ -588,14 +596,14 @@ mod tests {
                 .build();
 
             let res = test_resolve(&ans_host, &querier, &test_asset_info);
-            assert_eq!(res, Ok(expected_value));
+            assert_eq!(res.unwrap(), expected_value);
 
             let asset_res = test_resolve(
                 &ans_host,
                 &querier,
                 &Asset::cw20(expected_address, 12345u128),
             );
-            assert_eq!(asset_res, Ok(AnsAsset::new("chinachinachina", 12345u128)));
+            assert_eq!(asset_res.unwrap(), AnsAsset::new("chinachinachina", 12345u128));
         }
 
         #[coverage_helper::test]
@@ -638,7 +646,7 @@ mod tests {
 
             let res = keys.resolve(&wrap_querier(&querier), &ans_host);
 
-            assert_eq!(res, Ok(values));
+            assert_eq!(res.unwrap(), values);
         }
     }
 }

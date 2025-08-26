@@ -75,7 +75,7 @@ impl CwStakingCommand for WynDex {
                     entry.resolve(&deps.querier, ans_host)?
                 else {
                     return Err(
-                        StdError::generic_err("expected CW20 as LP token for staking.").into(),
+                        StdError::msg("expected CW20 as LP token for staking.").into(),
                     );
                 };
 
@@ -218,7 +218,7 @@ impl CwStakingCommand for WynDex {
         unbonding_period: Option<Duration>,
     ) -> StakingResult<StakeResponse> {
         let unbonding_period = unwrap_unbond(self, unbonding_period)
-            .map_err(|e| StdError::generic_err(e.to_string()))?;
+            .map_err(|e| StdError::msg(e.to_string()))?;
 
         let amounts = self
             .tokens
@@ -232,7 +232,7 @@ impl CwStakingCommand for WynDex {
                     (&staker, unbonding_period),
                 );
                 let stake_balance_info = stake_balance_res.map_err(|e| {
-                    StdError::generic_err(format!(
+                    StdError::msg(format!(
                         "Raw query for wynddex stake balance failed. Error: {e:?}"
                     ))
                 })?;

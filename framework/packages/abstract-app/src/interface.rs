@@ -179,9 +179,10 @@ macro_rules! __wrapper_fns_without_custom__ {
             deps: ::cosmwasm_std::DepsMut,
             env: ::cosmwasm_std::Env,
             msg: <$app_type as $crate::sdk::base::MigrateEndpoint>::MigrateMsg,
+            info: ::cosmwasm_std::MigrateInfo,
         ) -> Result<::cosmwasm_std::Response, <$app_type as $crate::sdk::base::Handler>::Error> {
             use $crate::sdk::base::MigrateEndpoint;
-            $app_const.migrate(deps, env, msg)
+            $app_const.migrate(deps, env, msg, info)
         }
 
         pub fn reply(

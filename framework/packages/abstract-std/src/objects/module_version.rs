@@ -292,36 +292,36 @@ mod tests {
         let to_version: Version = "0.19.1".parse().unwrap();
         let err = assert_contract_upgrade(&store, contract_name, to_version.clone()).unwrap_err();
         assert_eq!(
-            err,
+            err.to_string(),
             AbstractError::CannotDowngradeContract {
                 contract: contract_name.to_string(),
                 from: contract_version.parse().unwrap(),
                 to: to_version
-            }
+            }.to_string()
         );
 
         // Minor upgrade
         let to_version: Version = "0.21.0".parse().unwrap();
         let err = assert_contract_upgrade(&store, contract_name, to_version.clone()).unwrap_err();
         assert_eq!(
-            err,
+            err.to_string(),
             AbstractError::CannotSkipVersion {
                 contract: contract_name.to_string(),
                 from: contract_version.parse().unwrap(),
                 to: to_version
-            }
+            }.to_string()
         );
 
         // Major upgrade
         let to_version: Version = "2.0.0".parse().unwrap();
         let err = assert_contract_upgrade(&store, contract_name, to_version.clone()).unwrap_err();
         assert_eq!(
-            err,
+            err.to_string(),
             AbstractError::CannotSkipVersion {
                 contract: contract_name.to_string(),
                 from: contract_version.parse().unwrap(),
                 to: to_version
-            }
+            }.to_string()
         );
     }
 }

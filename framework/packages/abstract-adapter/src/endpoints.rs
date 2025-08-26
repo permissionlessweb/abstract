@@ -136,7 +136,7 @@ mod test {
             message_info(&owner, &[]),
             init_msg,
         );
-        assert_eq!(actual_init, expected_init);
+        assert_eq!(actual_init.unwrap(), expected_init.unwrap());
 
         // exec
         let exec_msg = adapter::ExecuteMsg::Module(AdapterRequestMsg::new(None, MockExecMsg {}));
@@ -152,19 +152,19 @@ mod test {
             message_info(&owner, &[]),
             exec_msg,
         );
-        assert_eq!(actual_exec, expected_exec);
+        assert_eq!(actual_exec.unwrap(), expected_exec.unwrap());
 
         // query
         let query_msg = adapter::QueryMsg::Module(MockQueryMsg::GetSomething {});
         let actual_query = query(deps.as_ref(), env.clone(), query_msg.clone());
         let expected_query = MOCK_ADAPTER.query(deps.as_ref(), env.clone(), query_msg);
-        assert_eq!(actual_query, expected_query);
+        assert_eq!(actual_query.unwrap(), expected_query.unwrap());
 
         // sudo
         let sudo_msg = MockSudoMsg {};
         let actual_sudo = sudo(deps.as_mut(), env.clone(), sudo_msg.clone());
         let expected_sudo = MOCK_ADAPTER.sudo(deps.as_mut(), env.clone(), sudo_msg);
-        assert_eq!(actual_sudo, expected_sudo);
+        assert_eq!(actual_sudo.unwrap(), expected_sudo.unwrap());
 
         // reply
         let reply_msg = ::cosmwasm_std::Reply {
@@ -175,7 +175,7 @@ mod test {
         };
         let actual_reply = reply(deps.as_mut(), env.clone(), reply_msg.clone());
         let expected_reply = MOCK_ADAPTER.reply(deps.as_mut(), env, reply_msg);
-        assert_eq!(actual_reply, expected_reply);
+        assert_eq!(actual_reply.unwrap(), expected_reply.unwrap());
     }
 
     #[coverage_helper::test]
@@ -261,7 +261,7 @@ mod test {
             message_info(&abstr.owner, &[]),
             init_msg,
         );
-        assert_eq!(actual_init, expected_init);
+        assert_eq!(actual_init.unwrap(), expected_init.unwrap());
 
         // exec
         let exec_msg = MockExecMsg {};
@@ -277,19 +277,19 @@ mod test {
             message_info(&abstr.owner, &[]),
             exec_msg.into(),
         );
-        assert_eq!(actual_exec, expected_exec);
+        assert_eq!(actual_exec.unwrap(), expected_exec.unwrap());
 
         // query
         let query_msg = adapter::QueryMsg::Module(MockQueryMsg::GetSomething {});
         let actual_query = query(deps.as_ref(), env.clone(), query_msg.clone());
         let expected_query = MOCK_ADAPTER.query(deps.as_ref(), env.clone(), query_msg);
-        assert_eq!(actual_query, expected_query);
+        assert_eq!(actual_query.unwrap(), expected_query.unwrap());
 
         // sudo
         let sudo_msg = MockSudoMsg {};
         let actual_sudo = sudo(deps.as_mut(), env.clone(), sudo_msg.clone());
         let expected_sudo = MOCK_ADAPTER.sudo(deps.as_mut(), env.clone(), sudo_msg);
-        assert_eq!(actual_sudo, expected_sudo);
+        assert_eq!(actual_sudo.unwrap(), expected_sudo.unwrap());
 
         // reply
         let reply_msg = ::cosmwasm_std::Reply {
@@ -300,6 +300,6 @@ mod test {
         };
         let actual_reply = reply(deps.as_mut(), env.clone(), reply_msg.clone());
         let expected_reply = MOCK_ADAPTER.reply(deps.as_mut(), env, reply_msg);
-        assert_eq!(actual_reply, expected_reply);
+        assert_eq!(actual_reply.unwrap(), expected_reply.unwrap());
     }
 }

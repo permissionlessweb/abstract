@@ -6,7 +6,7 @@ use cosmwasm_std::{Instantiate2AddressError, StdError};
 use cw_ownable::OwnershipError;
 use thiserror::Error;
 
-#[derive(Error, Debug, PartialEq)]
+#[derive(Error, Debug)]
 pub enum HostError {
     #[error(transparent)]
     Std(#[from] StdError),

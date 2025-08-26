@@ -492,11 +492,11 @@ fn account_adapter_ownership() -> AResult {
         .downcast()
         .unwrap();
     assert_eq!(
-        err,
+        err.to_string(),
         MockError::Adapter(AdapterError::UnauthorizedAddressAdapterRequest {
             adapter: adapter_1::MOCK_ADAPTER_ID.to_owned(),
             sender: who.to_string()
-        })
+        }).to_string()
     );
 
     // Checking base requests
@@ -557,11 +557,11 @@ fn account_adapter_ownership() -> AResult {
         .downcast()
         .unwrap();
     assert_eq!(
-        err,
+        err.to_string(),
         MockError::Adapter(AdapterError::UnauthorizedAdapterRequest {
             adapter: adapter_1::MOCK_ADAPTER_ID.to_owned(),
             sender: who.to_string()
-        })
+        }).to_string()
     );
 
     Ok(())
@@ -652,11 +652,11 @@ fn subaccount_adapter_ownership() -> AResult {
         .downcast()
         .unwrap();
     assert_eq!(
-        err,
+        err.to_string(),
         MockError::Adapter(AdapterError::UnauthorizedAddressAdapterRequest {
             adapter: adapter_1::MOCK_ADAPTER_ID.to_owned(),
             sender: who.to_string()
-        })
+        }).to_string()
     );
 
     // Checking base requests
@@ -716,11 +716,11 @@ fn subaccount_adapter_ownership() -> AResult {
         .downcast()
         .unwrap();
     assert_eq!(
-        err,
+        err.to_string(),
         MockError::Adapter(AdapterError::UnauthorizedAdapterRequest {
             adapter: adapter_1::MOCK_ADAPTER_ID.to_owned(),
             sender: who.to_string()
-        })
+        }).to_string()
     );
     Ok(())
 }

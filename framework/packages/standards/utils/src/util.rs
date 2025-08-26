@@ -1,4 +1,4 @@
-use cosmwasm_std::{to_json_binary, Addr, Coin, CosmosMsg, StdResult, WasmMsg};
+use cosmwasm_std::{to_json_binary, Addr, Coin, CosmosMsg, StdResult, Uint256, WasmMsg};
 use cw20::Cw20ExecuteMsg;
 use cw_asset::{Asset, AssetInfo};
 
@@ -25,7 +25,7 @@ pub fn coins_in_assets(assets: &[Asset]) -> Vec<Coin> {
     let mut coins = vec![];
     for asset in assets {
         if let AssetInfo::Native(denom) = &asset.info {
-            coins.push(Coin::new(asset.amount.u128(), denom.clone()));
+            coins.push(Coin::new(asset.amount, denom.clone()));
         }
     }
     // https://github.com/cosmos/cosmos-sdk/blob/d5b40fc427f530b5ab078c61531d521b85505a1e/types/coin.go#L259-L261

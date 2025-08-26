@@ -8,7 +8,9 @@ use abstract_std::{
     },
     ICA_CLIENT,
 };
-use cosmwasm_std::{to_json_binary, Deps, DepsMut, Env, MessageInfo, QueryResponse, Response};
+use cosmwasm_std::{
+    to_json_binary, Deps, DepsMut, Env, MessageInfo, MigrateInfo, QueryResponse, Response,
+};
 use semver::Version;
 
 use crate::{error::IcaClientError, queries};
@@ -116,7 +118,7 @@ pub fn query(deps: Deps, env: Env, msg: QueryMsg) -> IcaClientResult<QueryRespon
 }
 
 #[cfg_attr(feature = "export", cosmwasm_std::entry_point)]
-pub fn migrate(deps: DepsMut, env: Env, msg: MigrateMsg) -> IcaClientResult {
+pub fn migrate(deps: DepsMut, env: Env, msg: MigrateMsg, _info: MigrateInfo) -> IcaClientResult {
     match msg {
         MigrateMsg::Instantiate(instantiate_msg) => {
             abstract_sdk::cw_helpers::migrate_instantiate(deps, env, instantiate_msg, instantiate)
@@ -181,22 +183,30 @@ mod tests {
         #[coverage_helper::test]
         fn disallow_same_version() -> IcaClientResult<()> {
             let mut deps = mock_dependencies();
+            let sender = deps.api.addr_make("jimi");
             let env = mock_env_validated(deps.api);
             mock_init(&mut deps)?;
 
             let version: Version = CONTRACT_VERSION.parse().unwrap();
 
-            let res = contract::migrate(deps.as_mut(), env, MigrateMsg::Migrate {});
+            let res = contract::migrate(
+                deps.as_mut(),
+                env,
+                MigrateMsg::Migrate {},
+                MigrateInfo {
+                    sender,
+                    old_migrate_version: None,
+                },
+            );
 
             assert_eq!(
-                res,
-                Err(IcaClientError::Abstract(
-                    AbstractError::CannotDowngradeContract {
-                        contract: ICA_CLIENT.to_string(),
-                        from: version.to_string().parse().unwrap(),
-                        to: version.to_string().parse().unwrap(),
-                    },
-                ))
+                res.unwrap_err().to_string(),
+                IcaClientError::Abstract(AbstractError::CannotDowngradeContract {
+                    contract: ICA_CLIENT.to_string(),
+                    from: version.to_string().parse().unwrap(),
+                    to: version.to_string().parse().unwrap(),
+                },)
+                .to_string()
             );
 
             Ok(())
@@ -205,6 +215,7 @@ mod tests {
         #[coverage_helper::test]
         fn disallow_downgrade() -> IcaClientResult<()> {
             let mut deps = mock_dependencies();
+            let sender = deps.api.addr_make("jimi");
             let env = mock_env_validated(deps.api);
             mock_init(&mut deps)?;
 
@@ -213,17 +224,24 @@ mod tests {
 
             let version: Version = CONTRACT_VERSION.parse().unwrap();
 
-            let res = contract::migrate(deps.as_mut(), env, MigrateMsg::Migrate {});
+            let res = contract::migrate(
+                deps.as_mut(),
+                env,
+                MigrateMsg::Migrate {},
+                MigrateInfo {
+                    sender,
+                    old_migrate_version: None,
+                },
+            );
 
             assert_eq!(
-                res,
-                Err(IcaClientError::Abstract(
-                    AbstractError::CannotDowngradeContract {
-                        contract: ICA_CLIENT.to_string(),
-                        from: big_version.parse().unwrap(),
-                        to: version.to_string().parse().unwrap(),
-                    },
-                ))
+                res.unwrap_err().to_string(),
+                IcaClientError::Abstract(AbstractError::CannotDowngradeContract {
+                    contract: ICA_CLIENT.to_string(),
+                    from: big_version.parse().unwrap(),
+                    to: version.to_string().parse().unwrap(),
+                },)
+                .to_string()
             );
 
             Ok(())
@@ -232,6 +250,7 @@ mod tests {
         #[coverage_helper::test]
         fn disallow_name_change() -> IcaClientResult<()> {
             let mut deps = mock_dependencies();
+            let sender = deps.api.addr_make("jimi");
             let env = mock_env_validated(deps.api);
             mock_init(&mut deps)?;
 
@@ -239,16 +258,23 @@ mod tests {
             let old_name = "old:contract";
             cw2::set_contract_version(deps.as_mut().storage, old_name, old_version)?;
 
-            let res = contract::migrate(deps.as_mut(), env, MigrateMsg::Migrate {});
+            let res = contract::migrate(
+                deps.as_mut(),
+                env,
+                MigrateMsg::Migrate {},
+                MigrateInfo {
+                    sender,
+                    old_migrate_version: None,
+                },
+            );
 
             assert_eq!(
-                res,
-                Err(IcaClientError::Abstract(
-                    AbstractError::ContractNameMismatch {
-                        from: old_name.parse().unwrap(),
-                        to: ICA_CLIENT.parse().unwrap(),
-                    },
-                ))
+                res.unwrap_err().to_string(),
+                IcaClientError::Abstract(AbstractError::ContractNameMismatch {
+                    from: old_name.parse().unwrap(),
+                    to: ICA_CLIENT.parse().unwrap(),
+                },)
+                .to_string()
             );
 
             Ok(())
@@ -257,6 +283,7 @@ mod tests {
         #[coverage_helper::test]
         fn works() -> IcaClientResult<()> {
             let mut deps = mock_dependencies();
+            let sender = deps.api.addr_make("jimi");
             let env = mock_env_validated(deps.api);
             mock_init(&mut deps)?;
 
@@ -269,7 +296,15 @@ mod tests {
             .to_string();
             cw2::set_contract_version(deps.as_mut().storage, ICA_CLIENT, small_version)?;
 
-            let res = contract::migrate(deps.as_mut(), env, MigrateMsg::Migrate {})?;
+            let res = contract::migrate(
+                deps.as_mut(),
+                env,
+                MigrateMsg::Migrate {},
+                MigrateInfo {
+                    sender,
+                    old_migrate_version: None,
+                },
+            )?;
             assert!(res.messages.is_empty());
 
             assert_eq!(

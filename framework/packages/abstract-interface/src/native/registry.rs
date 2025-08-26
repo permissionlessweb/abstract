@@ -89,7 +89,7 @@ impl<Chain: CwEnv> Registry<Chain> {
                 Ok(module_list_response.modules.swap_remove(0).module)
             } else {
                 Err(crate::AbstractInterfaceError::Std(
-                    cosmwasm_std::StdError::generic_err("Module not found"),
+                    cosmwasm_std::StdError::msg("Module not found"),
                 ))
             }
         }
@@ -233,7 +233,7 @@ impl<Chain: CwEnv> Registry<Chain> {
         })?;
         let to_register_module_ids = to_register
             .iter()
-            .map(|to_register| to_register.0.id())
+            .map(|to_register| to_register.0.module_id())
             .collect::<Vec<String>>()
             .join(",");
         log::info!("Modules {to_register_module_ids} registered");

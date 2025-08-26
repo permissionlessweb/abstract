@@ -6,7 +6,7 @@ use thiserror::Error;
 use crate::objects::{ans_host::AnsHostError, registry::RegistryError};
 
 /// Wrapper error for the Abstract framework.
-#[derive(Error, Debug, PartialEq)]
+#[derive(Error, Debug)]
 pub enum AbstractError {
     #[error("Std error encountered while handling account object: {0}")]
     Std(#[from] StdError),

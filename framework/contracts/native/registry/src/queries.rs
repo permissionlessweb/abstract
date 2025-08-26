@@ -36,7 +36,7 @@ pub fn handle_accounts_address_query(
             ACCOUNT_ADDRESSES
                 .load(deps.storage, &account_id)
                 .map_err(|_| {
-                    StdError::generic_err(
+                    StdError::msg(
                         RegistryError::UnknownAccountId { id: account_id }.to_string(),
                     )
                 })
@@ -75,7 +75,7 @@ pub fn handle_modules_query(deps: Deps, modules: Vec<ModuleInfo>) -> StdResult<M
             let (latest_version, id) = versions?
                 .first()
                 .ok_or_else(|| {
-                    StdError::generic_err(RegistryError::ModuleNotFound(module.clone()).to_string())
+                    StdError::msg(RegistryError::ModuleNotFound(module.clone()).to_string())
                 })?
                 .clone();
             module.version = latest_version;
@@ -83,7 +83,7 @@ pub fn handle_modules_query(deps: Deps, modules: Vec<ModuleInfo>) -> StdResult<M
         };
 
         match maybe_module_ref {
-            Err(_) => Err(StdError::generic_err(
+            Err(_) => Err(StdError::msg(
                 RegistryError::ModuleNotFound(module).to_string(),
             )),
             Ok(mod_ref) => {
@@ -1089,7 +1089,7 @@ mod test {
 
             assert_eq!(
                 res,
-                Err(RegistryError::Std(StdError::generic_err(
+                Err(RegistryError::Std(StdError::msg(
                     RegistryError::UnknownAccountId { id: not_registered }.to_string(),
                 )))
             );

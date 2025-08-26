@@ -47,9 +47,9 @@ pub fn handle_config_query(deps: Deps, env: &Env) -> StdResult<Binary> {
     let abstract_code_id =
         native_addrs::abstract_code_id(&deps.querier, env.contract.address.clone())?;
     let registry = RegistryContract::new(deps, abstract_code_id)
-        .map_err(|e| StdError::generic_err(e.to_string()))?;
+        .map_err(|e| StdError::msg(e.to_string()))?;
     let module_factory = ModuleFactoryContract::new(deps, abstract_code_id)
-        .map_err(|e| StdError::generic_err(e.to_string()))?;
+        .map_err(|e| StdError::msg(e.to_string()))?;
     let is_suspended = SUSPENSION_STATUS.load(deps.storage)?;
     to_json_binary(&ConfigResponse {
         account_id,
@@ -79,7 +79,7 @@ pub fn handle_module_info_query(
     let abstract_code_id =
         native_addrs::abstract_code_id(&deps.querier, env.contract.address.clone())?;
     let registry = RegistryContract::new(deps, abstract_code_id)
-        .map_err(|e| StdError::generic_err(e.to_string()))?;
+        .map_err(|e| StdError::msg(e.to_string()))?;
 
     let mut resp_vec: Vec<AccountModuleInfo> = vec![];
     for (id, address) in ids_and_addr.into_iter() {
@@ -151,11 +151,11 @@ pub fn query_module_version(
                 .code_id;
             registry
                 .query_standalone_info_raw(code_id, &deps.querier)
-                .map_err(|e| StdError::generic_err(e.to_string()))?
+                .map_err(|e| StdError::msg(e.to_string()))?
         }
     };
     let version =
-        ContractVersion::try_from(module_info).map_err(|e| StdError::generic_err(e.to_string()))?;
+        ContractVersion::try_from(module_info).map_err(|e| StdError::msg(e.to_string()))?;
     Ok(version)
 }
 
@@ -172,7 +172,7 @@ pub fn query_module_versions(
     let abstract_code_id =
         native_addrs::abstract_code_id(&deps.querier, env.contract.address.clone())?;
     let registry = RegistryContract::new(deps, abstract_code_id)
-        .map_err(|e| StdError::generic_err(e.to_string()))?;
+        .map_err(|e| StdError::msg(e.to_string()))?;
     for (name, address) in addresses.into_iter() {
         let result = query_module_version(deps, address, &registry)?;
         module_versions.insert(name, result);

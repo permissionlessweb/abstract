@@ -63,7 +63,7 @@ pub mod fns {
                     seconds: sec.try_into().unwrap(),
                     nanos: 0,
                 })),
-                _ => Err(StdError::generic_err("Wrong duration, only time accepted")),
+                _ => Err(StdError::msg("Wrong duration, only time accepted")),
             }
         } else {
             Ok(None)
@@ -87,7 +87,7 @@ pub mod fns {
 
                     let pool_ref = ans_host.query_asset_pairing(querier, &dex_pair)?;
                     // Currently takes the first pool found, but should be changed to take the best pool
-                    let found: &PoolReference = pool_ref.first().ok_or(StdError::generic_err(
+                    let found: &PoolReference = pool_ref.first().ok_or(StdError::msg(
                         format!("No pool found for asset pairing {:?}", dex_pair),
                     ))?;
                     let metadata = ans_host.query_pool_metadata(querier, found.unique_id)?;

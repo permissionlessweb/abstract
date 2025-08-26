@@ -9,7 +9,7 @@ version = { workspace = true }
 
 
 [dependencies]
-cw-controllers   = "2.0.0"
+cw-controllers  = { version = "3.0.0", git = "https://github.com/permissionlessweb/cw-minus" }
 wyndex           = { git = "https://github.com/abstractsdk/wynddex", rev = "cbe316f17c4a89d0c3938ea66747a5ff1fc5a5e9", version = "2.2.0" }
 wyndex-factory   = { git = "https://github.com/abstractsdk/wynddex", rev = "cbe316f17c4a89d0c3938ea66747a5ff1fc5a5e9", version = "2.2.0" }
 wyndex-multi-hop = { git = "https://github.com/abstractsdk/wynddex", rev = "cbe316f17c4a89d0c3938ea66747a5ff1fc5a5e9", version = "2.2.0" }

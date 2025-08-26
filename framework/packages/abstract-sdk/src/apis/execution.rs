@@ -223,7 +223,7 @@ mod test {
                 .unwrap(),
                 funds: vec![],
             }));
-            assert_eq!(actual_res, Ok(expected));
+            assert_eq!(actual_res.unwrap(), expected);
         }
 
         #[coverage_helper::test]
@@ -246,7 +246,7 @@ mod test {
                 // funds should be empty
                 funds: vec![],
             }));
-            assert_eq!(actual_res, Ok(expected));
+            assert_eq!(actual_res.unwrap(), expected);
         }
     }
 
@@ -285,7 +285,7 @@ mod test {
                 reply_on: expected_reply_on,
                 payload: Binary::default(),
             };
-            assert_eq!(actual_res, Ok(expected));
+            assert_eq!(actual_res.unwrap(), expected);
         }
 
         #[coverage_helper::test]
@@ -321,7 +321,7 @@ mod test {
                 reply_on: expected_reply_on,
                 payload: Binary::default(),
             };
-            assert_eq!(actual_res, Ok(expected));
+            assert_eq!(actual_res.unwrap(), expected);
         }
     }
 
@@ -356,7 +356,7 @@ mod test {
                 )
                 .add_message(expected_msg);
 
-            assert_eq!(actual_res, Ok(expected));
+            assert_eq!(actual_res.unwrap(), expected);
         }
 
         #[coverage_helper::test]
@@ -387,7 +387,7 @@ mod test {
                         .add_attribute("action", expected_action),
                 )
                 .add_message(expected_msg);
-            assert_eq!(actual_res, Ok(expected));
+            assert_eq!(actual_res.unwrap(), expected);
         }
     }
 

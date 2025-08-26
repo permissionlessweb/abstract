@@ -11,7 +11,8 @@ default          = ["full_integration"]
 full_integration = ["dep:cw20", "dep:cw-asset", "dep:cw-utils", "dep:osmosis-std"]
 
 [dependencies]
-osmosis-std = { version = "0.26.0", optional = true }
+# osmosis-std = { version = "0.26.0", optional = true }
+osmosis-std = { version = "0.26.0", optional = true, git = "https://github.com/permissionlessweb/osmosis-rust" }
 
 abstract-dex-standard     = { workspace = true }
 abstract-sdk              = { workspace = true }

@@ -27,26 +27,29 @@ repository = "https://github.com/AbstractSDK/abstract"
 version = "0.26.1"
 
 [workspace.dependencies]
-cosmwasm-schema = { version = "2.0" }
-cosmwasm-std    = { version = "2.0" }
-cw-address-like = { version = "2.0" }
-cw-asset        = { version = "4.0" }
-cw-controllers  = "2.0"
-cw-orch         = { version = "0.27.0" }
-cw-ownable      = { version = "2.0" }
+cosmwasm-schema = { version = "3.0.1" }
+cosmwasm-std    = { version = "3.0.1" }
+cw-address-like = { version =  "3.0.1",  git = "https://github.com/permissionlessweb/cw-plus-plus" }
+
+cw-asset        = { version = "4.0", git = "https://github.com/permissionlessweb/cw-asset" }
+
 cw-plus-orch    = { version = "0.25.0" }
-cw-storage-plus = "2.0.0"
-cw-utils        = "2.0"
-cw2             = "2.0.0"
-cw20            = { version = "2.0.0" }
-cw20-base       = { version = "2.0.0" }
+cw-storage-plus = { version = "3.0.0" }
+cw-utils        = { version = "3.0.0" }
+cw2             = { version = "3.0.0" }
+cw-controllers  = { version = "3.0.0" }
+cw-orch            = { version = "0.30.0",  git = "https://github.com/permissionlessweb/cw-orchestrator" }
+cw-ownable      = { version = "3.0.1", git = "https://github.com/permissionlessweb/cw-plus-plus" }
+cw20            = { version = "3.0.0", git = "https://github.com/permissionlessweb/cw-plus" }
+cw20-base       = { version = "3.0.0", features = ["library"],  git = "https://github.com/permissionlessweb/cw-plus" }
+
 
 anyhow = "1.0"
 
 chrono    = { version = "0.4.31", default-features = false }
 clap      = { version = "4.0.32", features = ["derive"] }
 protobuf  = { version = "2", features = ["with-bytes"] }
-schemars  = "0.8"
+schemars  = { version = "0.8.4" }
 semver    = "1.0"
 serde     = { version = "1.0", default-features = false, features = ["derive"] }
 thiserror = { version = "1.0.50" }

@@ -91,7 +91,7 @@ impl<Error: ContractError, CustomInitMsg, CustomExecMsg, CustomQueryMsg, SudoMsg
         Ok(self
             .target_account
             .as_ref()
-            .ok_or_else(|| StdError::generic_err("No target Account specified to execute on."))?
+            .ok_or_else(|| StdError::msg("No target Account specified to execute on."))?
             .addr())
     }
     /// add dependencies to the contract

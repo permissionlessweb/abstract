@@ -269,7 +269,7 @@ pub fn resolve_native_ans_denom(
     let resolved_denom = name_service.query(&denom)?;
     let denom = match resolved_denom {
         AssetInfoBase::Native(denom) => Ok(denom),
-        _ => Err(StdError::generic_err("Non-native denom not supported")),
+        _ => Err(StdError::msg("Non-native denom not supported")),
     }?;
     Ok(denom)
 }

@@ -5,7 +5,7 @@ use cosmwasm_std::{
     from_json,
     testing::{MockApi, MockQuerier, MockStorage, MOCK_CONTRACT_ADDR},
     to_json_binary, Coin, ContractResult, Empty, OwnedDeps, Querier, QuerierResult, QueryRequest,
-    SystemError, SystemResult, Uint128, WasmQuery,
+    SystemError, SystemResult, Uint128, Uint256, WasmQuery,
 };
 use cw20::{BalanceResponse as Cw20BalanceResponse, Cw20QueryMsg};
 
@@ -99,7 +99,7 @@ impl WasmMockQuerier {
                             None => {
                                 return SystemResult::Ok(ContractResult::Ok(
                                     to_json_binary(&Cw20BalanceResponse {
-                                        balance: Uint128::zero(),
+                                        balance: Uint256::zero(),
                                     })
                                     .unwrap(),
                                 ));
@@ -107,7 +107,10 @@ impl WasmMockQuerier {
                         };
 
                         SystemResult::Ok(ContractResult::Ok(
-                            to_json_binary(&Cw20BalanceResponse { balance }).unwrap(),
+                            to_json_binary(&Cw20BalanceResponse {
+                                balance: balance.into(),
+                            })
+                            .unwrap(),
                         ))
                     }
                     _ => panic!("DO NOT ENTER HERE"),

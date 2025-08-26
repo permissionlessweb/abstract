@@ -5,7 +5,7 @@ use abstract_std::{
 use cosmwasm_std::{Addr, StdError};
 use thiserror::Error;
 
-#[derive(Error, Debug, PartialEq)]
+#[derive(Error, Debug)]
 pub enum RegistryError {
     #[error(transparent)]
     Std(#[from] StdError),

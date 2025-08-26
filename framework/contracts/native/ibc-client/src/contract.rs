@@ -5,7 +5,7 @@ use abstract_std::{
     IBC_CLIENT,
 };
 use cosmwasm_std::{
-    to_json_binary, Deps, DepsMut, Env, MessageInfo, QueryResponse, Reply, Response,
+    to_json_binary, Deps, DepsMut, Env, MessageInfo, MigrateInfo, QueryResponse, Reply, Response,
 };
 use semver::Version;
 
@@ -126,7 +126,7 @@ pub fn query(deps: Deps, env: Env, msg: QueryMsg) -> IbcClientResult<QueryRespon
 }
 
 #[cfg_attr(feature = "export", cosmwasm_std::entry_point)]
-pub fn migrate(deps: DepsMut, _env: Env, _msg: MigrateMsg) -> IbcClientResult {
+pub fn migrate(deps: DepsMut, _env: Env, _msg: MigrateMsg, _info: MigrateInfo) -> IbcClientResult {
     let to_version: Version = CONTRACT_VERSION.parse().unwrap();
 
     assert_cw_contract_upgrade(deps.storage, IBC_CLIENT, to_version)?;
@@ -272,12 +272,20 @@ mod tests {
         #[coverage_helper::test]
         fn disallow_same_version() -> IbcClientResult<()> {
             let mut deps = mock_dependencies();
+            let sender = deps.api.addr_make("jimi");
             let env = mock_env_validated(deps.api);
             mock_init(&mut deps)?;
 
             let version: Version = CONTRACT_VERSION.parse().unwrap();
-
-            let res = contract::migrate(deps.as_mut(), env, MigrateMsg {});
+            let res = contract::migrate(
+                deps.as_mut(),
+                env,
+                MigrateMsg {},
+                MigrateInfo {
+                    sender,
+                    old_migrate_version: None,
+                },
+            );
 
             assert_eq!(
                 res,
@@ -296,6 +304,7 @@ mod tests {
         #[coverage_helper::test]
         fn disallow_downgrade() -> IbcClientResult<()> {
             let mut deps = mock_dependencies();
+            let sender = deps.api.addr_make("jimi");
             let env = mock_env_validated(deps.api);
             mock_init(&mut deps)?;
 
@@ -304,7 +313,15 @@ mod tests {
 
             let version: Version = CONTRACT_VERSION.parse().unwrap();
 
-            let res = contract::migrate(deps.as_mut(), env, MigrateMsg {});
+            let res = contract::migrate(
+                deps.as_mut(),
+                env,
+                MigrateMsg {},
+                MigrateInfo {
+                    sender,
+                    old_migrate_version: None,
+                },
+            );
 
             assert_eq!(
                 res,
@@ -323,6 +340,7 @@ mod tests {
         #[coverage_helper::test]
         fn disallow_name_change() -> IbcClientResult<()> {
             let mut deps = mock_dependencies();
+            let sender = deps.api.addr_make("jimi");
             let env = mock_env_validated(deps.api);
             mock_init(&mut deps)?;
 
@@ -330,7 +348,15 @@ mod tests {
             let old_name = "old:contract";
             cw2::set_contract_version(deps.as_mut().storage, old_name, old_version)?;
 
-            let res = contract::migrate(deps.as_mut(), env, MigrateMsg {});
+            let res = contract::migrate(
+                deps.as_mut(),
+                env,
+                MigrateMsg {},
+                MigrateInfo {
+                    sender,
+                    old_migrate_version: None,
+                },
+            );
 
             assert_eq!(
                 res,
@@ -348,6 +374,7 @@ mod tests {
         #[coverage_helper::test]
         fn works() -> IbcClientResult<()> {
             let mut deps = mock_dependencies();
+            let sender = deps.api.addr_make("jimi");
             let env = mock_env_validated(deps.api);
             mock_init(&mut deps)?;
 
@@ -360,7 +387,15 @@ mod tests {
             .to_string();
             cw2::set_contract_version(deps.as_mut().storage, IBC_CLIENT, small_version)?;
 
-            let res = contract::migrate(deps.as_mut(), env, MigrateMsg {})?;
+            let res = contract::migrate(
+                deps.as_mut(),
+                env,
+                MigrateMsg {},
+                MigrateInfo {
+                    sender,
+                    old_migrate_version: None,
+                },
+            )?;
             assert!(res.messages.is_empty());
 
             assert_eq!(
@@ -1044,10 +1079,14 @@ mod tests {
             let msg = ExecuteMsg::Callback(CallbackMessage {
                 initiator: Addr::unchecked("invalid_initiator"),
                 initiator_msg: Binary::default(),
-                result: Callback::Execute(Ok(ExecutionResponse {
-                    executed_by: String::from("addr"),
-                    result: vec![],
-                })),
+                result: Callback::Execute(
+                    abstract_std::ibc::polytone_callbacks::ExecutionCallbackResult::Success(
+                        ExecutionResponse {
+                            executed_by: String::from("addr"),
+                            result: vec![],
+                        },
+                    ),
+                ),
             });
 
             let not_note = deps.api.addr_make("not_note");

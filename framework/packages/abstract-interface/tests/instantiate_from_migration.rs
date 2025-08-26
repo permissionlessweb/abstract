@@ -1,6 +1,7 @@
 use abstract_interface::{AnsHost, ModuleFactory, Registry};
 use abstract_std::{ANS_HOST, MODULE_FACTORY, REGISTRY};
 use cosmwasm_schema::serde::Serialize;
+use cosmwasm_std::StdResult;
 use cw_blob::interface::CwBlob;
 use cw_orch::{anyhow, mock::MockBase, prelude::*};
 
@@ -12,7 +13,7 @@ pub enum MigrateMsg<I> {
 pub fn instantiate_from_blob_same_result<T, I, A, S>(
     contract: T,
     instantiate_msg: I,
-) -> anyhow::Result<()>
+) -> StdResult<()>
 where
     T: ContractInstance<MockBase<A, S>> + Uploadable,
     I: Serialize + std::fmt::Debug,

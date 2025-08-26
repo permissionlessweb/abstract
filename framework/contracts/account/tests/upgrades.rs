@@ -836,7 +836,7 @@ fn native_not_migratable() -> AResult {
         .unwrap_err()
         .downcast()
         .unwrap();
-    assert_eq!(err, AccountError::NotUpgradeable(latest_ibc_client));
+    assert_eq!(err.to_string(), AccountError::NotUpgradeable(latest_ibc_client).to_string());
     Ok(())
 }
 

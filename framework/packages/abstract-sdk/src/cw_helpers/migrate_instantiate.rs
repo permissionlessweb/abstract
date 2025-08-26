@@ -11,7 +11,7 @@ where
     Err: From<cosmwasm_std::StdError>,
 {
     if cw2::CONTRACT.exists(deps.storage) {
-        return Err(cosmwasm_std::StdError::generic_err(
+        return Err(cosmwasm_std::StdError::msg(
             "Second instantiation attempt: cw2 is not clear during instantiation",
         )
         .into());

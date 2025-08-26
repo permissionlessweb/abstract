@@ -8,7 +8,7 @@ use abstract_std::{
     objects::module_version::assert_contract_upgrade,
     ANS_HOST,
 };
-use cosmwasm_std::{Binary, Deps, DepsMut, Env, MessageInfo, Response, StdResult};
+use cosmwasm_std::{Binary, Deps, DepsMut, Env, MessageInfo, MigrateInfo, Response, StdResult};
 use cw2::set_contract_version;
 use semver::Version;
 
@@ -51,7 +51,6 @@ pub fn instantiate(
 pub fn execute(deps: DepsMut, env: Env, info: MessageInfo, msg: ExecuteMsg) -> AnsHostResult {
     handle_message(deps, info, env, msg)
 }
-
 #[cfg_attr(feature = "export", cosmwasm_std::entry_point)]
 pub fn query(deps: Deps, env: Env, msg: QueryMsg) -> StdResult<Binary> {
     match msg {
@@ -99,7 +98,7 @@ pub fn query(deps: Deps, env: Env, msg: QueryMsg) -> StdResult<Binary> {
 }
 
 #[cfg_attr(feature = "export", cosmwasm_std::entry_point)]
-pub fn migrate(deps: DepsMut, env: Env, msg: MigrateMsg) -> AnsHostResult {
+pub fn migrate(deps: DepsMut, env: Env, msg: MigrateMsg, _info: MigrateInfo) -> AnsHostResult {
     match msg {
         MigrateMsg::Instantiate(instantiate_msg) => {
             abstract_sdk::cw_helpers::migrate_instantiate(deps, env, instantiate_msg, instantiate)
@@ -133,22 +132,30 @@ mod tests {
         #[coverage_helper::test]
         fn disallow_same_version() -> AnsHostResult<()> {
             let mut deps = mock_dependencies();
+            let sender = deps.api.addr_make("bob");
             let env = mock_env_validated(deps.api);
             mock_init(&mut deps)?;
 
             let version: Version = CONTRACT_VERSION.parse().unwrap();
 
-            let res = contract::migrate(deps.as_mut(), env, MigrateMsg::Migrate {});
+            let res = contract::migrate(
+                deps.as_mut(),
+                env,
+                MigrateMsg::Migrate {},
+                MigrateInfo {
+                    sender,
+                    old_migrate_version: None,
+                },
+            );
 
             assert_eq!(
-                res,
-                Err(AnsHostError::Abstract(
-                    AbstractError::CannotDowngradeContract {
-                        contract: ANS_HOST.to_string(),
-                        from: version.clone(),
-                        to: version,
-                    },
-                ))
+                res.unwrap_err().to_string(),
+                AnsHostError::Abstract(AbstractError::CannotDowngradeContract {
+                    contract: ANS_HOST.to_string(),
+                    from: version.clone(),
+                    to: version,
+                },)
+                .to_string()
             );
 
             Ok(())
@@ -157,6 +164,7 @@ mod tests {
         #[coverage_helper::test]
         fn disallow_downgrade() -> AnsHostResult<()> {
             let mut deps = mock_dependencies();
+            let sender = deps.api.addr_make("bob");
             let env = mock_env_validated(deps.api);
             mock_init(&mut deps)?;
 
@@ -165,17 +173,24 @@ mod tests {
 
             let version: Version = CONTRACT_VERSION.parse().unwrap();
 
-            let res = contract::migrate(deps.as_mut(), env, MigrateMsg::Migrate {});
+            let res = contract::migrate(
+                deps.as_mut(),
+                env,
+                MigrateMsg::Migrate {},
+                MigrateInfo {
+                    sender,
+                    old_migrate_version: None,
+                },
+            );
 
             assert_eq!(
-                res,
-                Err(AnsHostError::Abstract(
-                    AbstractError::CannotDowngradeContract {
-                        contract: ANS_HOST.to_string(),
-                        from: big_version.parse().unwrap(),
-                        to: version,
-                    },
-                ))
+                res.unwrap_err().to_string(),
+                AnsHostError::Abstract(AbstractError::CannotDowngradeContract {
+                    contract: ANS_HOST.to_string(),
+                    from: big_version.parse().unwrap(),
+                    to: version,
+                },)
+                .to_string()
             );
 
             Ok(())
@@ -184,6 +199,7 @@ mod tests {
         #[coverage_helper::test]
         fn disallow_name_change() -> AnsHostResult<()> {
             let mut deps = mock_dependencies();
+            let sender = deps.api.addr_make("bob");
             let env = mock_env_validated(deps.api);
             mock_init(&mut deps)?;
 
@@ -191,16 +207,23 @@ mod tests {
             let old_name = "old:contract";
             set_contract_version(deps.as_mut().storage, old_name, old_version)?;
 
-            let res = contract::migrate(deps.as_mut(), env, MigrateMsg::Migrate {});
+            let res = contract::migrate(
+                deps.as_mut(),
+                env,
+                MigrateMsg::Migrate {},
+                MigrateInfo {
+                    sender,
+                    old_migrate_version: None,
+                },
+            );
 
             assert_eq!(
-                res,
-                Err(AnsHostError::Abstract(
-                    AbstractError::ContractNameMismatch {
-                        from: old_name.parse().unwrap(),
-                        to: ANS_HOST.parse().unwrap(),
-                    },
-                ))
+                res.unwrap_err().to_string(),
+                AnsHostError::Abstract(AbstractError::ContractNameMismatch {
+                    from: old_name.parse().unwrap(),
+                    to: ANS_HOST.parse().unwrap(),
+                },)
+                .to_string()
             );
 
             Ok(())
@@ -209,6 +232,7 @@ mod tests {
         #[coverage_helper::test]
         fn works() -> AnsHostResult<()> {
             let mut deps = mock_dependencies();
+            let sender = deps.api.addr_make("bob");
             let env = mock_env_validated(deps.api);
 
             mock_init(&mut deps)?;
@@ -222,7 +246,15 @@ mod tests {
             .to_string();
             set_contract_version(deps.as_mut().storage, ANS_HOST, small_version)?;
 
-            let res = contract::migrate(deps.as_mut(), env, MigrateMsg::Migrate {})?;
+            let res = contract::migrate(
+                deps.as_mut(),
+                env,
+                MigrateMsg::Migrate {},
+                MigrateInfo {
+                    sender,
+                    old_migrate_version: None,
+                },
+            )?;
             assert_eq!(res.messages.len(), 0);
 
             assert_eq!(

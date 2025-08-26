@@ -435,7 +435,7 @@ fn cant_renounce_with_sub_accounts() -> AResult {
         .unwrap_err()
         .downcast()
         .unwrap();
-    assert_eq!(err, AccountError::RenounceWithSubAccount {});
+    assert_eq!(err.to_string(), AccountError::RenounceWithSubAccount {}.to_string());
     Ok(())
 }
 

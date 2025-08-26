@@ -179,7 +179,7 @@ mod tests {
                 #[allow(deprecated)]
                 Ok(Response::new().set_data(msg.result.unwrap().data.unwrap()))
             })])
-            .with_migrate(|_, _, _, _| Ok(Response::new().set_data("mock_migrate".as_bytes())));
+            .with_migrate(|_, _, _, _, _| Ok(Response::new().set_data("mock_migrate".as_bytes())));
 
         assert_eq!(app.module_id(), TEST_MODULE_ID);
         assert_eq!(app.version(), TEST_VERSION);

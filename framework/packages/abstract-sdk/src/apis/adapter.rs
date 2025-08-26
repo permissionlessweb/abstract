@@ -154,12 +154,12 @@ mod tests {
                 });
 
             assert_eq!(
-                res,
-                Ok(CosmosMsg::Wasm(WasmMsg::Execute {
+                res.unwrap(),
+                CosmosMsg::Wasm(WasmMsg::Execute {
                     contract_addr: abstr.module_address.to_string(),
                     msg: to_json_binary(&expected_msg).unwrap(),
                     funds: vec![],
-                }))
+                })
             );
         }
     }
@@ -188,7 +188,7 @@ mod tests {
 
             let res = mods.query::<_, String>(TEST_MODULE_ID, inner_msg);
 
-            assert_eq!(res, Ok(TEST_MODULE_RESPONSE.to_string()));
+            assert_eq!(res.unwrap(), TEST_MODULE_RESPONSE.to_string());
         }
     }
 

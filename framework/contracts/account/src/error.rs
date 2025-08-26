@@ -6,7 +6,7 @@ use abstract_std::{
 use cosmwasm_std::{Instantiate2AddressError, StdError};
 use thiserror::Error;
 
-#[derive(Error, Debug, PartialEq)]
+#[derive(Error, Debug)]
 pub enum AccountError {
     #[error(transparent)]
     Std(#[from] StdError),

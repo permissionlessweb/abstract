@@ -62,10 +62,10 @@ impl<Error: ContractError, CustomInitMsg, CustomExecMsg, CustomQueryMsg, SudoMsg
         let abstract_code_id = self.state(deps.storage)?.code_id;
         Ok(AdapterConfigResponse {
             registry_address: RegistryContract::new(deps, abstract_code_id)
-                .map_err(|e| StdError::generic_err(e.to_string()))?
+                .map_err(|e| StdError::msg(e.to_string()))?
                 .address,
             ans_host_address: AnsHost::new(deps, abstract_code_id)
-                .map_err(|e| StdError::generic_err(e.to_string()))?
+                .map_err(|e| StdError::msg(e.to_string()))?
                 .address,
             dependencies: self
                 .dependencies()

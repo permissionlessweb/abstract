@@ -26,7 +26,7 @@ impl<Error: ContractError, CustomInitMsg, CustomExecMsg, CustomQueryMsg, SudoMsg
         if let Some(target) = &self.target_account {
             Ok(target.clone())
         } else {
-            Err(StdError::generic_err("No target Account specified to execute on.").into())
+            Err(StdError::msg("No target Account specified to execute on.").into())
         }
     }
 }

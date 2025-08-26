@@ -6,7 +6,8 @@ use serde::{Deserialize, Serialize};
 
 use super::AssetEntry;
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Eq, JsonSchema)]
+#[cosmwasm_schema::cw_serde]
+#[derive(Eq)]
 pub struct AnsAsset {
     pub name: AssetEntry,
     pub amount: Uint128,

@@ -190,7 +190,7 @@ mod test {
                         .into(),
                 ),
             };
-            assert_eq!(res.unwrap_err(), expected_err);
+            assert_eq!(res.unwrap_err().to_string(), expected_err.to_string());
         }
 
         #[coverage_helper::test]
@@ -221,7 +221,7 @@ mod test {
                     .into(),
                 ),
             };
-            assert_eq!(res.unwrap_err(), expected_err);
+            assert_eq!(res.unwrap_err().to_string(), expected_err.to_string());
         }
 
         #[coverage_helper::test]
@@ -238,10 +238,10 @@ mod test {
             let registry = binding.account_registry(deps.as_ref()).unwrap();
             let res = registry.assert_is_account(account.addr());
 
-            assert_eq!(res, Ok(account.clone()));
+            assert_eq!(res.unwrap(), account.clone());
 
             let account_id = registry.account_id(account.addr());
-            assert_eq!(account_id, Ok(TEST_ACCOUNT_ID));
+            assert_eq!(account_id.unwrap(), TEST_ACCOUNT_ID);
         }
     }
 
@@ -258,7 +258,7 @@ mod test {
             let registry = binding.account_registry(deps.as_ref()).unwrap();
             let res = registry.namespace_registration_fee();
 
-            assert_eq!(res, Ok(None));
+            assert_eq!(res.unwrap(), None);
         }
 
         let abstr = AbstractMockAddrs::new(deps.api);
@@ -276,7 +276,7 @@ mod test {
         let registry = binding.account_registry(deps.as_ref()).unwrap();
         let res = registry.namespace_registration_fee();
 
-        assert_eq!(res, Ok(Some(Coin::new(42_u128, "foo"))));
+        assert_eq!(res.unwrap(), Some(Coin::new(42_u128, "foo")));
     }
 
     #[coverage_helper::test]

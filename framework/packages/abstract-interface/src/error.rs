@@ -1,5 +1,5 @@
 use abstract_std::{objects::dependency::StaticDependency, AbstractError};
-use cosmwasm_std::StdError;
+use cosmwasm_std::{StdError, StdResult};
 use cw_orch::prelude::CwOrchError;
 use thiserror::Error;
 
@@ -39,7 +39,7 @@ impl AbstractInterfaceError {
         }
     }
 
-    pub fn downcast<E>(self) -> cw_orch::anyhow::Result<E>
+    pub fn downcast<E>(self) -> StdResult<E>
     where
         E: std::fmt::Display + std::fmt::Debug + Send + Sync + 'static,
     {

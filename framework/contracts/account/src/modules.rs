@@ -94,8 +94,8 @@ pub fn _install_modules(
     let salt: Binary = generate_instantiate_salt(&account_id);
     for (ModuleResponse { module, .. }, init_msg) in modules.into_iter().zip(init_msgs) {
         // Check if module is already enabled.
-        if ACCOUNT_MODULES.has(deps.storage, &module.info.id()) {
-            return Err(AccountError::ModuleAlreadyInstalled(module.info.id()));
+        if ACCOUNT_MODULES.has(deps.storage, &module.info.module_id()) {
+            return Err(AccountError::ModuleAlreadyInstalled(module.info.module_id()));
         }
         installed_modules.push(module.info.id_with_version());
 
@@ -106,7 +106,7 @@ pub fn _install_modules(
                 if module.should_be_whitelisted() {
                     add_to_whitelist.push(module_address.clone());
                 }
-                add_to_account.push((module.info.id(), module_address.clone()));
+                add_to_account.push((module.info.module_id(), module_address.clone()));
                 install_context.push((module.clone(), None));
                 None
             }
@@ -127,10 +127,10 @@ pub fn _install_modules(
                 if module.should_be_whitelisted() {
                     add_to_whitelist.push(module_address.clone());
                 }
-                add_to_account.push((module.info.id(), module_address.clone()));
+                add_to_account.push((module.info.module_id(), module_address.clone()));
                 install_context.push((module.clone(), Some(module_address)));
 
-                Some(init_msg.ok_or(AccountError::InitMsgMissing(module.info.id()))?)
+                Some(init_msg.ok_or(AccountError::InitMsgMissing(module.info.module_id()))?)
             }
             _ => return Err(AccountError::ModuleNotInstallable(module.info.to_string())),
         };
@@ -425,7 +425,7 @@ mod tests {
                 vec![("".to_string(), Addr::unchecked("module1_addr"))];
 
             let res = update_module_addresses(deps.as_mut(), to_add, vec![]);
-            assert_eq!(res, Err(AccountError::InvalidModuleName {}));
+            assert_eq!(res.unwrap_err().to_string(), AccountError::InvalidModuleName {}.to_string());
 
             Ok(())
         }
@@ -482,8 +482,8 @@ mod tests {
 
             let res = execute_as(&mut deps, &not_account_factory, msg);
             assert_eq!(
-                res,
-                Err(AccountError::Ownership(GovOwnershipError::NotOwner))
+                res.unwrap_err().to_string(),
+                AccountError::Ownership(GovOwnershipError::NotOwner).to_string()
             );
 
             Ok(())
@@ -523,10 +523,10 @@ mod tests {
 
             let res = execute_as(&mut deps, &owner, msg);
             assert_eq!(
-                res,
-                Err(AccountError::ModuleHasDependents(Vec::from_iter(
+                res.unwrap_err().to_string(),
+                AccountError::ModuleHasDependents(Vec::from_iter(
                     dependents,
-                )))
+                )).to_string()
             );
 
             Ok(())
@@ -559,7 +559,7 @@ mod tests {
             )?;
 
             let res = execute_as(&mut deps, &not_owner, msg);
-            assert_eq!(res, Err(AccountError::SenderNotWhitelistedOrOwner {}));
+            assert_eq!(res.unwrap_err().to_string(), AccountError::SenderNotWhitelistedOrOwner {}.to_string());
             Ok(())
         }
 
@@ -580,7 +580,7 @@ mod tests {
             };
 
             let res = execute_as(&mut deps, &owner, msg);
-            assert_eq!(res, Err(AccountError::ModuleNotFound(missing_module)));
+            assert_eq!(res.unwrap_err().to_string(), AccountError::ModuleNotFound(missing_module).to_string());
 
             Ok(())
         }

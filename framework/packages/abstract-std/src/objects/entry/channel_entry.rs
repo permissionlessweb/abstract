@@ -2,13 +2,12 @@ use std::fmt::Display;
 
 use cosmwasm_std::{StdError, StdResult};
 use cw_storage_plus::{Key, KeyDeserialize, Prefixer, PrimaryKey};
-use schemars::JsonSchema;
-use serde::{Deserialize, Serialize};
 
 use crate::{objects::TruncatedChainId, AbstractResult};
 
 /// Key to get the Address of a connected_chain
-#[derive(Deserialize, Serialize, Clone, Debug, PartialEq, Eq, JsonSchema, PartialOrd, Ord)]
+#[cosmwasm_schema::cw_serde]
+#[derive(Eq, PartialOrd, Ord)]
 pub struct UncheckedChannelEntry {
     pub connected_chain: String,
     pub protocol: String,
@@ -35,7 +34,7 @@ impl TryFrom<String> for UncheckedChannelEntry {
     fn try_from(entry: String) -> Result<Self, Self::Error> {
         let composite: Vec<&str> = entry.split('/').collect();
         if composite.len() != 2 {
-            return Err(StdError::generic_err(
+            return Err(StdError::msg(
                 "connected_chain entry should be formatted as \"connected_chain_name/protocol\".",
             ));
         }
@@ -45,7 +44,8 @@ impl TryFrom<String> for UncheckedChannelEntry {
 
 /// Key to get the Address of a connected_chain
 /// Use [`UncheckedChannelEntry`] to construct this type.  
-#[derive(Deserialize, Serialize, Clone, Debug, PartialEq, JsonSchema, Eq, PartialOrd, Ord)]
+#[cosmwasm_schema::cw_serde]
+#[derive(Eq, PartialOrd, Ord)]
 pub struct ChannelEntry {
     pub connected_chain: TruncatedChainId,
     pub protocol: String,
@@ -103,7 +103,7 @@ fn parse_length(value: &[u8]) -> StdResult<usize> {
     Ok(u16::from_be_bytes(
         value
             .try_into()
-            .map_err(|_| StdError::generic_err("Could not read 2 byte length"))?,
+            .map_err(|_| StdError::msg("Could not read 2 byte length"))?,
     )
     .into())
 }

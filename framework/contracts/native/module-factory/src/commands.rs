@@ -145,7 +145,7 @@ pub fn execute_create_modules(
                 module_instantiate_messages.push(init_msg);
             }
             ModuleReference::Native(native_address) => {
-                if new_module.info.id() == IBC_CLIENT {
+                if new_module.info.module_id() == IBC_CLIENT {
                     modules_to_register.push(native_address.clone());
                     continue;
                 }

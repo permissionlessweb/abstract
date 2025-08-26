@@ -240,7 +240,7 @@ impl InstalledModuleIdentification {
             registry.query_module(self.module_info.clone(), &deps.querier)?;
 
         let no_account_id_error =
-            StdError::generic_err("Account id not specified in installed module definition");
+            StdError::msg("Account id not specified in installed module definition");
 
         let target_addr = match &target_module_resolved.reference {
             ModuleReference::Account(code_id) => {
@@ -255,7 +255,7 @@ impl InstalledModuleIdentification {
                 {
                     account.into_addr()
                 } else {
-                    Err(StdError::generic_err(
+                    Err(StdError::msg(
                         "Account contract doesn't correspond to code id of the account",
                     ))?
                 }
@@ -270,7 +270,7 @@ impl InstalledModuleIdentification {
                 let module_info: account::ModuleAddressesResponse = deps.querier.query_wasm_smart(
                     account.into_addr(),
                     &account::QueryMsg::ModuleAddresses {
-                        ids: vec![self.module_info.id()],
+                        ids: vec![self.module_info.module_id()],
                     },
                 )?;
                 module_info

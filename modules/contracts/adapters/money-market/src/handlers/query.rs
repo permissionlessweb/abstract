@@ -232,7 +232,7 @@ fn handle_local_query(
         }
         _ => {
             return Err(
-                StdError::generic_err("Can't treat non-local ans query, unreachable").into(),
+                StdError::msg("Can't treat non-local ans query, unreachable").into(),
             )
         }
     })

@@ -21,21 +21,21 @@ version = "0.26.1"
 [workspace.dependencies]
 
 
-cosmwasm-schema = { version = "2.0" }
-cosmwasm-std    = { version = "2.0" }
-cw-address-like = { version = "2.0" }
-cw-asset        = { version = "4.0" }
-cw-controllers  = { version = "2.0" }
-cw-ownable      = { version = "2.0" }
-cw-plus-orch    = { version = "0.25.0" }
-cw-storage-plus = "2.0.0"
-cw-utils        = { version = "2.0" }
+cosmwasm-schema = { version = "3.0.1" }
+cosmwasm-std    = { version = "3.0.1" }
+cw-address-like = { version = "3.0.1", git = "https://github.com/permissionlessweb/cw-plus-plus" }
+cw-asset        = { version = "4.0",  git = "https://github.com/permissionlessweb/cw-asset" }
+cw-controllers  = { version = "3.0.0", git = "https://github.com/permissionlessweb/cw-minus" }
+cw-ownable      = { version = "2.0", git = "https://github.com/permissionlessweb/cw-plus-plus" }
+cw-plus-orch    = { version = "0.25.0",  git = "https://github.com/permissionlessweb/cw-orchestrator" }
+cw-storage-plus = "3.0.0"
+cw-utils        = { version = "3.0.0"   }
 cw2             = { version = "2.0" }
-cw20            = { version = "2.0.0" }
-cw20-base       = { features = ["library"], version = "2.0.0" }
+cw20            = { version = "3.0.0", git = "https://github.com/permissionlessweb/cw-plus" }
+cw20-base       = { version = "3.0.0", features = ["library"], git = "https://github.com/permissionlessweb/cw-plus" }
 
 protobuf  = { version = "2", features = ["with-bytes"] }
-schemars  = "0.8"
+schemars  = { version = "0.8.4" }
 serde     = { version = "1.0", default-features = false, features = ["derive"] }
 thiserror = { version = "1.0.50" }
 
@@ -43,27 +43,30 @@ chrono = { version = "0.4.31", default-features = false }
 clap   = { version = "4.0.32", features = ["derive"] }
 semver = "1.0"
 
-cw-orch                   = { version = "0.27.0" }
-cw-orch-interchain        = { version = "0.8.0" }
-cw-orch-neutron-test-tube = { version = "0.2.0" }
-cw-orch-osmosis-test-tube = { version = "0.5.0" }
+cw-orch            = { version = "0.30.0", git = "https://github.com/permissionlessweb/cw-orchestrator" }
+cw-orch-interchain = { version = "0.8.1", git = "https://github.com/permissionlessweb/cw-orchestrator" }
+cw-orch-neutron-test-tube = { version = "0.2.0", git = "https://github.com/permissionlessweb/cw-orchestrator" }
+cw-orch-osmosis-test-tube = { version = "0.5.0", git = "https://github.com/permissionlessweb/cw-orchestrator" }
 tokio                     = { version = "1.4", features = ["full"] }
 
 ## crates in order of publishing ## see docs/Publishing.md
 
-abstract-adapter           = { version = "0.26.1" }
-abstract-app               = { version = "0.26.1" }
-abstract-client            = { version = "0.26.1" }
-abstract-integration-tests = { path = "../framework/packages/abstract-integration-tests" }
-abstract-interface         = { version = "0.26.1" }
-abstract-macros            = { version = "0.26.1" }
-abstract-standalone        = { version = "0.26.1" }
-abstract-testing           = { version = "0.26.1" }
+# abstract-adapter           = { version = "0.26.1" }
+abstract-adapter    = { path = "../framework/packages/abstract-adapter", version = "0.26.1" }
 
-abstract-adapter-utils         = { version = "0.26.1" }
-abstract-dex-standard          = { version = "0.26.1" }
-abstract-money-market-standard = { version = "0.26.1" }
-abstract-staking-standard      = { version = "0.26.1" }
+abstract-app               = { path = "../framework/packages/abstract-app", version = "0.26.1" }
+abstract-client            = { path = "../framework/packages/abstract-client", version = "0.26.1" }
+abstract-interface         = { path = "../framework/packages/abstract-interface", version = "0.26.1" }
+abstract-macros            = { path = "../framework/packages/abstract-macros", version = "0.26.1" }
+abstract-standalone        = { path = "../framework/packages/abstract-standalone", version = "0.26.1" }
+abstract-testing           = { path = "../framework/packages/abstract-testing", version = "0.26.1" }
+abstract-integration-tests = { path = "../framework/packages/abstract-integration-tests" }
+
+
+abstract-adapter-utils         = { version = "0.26.1",path = "../framework/packages/standards/utils" }
+abstract-dex-standard          = { path = "../framework/packages/standards/dex", version = "0.26.1" }
+abstract-money-market-standard = { path = "../framework/packages/standards/money-market", version = "0.26.1" }
+abstract-staking-standard      = { path = "../framework/packages/standards/staking", version = "0.26.1" }
 
 
 # Integrations

@@ -391,7 +391,7 @@ mod test {
             .unwrap(),
             funds: vec![],
         });
-        assert_eq!(msg, Ok(expected));
+        assert_eq!(msg.unwrap(), expected);
     }
 
     /// Tests that the ics_20 transfer can be built and that the funds are passed into the sendFunds message not the execute message
@@ -428,7 +428,7 @@ mod test {
             // ensure empty
             funds: vec![],
         });
-        assert_eq!(msg, Ok(expected));
+        assert_eq!(msg.unwrap(), expected);
     }
 
     #[coverage_helper::test]

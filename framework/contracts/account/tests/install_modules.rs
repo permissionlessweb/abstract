@@ -48,8 +48,8 @@ fn cannot_reinstall_module() -> AResult {
         .unwrap_err();
     let account_err: AccountError = err.downcast().unwrap();
     assert_eq!(
-        account_err,
-        AccountError::ModuleAlreadyInstalled(adapter_1::MOCK_ADAPTER_ID.to_owned())
+        account_err.to_string(),
+        AccountError::ModuleAlreadyInstalled(adapter_1::MOCK_ADAPTER_ID.to_owned()).to_string()
     );
     Ok(())
 }
@@ -135,8 +135,8 @@ fn only_admin_can_add_or_remove_module() -> AResult {
         .unwrap();
 
     assert_eq!(
-        not_admin_error,
-        AccountError::Ownership(GovOwnershipError::NotOwner)
+        not_admin_error.to_string(),
+        AccountError::Ownership(GovOwnershipError::NotOwner).to_string()
     );
 
     let not_admin_error: AccountError = account
@@ -152,8 +152,8 @@ fn only_admin_can_add_or_remove_module() -> AResult {
         .unwrap();
 
     assert_eq!(
-        not_admin_error,
-        AccountError::Ownership(GovOwnershipError::NotOwner)
+        not_admin_error.to_string(),
+        AccountError::Ownership(GovOwnershipError::NotOwner).to_string()
     );
 
     Ok(())
@@ -194,8 +194,8 @@ fn fails_adding_previously_added_module() -> AResult {
         .downcast()
         .unwrap();
     assert_eq!(
-        already_whitelisted,
-        AccountError::ModuleAlreadyInstalled(adapter_1::MOCK_ADAPTER_ID.to_string())
+        already_whitelisted.to_string(),
+        AccountError::ModuleAlreadyInstalled(adapter_1::MOCK_ADAPTER_ID.to_string()).to_string()
     );
     Ok(())
 }
@@ -254,8 +254,8 @@ fn fails_removing_non_existing_module() -> AResult {
         .unwrap();
 
     assert_eq!(
-        err,
-        AccountError::ModuleNotFound(adapter_1::MOCK_ADAPTER_ID.to_string())
+        err.to_string(),
+        AccountError::ModuleNotFound(adapter_1::MOCK_ADAPTER_ID.to_string()).to_string()
     );
     Ok(())
 }

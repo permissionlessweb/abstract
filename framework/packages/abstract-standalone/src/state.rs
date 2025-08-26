@@ -89,8 +89,8 @@ mod tests {
         assert_eq!(standalone.module_id(), TEST_MODULE_ID);
         assert_eq!(standalone.version(), TEST_VERSION);
         assert_eq!(
-            standalone.module_info(),
-            Ok(ModuleInfo::from_id(TEST_MODULE_ID, TEST_VERSION.parse().unwrap()).unwrap())
+            standalone.module_info().unwrap(),
+            ModuleInfo::from_id(TEST_MODULE_ID, TEST_VERSION.parse().unwrap()).unwrap()
         );
         assert_eq!(
             standalone.dependencies(),

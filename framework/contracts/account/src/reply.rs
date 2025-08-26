@@ -13,7 +13,7 @@ use cosmwasm_std::{DepsMut, Reply, Response, StdError};
 
 /// Add the message's data to the response
 pub(crate) fn forward_response_reply(result: Reply) -> AccountResult {
-    let res = result.result.into_result().map_err(StdError::generic_err)?;
+    let res = result.result.into_result().map_err(StdError::msg)?;
 
     #[allow(deprecated)]
     let resp = if let Some(data) = res.data {
@@ -54,7 +54,7 @@ pub(crate) fn register_dependencies(deps: DepsMut) -> AccountResult {
                 reference: ModuleReference::Adapter(_),
                 info,
             } => {
-                let id = info.id();
+                let id = info.module_id();
                 // assert version requirements
                 let dependencies =
                     crate::versioning::assert_install_requirements(deps.as_ref(), &id)?;
@@ -64,7 +64,7 @@ pub(crate) fn register_dependencies(deps: DepsMut) -> AccountResult {
                 reference: ModuleReference::Standalone(_),
                 info,
             } => {
-                let id = info.id();
+                let id = info.module_id();
                 // assert version requirements
                 let dependencies =
                     crate::versioning::assert_install_requirements_standalone(deps.as_ref(), &id)?;

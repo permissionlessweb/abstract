@@ -13,11 +13,11 @@ use crate::{anybuf::ibc::MsgTransferResponse, contract::IbcClientResult};
 // 2. Use reply.payload instead of state
 //   let payload: TokenFlowPayload = from_json(reply.payload)?;
 pub fn save_callback_actions(deps: DepsMut, reply: Reply) -> IbcClientResult {
-    let res = reply.result.into_result().map_err(StdError::generic_err)?;
+    let res = reply.result.into_result().map_err(StdError::msg)?;
     #[allow(deprecated)]
     let transfer_response =
         MsgTransferResponse::decode(&res.data.expect("Data is set after sending a packet"))
-            .map_err(|e| StdError::generic_err(e.to_string()))?;
+            .map_err(|e| StdError::msg(e.to_string()))?;
 
     let payload: AccountCallbackPayload = ICS20_ACCOUNT_CALLBACK_PAYLOAD.load(deps.storage)?;
 

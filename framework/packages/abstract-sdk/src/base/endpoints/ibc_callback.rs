@@ -23,7 +23,7 @@ pub trait IbcCallbackEndpoint: Handler {
             .iter()
             .any(|static_dep| static_dep.id == IBC_CLIENT)
         {
-            return Err(AbstractSdkError::Std(StdError::generic_err(format!(
+            return Err(AbstractSdkError::Std(StdError::msg(format!(
                 "Ibc Client is not dependency of {}",
                 self.module_id()
             )))

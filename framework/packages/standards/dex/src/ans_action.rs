@@ -90,7 +90,7 @@ impl Resolve for WholeDexAction {
                 if pool_ids.len() != 1 {
                     return Err(AnsHostError::QueryFailed {
                         method_name: "lp_pairing.resolve".to_string(),
-                        error: StdError::generic_err(format!(
+                        error: StdError::msg(format!(
                             "There are {} pairings for the given LP token",
                             pool_ids.len()
                         )),

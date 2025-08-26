@@ -21,7 +21,7 @@ use abstract_std::{
     },
     IBC_CLIENT,
 };
-use cosmwasm_std::{to_json_binary, CosmosMsg, Uint128};
+use cosmwasm_std::{to_json_binary, CosmosMsg, Uint128, Uint256};
 use cw_orch::{
     contract::Contract,
     environment::{Environment as _, MutCwEnv},
@@ -158,7 +158,7 @@ impl<Chain: IbcQueryHandler, IBC: InterchainEnv<Chain>> RemoteAccountBuilder<Cha
 
         let mut install_modules = self.install_modules.clone();
         // We add the IBC Client by default in the modules installed on the remote account
-        if !install_modules.iter().any(|m| m.module.id() == IBC_CLIENT) {
+        if !install_modules.iter().any(|m| m.module.module_id() == IBC_CLIENT) {
             install_modules.push(ModuleInstallConfig::new(
                 ModuleInfo::from_id_latest(IBC_CLIENT)?,
                 None,
@@ -254,7 +254,7 @@ impl<Chain: IbcQueryHandler, IBC: InterchainEnv<Chain>> RemoteAccount<Chain, IBC
     }
 
     /// Query account balance of a given denom
-    pub fn query_balance(&self, denom: impl Into<String>) -> AbstractClientResult<Uint128> {
+    pub fn query_balance(&self, denom: impl Into<String>) -> AbstractClientResult<Uint256> {
         let coins = self
             .host_chain()
             .bank_querier()

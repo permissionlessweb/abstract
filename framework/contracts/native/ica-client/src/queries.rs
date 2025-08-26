@@ -386,11 +386,12 @@ mod tests {
 
             let err = query(deps.as_ref(), mock_env_validated(deps.api), msg).unwrap_err();
             assert_eq!(
-                err,
+                err.to_string(),
                 IcaClientError::WrongChainType {
                     chain: chain_name.to_string(),
                     ty: ChainType::Cosmos.to_string()
                 }
+                .to_string()
             );
 
             Ok(())

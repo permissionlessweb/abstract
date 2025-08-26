@@ -191,10 +191,10 @@ pub fn handle_host_module_query(
         msg,
     });
     let bin = match deps.querier.raw_query(&to_json_vec(&query)?) {
-        SystemResult::Err(system_err) => Err(StdError::generic_err(format!(
+        SystemResult::Err(system_err) => Err(StdError::msg(format!(
             "Querier system error: {system_err}"
         ))),
-        SystemResult::Ok(ContractResult::Err(contract_err)) => Err(StdError::generic_err(format!(
+        SystemResult::Ok(ContractResult::Err(contract_err)) => Err(StdError::msg(format!(
             "Querier contract error: {contract_err}"
         ))),
         SystemResult::Ok(ContractResult::Ok(value)) => Ok(value),

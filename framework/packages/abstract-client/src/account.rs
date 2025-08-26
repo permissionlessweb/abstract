@@ -44,7 +44,7 @@ use abstract_std::{
     registry::{self, NamespaceResponse},
     IBC_CLIENT,
 };
-use cosmwasm_std::{to_json_binary, Coins, CosmosMsg, Uint128};
+use cosmwasm_std::{to_json_binary, Coins, CosmosMsg, Uint128, Uint256};
 use cw_orch::{
     contract::Contract,
     environment::{Environment as _, MutCwEnv},
@@ -408,7 +408,7 @@ impl<Chain: CwEnv> Account<Chain> {
     }
 
     /// Query account balance of a given denom
-    pub fn query_balance(&self, denom: impl Into<String>) -> AbstractClientResult<Uint128> {
+    pub fn query_balance(&self, denom: impl Into<String>) -> AbstractClientResult<Uint256> {
         let coins = self
             .environment()
             .bank_querier()
@@ -633,7 +633,7 @@ impl<Chain: CwEnv> Account<Chain> {
 
     /// Check if module version installed on account
     pub fn module_version_installed(&self, module: ModuleInfo) -> AbstractClientResult<bool> {
-        let module_id = module.id();
+        let module_id = module.module_id();
         // First we need to verify it's installed or next query will fail with strange error
         if !self.module_installed(&module_id)? {
             return Ok(false);
@@ -739,7 +739,7 @@ impl<Chain: CwEnv> Account<Chain> {
             !module_infos
                 .module_infos
                 .iter()
-                .any(|module_info| module_info.id == m.module.id())
+                .any(|module_info| module_info.id == m.module.module_id())
         });
         if !modules.is_empty() {
             self.abstr_account.install_modules(modules, funds)?;

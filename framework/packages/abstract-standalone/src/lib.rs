@@ -80,7 +80,7 @@ pub mod mock {
 
     use crate::StandaloneContract;
 
-    #[derive(Error, Debug, PartialEq)]
+    #[derive(Error, Debug)]
     pub enum MockError {
         #[error(transparent)]
         Std(#[from] StdError),

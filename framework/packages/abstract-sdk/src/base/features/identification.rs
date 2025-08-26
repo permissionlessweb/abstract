@@ -50,8 +50,8 @@ mod test {
 
             let account = test_account(deps.api);
 
-            let res = binding.account(deps.as_ref());
-            assert_eq!(res, Ok(account));
+            let res = binding.account(deps.as_ref()).unwrap();
+            assert_eq!(res, account);
         }
 
         #[coverage_helper::test]
@@ -64,7 +64,7 @@ mod test {
                 .build();
 
             let binding = MockBinding { mock_api: deps.api };
-            assert_eq!(binding.account_id(deps.as_ref()), Ok(TEST_ACCOUNT_ID));
+            assert_eq!(binding.account_id(deps.as_ref()).unwrap(), TEST_ACCOUNT_ID);
         }
     }
 }

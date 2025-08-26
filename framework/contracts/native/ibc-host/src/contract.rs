@@ -6,7 +6,8 @@ use abstract_std::{
     IBC_HOST,
 };
 use cosmwasm_std::{
-    Binary, Deps, DepsMut, Env, IbcReceiveResponse, MessageInfo, Reply, Response, StdError,
+    Binary, Deps, DepsMut, Env, IbcReceiveResponse, MessageInfo, MigrateInfo, Reply, Response,
+    StdError,
 };
 use semver::Version;
 
@@ -53,12 +54,12 @@ pub fn reply(deps: DepsMut, env: Env, reply_msg: Reply) -> HostResult {
     } else if reply_msg.id == RESPONSE_REPLY_ID {
         reply_forward_response_data(reply_msg)
     } else {
-        Err(HostError::Std(StdError::generic_err("Not implemented")))
+        Err(HostError::Std(StdError::msg("Not implemented")))
     }
 }
 
 #[cfg_attr(feature = "export", cosmwasm_std::entry_point)]
-pub fn migrate(deps: DepsMut, _env: Env, _msg: MigrateMsg) -> HostResult {
+pub fn migrate(deps: DepsMut, _env: Env, _msg: MigrateMsg, _info: MigrateInfo) -> HostResult {
     let to_version: Version = CONTRACT_VERSION.parse().unwrap();
 
     assert_cw_contract_upgrade(deps.storage, IBC_HOST, to_version)?;

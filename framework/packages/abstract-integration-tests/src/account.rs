@@ -18,7 +18,7 @@ use abstract_std::{
     registry::UpdateModule,
 };
 use abstract_testing::prelude::*;
-use cosmwasm_std::{coin, coins, wasm_execute, Uint128};
+use cosmwasm_std::{coin, coins, wasm_execute, Uint128, Uint256};
 use cw2::ContractVersion;
 use cw_orch::{environment::MutCwEnv, prelude::*};
 
@@ -305,7 +305,7 @@ pub fn install_app_with_account_action<T: MutCwEnv>(mut chain: T) -> AResult {
         .bank_querier()
         .balance(&Addr::unchecked(&adapter1), Some("TEST".to_owned()))
         .unwrap();
-    assert_eq!(test_addr_balance[0].amount, Uint128::new(123456));
+    assert_eq!(test_addr_balance[0].amount, Uint256::new(123456));
 
     account.expect_modules(vec![adapter1, adapter2, app1])?;
     Ok(())

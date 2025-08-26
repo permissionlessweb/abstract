@@ -33,7 +33,7 @@ use abstract_std::{
     IBC_CLIENT,
 };
 use abstract_testing::prelude::*;
-use cosmwasm_std::{coins, BankMsg, Uint128};
+use cosmwasm_std::{coins, BankMsg, Uint128, Uint256};
 use cw_asset::{AssetInfo, AssetInfoUnchecked};
 use cw_orch::prelude::*;
 use mock_service::{MockMsg, MockService};
@@ -532,8 +532,8 @@ fn can_build_cw20_with_all_options() -> anyhow::Result<()> {
     let logo = "link-to-logo";
     let project = "project";
     let marketing = chain.addr_make("marketing");
-    let cap = Uint128::from(100u128);
-    let starting_balance = Uint128::from(100u128);
+    let cap = Uint256::from(100u128);
+    let starting_balance = Uint256::from(100u128);
     let minter_response = cw20_builder::MinterResponse {
         minter: sender.to_string(),
         cap: Some(cap),
@@ -576,7 +576,7 @@ fn can_build_cw20_with_all_options() -> anyhow::Result<()> {
         },
         owner_balance
     );
-    let transfer_amount = Uint128::from(50u128);
+    let transfer_amount = Uint256::from(50u128);
     let recipient = chain.addr_make("user");
     cw20.transfer(transfer_amount, recipient.to_string())?;
 
@@ -622,7 +622,7 @@ fn can_build_cw20_with_minimum_options() -> anyhow::Result<()> {
     let owner_balance: cw20_builder::BalanceResponse = cw20.balance(sender.to_string())?;
     assert_eq!(
         cw20_builder::BalanceResponse {
-            balance: Uint128::zero(),
+            balance: Uint256::zero(),
         },
         owner_balance
     );
@@ -645,7 +645,7 @@ fn can_modify_and_query_balance_on_account() -> anyhow::Result<()> {
     assert_eq!(coin1.amount, account.query_balance("denom1")?);
     assert_eq!(coin2.amount, account.query_balance("denom2")?);
     assert_eq!(coin3.amount, account.query_balance("denom3")?);
-    assert_eq!(Uint128::zero(), account.query_balance("denom4")?);
+    assert_eq!(Uint256::zero(), account.query_balance("denom4")?);
 
     assert_eq!(vec![coin1, coin2, coin3], account.query_balances()?);
     Ok(())
@@ -694,7 +694,7 @@ fn can_set_and_query_balance_with_client() -> anyhow::Result<()> {
     assert_eq!(coin1.amount, client.query_balance(&user, "denom1")?);
     assert_eq!(coin2.amount, client.query_balance(&user, "denom2")?);
     assert_eq!(coin3.amount, client.query_balance(&user, "denom3")?);
-    assert_eq!(Uint128::zero(), client.query_balance(&user, "denom4")?);
+    assert_eq!(Uint256::zero(), client.query_balance(&user, "denom4")?);
 
     assert_eq!(vec![coin1, coin2, coin3], client.query_balances(&user)?);
     Ok(())
@@ -743,7 +743,13 @@ fn can_execute_on_account() -> anyhow::Result<()> {
         &coins(amount, denom),
     )?;
 
-    assert_eq!(amount, client.query_balance(&user, denom)?.into());
+    assert_eq!(
+        amount,
+        client
+            .query_balance(&user, denom)?
+            .to_string()
+            .parse::<u128>()?
+    );
     Ok(())
 }
 /// ANCHOR_END: mock_integration_test
@@ -791,7 +797,7 @@ fn doc_example_test() -> anyhow::Result<()> {
     // Query an address's balance
     let coin1_balance = client.query_balance(&sender, "eth")?;
 
-    assert_eq!(coin1_balance.u128(), 100);
+    assert_eq!(&coin1_balance.to_string(), "100");
     // ## ANCHOR_END: balances
 
     // ## ANCHOR: publisher
@@ -1069,7 +1075,7 @@ fn auto_funds_work() -> anyhow::Result<()> {
             monetization: Some(abstract_std::objects::module::Monetization::InstallFee(
                 FixedFee::new(&Coin {
                     denom: TTOKEN.to_owned(),
-                    amount: Uint128::new(50),
+                    amount: Uint256::new(50),
                 }),
             )),
             instantiation_funds: None,
@@ -1081,7 +1087,7 @@ fn auto_funds_work() -> anyhow::Result<()> {
     account_builder
         .name("bob")
         .install_adapter::<MockAdapterI<MockBech32>>()
-        .auto_fund_assert(|c| c[0].amount < Uint128::new(50));
+        .auto_fund_assert(|c| c[0].amount < Uint256::new(50));
     let e = account_builder.build().unwrap_err();
     assert!(matches!(e, AbstractClientError::AutoFundsAssertFailed(_)));
 
@@ -1235,11 +1241,12 @@ fn create_account_with_expected_account_id() -> anyhow::Result<()> {
     };
     let err: RegistryError = err.downcast().unwrap();
     assert_eq!(
-        err,
+        err.to_string(),
         RegistryError::InvalidAccountSequence {
             expected: 1,
             actual: 10,
         }
+        .to_string()
     );
 
     // Can create if right id
@@ -1262,8 +1269,8 @@ fn create_account_with_expected_account_id() -> anyhow::Result<()> {
     };
     let err: RegistryError = err.downcast().unwrap();
     assert_eq!(
-        err,
-        RegistryError::AccountAlreadyExists(AccountId::local(0))
+        err.to_string(),
+        RegistryError::AccountAlreadyExists(AccountId::local(0)).to_string()
     );
 
     // Can create sub-account if right id
@@ -1562,7 +1569,7 @@ fn ans_balance() -> anyhow::Result<()> {
     let balance = client
         .name_service()
         .balance(&chain.sender_addr(), &AssetEntry::new("mock"))?;
-    assert_eq!(balance, Uint128::new(101));
+    assert_eq!(balance, Uint256::new(101));
     Ok(())
 }
 

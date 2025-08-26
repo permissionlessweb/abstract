@@ -7,7 +7,7 @@ use cw_asset::AssetError;
 use thiserror::Error;
 
 /// Error type for the abstract module endpoints.
-#[derive(Error, Debug, PartialEq)]
+#[derive(Error, Debug)]
 pub struct EndpointError {
     #[source]
     source: AbstractSdkError,
@@ -21,7 +21,7 @@ impl Display for EndpointError {
 }
 
 /// Error type for the abstract sdk crate.
-#[derive(Error, Debug, PartialEq)]
+#[derive(Error, Debug)]
 pub enum AbstractSdkError {
     #[error("Abstract Account error in the sdk: {0}")]
     Abstract(#[from] AbstractError),
@@ -92,7 +92,7 @@ pub enum AbstractSdkError {
 }
 
 impl AbstractSdkError {
-    pub fn generic_err(msg: impl Into<String>) -> Self {
-        AbstractSdkError::Std(cosmwasm_std::StdError::generic_err(msg))
+    pub fn generic_err(msg: impl Into<String> + std::fmt::Display) -> Self {
+        AbstractSdkError::Std(cosmwasm_std::StdError::msg(msg))
     }
 }

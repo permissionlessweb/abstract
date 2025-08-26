@@ -41,7 +41,7 @@ use abstract_std::objects::{
     salt::generate_instantiate_salt,
     AccountId,
 };
-use cosmwasm_std::{BlockInfo, Uint128};
+use cosmwasm_std::{BlockInfo, Uint128, Uint256};
 use cw_orch::{contract::Contract, environment::Environment as _, prelude::*};
 use rand::Rng;
 
@@ -282,7 +282,7 @@ impl<Chain: CwEnv> AbstractClient<Chain> {
         &self,
         address: &Addr,
         denom: impl Into<String>,
-    ) -> AbstractClientResult<Uint128> {
+    ) -> AbstractClientResult<Uint256> {
         let coins = self
             .environment()
             .bank_querier()

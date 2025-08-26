@@ -12,14 +12,14 @@ use crate::{
 
 type DexName = String;
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Eq, JsonSchema)]
+#[cosmwasm_schema::cw_serde]
 pub struct PoolMetadata {
     pub dex: DexName,
     pub pool_type: PoolType,
     pub assets: Vec<AssetEntry>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]
+#[cosmwasm_schema::cw_serde]
 pub struct ResolvedPoolMetadata {
     pub dex: DexName,
     pub pool_type: PoolType,
@@ -83,7 +83,7 @@ impl FromStr for PoolMetadata {
                 .map(|(assets, pool_type)| (dex, assets, pool_type))
         });
         let Some((dex, assets, pool_type)) = parts else {
-            return Err(StdError::generic_err(format!(
+            return Err(StdError::msg(format!(
                 "invalid pool metadata format `{s}`; must be in format `{{dex}}{TYPE_DELIMITER}{{asset1}},{{asset2}}{ATTRIBUTE_DELIMITER}{{pool_type}}...`"
             )));
         };
@@ -216,9 +216,9 @@ mod tests {
         let pool_metadata_str = "junoswap:uusd,uust/stable";
         let err = PoolMetadata::from_str(pool_metadata_str).unwrap_err();
 
-        assert_eq!(err, StdError::generic_err(format!(
+        assert_eq!(err.to_string(), StdError::msg(format!(
             "invalid pool metadata format `{pool_metadata_str}`; must be in format `{{dex}}{TYPE_DELIMITER}{{asset1}},{{asset2}}{ATTRIBUTE_DELIMITER}{{pool_type}}...`"
-        )));
+        )).to_string());
     }
 
     #[coverage_helper::test]

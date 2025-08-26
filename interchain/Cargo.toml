@@ -31,21 +31,27 @@ repository = "https://github.com/AbstractSDK/abstract"
 version = "0.26.1"
 
 [workspace.dependencies]
-cosmwasm-schema = { version = "2.0" }
-cosmwasm-std    = { version = "2.0" }
-cw-controllers  = { version = "2.0" }
-cw-storage-plus = "2.0.0"
-cw-utils        = { version = "2.0" }
-cw2             = { version = "2.0.0" }
-cw20            = { version = "2.0.0" }
-cw20-base       = { version = "2.0.0", features = ["library"] }
+cosmwasm-schema = { version = "3.0.1" }
+cosmwasm-std    = { version = "3.0.1" }
+cw-controllers  = { version = "3.0.0" }
+cw-storage-plus = "3.0.0"
+cw-utils        = { version = "3.0.0" }
+cw2             = { version = "3.0.0" }
+cw20            = { version = "3.0.0",  git = "https://github.com/permissionlessweb/cw-plus" }
+cw20-base       = { version = "3.0.0", features = ["library"], git = "https://github.com/permissionlessweb/cw-plus" }
+cw-address-like = { version =  "3.0.1", git = "https://github.com/permissionlessweb/cw-plus-plus" }
+cw-asset        = { version = "4.0", git = "https://github.com/permissionlessweb/cw-asset" }
+cw-ownable      = { version = "3.0.1", git = "https://github.com/permissionlessweb/cw-plus-plus" }
 
-cw-address-like = { version = "2.0" }
-cw-asset        = { version = "4.0" }
-cw-ownable      = { version = "2.0" }
+# cw20            = { version = "2.0.0" }
+# cw20-base       = { version = "2.0.0", features = ["library"] }
+
+# cw-address-like = { version = "2.0" }
+# cw-asset        = { version = "4.0" }
+# cw-ownable      = { version = "2.0" }
 
 protobuf  = { version = "2", features = ["with-bytes"] }
-schemars  = "0.8"
+schemars  = { version = "0.8.4" }
 serde     = { version = "1.0", default-features = false, features = ["derive"] }
 thiserror = { version = "1.0.49" }
 
@@ -57,11 +63,11 @@ cw-orch-polytone = { package = "abstract-cw-orch-polytone", version = "5.0.0" }
 polytone         = { package = "abstract-polytone", version = "2.0.0" }
 polytone-note    = { package = "abstract-polytone-note", version = "4.0.0" }
 
-cw-orch               = { version = "0.27.0" }
-cw-orch-clone-testing = { version = "0.9.0" }
-cw-orch-daemon        = { version = "0.28.0" }
-cw-orch-interchain    = { version = "0.8.0" }
-cw-orch-proto         = { version = "0.9.0" }
+cw-orch            = { version = "0.30.0", git = "https://github.com/permissionlessweb/cw-orchestrator" }
+cw-orch-clone-testing = { version = "0.9.0", git = "https://github.com/permissionlessweb/cw-orchestrator" }
+cw-orch-daemon        = { version = "0.29.0", git = "https://github.com/permissionlessweb/cw-orchestrator" }
+cw-orch-interchain = { version = "0.8.1", git = "https://github.com/permissionlessweb/cw-orchestrator" }
+cw-orch-proto         = { version = "0.9.0", git = "https://github.com/permissionlessweb/cw-orchestrator" }
 
 # Keep these as path, creates cirular dependency otherwise
 # Only need to re-publish all contracts if a re-publish of abstract-interface is required

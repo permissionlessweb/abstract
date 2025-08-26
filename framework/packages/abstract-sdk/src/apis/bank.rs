@@ -465,12 +465,11 @@ mod test {
             let actual_res = bank.send(coin, &expected_recipient, &hook_msg);
 
             assert_eq!(
-                actual_res,
-                Err(AbstractSdkError::Asset(
-                    AssetError::UnavailableMethodForNative {
-                        method: "send".into(),
-                    }
-                )),
+                actual_res.unwrap_err().to_string(),
+                AbstractSdkError::Asset(AssetError::UnavailableMethodForNative {
+                    method: "send".into(),
+                })
+                .to_string(),
             );
         }
     }

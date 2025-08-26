@@ -146,7 +146,7 @@ impl NestedAdmin {
     pub fn query_account_owner<Q: CustomQuery>(&self, deps: Deps<Q>) -> StdResult<AdminResponse> {
         let admin = match self.0.get(deps)? {
             Some(owner) => Some(query_top_level_owner_addr(&deps.querier, owner).map_err(|_| {
-                StdError::generic_err(
+                StdError::msg(
                     "Failed to query top level owner. Make sure this module is owned by the account",
                 )
             })?),
@@ -167,7 +167,7 @@ pub fn query_top_level_owner_addr<Q: CustomQuery>(
         ownership
             .owner
             .owner_address(&querier.into_empty())
-            .ok_or(StdError::generic_err("Top level account got renounced"))
+            .ok_or(StdError::msg("Top level account got renounced"))
     })
 }
 

@@ -15,7 +15,7 @@ pub struct DexCommandTester {
 
 pub fn expect_eq<T: PartialEq + Debug>(t1: T, t2: T) -> Result<(), StdError> {
     if t1 != t2 {
-        Err(StdError::generic_err(format!(
+        Err(StdError::msg(format!(
             "Test failed, wrong result, expected : {:?}, got : {:?}",
             t1, t2
         )))?

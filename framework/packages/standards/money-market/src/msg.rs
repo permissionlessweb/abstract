@@ -269,9 +269,9 @@ impl MoneyMarketQueryMsg {
             MoneyMarketQueryMsg::AnsPrice { money_market, .. } => Ok(money_market),
 
             MoneyMarketQueryMsg::GenerateMessages { .. } => {
-                Err(StdError::generic_err("Wrong query type"))
+                Err(StdError::msg("Wrong query type"))
             }
-            MoneyMarketQueryMsg::Fees {} => Err(StdError::generic_err("Wrong query type")),
+            MoneyMarketQueryMsg::Fees {} => Err(StdError::msg("Wrong query type")),
         }
     }
 }

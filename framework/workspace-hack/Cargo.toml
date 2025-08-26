@@ -18,8 +18,8 @@ anstream = { version = "0.6" }
 anyhow = { version = "1" }
 byteorder = { version = "1", features = ["i128"] }
 bytes = { version = "1", default-features = false, features = ["serde"] }
-cosmwasm-std = { version = "2", features = ["cosmwasm_2_0", "staking", "stargate"] }
-cw-orch = { version = "0.27", features = ["daemon", "snapshot-testing"] }
+cosmwasm-std = { version = "3", features = ["cosmwasm_2_0", "staking", "stargate"] }
+cw-orch = { version = "0.30.0", features = ["daemon", "snapshot-testing"], git = "https://github.com/permissionlessweb/cw-orchestrator" }
 cw-orch-interchain = { version = "0.8", features = ["daemon"] }
 cw20-base = { version = "2", default-features = false, features = ["library"] }
 der = { version = "0.7", default-features = false, features = ["oid", "pem", "std"] }
@@ -54,8 +54,8 @@ anstream = { version = "0.6" }
 anyhow = { version = "1" }
 byteorder = { version = "1", features = ["i128"] }
 bytes = { version = "1", default-features = false, features = ["serde"] }
-cosmwasm-std = { version = "2", features = ["cosmwasm_2_0", "staking", "stargate"] }
-cw-orch = { version = "0.27", features = ["daemon", "snapshot-testing"] }
+cosmwasm-std = { version = "3", features = ["cosmwasm_2_0", "staking", "stargate"] }
+cw-orch = { version = "0.30.0", features = ["daemon", "snapshot-testing"], git = "https://github.com/permissionlessweb/cw-orchestrator" }
 cw-orch-interchain = { version = "0.8", features = ["daemon"] }
 cw20-base = { version = "2", default-features = false, features = ["library"] }
 der = { version = "0.7", default-features = false, features = ["oid", "pem", "std"] }
@@ -99,7 +99,7 @@ bs58 = { version = "0.5", features = ["check"] }
 bytes = { version = "1" }
 chrono = { version = "0.4", features = ["serde"] }
 console = { version = "0.15" }
-cosmos-sdk-proto = { version = "0.24", default-features = false, features = ["cosmwasm", "grpc-transport"] }
+cosmos-sdk-proto = { version = "0.27", default-features = false, features = ["cosmwasm", "grpc-transport"] }
 cosmrs = { version = "0.19", features = ["cosmwasm", "dev", "grpc"] }
 crossbeam-epoch = { version = "0.9" }
 crunchy = { version = "0.2", features = ["std"] }
@@ -148,7 +148,7 @@ smallvec = { version = "1", default-features = false, features = ["const_new"] }
 time = { version = "0.3" }
 tokio-stream = { version = "0.1", features = ["net"] }
 tokio-util = { version = "0.7", features = ["codec", "io", "time"] }
-tonic = { version = "0.12", features = ["tls-roots"] }
+tonic = { version = "0.13", features = [ ] }
 tower = { version = "0.4", features = ["balance", "buffer", "filter", "limit", "util"] }
 tracing = { version = "0.1", features = ["log"] }
 tracing-core = { version = "0.1" }
@@ -167,7 +167,7 @@ bs58 = { version = "0.5", features = ["check"] }
 bytes = { version = "1" }
 chrono = { version = "0.4", features = ["serde"] }
 console = { version = "0.15" }
-cosmos-sdk-proto = { version = "0.24", default-features = false, features = ["cosmwasm", "grpc-transport"] }
+cosmos-sdk-proto = { version = "0.27", default-features = false, features = ["cosmwasm", "grpc-transport"] }
 cosmrs = { version = "0.19", features = ["cosmwasm", "dev", "grpc"] }
 crossbeam-epoch = { version = "0.9" }
 crunchy = { version = "0.2", features = ["std"] }
@@ -217,7 +217,7 @@ syn-f595c2ba2a3f28df = { package = "syn", version = "2", default-features = fals
 time = { version = "0.3" }
 tokio-stream = { version = "0.1", features = ["net"] }
 tokio-util = { version = "0.7", features = ["codec", "io", "time"] }
-tonic = { version = "0.12", features = ["tls-roots"] }
+tonic = { version = "0.13", features = [ ] }
 tower = { version = "0.4", features = ["balance", "buffer", "filter", "limit", "util"] }
 tracing = { version = "0.1", features = ["log"] }
 tracing-core = { version = "0.1" }
@@ -235,7 +235,7 @@ bs58 = { version = "0.5", features = ["check"] }
 bytes = { version = "1" }
 chrono = { version = "0.4", features = ["serde"] }
 console = { version = "0.15" }
-cosmos-sdk-proto = { version = "0.24", default-features = false, features = ["cosmwasm", "grpc-transport"] }
+cosmos-sdk-proto = { version = "0.27", default-features = false, features = ["cosmwasm", "grpc-transport"] }
 cosmrs = { version = "0.19", features = ["cosmwasm", "dev", "grpc"] }
 crossbeam-epoch = { version = "0.9" }
 crunchy = { version = "0.2", features = ["std"] }
@@ -284,7 +284,7 @@ smallvec = { version = "1", default-features = false, features = ["const_new"] }
 time = { version = "0.3" }
 tokio-stream = { version = "0.1", features = ["net"] }
 tokio-util = { version = "0.7", features = ["codec", "io", "time"] }
-tonic = { version = "0.12", features = ["tls-roots"] }
+tonic = { version = "0.13.1" }
 tower = { version = "0.4", features = ["balance", "buffer", "filter", "limit", "util"] }
 tracing = { version = "0.1", features = ["log"] }
 tracing-core = { version = "0.1" }
@@ -302,7 +302,7 @@ bs58 = { version = "0.5", features = ["check"] }
 bytes = { version = "1" }
 chrono = { version = "0.4", features = ["serde"] }
 console = { version = "0.15" }
-cosmos-sdk-proto = { version = "0.24", default-features = false, features = ["cosmwasm", "grpc-transport"] }
+cosmos-sdk-proto = { version = "0.27", default-features = false, features = ["cosmwasm", "grpc-transport"] }
 cosmrs = { version = "0.19", features = ["cosmwasm", "dev", "grpc"] }
 crossbeam-epoch = { version = "0.9" }
 crunchy = { version = "0.2", features = ["std"] }
@@ -352,7 +352,7 @@ syn-f595c2ba2a3f28df = { package = "syn", version = "2", default-features = fals
 time = { version = "0.3" }
 tokio-stream = { version = "0.1", features = ["net"] }
 tokio-util = { version = "0.7", features = ["codec", "io", "time"] }
-tonic = { version = "0.12", features = ["tls-roots"] }
+tonic = { version = "0.13", features = [ ] }
 tower = { version = "0.4", features = ["balance", "buffer", "filter", "limit", "util"] }
 tracing = { version = "0.1", features = ["log"] }
 tracing-core = { version = "0.1" }

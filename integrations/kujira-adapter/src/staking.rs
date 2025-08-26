@@ -63,7 +63,7 @@ impl CwStakingCommand for Bow {
 
                 let AssetInfoBase::Native(denom) = entry.resolve(&deps.querier, ans_host)? else {
                     return Err(
-                        StdError::generic_err("expected denom as LP token for staking.").into(),
+                        StdError::msg("expected denom as LP token for staking.").into(),
                     );
                 };
                 let lp_token_denom = denom;
@@ -197,7 +197,7 @@ impl CwStakingCommand for Bow {
                         },
                     )
                     .map_err(|e| {
-                        StdError::generic_err(format!(
+                        StdError::msg(format!(
                             "Failed to query staked balance on {} for {}. Error: {:?}",
                             self.name(),
                             staker,
@@ -237,7 +237,7 @@ impl CwStakingCommand for Bow {
                         },
                     )
                     .map_err(|e| {
-                        StdError::generic_err(format!(
+                        StdError::msg(format!(
                             "Failed to query reward info on {} for lp token {}. Error: {:?}",
                             self.name(),
                             t.lp_token,

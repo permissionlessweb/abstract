@@ -50,7 +50,7 @@ pub fn redelegate_all(
 ) -> StdResult<CosmosMsg> {
     let delegation = querier
         .query_delegation(account_address, source_validator)?
-        .ok_or(StdError::generic_err(format!(
+        .ok_or(StdError::msg(format!(
             "OS not delegated to validator {source_validator}"
         )))?;
     Ok(CosmosMsg::Staking(StakingMsg::Redelegate {
@@ -98,7 +98,7 @@ pub fn undelegate_all_from(
 ) -> StdResult<CosmosMsg> {
     let delegation = querier
         .query_delegation(account_address, validator)?
-        .ok_or(StdError::generic_err(format!(
+        .ok_or(StdError::msg(format!(
             "OS not delegated to validator {validator}"
         )))?;
     Ok(CosmosMsg::Staking(StakingMsg::Undelegate {

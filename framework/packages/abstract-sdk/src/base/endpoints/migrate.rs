@@ -1,4 +1,4 @@
-use cosmwasm_std::{DepsMut, Env, Response};
+use cosmwasm_std::{DepsMut, Env, MigrateInfo, Response};
 use schemars::JsonSchema;
 use serde::Serialize;
 
@@ -15,5 +15,6 @@ pub trait MigrateEndpoint: Handler {
         deps: DepsMut,
         env: Env,
         msg: Self::MigrateMsg,
+        info: MigrateInfo,
     ) -> Result<Response, Self::Error>;
 }

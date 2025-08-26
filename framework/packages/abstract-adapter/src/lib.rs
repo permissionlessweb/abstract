@@ -51,7 +51,7 @@ pub mod mock {
     pub const TEST_METADATA: &str = "test_metadata";
     pub const TEST_AUTHORIZED_ADDR: &str = "test_authorized_address";
 
-    #[derive(Error, Debug, PartialEq)]
+    #[derive(Error, Debug)]
     pub enum MockError {
         #[error(transparent)]
         Std(#[from] StdError),

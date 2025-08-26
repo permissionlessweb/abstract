@@ -175,6 +175,7 @@ mod tests {
         mod migrate {
             use abstract_std::{registry::MigrateMsg, AbstractError, REGISTRY};
             use contract::{VCResult, CONTRACT_VERSION};
+            use cosmwasm_std::MigrateInfo;
             use semver::Version;
 
             use super::*;
@@ -182,12 +183,21 @@ mod tests {
             #[coverage_helper::test]
             fn disallow_same_version() -> VCResult<()> {
                 let mut deps = mock_dependencies();
+                let sender = deps.api.addr_make("jimi");
                 let env = mock_env_validated(deps.api);
                 mock_init(&mut deps)?;
 
                 let version: Version = CONTRACT_VERSION.parse().unwrap();
 
-                let res = crate::migrate::migrate(deps.as_mut(), env, MigrateMsg::Migrate {});
+                let res = crate::migrate::migrate(
+                    deps.as_mut(),
+                    env,
+                    MigrateMsg::Migrate {},
+                    MigrateInfo {
+                        sender,
+                        old_migrate_version: None,
+                    },
+                );
 
                 assert_eq!(
                     res,
@@ -206,6 +216,7 @@ mod tests {
             #[coverage_helper::test]
             fn disallow_downgrade() -> VCResult<()> {
                 let mut deps = mock_dependencies();
+                let sender = deps.api.addr_make("jimi");
                 let env = mock_env_validated(deps.api);
                 mock_init(&mut deps)?;
 
@@ -214,7 +225,15 @@ mod tests {
 
                 let version: Version = CONTRACT_VERSION.parse().unwrap();
 
-                let res = crate::migrate::migrate(deps.as_mut(), env, MigrateMsg::Migrate {});
+                let res = crate::migrate::migrate(
+                    deps.as_mut(),
+                    env,
+                    MigrateMsg::Migrate {},
+                    MigrateInfo {
+                        sender,
+                        old_migrate_version: None,
+                    },
+                );
 
                 assert_eq!(
                     res,
@@ -233,6 +252,7 @@ mod tests {
             #[coverage_helper::test]
             fn disallow_name_change() -> VCResult<()> {
                 let mut deps = mock_dependencies();
+                let sender = deps.api.addr_make("jimi");
                 let env = mock_env_validated(deps.api);
                 mock_init(&mut deps)?;
 
@@ -240,7 +260,15 @@ mod tests {
                 let old_name = "old:contract";
                 cw2::set_contract_version(deps.as_mut().storage, old_name, old_version)?;
 
-                let res = crate::migrate::migrate(deps.as_mut(), env, MigrateMsg::Migrate {});
+                let res = crate::migrate::migrate(
+                    deps.as_mut(),
+                    env,
+                    MigrateMsg::Migrate {},
+                    MigrateInfo {
+                        sender,
+                        old_migrate_version: None,
+                    },
+                );
 
                 assert_eq!(
                     res,
@@ -258,6 +286,8 @@ mod tests {
             #[coverage_helper::test]
             fn works() -> VCResult<()> {
                 let mut deps = mock_dependencies();
+                let sender = deps.api.addr_make("jimi");
+
                 let env = mock_env_validated(deps.api);
                 mock_init(&mut deps)?;
 
@@ -270,7 +300,15 @@ mod tests {
                 .to_string();
                 cw2::set_contract_version(deps.as_mut().storage, REGISTRY, small_version)?;
 
-                let res = crate::migrate::migrate(deps.as_mut(), env, MigrateMsg::Migrate {})?;
+                let res = crate::migrate::migrate(
+                    deps.as_mut(),
+                    env,
+                    MigrateMsg::Migrate {},
+                    MigrateInfo {
+                        sender,
+                        old_migrate_version: None,
+                    },
+                )?;
                 assert!(res.messages.is_empty());
 
                 assert_eq!(

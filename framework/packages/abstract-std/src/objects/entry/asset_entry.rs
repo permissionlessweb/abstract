@@ -2,16 +2,13 @@ use std::fmt::Display;
 
 use cosmwasm_std::StdResult;
 use cw_storage_plus::{Key, KeyDeserialize, Prefixer, PrimaryKey};
-use schemars::JsonSchema;
-use serde::{Deserialize, Serialize};
 
 use crate::{constants::CHAIN_DELIMITER, AbstractError, AbstractResult};
 
 /// An unchecked ANS asset entry. This is a string that is formatted as
 /// `src_chain>[intermediate_chain>]asset_name`
-#[derive(
-    Deserialize, Serialize, Clone, Debug, PartialEq, Eq, JsonSchema, PartialOrd, Ord, Default,
-)]
+#[cosmwasm_schema::cw_serde]
+#[derive(Eq, PartialOrd, Ord, Default)]
 pub struct AssetEntry(pub(crate) String);
 
 impl AssetEntry {
@@ -139,16 +136,16 @@ mod test {
         // technically invalid, but we don't care here
         let entry = AssetEntry::new("CRAB");
         assert_eq!(
-            entry.src_chain(),
-            Err(AbstractError::EntryFormattingError {
+            entry.src_chain().unwrap_err().to_string(),
+            AbstractError::EntryFormattingError {
                 actual: "crab".to_string(),
                 expected: "src_chain>asset_name".to_string(),
-            })
+            }.to_string()
         );
         let entry = AssetEntry::new("osmosis>crab");
-        assert_eq!(entry.src_chain(), Ok("osmosis".to_string()));
+        assert_eq!(entry.src_chain().unwrap(), "osmosis".to_string());
         let entry = AssetEntry::new("osmosis>juno>crab");
-        assert_eq!(entry.src_chain(), Ok("osmosis".to_string()));
+        assert_eq!(entry.src_chain().unwrap(), "osmosis".to_string());
 
         Ok(())
     }
@@ -162,11 +159,11 @@ mod test {
         let entry = AssetEntry::new(input);
 
         assert_eq!(
-            entry.src_chain(),
-            Err(AbstractError::EntryFormattingError {
+            entry.src_chain().unwrap_err().to_string(),
+            AbstractError::EntryFormattingError {
                 actual: input.to_ascii_lowercase(),
                 expected: "src_chain>asset_name".to_string(),
-            })
+            }.to_string()
         );
     }
 

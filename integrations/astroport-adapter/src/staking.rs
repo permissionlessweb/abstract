@@ -69,7 +69,7 @@ impl CwStakingCommand for Astroport {
 
                 let AssetInfo::Cw20(token_addr) = entry.resolve(&deps.querier, ans_host)? else {
                     return Err(
-                        StdError::generic_err("expected CW20 as LP token for staking.").into(),
+                        StdError::msg("expected CW20 as LP token for staking.").into(),
                     );
                 };
 
@@ -205,7 +205,7 @@ impl CwStakingCommand for Astroport {
                         },
                     )
                     .map_err(|e| {
-                        StdError::generic_err(format!(
+                        StdError::msg(format!(
                             "Failed to query staked balance on {} for {}. Error: {:?}",
                             self.name(),
                             staker,
@@ -243,7 +243,7 @@ impl CwStakingCommand for Astroport {
                         },
                     )
                     .map_err(|e| {
-                        StdError::generic_err(format!(
+                        StdError::msg(format!(
                             "Failed to query reward info on {} for lp token {}. Error: {:?}",
                             self.name(),
                             t.lp_token,

@@ -7,7 +7,7 @@ use cosmwasm_std::{
 use cw_asset::AssetError;
 use thiserror::Error;
 
-#[derive(Error, Debug, PartialEq)]
+#[derive(Error, Debug)]
 pub enum MoneyMarketError {
     #[error(transparent)]
     Std(#[from] StdError),

@@ -353,7 +353,7 @@ fn assert_slippage_tolerance(
     if let Some(slippage_tolerance) = *slippage_tolerance {
         let slippage_tolerance: Decimal256 = slippage_tolerance.into();
         if slippage_tolerance > Decimal256::one() {
-            return Err(DexError::Std(StdError::generic_err(
+            return Err(DexError::Std(StdError::msg(
                 "slippage_tolerance cannot bigger than 1",
             )));
         }

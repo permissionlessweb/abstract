@@ -147,7 +147,7 @@ fn account_app_ownership() -> AResult {
         .unwrap_err()
         .downcast()
         .unwrap();
-    assert_eq!(err, MockError::Admin(AdminError::NotAdmin {}));
+    assert_eq!(err.to_string(), MockError::Admin(AdminError::NotAdmin {}).to_string());
     Ok(())
 }
 
@@ -222,7 +222,7 @@ fn cant_reinstall_app_after_uninstall() -> AResult {
         panic!("Expected error");
     };
     let account_err: AccountError = err.downcast().unwrap();
-    assert_eq!(account_err, AccountError::ProhibitedReinstall {});
+    assert_eq!(account_err.to_string(), AccountError::ProhibitedReinstall {}.to_string());
     Ok(())
 }
 

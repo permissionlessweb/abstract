@@ -13,7 +13,7 @@ pub use cw_utils::Expiration;
 use super::nested_admin::query_top_level_owner;
 
 /// Errors associated with the contract's ownership
-#[derive(thiserror::Error, Debug, PartialEq)]
+#[derive(thiserror::Error, Debug)]
 pub enum GovOwnershipError {
     #[error(transparent)]
     Std(#[from] StdError),
@@ -480,7 +480,7 @@ mod tests {
 
             let res =
                 assert_nested_owner(deps.as_ref().storage, &deps.as_ref().querier, &jake_address);
-            assert_eq!(res.unwrap_err(), GovOwnershipError::NotOwner);
+            assert_eq!(res.unwrap_err().to_string(), GovOwnershipError::NotOwner.to_string());
         }
 
         // case 2. owner has renounced
@@ -493,7 +493,7 @@ mod tests {
                 &deps.as_ref().querier,
                 &larry_address,
             );
-            assert_eq!(res.unwrap_err(), GovOwnershipError::NoOwner);
+            assert_eq!(res.unwrap_err().to_string(), GovOwnershipError::NoOwner.to_string());
         }
     }
 
@@ -520,7 +520,7 @@ mod tests {
                 },
             )
             .unwrap_err();
-            assert_eq!(err, GovOwnershipError::NotOwner);
+            assert_eq!(err.to_string(), GovOwnershipError::NotOwner.to_string());
         }
 
         // owner properly transfers ownership
@@ -568,7 +568,7 @@ mod tests {
                 GovAction::AcceptOwnership,
             )
             .unwrap_err();
-            assert_eq!(err, GovOwnershipError::TransferNotFound);
+            assert_eq!(err.to_string(), GovOwnershipError::TransferNotFound.to_string());
         }
 
         transfer_ownership(
@@ -588,7 +588,7 @@ mod tests {
                 GovAction::AcceptOwnership,
             )
             .unwrap_err();
-            assert_eq!(err, GovOwnershipError::NotPendingOwner);
+            assert_eq!(err.to_string(), GovOwnershipError::NotPendingOwner.to_string());
         }
 
         // cannot accept ownership if deadline has passed
@@ -600,7 +600,7 @@ mod tests {
                 GovAction::AcceptOwnership,
             )
             .unwrap_err();
-            assert_eq!(err, GovOwnershipError::TransferExpired);
+            assert_eq!(err.to_string(), GovOwnershipError::TransferExpired.to_string());
         }
 
         // pending owner properly accepts ownership before deadline
@@ -649,7 +649,7 @@ mod tests {
                 GovAction::RenounceOwnership,
             )
             .unwrap_err();
-            assert_eq!(err, GovOwnershipError::NotOwner);
+            assert_eq!(err.to_string(), GovOwnershipError::NotOwner.to_string());
         }
 
         // owner properly renounces
@@ -684,7 +684,7 @@ mod tests {
                 GovAction::RenounceOwnership,
             )
             .unwrap_err();
-            assert_eq!(err, GovOwnershipError::NoOwner);
+            assert_eq!(err.to_string(), GovOwnershipError::NoOwner.to_string());
         }
     }
 

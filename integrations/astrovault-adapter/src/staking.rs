@@ -73,7 +73,7 @@ impl CwStakingCommand for Astrovault {
                     self.staking_contract_address(deps, ans_host, &entry)?;
                 let AssetInfo::Cw20(token_addr) = entry.resolve(&deps.querier, ans_host)? else {
                     return Err(
-                        StdError::generic_err("expected CW20 as LP token for staking.").into(),
+                        StdError::msg("expected CW20 as LP token for staking.").into(),
                     );
                 };
 
@@ -209,7 +209,7 @@ impl CwStakingCommand for Astrovault {
                     &mini_astrovault::AstrovaultStakingQueryMsg::Config {},
                 )
                 .map_err(|e| {
-                    StdError::generic_err(format!(
+                    StdError::msg(format!(
                         "Failed to query staking info for {} with lp_staking: {}, {:?}",
                         self.name(),
                         staking_addr.clone(),
@@ -252,7 +252,7 @@ impl CwStakingCommand for Astrovault {
                         },
                     )
                     .map_err(|e| {
-                        StdError::generic_err(format!(
+                        StdError::msg(format!(
                             "Failed to query staked balance on {} for {}. Error: {:?}",
                             self.name(),
                             staker,
@@ -283,7 +283,7 @@ impl CwStakingCommand for Astrovault {
                         },
                     )
                     .map_err(|e| {
-                        StdError::generic_err(format!(
+                        StdError::msg(format!(
                             "Failed to query staked balance on {} for {}. Error: {:?}",
                             self.name(),
                             staker,
@@ -323,7 +323,7 @@ impl CwStakingCommand for Astrovault {
                         },
                     )
                     .map_err(|e| {
-                        StdError::generic_err(format!(
+                        StdError::msg(format!(
                             "Failed to query reward info on {} for lp token. Error: {:?}",
                             self.name(),
                             e

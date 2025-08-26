@@ -1304,10 +1304,10 @@ mod test {
             let res = execute_update(&mut deps, (vec![entry], vec![]), &abstr.owner);
 
             assert_eq!(
-                res,
-                Err(AnsHostError::UnregisteredDex {
+                res.unwrap_err().to_string(),
+                AnsHostError::UnregisteredDex {
                     dex: unregistered_dex.into(),
-                })
+                }.to_string()
             );
 
             let actual_pools = load_pool_metadata(&deps.storage)?;
@@ -1394,10 +1394,10 @@ mod test {
             let res = execute_update(&mut deps, (vec![entry], vec![]), &abstr.owner);
 
             assert_eq!(
-                res,
-                Err(AnsHostError::UnregisteredAsset {
+                res.unwrap_err().to_string(),
+                AnsHostError::UnregisteredAsset {
                     asset: "juno".to_string(),
-                }),
+                }.to_string(),
             );
 
             Ok(())
@@ -1413,24 +1413,24 @@ mod test {
             let deps = mock_dependencies();
             let result = validate_pool_assets(&deps.storage, assets).unwrap_err();
             assert_eq!(
-                result,
+                result.to_string(),
                 InvalidAssetCount {
                     min: MIN_POOL_ASSETS,
                     max: MAX_POOL_ASSETS,
                     provided: 0,
-                }
+                }.to_string()
             );
 
             let assets = &mut ["a".into()];
             let deps = mock_dependencies();
             let result = validate_pool_assets(&deps.storage, assets).unwrap_err();
             assert_eq!(
-                result,
+                result.to_string(),
                 InvalidAssetCount {
                     min: MIN_POOL_ASSETS,
                     max: MAX_POOL_ASSETS,
                     provided: 1,
-                }
+                }.to_string()
             );
         }
 
@@ -1441,10 +1441,10 @@ mod test {
             let res = validate_pool_assets(&deps.storage, &mut assets);
 
             assert_eq!(
-                res,
-                Err(AnsHostError::UnregisteredAsset {
+                res.unwrap_err().to_string(),
+                AnsHostError::UnregisteredAsset {
                     asset: "a".to_string(),
-                })
+                }.to_string()
             );
         }
 
@@ -1481,12 +1481,12 @@ mod test {
             let deps = mock_dependencies();
             let result = validate_pool_assets(&deps.storage, &mut assets).unwrap_err();
             assert_eq!(
-                result,
+                result.to_string(),
                 InvalidAssetCount {
                     min: MIN_POOL_ASSETS,
                     max: MAX_POOL_ASSETS,
                     provided: 6,
-                }
+                }.to_string()
             );
         }
     }

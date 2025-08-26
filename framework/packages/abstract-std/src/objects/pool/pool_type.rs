@@ -1,10 +1,11 @@
 use std::{fmt, str::FromStr};
 
+use cosmwasm_schema::cw_serde;
 use cosmwasm_std::StdError;
-use schemars::JsonSchema;
-use serde::{Deserialize, Serialize};
+ 
 
-#[derive(Deserialize, Serialize, Clone, Copy, Debug, PartialEq, Eq, JsonSchema)]
+#[cw_serde]
+#[derive(Copy, Eq)]
 #[non_exhaustive]
 pub enum PoolType {
     ConstantProduct,
@@ -30,7 +31,7 @@ impl FromStr for PoolType {
             WEIGHTED => Ok(PoolType::Weighted),
             LIQUIDITY_BOOTSTRAP => Ok(PoolType::LiquidityBootstrap),
             CONCENTRATED_LIQUIDITY => Ok(PoolType::ConcentratedLiquidity),
-            _ => Err(StdError::generic_err(format!("invalid pool type `{s}`"))),
+            _ => Err(StdError::msg(format!("invalid pool type `{s}`"))),
         }
     }
 }

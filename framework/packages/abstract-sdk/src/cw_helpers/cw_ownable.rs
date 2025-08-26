@@ -65,7 +65,7 @@ mod tests {
     #[derive(QueryResponses)]
     enum QueryMsg {}
 
-    #[derive(Error, Debug, PartialEq)]
+    #[derive(Error, Debug )]
     pub enum MockError {
         #[error(transparent)]
         Std(#[from] StdError),

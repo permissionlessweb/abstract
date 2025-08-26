@@ -15,13 +15,14 @@ use abstract_std::objects::{
     AccountId,
 };
 use abstract_testing::prelude::*;
+use cosmwasm_std::StdResult;
 use cw_orch::prelude::*;
-pub type AResult = anyhow::Result<()>; // alias for Result<(), anyhow::Error>
+pub type AResult = StdResult<()>; // alias for StdResult<(), StdError>
 
 pub fn create_default_account<T: CwEnv>(
     sender: &Addr,
     abstr: &Abstract<T>,
-) -> anyhow::Result<AccountI<T>> {
+) -> StdResult<AccountI<T>> {
     let account = AccountI::create_default_account(
         abstr,
         GovernanceDetails::Monarchy {
@@ -35,7 +36,7 @@ pub fn install_module_version<T: CwEnv>(
     account: &AccountI<T>,
     module: &str,
     version: &str,
-) -> anyhow::Result<String> {
+) -> StdResult<String> {
     account.install_module_version(
         module,
         ModuleVersion::Version(version.to_string()),
@@ -51,7 +52,7 @@ pub fn init_mock_adapter<T: CwEnv>(
     deployment: &Abstract<T>,
     version: Option<String>,
     account_id: AccountId,
-) -> anyhow::Result<MockAdapterI<T>> {
+) -> StdResult<MockAdapterI<T>> {
     deployment
         .registry
         .claim_namespace(account_id, "tester".to_string())?;
@@ -67,7 +68,7 @@ pub fn add_mock_adapter_install_fee<T: CwEnv>(
     deployment: &Abstract<T>,
     monetization: Monetization,
     version: Option<String>,
-) -> anyhow::Result<()> {
+) -> StdResult<()> {
     let version = version.unwrap_or(TEST_VERSION.to_string());
     deployment.registry.update_module_configuration(
         "test-module-id".to_string(),

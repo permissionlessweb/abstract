@@ -32,7 +32,7 @@ use cw_controllers::AdminError;
 use thiserror::Error;
 
 // ANCHOR: error
-#[derive(Error, Debug, PartialEq)]
+#[derive(Error, Debug)]
 pub enum CounterError {
     #[error(transparent)]
     Std(#[from] StdError),

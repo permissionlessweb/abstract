@@ -90,7 +90,7 @@ pub mod mock {
     use self::interface::MockAppWithDepI;
     use crate::{AppContract, AppError};
 
-    #[derive(Error, Debug, PartialEq)]
+    #[derive(Error, Debug)]
     pub enum MockError {
         #[error(transparent)]
         Std(#[from] StdError),
@@ -156,7 +156,7 @@ pub mod mock {
                 #[allow(deprecated)]
                 Ok(Response::new().set_data(msg.result.unwrap().data.unwrap()))
             })])
-            .with_migrate(|_, _, _, _| Ok(Response::new().set_data("mock_migrate".as_bytes())));
+            .with_migrate(|_, _, _, _, _| Ok(Response::new().set_data("mock_migrate".as_bytes())));
 
     crate::cw_orch_interface!(MOCK_APP_WITH_DEP, MockAppContract, MockAppWithDepI);
 
@@ -298,7 +298,7 @@ pub mod mock {
                 // We have address!
                 ::cosmwasm_std::ensure!(
                     adapter1_addr.is_some(),
-                    ::cosmwasm_std::StdError::generic_err("no address")
+                    ::cosmwasm_std::StdError::msg("no address")
                 );
                 println!("adapter_addr: {adapter1_addr:?}");
                 // See test `install_app_with_account_action` where this transfer will happen.
@@ -356,9 +356,10 @@ pub mod mock {
             deps: ::cosmwasm_std::DepsMut,
             env: ::cosmwasm_std::Env,
             msg: <::abstract_app::mock::MockAppContract as $crate::sdk::base::MigrateEndpoint>::MigrateMsg,
+            info: ::cosmwasm_std::MigrateInfo,
         ) -> Result<::cosmwasm_std::Response, <::abstract_app::mock::MockAppContract as $crate::sdk::base::Handler>::Error> {
             use $crate::sdk::base::MigrateEndpoint;
-            MOCK_APP_WITH_DEP.migrate(deps, env, msg)
+            MOCK_APP_WITH_DEP.migrate(deps, env, msg,info)
         }
 
         #[cw_orch::interface(Init, Exec, Query, Migrate)]

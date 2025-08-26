@@ -116,17 +116,21 @@ impl ModuleInfo {
         self.namespace.validate()?;
         validate_name(&self.name)?;
         self.version.validate().map_err(|e| {
-            StdError::generic_err(format!("Invalid version for module {}: {}", self.id(), e))
+            StdError::msg(format!(
+                "Invalid version for module {}: {}",
+                self.module_id(),
+                e
+            ))
         })?;
         Ok(())
     }
 
-    pub fn id(&self) -> String {
+    pub fn module_id(&self) -> String {
         format!("{}:{}", self.namespace, self.name)
     }
 
     pub fn id_with_version(&self) -> String {
-        format!("{}:{}", self.id(), self.version)
+        format!("{}:{}", self.module_id(), self.version)
     }
 
     pub fn assert_version_variant(&self) -> AbstractResult<()> {
@@ -188,9 +192,8 @@ impl KeyDeserialize for &ModuleInfo {
         let ver = name_ver.split_off(ver_len);
 
         Ok(ModuleInfo {
-            namespace: Namespace::try_from(String::from_vec(prov_name_ver)?).map_err(|e| {
-                StdError::generic_err(format!("Invalid namespace for module: {}", e))
-            })?,
+            namespace: Namespace::try_from(String::from_vec(prov_name_ver)?)
+                .map_err(|e| StdError::msg(format!("Invalid namespace for module: {}", e)))?,
             name: String::from_vec(name_ver)?,
             version: ModuleVersion::from_vec(ver)?,
         })
@@ -217,7 +220,7 @@ fn parse_length(value: &[u8]) -> StdResult<usize> {
     Ok(u16::from_be_bytes(
         value
             .try_into()
-            .map_err(|_| StdError::generic_err("Could not read 2 byte length"))?,
+            .map_err(|_| StdError::msg("Could not read 2 byte length"))?,
     )
     .into())
 }
@@ -371,7 +374,7 @@ impl Module {
         match &self.reference {
             // Standalone, Service or Native(exception for IBC Client for the ICS20 Callbacks) contracts not supposed to be whitelisted on account
             ModuleReference::Adapter(_) | ModuleReference::App(_) => true,
-            ModuleReference::Native(_) if self.info.id() == IBC_CLIENT => true,
+            ModuleReference::Native(_) if self.info.module_id() == IBC_CLIENT => true,
             _ => false,
         }
     }
@@ -403,7 +406,7 @@ impl ModuleInitMsg {
             ModuleInitMsg {
                 fixed_init: None,
                 owner_init: None,
-            } => Err(StdError::generic_err("No init msg set for this module")),
+            } => Err(StdError::msg("No init msg set for this module")),
         }
         .map_err(Into::into)
     }
@@ -456,11 +459,11 @@ pub fn assert_module_data_validity(
 
     // Assert that the contract name is equal to the module name
     ensure_eq!(
-        module_claim.info.id(),
+        module_claim.info.module_id(),
         cw_2_data.contract,
         AbstractError::UnequalModuleData {
             cw2: cw_2_data.contract,
-            module: module_claim.info.id()
+            module: module_claim.info.module_id()
         }
     );
 
@@ -828,7 +831,7 @@ mod test {
 
             let expected = "namespace:name".to_string();
 
-            assert_eq!(info.id(), expected);
+            assert_eq!(info.module_id(), expected);
         }
 
         #[coverage_helper::test]

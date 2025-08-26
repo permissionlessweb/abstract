@@ -2,8 +2,6 @@ use std::fmt::Display;
 
 use cosmwasm_std::StdResult;
 use cw_storage_plus::{KeyDeserialize, Prefixer, PrimaryKey};
-use schemars::JsonSchema;
-use serde::{Deserialize, Serialize};
 
 use crate::{
     constants::{ASSET_DELIMITER, TYPE_DELIMITER},
@@ -14,7 +12,8 @@ type DexName = String;
 
 /// The key for an asset pairing
 /// Consists of the two assets and the dex name
-#[derive(Deserialize, Serialize, Clone, Debug, PartialEq, Eq, JsonSchema, PartialOrd, Ord)]
+#[cosmwasm_schema::cw_serde]
+#[derive(PartialOrd, Eq, Ord)]
 pub struct DexAssetPairing<Asset = AssetEntry>((Asset, Asset, DexName));
 
 impl<Asset> DexAssetPairing<Asset> {

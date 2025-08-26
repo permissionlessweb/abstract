@@ -220,7 +220,7 @@ pub(crate) mod deser {
         Ok(u16::from_be_bytes(
             value
                 .try_into()
-                .map_err(|_| StdError::generic_err("Could not read 2 byte length"))?,
+                .map_err(|_| StdError::msg("Could not read 2 byte length"))?,
         )
         .into())
     }

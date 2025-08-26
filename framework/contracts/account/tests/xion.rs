@@ -239,7 +239,7 @@ fn xion_account_auth_itself() -> anyhow::Result<()> {
     // This should error because this action is triggered at the top by an external module
     let res = execute_from_res(deps.as_mut(), &env, res).unwrap_err();
 
-    assert_eq!(res, AccountError::Ownership(GovOwnershipError::NotOwner));
+    assert_eq!(res.to_string(), AccountError::Ownership(GovOwnershipError::NotOwner).to_string());
     Ok(())
 }
 

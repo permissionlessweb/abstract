@@ -1,7 +1,8 @@
 use abstract_std::objects::{account::AccountTrace, AccountId, TruncatedChainId};
 // We need to rewrite this because cosmrs::Msg is not implemented for IBC types
 use abstract_interface::{Abstract, AccountDetails, AccountI, AccountQueryFns};
-use cw_orch::anyhow::Result as AnyResult;
+
+use cosmwasm_std::StdResult;
 use cw_orch::{environment::Environment, prelude::*};
 use cw_orch_interchain::prelude::*;
 
@@ -15,7 +16,7 @@ pub fn create_test_remote_account<Chain: IbcQueryHandler, IBC: InterchainEnv<Cha
     remote_id: &str,
     interchain: &IBC,
     funds: Vec<Coin>,
-) -> AnyResult<(AccountI<Chain>, AccountId)> {
+) -> StdResult<(AccountI<Chain>, AccountId)> {
     let origin_name = TruncatedChainId::from_chain_id(origin_id);
     let remote_name = TruncatedChainId::from_chain_id(remote_id);
 
@@ -85,11 +86,11 @@ mod test {
         ACCOUNT, IBC_CLIENT, ICS20,
     };
 
-    use cosmwasm_std::{coins, to_json_binary, CosmosMsg, IbcTimeout, Uint128, WasmMsg};
+    use cosmwasm_std::{coins, to_json_binary, CosmosMsg, IbcTimeout, StdResult, Uint256, WasmMsg};
     use cw_orch::{environment::Environment, mock::cw_multi_test::AppResponse};
 
     #[test]
-    fn ibc_account_action() -> AnyResult<()> {
+    fn ibc_account_action() -> StdResult<()> {
         logger_test_init();
         let mock_interchain =
             MockBech32InterchainEnv::new(vec![(JUNO, "juno"), (STARGAZE, "stargaze")]);
@@ -152,7 +153,7 @@ mod test {
     }
 
     #[test]
-    fn ibc_stargate_action() -> AnyResult<()> {
+    fn ibc_stargate_action() -> StdResult<()> {
         logger_test_init();
         let mock_interchain =
             MockBech32InterchainEnv::new(vec![(JUNO, "juno"), (STARGAZE, "stargaze")]);
@@ -168,7 +169,7 @@ mod test {
         // Do stargate action on account to verify it's enabled
         let amount = Coin {
             denom: "ujuno".to_owned(),
-            amount: Uint128::new(100),
+            amount: Uint256::new(100),
         };
         mock_interchain
             .get_chain(JUNO)
@@ -217,13 +218,13 @@ mod test {
             .unwrap()
             .balance(&remote_abstract_account.address()?, None)?;
         assert_eq!(remote_account_balance.len(), 1);
-        assert_eq!(remote_account_balance[0].amount.u128(), 100);
+        assert_eq!(&remote_account_balance[0].amount.to_string(), "100");
 
         Ok(())
     }
 
     #[test]
-    fn test_multi_hop_account_creation() -> AnyResult<()> {
+    fn test_multi_hop_account_creation() -> StdResult<()> {
         logger_test_init();
         let mock_interchain = MockBech32InterchainEnv::new(vec![
             (JUNO, "juno"),
@@ -323,7 +324,7 @@ mod test {
     }
 
     #[test]
-    fn test_create_ibc_account() -> AnyResult<()> {
+    fn test_create_ibc_account() -> StdResult<()> {
         logger_test_init();
 
         let mock_interchain =
@@ -427,7 +428,7 @@ mod test {
     }
 
     #[test]
-    fn test_cannot_create_remote_account_when_caller_is_not_host() -> AnyResult<()> {
+    fn test_cannot_create_remote_account_when_caller_is_not_host() -> StdResult<()> {
         let mock_interchain =
             MockBech32InterchainEnv::new(vec![(JUNO, "juno"), (STARGAZE, "stargaze")]);
         let stargaze = mock_interchain.get_chain(STARGAZE)?;
@@ -444,7 +445,7 @@ mod test {
     fn try_create_remote_account(
         abstr: &Abstract<MockBech32>,
         sender: &Addr,
-    ) -> AnyResult<AppResponse> {
+    ) -> StdResult<AppResponse> {
         let account_code_id = abstr.registry.get_account_code()?;
         let chain = abstr.ans_host.environment();
         let account_id = AccountId::new(
@@ -476,7 +477,7 @@ mod test {
     }
 
     #[test]
-    fn test_cannot_call_remote_account_from_non_host_account() -> AnyResult<()> {
+    fn test_cannot_call_remote_account_from_non_host_account() -> StdResult<()> {
         logger_test_init();
         let mock_interchain =
             MockBech32InterchainEnv::new(vec![(JUNO, "juno"), (STARGAZE, "stargaze")]);
@@ -515,7 +516,7 @@ mod test {
     }
 
     #[test]
-    fn test_cannot_call_ibc_host_directly_with_remove_chain_account() -> AnyResult<()> {
+    fn test_cannot_call_ibc_host_directly_with_remove_chain_account() -> StdResult<()> {
         logger_test_init();
         let mock_interchain =
             MockBech32InterchainEnv::new(vec![(JUNO, "juno"), (STARGAZE, "stargaze")]);
@@ -535,7 +536,7 @@ mod test {
     }
 
     #[test]
-    fn test_cannot_call_ibc_host_directly_with_register_chain_proxy() -> AnyResult<()> {
+    fn test_cannot_call_ibc_host_directly_with_register_chain_proxy() -> StdResult<()> {
         logger_test_init();
         let mock_interchain =
             MockBech32InterchainEnv::new(vec![(JUNO, "juno"), (STARGAZE, "stargaze")]);
@@ -554,7 +555,7 @@ mod test {
     }
 
     #[test]
-    fn test_cannot_call_ibc_host_directly_with_dispatch_action() -> AnyResult<()> {
+    fn test_cannot_call_ibc_host_directly_with_dispatch_action() -> StdResult<()> {
         logger_test_init();
         let mock_interchain =
             MockBech32InterchainEnv::new(vec![(JUNO, "juno"), (STARGAZE, "stargaze")]);
@@ -586,7 +587,7 @@ mod test {
     }
 
     #[test]
-    fn test_cannot_call_ibc_host_directly_with_internal_action() -> AnyResult<()> {
+    fn test_cannot_call_ibc_host_directly_with_internal_action() -> StdResult<()> {
         logger_test_init();
         let mock_interchain =
             MockBech32InterchainEnv::new(vec![(JUNO, "juno"), (STARGAZE, "stargaze")]);
@@ -618,7 +619,7 @@ mod test {
     }
 
     #[test]
-    fn test_cannot_call_ibc_host_directly_with_helper_action() -> AnyResult<()> {
+    fn test_cannot_call_ibc_host_directly_with_helper_action() -> StdResult<()> {
         logger_test_init();
         let mock_interchain =
             MockBech32InterchainEnv::new(vec![(JUNO, "juno"), (STARGAZE, "stargaze")]);
@@ -644,7 +645,7 @@ mod test {
     }
 
     #[test]
-    fn test_send_all_back() -> AnyResult<()> {
+    fn test_send_all_back() -> StdResult<()> {
         logger_test_init();
         let mock_interchain =
             MockBech32InterchainEnv::new(vec![(JUNO, "juno"), (STARGAZE, "stargaze")]);
@@ -712,7 +713,7 @@ mod test {
         let origin_balance = mock_interchain
             .get_chain(JUNO)?
             .query_balance(&origin_account.address()?, origin_denom)?;
-        assert_eq!(Uint128::from(10u128), origin_balance);
+        assert_eq!(Uint256::from(10u128), origin_balance);
 
         // Send funds from juno to stargaze.
         let send_funds_tx = origin_account.execute(
@@ -744,7 +745,7 @@ mod test {
             .get_chain(STARGAZE)?
             .query_all_balances(&remote_account.address()?)?;
         assert_eq!(1, remote_balance.len());
-        assert_eq!(Uint128::from(10u128), remote_balance[0].amount);
+        assert_eq!(Uint256::from(10u128), remote_balance[0].amount);
 
         // Send all back.
         let send_funds_back_tx =
@@ -762,7 +763,7 @@ mod test {
         let origin_balance = mock_interchain
             .get_chain(JUNO)?
             .query_balance(&origin_account.address()?, origin_denom)?;
-        assert_eq!(Uint128::from(10u128), origin_balance);
+        assert_eq!(Uint256::from(10u128), origin_balance);
 
         Ok(())
     }

@@ -126,7 +126,7 @@ pub fn simulate_swap(
     mut offer_asset: Asset,
     ask_asset: AssetInfo,
 ) -> DexResult<SimulateSwapResponse<AssetInfoBase<String>>> {
-    let exchange = resolve_exchange(&dex).map_err(|e| StdError::generic_err(e.to_string()))?;
+    let exchange = resolve_exchange(&dex).map_err(|e| StdError::msg(e.to_string()))?;
 
     let pool_info = DexAssetPairing::new(
         offer_asset.info.clone().into(),
@@ -141,7 +141,7 @@ pub fn simulate_swap(
 
     let (return_amount, spread_amount, commission_amount, fee_on_input) = exchange
         .simulate_swap(deps, pool, offer_asset.clone(), ask_asset.clone())
-        .map_err(|e| StdError::generic_err(e.to_string()))?;
+        .map_err(|e| StdError::msg(e.to_string()))?;
     let commission_asset = if fee_on_input {
         ask_asset
     } else {

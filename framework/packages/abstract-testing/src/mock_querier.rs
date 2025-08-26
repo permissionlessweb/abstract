@@ -370,6 +370,7 @@ impl MockQuerierBuilder {
                         self.contract_admin.get(&addr).map(Addr::unchecked),
                         false,
                         None,
+                        None,
                     );
                     Ok(to_json_binary(&info).unwrap())
                 }
@@ -456,7 +457,7 @@ mod tests {
 
             let expected = abstr.account;
 
-            assert_eq!(actual, Ok(Some(expected)));
+            assert_eq!(actual.unwrap(), Some(expected));
         }
 
         #[test]
@@ -474,7 +475,7 @@ mod tests {
                 &TEST_ACCOUNT_ID,
             );
 
-            assert_eq!(actual, Ok(Some(account)));
+            assert_eq!(actual.unwrap(), Some(account));
         }
     }
 
@@ -553,7 +554,7 @@ mod tests {
             let actual =
                 ACCOUNT_ID.query(&wrap_querier(&deps.querier), root_account.addr().clone());
 
-            assert_eq!(actual, Ok(ABSTRACT_ACCOUNT_ID));
+            assert_eq!(actual.unwrap(), ABSTRACT_ACCOUNT_ID);
         }
 
         #[test]
@@ -566,7 +567,7 @@ mod tests {
 
             let actual = ACCOUNT_ID.query(&wrap_querier(&deps.querier), test_base.into_addr());
 
-            assert_eq!(actual, Ok(TEST_ACCOUNT_ID));
+            assert_eq!(actual.unwrap(), TEST_ACCOUNT_ID);
         }
     }
 
@@ -585,7 +586,7 @@ mod tests {
                 TEST_MODULE_ID,
             );
 
-            assert_eq!(actual, Ok(Some(abstr.module_address)));
+            assert_eq!(actual.unwrap(), Some(abstr.module_address));
         }
 
         // #[test]

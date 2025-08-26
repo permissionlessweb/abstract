@@ -1,5 +1,7 @@
 use abstract_std::ibc::{Callback, IbcResult, ModuleIbcInfo};
-use cosmwasm_std::{Binary, Deps, DepsMut, Env, MessageInfo, Reply, Response, Storage};
+use cosmwasm_std::{
+    Binary, Deps, DepsMut, Env, MessageInfo, MigrateInfo, Reply, Response, Storage,
+};
 use cw2::{ContractVersion, CONTRACT};
 
 use super::handler::Handler;
@@ -45,7 +47,7 @@ pub type ModuleIbcHandlerFn<Module, Error> =
 // ANCHOR: mig
 /// Function signature for a migrate handler.
 pub type MigrateHandlerFn<Module, CustomMigrateMsg, Error> =
-    fn(DepsMut, Env, Module, CustomMigrateMsg) -> Result<Response, Error>;
+    fn(DepsMut, Env, Module, CustomMigrateMsg, MigrateInfo) -> Result<Response, Error>;
 // ANCHOR_END: mig
 
 // ANCHOR: sudo
@@ -228,7 +230,7 @@ mod test {
 
     use thiserror::Error;
 
-    #[derive(Error, Debug, PartialEq)]
+    #[derive(Error, Debug)]
     pub enum MockError {
         #[error(transparent)]
         Sdk(#[from] AbstractSdkError),

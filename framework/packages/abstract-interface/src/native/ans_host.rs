@@ -7,7 +7,7 @@ use abstract_std::{
     },
     ANS_HOST,
 };
-use cosmwasm_std::Uint128;
+use cosmwasm_std::Uint256;
 use cw_address_like::AddressLike;
 use cw_asset::{Asset, AssetInfo, AssetInfoBase, AssetInfoUnchecked, AssetUnchecked};
 use cw_orch::{interface, prelude::*};
@@ -18,7 +18,7 @@ pub struct AnsHost<Chain>;
 impl<Chain: CwEnv> cw_blob::interface::DeterministicInstantiation<Chain> for AnsHost<Chain> {}
 
 impl<Chain: CwEnv> AnsHost<Chain> {
-    pub fn balance(&self, addr: &Addr, asset: &AssetEntry) -> Result<Uint128, CwOrchError> {
+    pub fn balance(&self, addr: &Addr, asset: &AssetEntry) -> Result<Uint256, CwOrchError> {
         let asset: AssetInfo = self.resolve(asset)?;
         let chain = self.environment();
         match asset {
@@ -191,7 +191,7 @@ impl<Chain: CwEnv> ClientResolve<Chain> for AssetUnchecked {
     fn resolve(&self, ans_host: &AnsHost<Chain>) -> Result<Self::Output, CwOrchError> {
         Ok(AnsAsset {
             name: self.info.resolve(ans_host)?,
-            amount: self.amount,
+            amount: self.amount.to_string().parse()?,
         })
     }
 }

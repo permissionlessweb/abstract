@@ -11,7 +11,8 @@ use abstract_std::{
     },
 };
 use cosmwasm_std::{
-    to_json_binary, Binary, Coins, Deps, DepsMut, Env, MessageInfo, Response, StdError, StdResult,
+    to_json_binary, Binary, Coins, Deps, DepsMut, Env, MessageInfo, MigrateInfo, Response,
+    StdError, StdResult,
 };
 use cw2::set_contract_version;
 use semver::Version;
@@ -69,10 +70,10 @@ pub fn query_config(deps: Deps, env: &Env) -> StdResult<ConfigResponse> {
 
     let resp = ConfigResponse {
         registry_address: RegistryContract::new(deps, abstract_code_id)
-            .map_err(|e| StdError::generic_err(e.to_string()))?
+            .map_err(|e| StdError::msg(e.to_string()))?
             .address,
         ans_host_address: AnsHost::new(deps, abstract_code_id)
-            .map_err(|e| StdError::generic_err(e.to_string()))?
+            .map_err(|e| StdError::msg(e.to_string()))?
             .address,
     };
 
@@ -87,12 +88,12 @@ pub fn query_simulate_install_modules(
     let abstract_code_id =
         native_addrs::abstract_code_id(&deps.querier, env.contract.address.clone())?;
 
-    let registry = RegistryContract::new(deps, abstract_code_id)
-        .map_err(|e| StdError::generic_err(e.to_string()))?;
+    let registry =
+        RegistryContract::new(deps, abstract_code_id).map_err(|e| StdError::msg(e.to_string()))?;
 
     let module_responses = registry
         .query_modules_configs(modules, &deps.querier)
-        .map_err(|e| cosmwasm_std::StdError::generic_err(e.to_string()))?;
+        .map_err(|e| cosmwasm_std::StdError::msg(e.to_string()))?;
 
     let mut coins = Coins::default();
     let mut install_funds = vec![];
@@ -100,11 +101,11 @@ pub fn query_simulate_install_modules(
     for module in module_responses {
         if let Monetization::InstallFee(fee) = module.config.monetization {
             coins.add(fee.fee())?;
-            install_funds.push((module.module.info.id(), fee.fee()))
+            install_funds.push((module.module.info.module_id(), fee.fee()))
         }
         if !module.config.instantiation_funds.is_empty() {
             init_funds.push((
-                module.module.info.id(),
+                module.module.info.module_id(),
                 module.config.instantiation_funds.clone(),
             ));
 
@@ -122,7 +123,12 @@ pub fn query_simulate_install_modules(
 }
 
 #[cfg_attr(feature = "export", cosmwasm_std::entry_point)]
-pub fn migrate(deps: DepsMut, env: Env, msg: MigrateMsg) -> ModuleFactoryResult {
+pub fn migrate(
+    deps: DepsMut,
+    env: Env,
+    msg: MigrateMsg,
+    _info: MigrateInfo,
+) -> ModuleFactoryResult {
     match msg {
         MigrateMsg::Instantiate(instantiate_msg) => {
             abstract_sdk::cw_helpers::migrate_instantiate(deps, env, instantiate_msg, instantiate)
@@ -155,12 +161,22 @@ mod tests {
         #[coverage_helper::test]
         fn disallow_same_version() -> ModuleFactoryResult<()> {
             let mut deps = mock_dependencies();
+            let sender = deps.api.addr_make("jimi");
+
             let env = mock_env_validated(deps.api);
             mock_init(&mut deps)?;
 
             let version: Version = CONTRACT_VERSION.parse().unwrap();
 
-            let res = contract::migrate(deps.as_mut(), env, MigrateMsg::Migrate {});
+            let res = contract::migrate(
+                deps.as_mut(),
+                env,
+                MigrateMsg::Migrate {},
+                MigrateInfo {
+                    sender,
+                    old_migrate_version: None,
+                },
+            );
 
             assert_eq!(
                 res,
@@ -179,6 +195,8 @@ mod tests {
         #[coverage_helper::test]
         fn disallow_downgrade() -> ModuleFactoryResult<()> {
             let mut deps = mock_dependencies();
+            let sender = deps.api.addr_make("jimi");
+
             let env = mock_env_validated(deps.api);
             mock_init(&mut deps)?;
 
@@ -187,7 +205,15 @@ mod tests {
 
             let version: Version = CONTRACT_VERSION.parse().unwrap();
 
-            let res = contract::migrate(deps.as_mut(), env, MigrateMsg::Migrate {});
+            let res = contract::migrate(
+                deps.as_mut(),
+                env,
+                MigrateMsg::Migrate {},
+                MigrateInfo {
+                    sender,
+                    old_migrate_version: None,
+                },
+            );
 
             assert_eq!(
                 res,
@@ -206,6 +232,8 @@ mod tests {
         #[coverage_helper::test]
         fn disallow_name_change() -> ModuleFactoryResult<()> {
             let mut deps = mock_dependencies();
+            let sender = deps.api.addr_make("jimi");
+
             let env = mock_env_validated(deps.api);
             mock_init(&mut deps)?;
 
@@ -213,7 +241,15 @@ mod tests {
             let old_name = "old:contract";
             set_contract_version(deps.as_mut().storage, old_name, old_version)?;
 
-            let res = contract::migrate(deps.as_mut(), env, MigrateMsg::Migrate {});
+            let res = contract::migrate(
+                deps.as_mut(),
+                env,
+                MigrateMsg::Migrate {},
+                MigrateInfo {
+                    sender,
+                    old_migrate_version: None,
+                },
+            );
 
             assert_eq!(
                 res,
@@ -231,6 +267,8 @@ mod tests {
         #[coverage_helper::test]
         fn works() -> ModuleFactoryResult<()> {
             let mut deps = mock_dependencies();
+            let sender = deps.api.addr_make("jimi");
+
             let env = mock_env_validated(deps.api);
             mock_init(&mut deps)?;
 
@@ -243,7 +281,15 @@ mod tests {
             .to_string();
             set_contract_version(deps.as_mut().storage, MODULE_FACTORY, small_version)?;
 
-            let res = contract::migrate(deps.as_mut(), env, MigrateMsg::Migrate {})?;
+            let res = contract::migrate(
+                deps.as_mut(),
+                env,
+                MigrateMsg::Migrate {},
+                MigrateInfo {
+                    sender,
+                    old_migrate_version: None,
+                },
+            )?;
             assert!(res.messages.is_empty());
 
             assert_eq!(

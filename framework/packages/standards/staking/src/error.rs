@@ -5,7 +5,7 @@ use cosmwasm_std::StdError;
 use cw_asset::AssetError;
 use thiserror::Error;
 
-#[derive(Error, Debug, PartialEq)]
+#[derive(Error, Debug)]
 pub enum CwStakingError {
     #[error(transparent)]
     Std(#[from] StdError),

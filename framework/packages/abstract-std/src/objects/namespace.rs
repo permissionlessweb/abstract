@@ -2,8 +2,6 @@ use std::fmt::Display;
 
 use cosmwasm_std::StdResult;
 use cw_storage_plus::{Key, KeyDeserialize, Prefixer, PrimaryKey};
-use schemars::JsonSchema;
-use serde::{Deserialize, Serialize};
 
 use super::module::validate_name;
 use crate::{AbstractError, AbstractResult};
@@ -11,7 +9,7 @@ use crate::{AbstractError, AbstractResult};
 pub const ABSTRACT_NAMESPACE: &str = "abstract";
 
 /// Represents an Abstract namespace for modules
-#[derive(Deserialize, Serialize, Clone, Debug, PartialEq, JsonSchema)]
+#[cosmwasm_schema::cw_serde]
 pub struct Namespace(String);
 
 impl Namespace {

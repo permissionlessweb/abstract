@@ -10,7 +10,7 @@ use abstract_std::{
     objects::TruncatedChainId,
     ABSTRACT_EVENT_TYPE,
 };
-use cosmwasm_std::{from_json, Attribute, DepsMut, Env, MessageInfo};
+use cosmwasm_std::{from_json, Attribute, DepsMut, Env, MessageInfo, StdError};
 
 use crate::{
     contract::{IbcClientResponse, IbcClientResult},
@@ -43,14 +43,21 @@ pub fn receive_action_callback(
     match callback_msg {
         IbcClientCallback::WhoAmI {} => {
             // This response is used to store the Counterparty proxy address (this is used to whitelist the address on the host side)
-            if let PolytoneCallback::Execute(Ok(response)) = &polytone_callback.result {
-                IBC_INFRA.update(deps.storage, &host_chain, |c| match c {
-                    None => Err(IbcClientError::UnregisteredChain(host_chain.to_string())),
-                    Some(mut counterpart) => {
-                        counterpart.remote_proxy = Some(response.executed_by.clone());
-                        Ok(counterpart)
+            if let PolytoneCallback::Execute(response) = &polytone_callback.result {
+                match response {
+                    abstract_std::ibc::polytone_callbacks::ExecutionCallbackResult::Success(er) => {
+                        IBC_INFRA.update(deps.storage, &host_chain, |c| match c {
+                            None => Err(IbcClientError::UnregisteredChain(host_chain.to_string())),
+                            Some(mut counterpart) => {
+                                counterpart.remote_proxy = Some(er.executed_by.clone());
+                                Ok(counterpart)
+                            }
+                        })?;
                     }
-                })?;
+                    abstract_std::ibc::polytone_callbacks::ExecutionCallbackResult::Error(e) => {
+                        return Err(IbcClientError::Std(StdError::msg(e)))
+                    }
+                };
             } else {
                 return Err(IbcClientError::IbcFailed(polytone_callback));
             }
@@ -59,28 +66,35 @@ pub fn receive_action_callback(
         }
         IbcClientCallback::CreateAccount { account_id } => {
             // We need to get the address of the remote proxy from the account creation response
-            if let PolytoneCallback::Execute(Ok(response)) = &polytone_callback.result {
-                let account_creation_result = response.result[0].clone();
+            if let PolytoneCallback::Execute(response) = &polytone_callback.result {
+                match response {
+                    abstract_std::ibc::polytone_callbacks::ExecutionCallbackResult::Success(er) => {
+                        let account_creation_result = er.result[0].clone();
 
-                let wasm_abstract_attributes: Vec<Attribute> = account_creation_result
-                    .events
-                    .into_iter()
-                    .filter(|e| e.ty == ABSTRACT_EVENT_TYPE)
-                    .flat_map(|e| e.attributes)
-                    .collect();
+                        let wasm_abstract_attributes: Vec<Attribute> = account_creation_result
+                            .events
+                            .into_iter()
+                            .filter(|e| e.ty == ABSTRACT_EVENT_TYPE)
+                            .flat_map(|e| e.attributes)
+                            .collect();
 
-                let remote_account_address = &wasm_abstract_attributes
-                    .iter()
-                    .find(|e| e.key == "account_address")
-                    .ok_or(IbcClientError::IbcFailed(polytone_callback))?
-                    .value;
+                        let remote_account_address = &wasm_abstract_attributes
+                            .iter()
+                            .find(|e| e.key == "account_address")
+                            .ok_or(IbcClientError::IbcFailed(polytone_callback))?
+                            .value;
 
-                // We need to store the account address in the IBC client for interactions that may need it locally
-                ACCOUNTS.save(
-                    deps.storage,
-                    (account_id.trace(), account_id.seq(), &host_chain),
-                    remote_account_address,
-                )?;
+                        // We need to store the account address in the IBC client for interactions that may need it locally
+                        ACCOUNTS.save(
+                            deps.storage,
+                            (account_id.trace(), account_id.seq(), &host_chain),
+                            remote_account_address,
+                        )?;
+                    }
+                    abstract_std::ibc::polytone_callbacks::ExecutionCallbackResult::Error(_) => {
+                        return Err(IbcClientError::IbcFailed(polytone_callback));
+                    }
+                }
             } else {
                 return Err(IbcClientError::IbcFailed(polytone_callback));
             }

@@ -22,7 +22,7 @@ abstract-sdk = { workspace = true }
 cw-orch      = { workspace = true }
 
 # EVM
-polytone-evm = { version = "0.1.0" }
+polytone-evm = { version = "2.0.0",git = "https://github.com/permissionlessweb/polytone", branch = "bump/cw3-evm"  }
 
 [target.'cfg(not(target_arch = "wasm32"))'.dependencies]
 workspace-hack = { version = "0.1", path = "../../workspace-hack" }

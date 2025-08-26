@@ -48,10 +48,7 @@ pub enum RegistryError {
 
     // Query method failed
     #[error("Query during '{method_name}' failed: {error}")]
-    QueryFailed {
-        method_name: String,
-        error: cosmwasm_std::StdError,
-    },
+    QueryFailed { method_name: String, error: String },
 
     // Service module not found in version registry
     #[error("Service {service_addr} not found in version registry {registry_addr}.")]
@@ -97,7 +94,7 @@ impl RegistryContract {
             .query(querier, self.address.clone(), module_info)
             .map_err(|error| RegistryError::QueryFailed {
                 method_name: function_name!().to_owned(),
-                error,
+                error: error.to_string(),
             })?;
 
         module_reference.ok_or_else(|| RegistryError::ModuleNotFound {
@@ -141,7 +138,7 @@ impl RegistryContract {
             .query_wasm_smart(self.address.to_string(), &QueryMsg::Modules { infos })
             .map_err(|error| RegistryError::QueryFailed {
                 method_name: function_name!().to_owned(),
-                error,
+                error: error.to_string(),
             })?;
         Ok(modules)
     }
@@ -158,7 +155,7 @@ impl RegistryContract {
             .query_wasm_smart(self.address.to_string(), &QueryMsg::Namespace { namespace })
             .map_err(|error| RegistryError::QueryFailed {
                 method_name: function_name!().to_owned(),
-                error,
+                error: error.to_string(),
             })?;
         Ok(namespace_response)
     }
@@ -174,7 +171,7 @@ impl RegistryContract {
             .query(querier, self.address.clone(), &namespace)
             .map_err(|error| RegistryError::QueryFailed {
                 method_name: function_name!().to_owned(),
-                error,
+                error: error.to_string(),
             })?;
         Ok(namespace_response)
     }
@@ -190,7 +187,7 @@ impl RegistryContract {
             .query_wasm_smart(self.address.to_string(), &QueryMsg::Namespaces { accounts })
             .map_err(|error| RegistryError::QueryFailed {
                 method_name: function_name!().to_owned(),
-                error,
+                error: error.to_string(),
             })?;
         Ok(namespaces_response)
     }
@@ -206,7 +203,7 @@ impl RegistryContract {
             .query(querier, self.address.clone(), code_id)
             .map_err(|error| RegistryError::QueryFailed {
                 method_name: function_name!().to_owned(),
-                error,
+                error: error.to_string(),
             })?;
         module_info.ok_or_else(|| RegistryError::StandaloneNotFound {
             code_id,
@@ -225,7 +222,7 @@ impl RegistryContract {
             .query(querier, self.address.clone(), service_addr)
             .map_err(|error| RegistryError::QueryFailed {
                 method_name: function_name!().to_owned(),
-                error,
+                error: error.to_string(),
             })?;
         module_info.ok_or_else(|| RegistryError::ServiceNotFound {
             service_addr: service_addr.clone(),
@@ -279,7 +276,7 @@ impl RegistryContract {
             .query(querier, self.address.clone(), account_id)
             .map_err(|error| RegistryError::QueryFailed {
                 method_name: function_name!().to_owned(),
-                error,
+                error: error.to_string(),
             })?;
         maybe_account.ok_or_else(|| RegistryError::UnknownAccountId {
             account_id: account_id.clone(),
@@ -297,7 +294,7 @@ impl RegistryContract {
             .query(querier, self.address.clone())
             .map_err(|error| RegistryError::QueryFailed {
                 method_name: function_name!().to_owned(),
-                error,
+                error: error.to_string(),
             })?;
         Ok(config.namespace_registration_fee)
     }

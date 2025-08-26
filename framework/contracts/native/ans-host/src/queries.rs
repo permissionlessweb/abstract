@@ -75,7 +75,7 @@ pub fn query_asset_infos(
         .map(|info| {
             let key = info
                 .check(deps.api, None)
-                .map_err(|err| StdError::generic_err(err.to_string()))?;
+                .map_err(|err| StdError::msg(err.to_string()))?;
             let value = REV_ASSET_ADDRESSES.load(deps.storage, &key)?;
             Ok((key, value))
         })
@@ -93,7 +93,7 @@ pub fn query_asset_info_list(
     let asset_info = last_asset_info
         .map(|info| {
             info.check(deps.api, None)
-                .map_err(|e| StdError::generic_err(e.to_string()))
+                .map_err(|e| StdError::msg(e.to_string()))
         })
         .transpose()?;
     let start_bound = asset_info.as_ref().map(Bound::exclusive);

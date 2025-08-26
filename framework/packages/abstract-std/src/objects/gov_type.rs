@@ -104,7 +104,7 @@ impl GovernanceDetails<String> {
                     &account_id,
                 )?;
                 let Some(b) = base else {
-                    return Err(AbstractError::Std(cosmwasm_std::StdError::generic_err(
+                    return Err(AbstractError::Std(cosmwasm_std::StdError::msg(
                         format!(
                             "Version control does not have account id of account {account_addr}"
                         ),
@@ -115,7 +115,7 @@ impl GovernanceDetails<String> {
                         account: account_addr,
                     })
                 } else {
-                    Err(AbstractError::Std(cosmwasm_std::StdError::generic_err(
+                    Err(AbstractError::Std(cosmwasm_std::StdError::msg(
                         "Verification of sub-account failed, account has different account ids",
                     )))
                 }

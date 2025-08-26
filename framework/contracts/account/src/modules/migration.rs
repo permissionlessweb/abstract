@@ -60,7 +60,7 @@ pub fn upgrade_modules(
 
     // Set the migrate messages for each module that's not the account and update the dependency store
     for (module_info, migrate_msg) in modules {
-        let module_id = module_info.id();
+        let module_id = module_info.module_id();
 
         // Check for duplicates
         if upgraded_module_ids.contains(&module_id) {
@@ -115,7 +115,7 @@ pub fn set_migrate_msgs_and_context(
         native_addrs::abstract_code_id(&deps.querier, env.contract.address.clone())?;
     let registry = RegistryContract::new(deps.as_ref(), abstract_code_id)?;
 
-    let old_module_addr = load_module_addr(deps.storage, &module_info.id())?;
+    let old_module_addr = load_module_addr(deps.storage, &module_info.module_id())?;
     let old_module_cw2 = query_module_version(deps.as_ref(), old_module_addr.clone(), &registry)?;
     let requested_module = query_module(
         deps.as_ref(),
@@ -162,7 +162,7 @@ pub fn handle_adapter_migration(
     old_adapter_addr: Addr,
     new_adapter_addr: Addr,
 ) -> AccountResult<Vec<CosmosMsg>> {
-    let module_id = module_info.id();
+    let module_id = module_info.module_id();
     crate::versioning::assert_migrate_requirements(
         deps.as_ref(),
         &module_id,
@@ -189,7 +189,7 @@ pub fn handle_app_migration(
     module_info: ModuleInfo,
     code_id: u64,
 ) -> AccountResult<Vec<CosmosMsg>> {
-    let module_id = module_info.id();
+    let module_id = module_info.module_id();
     crate::versioning::assert_migrate_requirements(
         deps.as_ref(),
         &module_id,

@@ -61,10 +61,10 @@ impl<
         Ok(AppConfigResponse {
             account: state.account.into_addr(),
             ans_host_address: AnsHost::new(deps, abstract_code_id)
-                .map_err(|e| StdError::generic_err(e.to_string()))?
+                .map_err(|e| StdError::msg(e.to_string()))?
                 .address,
             registry_address: RegistryContract::new(deps, abstract_code_id)
-                .map_err(|e| StdError::generic_err(e.to_string()))?
+                .map_err(|e| StdError::msg(e.to_string()))?
                 .address,
         })
     }
@@ -150,7 +150,7 @@ mod test {
             let res = with_mocked_query.query(deps.as_ref(), mock_env_validated(deps.api), msg);
 
             let expected = to_json_binary(&MockQueryMsg::GetSomething {}).unwrap();
-            assert_eq!(res, Ok(expected));
+            assert_eq!(res.unwrap(),expected);
         }
     }
 

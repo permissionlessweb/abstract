@@ -219,7 +219,7 @@ fn cw_asset_to_kujira(asset: &Asset) -> Result<kujira::Asset, DexError> {
 /// Converts [`Decimal`] to [`Decimal256`].
 pub fn decimal2decimal256(dec_value: Decimal) -> StdResult<Decimal256> {
     Decimal256::from_atomics(dec_value.atomics(), dec_value.decimal_places()).map_err(|_| {
-        StdError::generic_err(format!(
+        StdError::msg(format!(
             "Failed to convert Decimal {} to Decimal256",
             dec_value
         ))

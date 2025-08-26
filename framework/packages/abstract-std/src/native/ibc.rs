@@ -16,7 +16,10 @@ use crate::{
     base::ExecuteMsg,
     objects::{module::ModuleInfo, TruncatedChainId},
 };
-use polytone_callbacks::{Callback as PolytoneCallback, ErrorResponse, ExecutionResponse};
+use polytone_callbacks::{
+    Callback as PolytoneCallback, ErrorResponse, ExecutionCallbackResult, ExecutionResponse,
+    QueryCallbackResult,
+};
 
 pub const PACKET_LIFETIME: u64 = 60 * 60;
 
@@ -74,12 +77,12 @@ impl IbcResponseMsg {
 pub enum IbcResult {
     Query {
         queries: Vec<QueryRequest<ModuleQuery>>,
-        results: Result<Vec<Binary>, ErrorResponse>,
+        results: QueryCallbackResult,
     },
 
     Execute {
         initiator_msg: Binary,
-        result: Result<ExecutionResponse, String>,
+        result: ExecutionCallbackResult,
     },
 
     /// An error occured that could not be recovered from. The only
@@ -104,7 +107,7 @@ impl IbcResult {
                 queries,
                 results: q,
             }),
-            PolytoneCallback::Execute(_) => Err(StdError::generic_err(
+            PolytoneCallback::Execute(_) => Err(StdError::msg(
                 "Expected a query result, got an execute result",
             )),
             PolytoneCallback::FatalError(e) => Ok(Self::FatalError(e)),
@@ -116,7 +119,7 @@ impl IbcResult {
         initiator_msg: Binary,
     ) -> Result<Self, StdError> {
         match callback {
-            PolytoneCallback::Query(_) => Err(StdError::generic_err(
+            PolytoneCallback::Query(_) => Err(StdError::msg(
                 "Expected an execution result, got a query result",
             )),
             PolytoneCallback::Execute(e) => Ok(Self::Execute {
@@ -131,15 +134,16 @@ impl IbcResult {
     pub fn get_query_result(&self, index: usize) -> StdResult<(QueryRequest<ModuleQuery>, Binary)> {
         match &self {
             IbcResult::Query { queries, results } => {
-                let results = results
-                    .as_ref()
-                    .map_err(|err| StdError::generic_err(err.error.clone()))?;
+                let results = match results {
+                    QueryCallbackResult::Success(items) => Ok(items),
+                    QueryCallbackResult::Error(err) => Err(StdError::msg(err.error.clone())),
+                }?;
                 Ok((queries[index].clone(), results[index].clone()))
             }
-            IbcResult::Execute { .. } => Err(StdError::generic_err(
-                "expected query, got execute ibc result",
-            )),
-            IbcResult::FatalError(err) => Err(StdError::generic_err(err.to_owned())),
+            IbcResult::Execute { .. } => {
+                Err(StdError::msg("expected query, got execute ibc result"))
+            }
+            IbcResult::FatalError(err) => Err(StdError::msg(err.to_owned())),
         }
     }
 
@@ -147,20 +151,20 @@ impl IbcResult {
     pub fn get_execute_events(&self) -> StdResult<Vec<Event>> {
         match &self {
             IbcResult::Execute { result, .. } => {
-                let result = result
-                    .as_ref()
-                    .map_err(|err| StdError::generic_err(err.clone()))?;
+                let results = match result {
+                    ExecutionCallbackResult::Success(items) => Ok(items),
+                    ExecutionCallbackResult::Error(err) => Err(StdError::msg(err.clone())),
+                }?;
+
                 // result should always be size 1 (proxy -> ibc-host --multiple-msgs-> module)
-                let res = result
+                let res = results
                     .result
                     .first()
                     .expect("execution response without submsg");
                 Ok(res.events.clone())
             }
-            IbcResult::Query { .. } => Err(StdError::generic_err(
-                "expected execute, got query ibc result",
-            )),
-            IbcResult::FatalError(err) => Err(StdError::generic_err(err.to_owned())),
+            IbcResult::Query { .. } => Err(StdError::msg("expected execute, got query ibc result")),
+            IbcResult::FatalError(err) => Err(StdError::msg(err.to_owned())),
         }
     }
 }

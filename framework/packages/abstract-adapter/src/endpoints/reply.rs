@@ -57,11 +57,11 @@ mod test {
         };
         let res = reply(deps.as_mut(), env, reply_msg);
         assert_eq!(
-            res,
-            Err(AbstractSdkError::MissingHandler {
+            res.unwrap_err().to_string(),
+            AbstractSdkError::MissingHandler {
                 endpoint: "reply with id 0".into(),
             }
-            .into())
+            .to_string()
         );
         Ok(())
     }

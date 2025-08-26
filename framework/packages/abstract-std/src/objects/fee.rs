@@ -1,4 +1,4 @@
-use cosmwasm_std::{Addr, Coin, CosmosMsg, Decimal, MessageInfo, Uint128};
+use cosmwasm_std::{Addr, Coin, CosmosMsg, Decimal, MessageInfo, Uint128, Uint256};
 use cw_asset::Asset;
 
 use crate::{error::AbstractError, AbstractResult};
@@ -26,7 +26,7 @@ impl UsageFee {
         self.fee.share()
     }
 
-    pub fn compute(&self, amount: Uint128) -> Uint128 {
+    pub fn compute(&self, amount: Uint256) -> Uint256 {
         amount.mul_floor(self.share())
     }
 
@@ -57,7 +57,7 @@ impl Fee {
         Ok(Fee { share })
     }
 
-    pub fn compute(&self, amount: Uint128) -> Uint128 {
+    pub fn compute(&self, amount: Uint256) -> Uint256 {
         amount.mul_floor(self.share)
     }
 
@@ -85,7 +85,7 @@ impl FixedFee {
     /// Allows to collect the fee multiple times
     /// E.g., for namespaces, you want to charge the number of claimed namespaces times the fee for 1 namespace
     pub fn quantity(mut self, qty: u128) -> Self {
-        self.fee.amount *= Uint128::from(qty);
+        self.fee.amount *= Uint256::from(qty);
         self
     }
 
@@ -154,17 +154,17 @@ mod tests {
             let fee = Fee {
                 share: Decimal::percent(20u64),
             };
-            let deposit = Uint128::from(1000000u64);
+            let deposit = Uint256::from(1000000u64);
             let deposit_fee = fee.compute(deposit);
-            assert_eq!(deposit_fee, Uint128::from(200000u64));
+            assert_eq!(deposit_fee, Uint256::from(200000u64));
         }
 
         #[coverage_helper::test]
         fn test_fee_new() {
             let fee = Fee::new(Decimal::percent(20u64)).unwrap();
-            let deposit = Uint128::from(1000000u64);
+            let deposit = Uint256::from(1000000u64);
             let deposit_fee = fee.compute(deposit);
-            assert_eq!(deposit_fee, Uint128::from(200000u64));
+            assert_eq!(deposit_fee, Uint256::from(200000u64));
         }
 
         #[coverage_helper::test]
@@ -185,7 +185,7 @@ mod tests {
         #[coverage_helper::test]
         fn test_fee_msg() {
             let fee = Fee::new(Decimal::percent(20u64)).unwrap();
-            let asset = Asset::native("uusd", Uint128::from(1000000u64));
+            let asset = Asset::native("uusd", Uint256::from(1000000u64));
 
             let recipient = Addr::unchecked("recipient");
             let msg = fee.msg(asset.clone(), recipient.clone()).unwrap();
@@ -201,8 +201,8 @@ mod tests {
         fn test_transfer_fee_new() {
             let fee = UsageFee::new(Decimal::percent(20u64), Addr::unchecked("recipient")).unwrap();
             let deposit = Uint128::from(1000000u64);
-            let deposit_fee = fee.compute(deposit);
-            assert_eq!(deposit_fee, Uint128::from(200000u64));
+            let deposit_fee = fee.compute(deposit.into());
+            assert_eq!(deposit_fee, Uint256::from(200000u64));
         }
 
         #[coverage_helper::test]

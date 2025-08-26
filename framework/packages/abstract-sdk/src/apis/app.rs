@@ -148,12 +148,12 @@ mod tests {
             let expected_msg: app::ExecuteMsg<_> = app::ExecuteMsg::Module(MockModuleExecuteMsg {});
 
             assert_eq!(
-                res,
-                Ok(CosmosMsg::Wasm(WasmMsg::Execute {
+                res.unwrap(),
+                CosmosMsg::Wasm(WasmMsg::Execute {
                     contract_addr: abstr.module_address.into(),
                     msg: to_json_binary(&expected_msg).unwrap(),
                     funds: vec![],
-                }))
+                })
             );
         }
     }
@@ -180,7 +180,7 @@ mod tests {
 
             let res = mods.query::<_, String>(TEST_MODULE_ID, Empty {});
 
-            assert_eq!(res, Ok(TEST_MODULE_RESPONSE.to_string()));
+            assert_eq!(res.unwrap(), TEST_MODULE_RESPONSE.to_string());
         }
     }
 

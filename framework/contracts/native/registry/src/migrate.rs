@@ -11,7 +11,7 @@ use abstract_std::{
     REGISTRY,
 };
 
-use cosmwasm_std::{from_json, DepsMut, Env, Order, StdResult};
+use cosmwasm_std::{from_json, DepsMut, Env, MigrateInfo, Order, StdResult};
 use cw_storage_plus::{Index, IndexList, IndexedMap, MultiIndex};
 use semver::Version;
 
@@ -44,7 +44,7 @@ pub struct ConfigV0_24 {
 }
 
 #[cfg_attr(feature = "export", cosmwasm_std::entry_point)]
-pub fn migrate(deps: DepsMut, env: Env, msg: MigrateMsg) -> VCResult {
+pub fn migrate(deps: DepsMut, env: Env, msg: MigrateMsg, _info: MigrateInfo) -> VCResult {
     match msg {
         MigrateMsg::Instantiate(instantiate_msg) => abstract_sdk::cw_helpers::migrate_instantiate(
             deps,

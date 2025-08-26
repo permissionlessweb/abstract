@@ -2,13 +2,12 @@ use std::{fmt::Display, str::FromStr};
 
 use cosmwasm_std::{StdError, StdResult};
 use cw_storage_plus::{Key, KeyDeserialize, Prefixer, PrimaryKey};
-use schemars::JsonSchema;
-use serde::{Deserialize, Serialize};
 
 use crate::constants::ATTRIBUTE_DELIMITER;
 
 /// Key to get the Address of a contract
-#[derive(Deserialize, Serialize, Clone, Debug, PartialEq, Eq, JsonSchema, PartialOrd, Ord)]
+#[cosmwasm_schema::cw_serde]
+#[derive(Eq, PartialOrd, Ord)]
 // Need hash for ans scraper
 #[cfg_attr(not(target_arch = "wasm32"), derive(Hash))]
 pub struct UncheckedContractEntry {
@@ -45,7 +44,7 @@ impl TryFrom<&str> for UncheckedContractEntry {
     /// Try from a string slice like "protocol:contract_name"
     fn try_from(entry: &str) -> Result<Self, Self::Error> {
         let Some((protocol, contract_name)) = entry.split_once(ATTRIBUTE_DELIMITER) else {
-            return Err(StdError::generic_err(
+            return Err(StdError::msg(
                 "contract entry should be formatted as \"protocol:contract_name\".",
             ));
         };
@@ -55,7 +54,8 @@ impl TryFrom<&str> for UncheckedContractEntry {
 
 /// Key to get the Address of a contract
 /// Use [`UncheckedContractEntry`] to construct this type.  
-#[derive(Deserialize, Serialize, Clone, Debug, PartialEq, JsonSchema, Eq, PartialOrd, Ord)]
+#[cosmwasm_schema::cw_serde]
+#[derive(Eq, PartialOrd, Ord)]
 pub struct ContractEntry {
     pub protocol: String,
     pub contract: String,
@@ -127,7 +127,7 @@ fn parse_length(value: &[u8]) -> StdResult<usize> {
     Ok(u16::from_be_bytes(
         value
             .try_into()
-            .map_err(|_| StdError::generic_err("Could not read 2 byte length"))?,
+            .map_err(|_| StdError::msg("Could not read 2 byte length"))?,
     )
     .into())
 }
@@ -263,10 +263,9 @@ mod test {
             let err = ContractEntry::from_str(contract_entry_str).unwrap_err();
 
             assert_eq!(
-                err,
-                StdError::generic_err(
-                    "contract entry should be formatted as \"protocol:contract_name\".",
-                )
+                err.to_string(),
+                StdError::msg("contract entry should be formatted as \"protocol:contract_name\".",)
+                    .to_string()
             );
         }
 

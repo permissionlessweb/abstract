@@ -461,12 +461,11 @@ mod tests {
             let res = base_execute_as(&mut deps, account.addr(), msg);
 
             assert_eq!(
-                res,
-                Err(MockError::Adapter(
-                    AdapterError::AuthorizedAddressOrModuleIdNotPresent {
-                        addr_or_module_id: test_authorized_address_string
-                    }
-                ))
+                res.unwrap_err().to_string(),
+                MockError::Adapter(AdapterError::AuthorizedAddressOrModuleIdNotPresent {
+                    addr_or_module_id: test_authorized_address_string
+                })
+                .to_string()
             );
             Ok(())
         }
