@@ -5,7 +5,7 @@ use abstract_app::sdk::{
 use abstract_app::std::objects::AssetEntry;
 use chrono::{DateTime, FixedOffset, LocalResult, NaiveTime, TimeZone};
 use cosmwasm_std::{
-    BankMsg, Coin, CosmosMsg, Deps, DepsMut, Env, Int64, MessageInfo, StdError, Uint128,
+    BankMsg, Coin, CosmosMsg, Deps, DepsMut, Env, Int64, MessageInfo, StdError, Uint128, Uint256,
 };
 use cw_asset::AssetInfoBase;
 use cw_utils::must_pay;
@@ -113,8 +113,8 @@ fn request_meeting(
     let meeting_end_timestamp = meeting.end_time;
 
     // This number will be positive enforced by previous checks.
-    let duration_in_minutes: Uint128 =
-        Uint128::new((meeting_end_time - meeting_start_time).num_minutes() as u128);
+    let duration_in_minutes: Uint256 =
+        Uint256::new((meeting_end_time - meeting_start_time).num_minutes() as u128);
 
     let expected_amount = duration_in_minutes * config.price_per_minute;
     if amount_sent != expected_amount {
@@ -191,7 +191,7 @@ fn handle_stake(
         return Err(CalendarError::StakeAlreadyHandled {});
     }
 
-    meeting.amount_staked = Uint128::zero();
+    meeting.amount_staked = Uint256::zero();
     let bank = module.bank(deps.as_ref());
 
     let response = match stake_action {
@@ -239,7 +239,7 @@ fn update_config(
     env: Env,
     info: MessageInfo,
     module: CalendarApp,
-    price_per_minute: Option<Uint128>,
+    price_per_minute: Option<Uint256>,
     denom: Option<AssetEntry>,
 ) -> CalendarAppResult {
     module

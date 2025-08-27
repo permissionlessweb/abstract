@@ -11,7 +11,7 @@ use calendar_app::{
     CalendarAppInterface,
 };
 use chrono::{DateTime, Days, FixedOffset, NaiveDateTime, NaiveTime, TimeZone, Timelike};
-use cosmwasm_std::{coins, BlockInfo, Uint128};
+use cosmwasm_std::{coins, BlockInfo, Uint256};
 use cw_asset::AssetInfoUnchecked;
 use cw_orch::{anyhow, prelude::*};
 
@@ -119,7 +119,7 @@ fn setup_with_time(
     let app: Application<MockBech32, CalendarAppInterface<MockBech32>> =
         publisher.account().install_app(
             &CalendarInstantiateMsg {
-                price_per_minute: Uint128::from(1u128),
+                price_per_minute: Uint256::from(1u128),
                 denom: AssetEntry::from(DENOM),
                 utc_offset: 0,
                 start_time,
@@ -271,7 +271,7 @@ fn successful_install() -> anyhow::Result<()> {
     assert_eq!(
         config,
         ConfigResponse {
-            price_per_minute: Uint128::from(1u128),
+            price_per_minute: Uint256::from(1u128),
             utc_offset: 0,
             start_time: Time { hour: 9, minute: 0 },
             end_time: Time {
@@ -319,7 +319,7 @@ fn request_meeting_at_start_of_day() -> anyhow::Result<()> {
             start_time: meeting_start_datetime.and_utc().timestamp(),
             end_time: meeting_end_datetime.and_utc().timestamp(),
             requester: sender,
-            amount_staked: Uint128::from(60u128),
+            amount_staked: Uint256::from(60u128),
         }],
         meetings_response.meetings
     );
@@ -363,7 +363,7 @@ fn request_meeting_at_end_of_day() -> anyhow::Result<()> {
             start_time: meeting_start_datetime.and_utc().timestamp(),
             end_time: meeting_end_datetime.and_utc().timestamp(),
             requester: sender,
-            amount_staked: Uint128::from(60u128),
+            amount_staked: Uint256::from(60u128),
         }],
         meetings_response.meetings
     );
@@ -424,13 +424,13 @@ fn request_multiple_meetings_on_same_day() -> anyhow::Result<()> {
                 start_time: meeting_start_datetime1.and_utc().timestamp(),
                 end_time: meeting_end_datetime1.and_utc().timestamp(),
                 requester: sender1,
-                amount_staked: Uint128::from(60u128),
+                amount_staked: Uint256::from(60u128),
             },
             Meeting {
                 start_time: meeting_start_datetime2.and_utc().timestamp(),
                 end_time: meeting_end_datetime2.and_utc().timestamp(),
                 requester: sender2,
-                amount_staked: Uint128::from(60u128),
+                amount_staked: Uint256::from(60u128),
             }
         ],
         meetings_response.meetings
@@ -502,13 +502,13 @@ fn request_back_to_back_meetings_on_left() -> anyhow::Result<()> {
                 start_time: meeting_start_datetime1.and_utc().timestamp(),
                 end_time: meeting_end_datetime1.and_utc().timestamp(),
                 requester: sender1,
-                amount_staked: Uint128::from(60u128),
+                amount_staked: Uint256::from(60u128),
             },
             Meeting {
                 start_time: meeting_start_datetime2.and_utc().timestamp(),
                 end_time: meeting_end_datetime2.and_utc().timestamp(),
                 requester: sender2,
-                amount_staked: Uint128::from(60u128),
+                amount_staked: Uint256::from(60u128),
             }
         ],
         meetings_response.meetings
@@ -580,13 +580,13 @@ fn request_back_to_back_meetings_on_right() -> anyhow::Result<()> {
                 start_time: meeting_start_datetime1.and_utc().timestamp(),
                 end_time: meeting_end_datetime1.and_utc().timestamp(),
                 requester: sender1,
-                amount_staked: Uint128::from(60u128),
+                amount_staked: Uint256::from(60u128),
             },
             Meeting {
                 start_time: meeting_start_datetime2.and_utc().timestamp(),
                 end_time: meeting_end_datetime2.and_utc().timestamp(),
                 requester: sender2,
-                amount_staked: Uint128::from(60u128),
+                amount_staked: Uint256::from(60u128),
             }
         ],
         meetings_response.meetings
@@ -645,7 +645,7 @@ fn request_meetings_on_different_days() -> anyhow::Result<()> {
             start_time: meeting_start_datetime1.and_utc().timestamp(),
             end_time: meeting_end_datetime1.and_utc().timestamp(),
             requester: sender1,
-            amount_staked: Uint128::from(60u128),
+            amount_staked: Uint256::from(60u128),
         }],
         meetings_response1.meetings
     );
@@ -664,7 +664,7 @@ fn request_meetings_on_different_days() -> anyhow::Result<()> {
             start_time: meeting_start_datetime2.and_utc().timestamp(),
             end_time: meeting_end_datetime2.and_utc().timestamp(),
             requester: sender2,
-            amount_staked: Uint128::from(60u128),
+            amount_staked: Uint256::from(60u128),
         }],
         meetings_response2.meetings
     );
@@ -1138,7 +1138,7 @@ fn cannot_request_meeting_with_insufficient_funds() -> anyhow::Result<()> {
 
     assert_eq!(
         CalendarError::InvalidStakeAmountSent {
-            expected_amount: Uint128::from(60u128)
+            expected_amount: Uint256::from(60u128)
         }
         .to_string(),
         error.root_cause().to_string(),
@@ -1188,12 +1188,12 @@ fn slash_full_stake() -> anyhow::Result<()> {
             start_time: meeting_start_datetime.and_utc().timestamp(),
             end_time: meeting_end_datetime.and_utc().timestamp(),
             requester: sender,
-            amount_staked: Uint128::zero(),
+            amount_staked: Uint256::zero(),
         }],
         meetings_response.meetings
     );
 
-    assert_eq!(Uint128::from(60u128), app.account().query_balance(DENOM)?);
+    assert_eq!(Uint256::from(60u128), app.account().query_balance(DENOM)?);
 
     Ok(())
 }
@@ -1222,7 +1222,7 @@ fn return_stake() -> anyhow::Result<()> {
     )?;
 
     assert_eq!(
-        Uint128::from(INITIAL_BALANCE - 60),
+        Uint256::from(INITIAL_BALANCE - 60),
         client.query_balance(&sender, DENOM)?
     );
 
@@ -1244,13 +1244,13 @@ fn return_stake() -> anyhow::Result<()> {
             start_time: meeting_start_datetime.and_utc().timestamp(),
             end_time: meeting_end_datetime.and_utc().timestamp(),
             requester: sender.clone(),
-            amount_staked: Uint128::zero(),
+            amount_staked: Uint256::zero(),
         }],
         meetings_response.meetings
     );
 
     assert_eq!(
-        Uint128::from(INITIAL_BALANCE),
+        Uint256::from(INITIAL_BALANCE),
         client.query_balance(&sender, DENOM)?
     );
 
@@ -1281,7 +1281,7 @@ fn slash_partial_stake() -> anyhow::Result<()> {
     )?;
 
     assert_eq!(
-        Uint128::from(INITIAL_BALANCE - 60),
+        Uint256::from(INITIAL_BALANCE - 60),
         client.query_balance(&sender, DENOM)?
     );
 
@@ -1304,17 +1304,17 @@ fn slash_partial_stake() -> anyhow::Result<()> {
             start_time: meeting_start_datetime.and_utc().timestamp(),
             end_time: meeting_end_datetime.and_utc().timestamp(),
             requester: sender.clone(),
-            amount_staked: Uint128::zero(),
+            amount_staked: Uint256::zero(),
         }],
         meetings_response.meetings
     );
 
     assert_eq!(
-        Uint128::from(INITIAL_BALANCE - 20),
+        Uint256::from(INITIAL_BALANCE - 20),
         client.query_balance(&sender, DENOM)?
     );
 
-    assert_eq!(Uint128::from(20u128), app.account().query_balance(DENOM)?);
+    assert_eq!(Uint256::from(20u128), app.account().query_balance(DENOM)?);
 
     Ok(())
 }

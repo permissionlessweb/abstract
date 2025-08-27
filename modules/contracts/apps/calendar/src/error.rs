@@ -1,7 +1,7 @@
 use abstract_app::sdk::AbstractSdkError;
 use abstract_app::std::AbstractError;
 use abstract_app::AppError as AbstractAppError;
-use cosmwasm_std::{StdError, Uint128};
+use cosmwasm_std::{StdError, Uint256};
 use cw_asset::AssetError;
 use cw_controllers::AdminError;
 use cw_utils::PaymentError;
@@ -58,7 +58,7 @@ pub enum CalendarError {
     EndTimeNotRoundedToNearestMinute {},
 
     #[error("Invalid stack amount sent. Expected_amount: {expected_amount}")]
-    InvalidStakeAmountSent { expected_amount: Uint128 },
+    InvalidStakeAmountSent { expected_amount: Uint256 },
 
     #[error("No meetings at given day datetime")]
     NoMeetingsAtGivenDayDateTime {},

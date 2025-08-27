@@ -1,5 +1,5 @@
 use abstract_app::sdk::AbstractResponse;
-use cosmwasm_std::{DepsMut, Env};
+use cosmwasm_std::{DepsMut, Env, MigrateInfo};
 
 use crate::{
     contract::{CalendarApp, CalendarAppResult},
@@ -13,6 +13,7 @@ pub fn migrate_handler(
     _env: Env,
     module: CalendarApp,
     _msg: CalendarMigrateMsg,
+    _info: MigrateInfo,
 ) -> CalendarAppResult {
     Ok(module.response("migrate"))
 }

@@ -1,12 +1,12 @@
 use chrono::{DateTime, FixedOffset, NaiveTime, Timelike};
-use cosmwasm_std::{Addr, BlockInfo, Uint128};
+use cosmwasm_std::{Addr, BlockInfo, Uint128, Uint256};
 use cw_storage_plus::{Item, Map};
 
 use crate::{error::CalendarError, msg::Time};
 
 #[cosmwasm_schema::cw_serde]
 pub struct Config {
-    pub price_per_minute: Uint128,
+    pub price_per_minute: Uint256,
     pub denom: String,
     pub utc_offset: i32,
     pub start_time: Time,
@@ -18,7 +18,7 @@ pub struct Meeting {
     pub start_time: i64,
     pub end_time: i64,
     pub requester: Addr,
-    pub amount_staked: Uint128,
+    pub amount_staked: Uint256,
 }
 
 impl Meeting {
@@ -28,7 +28,7 @@ impl Meeting {
         meeting_start_datetime: DateTime<FixedOffset>,
         meeting_end_datetime: DateTime<FixedOffset>,
         requester: Addr,
-        amount_staked: Uint128,
+        amount_staked: Uint256,
     ) -> Result<Self, CalendarError> {
         let meeting_start_timestamp = meeting_start_datetime.timestamp();
         let meeting_end_timestamp = meeting_end_datetime.timestamp();

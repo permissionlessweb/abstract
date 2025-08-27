@@ -1,7 +1,7 @@
 use abstract_app::std::objects::AssetEntry;
 use chrono::NaiveTime;
 use cosmwasm_schema::QueryResponses;
-use cosmwasm_std::{Int64, Uint128};
+use cosmwasm_std::{Int64, Uint256};
 
 use crate::{contract::CalendarApp, error::CalendarError, state::Meeting};
 
@@ -37,7 +37,7 @@ impl From<Time> for NaiveTime {
 pub struct CalendarInstantiateMsg {
     /// The price per minute charged to determine the amount of stake necessary to request a
     /// meeting for a given length.
-    pub price_per_minute: Uint128,
+    pub price_per_minute: Uint256,
     /// The denom of the staked asset.
     pub denom: AssetEntry,
     /// The utc offset of the timezone.
@@ -90,7 +90,7 @@ pub enum CalendarExecuteMsg {
     /// Update the config. Admin only.
     UpdateConfig {
         /// The updated price per minute.
-        price_per_minute: Option<Uint128>,
+        price_per_minute: Option<Uint256>,
         /// The updated denom.
         denom: Option<AssetEntry>,
     },
@@ -115,7 +115,7 @@ pub struct CalendarMigrateMsg {}
 
 #[cosmwasm_schema::cw_serde]
 pub struct ConfigResponse {
-    pub price_per_minute: Uint128,
+    pub price_per_minute: Uint256,
     pub utc_offset: i32,
     pub start_time: Time,
     pub end_time: Time,

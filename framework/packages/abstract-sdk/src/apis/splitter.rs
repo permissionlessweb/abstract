@@ -73,9 +73,7 @@ mod test {
     use abstract_std::objects::{AnsAsset, AssetEntry};
     use abstract_testing::{abstract_mock_querier_builder, prelude::*};
     use cosmwasm_std::{
-        coins,
-        testing::{mock_dependencies, mock_env},
-        Addr, BankMsg, CosmosMsg, Empty, Response, StdError, SubMsg, Uint128, WasmMsg,
+        coins, testing::{mock_dependencies, mock_env}, Addr, BankMsg, CosmosMsg, Empty, Response, StdError, SubMsg, Uint128, Uint256, WasmMsg
     };
     use cw_asset::AssetInfo;
 

@@ -14,7 +14,7 @@ use calendar_app::{
     msg::{CalendarInstantiateMsg, Time},
     CalendarAppInterface,
 };
-use cosmwasm_std::Uint128;
+use cosmwasm_std::Uint256;
 use cw_orch::{
     anyhow,
     prelude::{networks::LOCAL_JUNO, Daemon, Deploy, TxHandler},
@@ -62,7 +62,7 @@ fn main() -> anyhow::Result<()> {
     account.install_app(
         &app,
         &CalendarInstantiateMsg {
-            price_per_minute: Uint128::zero(),
+            price_per_minute: Uint256::zero(),
             denom: AssetEntry::from("juno>ujunox"),
             utc_offset: 0,
             start_time: Time { hour: 9, minute: 0 },

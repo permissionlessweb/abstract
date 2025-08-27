@@ -666,7 +666,7 @@ mod tests {
     use cosmwasm_std::{
         from_json,
         testing::{message_info, mock_dependencies, MockApi},
-        Addr, Coin, OwnedDeps,
+        Addr, Coin, OwnedDeps, Uint256,
     };
     use cw_ownable::OwnershipError;
     use cw_storage_plus::Item;
@@ -1148,7 +1148,8 @@ mod tests {
                 RegistryError::NamespaceOccupied {
                     namespace: Namespace::try_from("abstract")?.to_string(),
                     id: ABSTRACT_ACCOUNT_ID,
-                }.to_string()
+                }
+                .to_string()
             );
             Ok(())
         }
@@ -1211,7 +1212,7 @@ mod tests {
                 security_enabled: None,
                 namespace_registration_fee: Clearable::new_opt(Coin {
                     denom: "ujunox".to_string(),
-                    amount: Uint128::one(),
+                    amount: Uint256::one(),
                 }),
             };
 
@@ -1233,7 +1234,7 @@ mod tests {
 
             let new_fee = Coin {
                 denom: "ujunox".to_string(),
-                amount: Uint128::one(),
+                amount: Uint256::one(),
             };
 
             let msg = ExecuteMsg::UpdateConfig {
@@ -1365,7 +1366,8 @@ mod tests {
                 res.unwrap_err().to_string(),
                 RegistryError::UnknownNamespace {
                     namespace: new_namespace1.clone(),
-                }.to_string()
+                }
+                .to_string()
             );
 
             // remove as admin
@@ -1374,7 +1376,8 @@ mod tests {
                 res.unwrap_err().to_string(),
                 RegistryError::UnknownNamespace {
                     namespace: new_namespace1,
-                }.to_string()
+                }
+                .to_string()
             );
 
             Ok(())
@@ -1467,7 +1470,8 @@ mod tests {
                 res.unwrap_err().to_string(),
                 RegistryError::UnknownNamespace {
                     namespace: new_module.namespace.clone(),
-                }.to_string()
+                }
+                .to_string()
             );
 
             // add namespaces
@@ -1607,7 +1611,8 @@ mod tests {
                 res.unwrap_err().to_string(),
                 RegistryError::UnknownNamespace {
                     namespace: new_module.namespace.clone(),
-                }.to_string()
+                }
+                .to_string()
             );
 
             // add namespaces
@@ -1648,7 +1653,8 @@ mod tests {
                 res.unwrap_err().to_string(),
                 RegistryError::UnknownNamespace {
                     namespace: new_module.namespace.clone(),
-                }.to_string()
+                }
+                .to_string()
             );
 
             // add namespaces
@@ -1923,7 +1929,8 @@ mod tests {
                 res.unwrap_err().to_string(),
                 RegistryError::Abstract(AbstractError::Assert(
                     "Module version must be set to a specific version".into(),
-                )).to_string()
+                ))
+                .to_string()
             );
             Ok(())
         }
@@ -1996,7 +2003,8 @@ mod tests {
                         object: "module name".into(),
                         expected: "with content".into(),
                         actual: "empty".into(),
-                    }).to_string()
+                    })
+                    .to_string()
                 );
             }
 
@@ -2315,7 +2323,8 @@ mod tests {
                         ModuleVersion::Version(String::from("0.0.0")),
                     )
                     .unwrap(),
-                }.to_string()
+                }
+                .to_string()
             );
 
             // as account
@@ -2345,8 +2354,8 @@ mod tests {
             // as other
             let transfer_res = execute_as(&mut deps, &other, transfer_msg.clone());
             assert_eq!(
-                transfer_res,
-                Err(RegistryError::Ownership(OwnershipError::NotOwner {}))
+                transfer_res.to_string(),
+                RegistryError::Ownership(OwnershipError::NotOwner {}.to_string())
             );
 
             execute_as(&mut deps, &abstr.owner, transfer_msg)?;

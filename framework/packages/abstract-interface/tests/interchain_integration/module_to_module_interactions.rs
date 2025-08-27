@@ -280,7 +280,7 @@ pub const fn mock_app(id: &'static str, version: &'static str) -> MockAppContrac
             #[allow(deprecated)]
             Ok(Response::new().set_data(msg.result.unwrap().data.unwrap()))
         })])
-        .with_migrate(|_, _, _, _| Ok(Response::new().set_data("mock_migrate".as_bytes())))
+        .with_migrate(|_, _, _, _, _| Ok(Response::new().set_data("mock_migrate".as_bytes())))
         .with_module_ibc(|deps, _, _, src_module_info, _| {
             // We save the module info status
             MODULE_IBC_RECEIVED.save(deps.storage, &src_module_info.module)?;

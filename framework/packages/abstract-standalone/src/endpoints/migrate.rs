@@ -36,12 +36,23 @@ impl StandaloneContract {
 mod test {
     use crate::mock::*;
     use abstract_testing::prelude::*;
+    use cosmwasm_std::MigrateInfo;
 
     #[coverage_helper::test]
     fn test_migrate_migratable() {
         let mut deps = mock_init(true);
+        let sender = deps.api.addr_make("jimi");
         let env = mock_env_validated(deps.api);
-        let res = migrate(deps.as_mut(), env, MockMigrateMsg {}).unwrap();
+        let res = migrate(
+            deps.as_mut(),
+            env,
+            MockMigrateMsg {},
+            MigrateInfo {
+                sender,
+                old_migrate_version: None,
+            },
+        )
+        .unwrap();
         assert!(res.messages.is_empty());
     }
 }
