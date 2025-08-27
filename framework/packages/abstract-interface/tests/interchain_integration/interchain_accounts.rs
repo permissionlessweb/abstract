@@ -756,8 +756,8 @@ mod test {
         // Check balance on remote chain.
         let remote_balance = mock_interchain
             .get_chain(STARGAZE)?
-            .query_all_balances(&remote_account.address()?)?;
-        assert!(remote_balance.is_empty());
+            .query_balance(&remote_account.address()?, origin_denom)?;
+        assert!(remote_balance.is_zero());
 
         // Check balance on local chain.
         let origin_balance = mock_interchain

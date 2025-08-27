@@ -4,11 +4,11 @@ use abstract_std::{
     objects::{gov_type::GovernanceDetails, TruncatedChainId, UncheckedChannelEntry},
     IBC_CLIENT, ICS20,
 };
-use cosmwasm_std::{coin, coins, to_json_binary, BankMsg};
+use cosmwasm_std::{coin, coins, to_json_binary, BankMsg, StdResult};
 use cw_orch::prelude::*;
 use cw_orch_interchain::prelude::*;
 
-type AResult = cw_orch::anyhow::Result<()>; // alias for Result<(), anyhow::Error>
+type AResult = StdResult<()>; // alias for Result<(), anyhow::Error>
 
 pub const SOURCE_CHAIN_ID: &str = "source-1";
 pub const DEST_CHAIN_ID: &str = "dest-1";

@@ -2,7 +2,7 @@ use thiserror::Error;
 
 use super::verifiers::DANGEROUS_CHARS;
 
-#[derive(Error, Debug, PartialEq)]
+#[derive(Error, Debug)]
 pub enum ValidationError {
     #[error("description too short, must be at least {0} characters")]
     DescriptionInvalidShort(usize),

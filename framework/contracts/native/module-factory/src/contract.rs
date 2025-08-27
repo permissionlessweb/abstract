@@ -179,14 +179,14 @@ mod tests {
             );
 
             assert_eq!(
-                res,
-                Err(ModuleFactoryError::Abstract(
+                res.unwrap_err().to_string(),
+                ModuleFactoryError::Abstract(
                     AbstractError::CannotDowngradeContract {
                         contract: MODULE_FACTORY.to_string(),
                         from: version.clone(),
                         to: version,
                     },
-                ))
+                ).to_string()
             );
 
             Ok(())
@@ -216,14 +216,14 @@ mod tests {
             );
 
             assert_eq!(
-                res,
-                Err(ModuleFactoryError::Abstract(
+                res.unwrap_err().to_string(),
+                ModuleFactoryError::Abstract(
                     AbstractError::CannotDowngradeContract {
                         contract: MODULE_FACTORY.to_string(),
                         from: big_version.parse().unwrap(),
                         to: version,
                     },
-                ))
+                ).to_string()
             );
 
             Ok(())
@@ -252,13 +252,13 @@ mod tests {
             );
 
             assert_eq!(
-                res,
-                Err(ModuleFactoryError::Abstract(
+                res.unwrap_err().to_string(),
+                ModuleFactoryError::Abstract(
                     AbstractError::ContractNameMismatch {
                         from: old_name.parse().unwrap(),
                         to: MODULE_FACTORY.parse().unwrap(),
                     },
-                ))
+                ).to_string()
             );
 
             Ok(())

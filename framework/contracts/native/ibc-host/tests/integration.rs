@@ -121,8 +121,8 @@ fn cannot_register_proxy_as_non_owner() -> anyhow::Result<()> {
         .unwrap_err();
 
     assert_eq!(
-        HostError::OwnershipError(OwnershipError::NotOwner),
-        err.downcast()?
+        HostError::OwnershipError(OwnershipError::NotOwner).to_string(),
+        err.downcast::<HostError>()?.to_string()
     );
 
     Ok(())
@@ -146,8 +146,8 @@ fn cannot_remove_proxy_as_non_owner() -> anyhow::Result<()> {
         .unwrap_err();
 
     assert_eq!(
-        HostError::OwnershipError(OwnershipError::NotOwner),
-        err.downcast()?
+        HostError::OwnershipError(OwnershipError::NotOwner).to_string(),
+        err.downcast::<HostError>()?.to_string()
     );
 
     Ok(())

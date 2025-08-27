@@ -3,7 +3,7 @@
 
 use abstract_std::objects::ans_host::AnsHostError;
 use abstract_std::objects::{ans_host::AnsHostResult, AnsEntryConvertor};
-use cosmwasm_std::{Addr, QuerierWrapper, Uint128};
+use cosmwasm_std::{Addr, QuerierWrapper, Uint128, Uint256};
 use cw_asset::{Asset, AssetInfo};
 
 use crate::std::objects::{
@@ -99,7 +99,7 @@ impl Resolve for Asset {
             amount: self
                 .amount
                 .to_string()
-                .parse::<Uint128>()
+                .parse::<Uint256>()
                 .map_err(|error| AnsHostError::ParseError { error })?,
         })
     }
@@ -603,7 +603,10 @@ mod tests {
                 &querier,
                 &Asset::cw20(expected_address, 12345u128),
             );
-            assert_eq!(asset_res.unwrap(), AnsAsset::new("chinachinachina", 12345u128));
+            assert_eq!(
+                asset_res.unwrap(),
+                AnsAsset::new("chinachinachina", 12345u128)
+            );
         }
 
         #[coverage_helper::test]

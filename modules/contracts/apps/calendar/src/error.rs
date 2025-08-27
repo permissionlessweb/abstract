@@ -7,7 +7,7 @@ use cw_controllers::AdminError;
 use cw_utils::PaymentError;
 use thiserror::Error;
 
-#[derive(Error, Debug, PartialEq)]
+#[derive(Error, Debug)]
 pub enum CalendarError {
     #[error(transparent)]
     Std(#[from] StdError),

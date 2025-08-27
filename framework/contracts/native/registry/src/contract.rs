@@ -200,14 +200,15 @@ mod tests {
                 );
 
                 assert_eq!(
-                    res,
-                    Err(RegistryError::Abstract(
+                    res.unwrap_err().to_string(),
+                    RegistryError::Abstract(
                         AbstractError::CannotDowngradeContract {
                             contract: REGISTRY.to_string(),
                             from: version.to_string().parse().unwrap(),
                             to: version.to_string().parse().unwrap(),
-                        },
-                    ))
+                        }
+                        .to_string()
+                    )
                 );
 
                 Ok(())
@@ -236,14 +237,15 @@ mod tests {
                 );
 
                 assert_eq!(
-                    res,
-                    Err(RegistryError::Abstract(
+                    res.unwrap_err().to_string(),
+                    RegistryError::Abstract(
                         AbstractError::CannotDowngradeContract {
                             contract: REGISTRY.to_string(),
                             from: big_version.parse().unwrap(),
                             to: version.to_string().parse().unwrap(),
-                        },
-                    ))
+                        }
+                        .to_string()
+                    )
                 );
 
                 Ok(())
@@ -271,13 +273,14 @@ mod tests {
                 );
 
                 assert_eq!(
-                    res,
-                    Err(RegistryError::Abstract(
+                    res.unwrap_err().to_string(),
+                    RegistryError::Abstract(
                         AbstractError::ContractNameMismatch {
                             from: old_name.to_string(),
                             to: REGISTRY.to_string(),
-                        },
-                    ))
+                        }
+                        .to_string()
+                    )
                 );
 
                 Ok(())

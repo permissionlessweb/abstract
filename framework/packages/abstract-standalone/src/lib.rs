@@ -25,6 +25,7 @@ pub mod mock {
     use abstract_std::standalone::{self, StandaloneInstantiateMsg};
     use cosmwasm_schema::QueryResponses;
     pub use cosmwasm_std::testing::{mock_dependencies, mock_env, MockApi};
+    use cosmwasm_std::MigrateInfo;
     use cosmwasm_std::{
         testing::message_info, to_json_binary, Binary, Deps, DepsMut, Env, MessageInfo, Response,
         StdError, StdResult,
@@ -145,7 +146,12 @@ pub mod mock {
     }
 
     #[cosmwasm_std::entry_point]
-    pub fn migrate(_deps: DepsMut, _env: Env, _msg: MockMigrateMsg) -> Result<Response, MockError> {
+    pub fn migrate(
+        _deps: DepsMut,
+        _env: Env,
+        _msg: MockMigrateMsg,
+        _info: MigrateInfo,
+    ) -> Result<Response, MockError> {
         let mut v: semver::Version = TEST_VERSION.parse().unwrap();
         v.minor += 1;
         let version = v.to_string();

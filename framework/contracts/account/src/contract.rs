@@ -567,8 +567,8 @@ mod tests {
             "foo".to_owned(),
         );
         assert_eq!(
-            res,
-            Err(AccountError::Ownership(GovOwnershipError::NotOwner))
+            res.unwrap_err().to_string(),
+            AccountError::Ownership(GovOwnershipError::NotOwner).to_string()
         );
     }
 }

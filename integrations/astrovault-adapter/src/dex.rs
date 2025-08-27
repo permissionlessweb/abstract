@@ -272,6 +272,8 @@ impl DexCommand for Astrovault {
         && !matches!(pool_type, AstrovaultPoolType::Stable { .. } | AstrovaultPoolType::Ratio)
         {
             // find 0 asset
+
+            use cosmwasm_std::Uint256;
             let (index, non_zero_offer_asset) = offer_assets
                 .iter()
                 .enumerate()
@@ -286,7 +288,7 @@ impl DexCommand for Astrovault {
                 non_zero_offer_asset.info.clone(),
                 non_zero_offer_asset
                     .amount
-                    .checked_div(Uint128::from(2u128))
+                    .checked_div(Uint256::from(2u128))
                     .unwrap(),
             );
 
@@ -409,9 +411,11 @@ impl DexCommand for Astrovault {
                     )?
                 } else {
                     // Withdraw equal amounts, but remainder goes to first asset
+
+                    use cosmwasm_std::Uint256;
                     let (withdraw_amount, remainder) = (
-                        lp_token.amount / Uint128::new(2),
-                        lp_token.amount % Uint128::new(2),
+                        lp_token.amount / Uint256::new(2),
+                        lp_token.amount % Uint256::new(2),
                     );
                     to_json_binary(
                         &mini_astrovault::AstrovaultCw20HookMsg::WithdrawalToLockupStable {

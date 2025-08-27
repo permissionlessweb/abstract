@@ -326,7 +326,7 @@ mod test {
     #[coverage_helper::test]
     fn test_with_migrate() {
         let contract = MockAppContract::new("test_contract", "0.1.0", ModuleMetadata::default())
-            .with_migrate(|_, _, _, _| Ok(Response::default().add_attribute("test", "migrate")));
+            .with_migrate(|_, _, _, _, _| Ok(Response::default().add_attribute("test", "migrate")));
 
         assert!(contract.migrate_handler.is_some());
     }

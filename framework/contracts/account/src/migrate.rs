@@ -169,14 +169,14 @@ mod tests {
         );
 
         assert_eq!(
-            res,
-            Err(AccountError::Abstract(
+            res.unwrap_err().to_string(),
+            AccountError::Abstract(
                 AbstractError::CannotDowngradeContract {
                     contract: ACCOUNT.to_string(),
                     from: version.clone(),
                     to: version,
                 },
-            ))
+            ).to_string()
         );
 
         Ok(())
@@ -205,14 +205,14 @@ mod tests {
         );
 
         assert_eq!(
-            res,
-            Err(AccountError::Abstract(
+            res.unwrap_err().to_string(),
+            AccountError::Abstract(
                 AbstractError::CannotDowngradeContract {
                     contract: ACCOUNT.to_string(),
                     from: big_version.parse().unwrap(),
                     to: version,
                 },
-            ))
+            ).to_string()
         );
 
         Ok(())
@@ -240,13 +240,13 @@ mod tests {
         );
 
         assert_eq!(
-            res,
-            Err(AccountError::Abstract(
+            res.unwrap_err().to_string(),
+            AccountError::Abstract(
                 AbstractError::ContractNameMismatch {
                     from: old_name.parse().unwrap(),
                     to: ACCOUNT.parse().unwrap(),
                 },
-            ))
+            ).to_string()
         );
 
         Ok(())

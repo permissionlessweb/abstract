@@ -219,8 +219,8 @@ impl Deploy<MockBech32> for WynDex {
                 wyndex::factory::PairType::Xyk {},
                 [eur_info.clone(), wynd_info.clone()],
                 Some(PartialStakeConfig {
-                    tokens_per_power: Some(Uint128::new(100)),
-                    min_bond: Some(Uint128::new(100)),
+                    tokens_per_power: Some(Uint256::new(100)),
+                    min_bond: Some(Uint256::new(100)),
                     ..Default::default()
                 }),
                 None,

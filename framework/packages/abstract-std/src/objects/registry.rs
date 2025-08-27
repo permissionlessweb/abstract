@@ -21,7 +21,7 @@ use crate::{
     AbstractResult,
 };
 
-#[derive(Error, Debug, PartialEq)]
+#[derive(Error, Debug)]
 pub enum RegistryError {
     // module not found in version registry
     #[error("Module {module} not found in version registry {registry_addr}.")]

@@ -5,7 +5,9 @@ use abstract_std::{
     adapter,
     adapter::{AdapterExecuteMsg, AdapterQueryMsg},
 };
-use cosmwasm_schema::{export_schema_with_title, schema_for, write_api, QueryResponses};
+use cosmwasm_schema::{
+    cw_schema::Schemaifier, export_schema_with_title, schema_for, write_api, QueryResponses,
+};
 use cosmwasm_std::Empty;
 use schemars::JsonSchema;
 use serde::Serialize;
@@ -18,9 +20,9 @@ impl<
             + From<abstract_sdk::AbstractSdkError>
             + From<abstract_std::AbstractError>
             + 'static,
-        CustomExecMsg: Serialize + JsonSchema + AdapterExecuteMsg,
-        CustomInitMsg: Serialize + JsonSchema,
-        CustomQueryMsg: Serialize + JsonSchema + AdapterQueryMsg + QueryResponses,
+        CustomExecMsg: Serialize + JsonSchema + Schemaifier + AdapterExecuteMsg,
+        CustomInitMsg: Serialize + JsonSchema + Schemaifier,
+        CustomQueryMsg: Serialize + JsonSchema + Schemaifier + AdapterQueryMsg + QueryResponses,
         SudoMsg,
     > AdapterContract<Error, CustomInitMsg, CustomExecMsg, CustomQueryMsg, SudoMsg>
 {

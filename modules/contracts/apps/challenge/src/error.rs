@@ -13,7 +13,7 @@ use thiserror::Error;
 
 use crate::state::MAX_AMOUNT_OF_FRIENDS;
 
-#[derive(Error, Debug, PartialEq)]
+#[derive(Error, Debug)]
 pub enum AppError {
     #[error(transparent)]
     Std(#[from] StdError),

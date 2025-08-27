@@ -1,8 +1,6 @@
 use std::fmt;
 
-use cosmwasm_std::Uint128;
-use schemars::JsonSchema;
-use serde::{Deserialize, Serialize};
+use cosmwasm_std::Uint256;
 
 use super::AssetEntry;
 
@@ -10,11 +8,11 @@ use super::AssetEntry;
 #[derive(Eq)]
 pub struct AnsAsset {
     pub name: AssetEntry,
-    pub amount: Uint128,
+    pub amount: Uint256,
 }
 
 impl AnsAsset {
-    pub fn new(name: impl Into<AssetEntry>, amount: impl Into<Uint128>) -> Self {
+    pub fn new(name: impl Into<AssetEntry>, amount: impl Into<Uint256>) -> Self {
         AnsAsset {
             name: name.into(),
             amount: amount.into(),
@@ -39,7 +37,7 @@ mod test {
         let AnsAsset { name, amount } = AnsAsset::new("crab", 100u128);
 
         assert_eq!(name, AssetEntry::new("crab"));
-        assert_eq!(amount, Uint128::new(100));
+        assert_eq!(amount, Uint256::new(100));
     }
 
     #[coverage_helper::test]

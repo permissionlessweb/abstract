@@ -288,14 +288,14 @@ mod tests {
             );
 
             assert_eq!(
-                res,
-                Err(IbcClientError::Abstract(
+                res.unwrap_err().to_string(),
+                IbcClientError::Abstract(
                     AbstractError::CannotDowngradeContract {
                         contract: IBC_CLIENT.to_string(),
                         from: version.to_string().parse().unwrap(),
                         to: version.to_string().parse().unwrap(),
                     },
-                ))
+                ).to_string()
             );
 
             Ok(())
@@ -324,14 +324,14 @@ mod tests {
             );
 
             assert_eq!(
-                res,
-                Err(IbcClientError::Abstract(
+                res.unwrap_err().to_string(),
+                IbcClientError::Abstract(
                     AbstractError::CannotDowngradeContract {
                         contract: IBC_CLIENT.to_string(),
                         from: big_version.parse().unwrap(),
                         to: version.to_string().parse().unwrap(),
                     },
-                ))
+                ).to_string()
             );
 
             Ok(())
@@ -359,13 +359,13 @@ mod tests {
             );
 
             assert_eq!(
-                res,
-                Err(IbcClientError::Abstract(
+                res.unwrap_err().to_string(),
+                IbcClientError::Abstract(
                     AbstractError::ContractNameMismatch {
                         from: old_name.parse().unwrap(),
                         to: IBC_CLIENT.parse().unwrap(),
                     },
-                ))
+                ).to_string()
             );
 
             Ok(())

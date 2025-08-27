@@ -1061,13 +1061,11 @@ mod tests {
             // Success
             let sent_coins = coins(6, "ujunox");
             let res = execute_as_with_funds(&mut deps, &abstr.owner, msg, &sent_coins);
-            assert_eq!(
-                res.map(|res| res.messages),
-                Ok(vec![SubMsg::new(CosmosMsg::Bank(BankMsg::Send {
-                    to_address: abstr.account.addr().to_string(),
-                    amount: sent_coins,
-                }))])
-            );
+            let expected_messages = vec![SubMsg::new(CosmosMsg::Bank(BankMsg::Send {
+                to_address: abstr.account.addr().to_string(),
+                amount: sent_coins,
+            }))];
+            assert_eq!(res.unwrap().messages, expected_messages);
 
             Ok(())
         }
@@ -1146,11 +1144,11 @@ mod tests {
             };
             let res = execute_as(&mut deps, &abstr.owner, claim_abstract_msg);
             assert_eq!(
-                res,
-                Err(RegistryError::NamespaceOccupied {
+                res.unwrap_err().to_string(),
+                RegistryError::NamespaceOccupied {
                     namespace: Namespace::try_from("abstract")?.to_string(),
                     id: ABSTRACT_ACCOUNT_ID,
-                })
+                }.to_string()
             );
             Ok(())
         }
@@ -1364,19 +1362,19 @@ mod tests {
             };
             let res = execute_as(&mut deps, &abstr.owner, msg.clone());
             assert_eq!(
-                res,
-                Err(RegistryError::UnknownNamespace {
+                res.unwrap_err().to_string(),
+                RegistryError::UnknownNamespace {
                     namespace: new_namespace1.clone(),
-                })
+                }.to_string()
             );
 
             // remove as admin
             let res = execute_as(&mut deps, &abstr.owner, msg);
             assert_eq!(
-                res,
-                Err(RegistryError::UnknownNamespace {
+                res.unwrap_err().to_string(),
+                RegistryError::UnknownNamespace {
                     namespace: new_namespace1,
-                })
+                }.to_string()
             );
 
             Ok(())
@@ -1466,10 +1464,10 @@ mod tests {
             // try while no namespace
             let res = execute_as(&mut deps, &abstr.owner, msg.clone());
             assert_eq!(
-                res,
-                Err(RegistryError::UnknownNamespace {
+                res.unwrap_err().to_string(),
+                RegistryError::UnknownNamespace {
                     namespace: new_module.namespace.clone(),
-                })
+                }.to_string()
             );
 
             // add namespaces
@@ -1606,10 +1604,10 @@ mod tests {
             // try while no namespace
             let res = execute_as(&mut deps, &abstr.owner, msg.clone());
             assert_eq!(
-                res,
-                Err(RegistryError::UnknownNamespace {
+                res.unwrap_err().to_string(),
+                RegistryError::UnknownNamespace {
                     namespace: new_module.namespace.clone(),
-                })
+                }.to_string()
             );
 
             // add namespaces
@@ -1647,10 +1645,10 @@ mod tests {
             // try while no namespace
             let res = execute_as(&mut deps, &abstr.owner, msg.clone());
             assert_eq!(
-                res,
-                Err(RegistryError::UnknownNamespace {
+                res.unwrap_err().to_string(),
+                RegistryError::UnknownNamespace {
                     namespace: new_module.namespace.clone(),
-                })
+                }.to_string()
             );
 
             // add namespaces
@@ -1706,8 +1704,8 @@ mod tests {
             let not_owner = deps.api.addr_make("not_owner");
             let res = execute_as(&mut deps, &not_owner, msg.clone());
             assert_eq!(
-                res,
-                Err(RegistryError::Ownership(OwnershipError::NotOwner {}))
+                res.unwrap_err().to_string(),
+                RegistryError::Ownership(OwnershipError::NotOwner {}).to_string()
             );
 
             // approve by admin
@@ -1756,8 +1754,8 @@ mod tests {
             let not_owner = deps.api.addr_make("not_owner");
             let res = execute_as(&mut deps, &not_owner, msg.clone());
             assert_eq!(
-                res,
-                Err(RegistryError::Ownership(OwnershipError::NotOwner {}))
+                res.unwrap_err().to_string(),
+                RegistryError::Ownership(OwnershipError::NotOwner {}).to_string()
             );
 
             // reject by admin
@@ -1802,8 +1800,8 @@ mod tests {
             let other = deps.api.addr_make(TEST_OTHER);
             let res = execute_as(&mut deps, &other, msg.clone());
             assert_eq!(
-                res,
-                Err(RegistryError::Ownership(OwnershipError::NotOwner {}))
+                res.unwrap_err().to_string(),
+                RegistryError::Ownership(OwnershipError::NotOwner {}).to_string()
             );
 
             // only admin can remove modules.
@@ -1922,10 +1920,10 @@ mod tests {
             };
             let res = execute_as(&mut deps, &other, msg);
             assert_eq!(
-                res,
-                Err(RegistryError::Abstract(AbstractError::Assert(
+                res.unwrap_err().to_string(),
+                RegistryError::Abstract(AbstractError::Assert(
                     "Module version must be set to a specific version".into(),
-                )))
+                )).to_string()
             );
             Ok(())
         }
@@ -1948,8 +1946,8 @@ mod tests {
             let other = deps.api.addr_make(TEST_OTHER);
             let res = execute_as(&mut deps, &other, msg.clone());
             assert_eq!(
-                res,
-                Err(RegistryError::Ownership(OwnershipError::NotOwner {}))
+                res.unwrap_err().to_string(),
+                RegistryError::Ownership(OwnershipError::NotOwner {}).to_string()
             );
 
             execute_as(&mut deps, &abstr.owner, msg)?;
@@ -1993,12 +1991,12 @@ mod tests {
                 let other = deps.api.addr_make(TEST_OTHER);
                 let res = execute_as(&mut deps, &other, msg);
                 assert_eq!(
-                    res,
-                    Err(RegistryError::Abstract(AbstractError::FormattingError {
+                    res.unwrap_err().to_string(),
+                    RegistryError::Abstract(AbstractError::FormattingError {
                         object: "module name".into(),
                         expected: "with content".into(),
                         actual: "empty".into(),
-                    }))
+                    }).to_string()
                 );
             }
 
@@ -2197,8 +2195,8 @@ mod tests {
             let res = execute_as(&mut deps, &other, msg);
 
             assert_eq!(
-                res,
-                Err(RegistryError::Ownership(OwnershipError::NotOwner {}))
+                res.unwrap_err().to_string(),
+                RegistryError::Ownership(OwnershipError::NotOwner {}).to_string()
             );
             Ok(())
         }
@@ -2310,14 +2308,14 @@ mod tests {
             // as non-account
             let res = execute_as(&mut deps, &other, msg.clone());
             assert_eq!(
-                res,
-                Err(RegistryError::NotAccountInfo {
+                res.unwrap_err().to_string(),
+                RegistryError::NotAccountInfo {
                     caller_info: ModuleInfo::from_id(
                         "some:contract",
                         ModuleVersion::Version(String::from("0.0.0")),
                     )
                     .unwrap(),
-                })
+                }.to_string()
             );
 
             // as account

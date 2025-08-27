@@ -8,7 +8,7 @@ use abstract_std::{
 use cosmwasm_std::{to_json_binary, StdResult, SubMsgResponse};
 use cw_orch::{core::serde_json, mock::MockBech32, prelude::*, take_storage_snapshot};
 
-type AResult = cw_orch::anyhow::Result<()>; // alias for Result<(), anyhow::Error>
+type AResult = StdResult<()>; // alias for Result<(), anyhow::Error>
 
 #[test]
 fn multihop_account_snapshot() -> AResult {

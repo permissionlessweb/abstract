@@ -83,10 +83,10 @@ mod test_common {
 
         let res = execute_as(&mut deps, &not_owner, msg);
         assert_eq!(
-            res,
-            Err(AccountError::Ownership(
+            res.unwrap_err().to_string(),
+            AccountError::Ownership(
                 ownership::GovOwnershipError::NotOwner,
-            ))
+            ).to_string()
         );
 
         Ok(())

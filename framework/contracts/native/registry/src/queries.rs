@@ -1088,10 +1088,10 @@ mod test {
             );
 
             assert_eq!(
-                res,
-                Err(RegistryError::Std(StdError::msg(
+                res.unwrap_err().to_string(),
+                RegistryError::Std(StdError::msg(
                     RegistryError::UnknownAccountId { id: not_registered }.to_string(),
-                )))
+                )).to_string()
             );
 
             Ok(())

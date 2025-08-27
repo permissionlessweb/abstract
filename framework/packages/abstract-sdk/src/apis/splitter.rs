@@ -102,7 +102,7 @@ mod test {
         let usage_anchor: Result<Response, AbstractSdkError> = {
             // ANCHOR: usage
             let asset = AnsAsset {
-                amount: Uint128::from(100u128),
+                amount: Uint256::from(100u128),
                 name: "usd".into(),
             };
 

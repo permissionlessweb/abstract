@@ -10,7 +10,7 @@ use thiserror::Error;
 
 use crate::handlers::execute::MAX_UNSUBS;
 
-#[derive(Error, Debug, PartialEq)]
+#[derive(Error, Debug)]
 pub enum SubscriptionError {
     #[error(transparent)]
     Std(#[from] StdError),

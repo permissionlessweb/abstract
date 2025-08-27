@@ -7,7 +7,7 @@ use cw_asset::AssetError;
 use cw_controllers::AdminError;
 use thiserror::Error;
 
-#[derive(Error, Debug, PartialEq)]
+#[derive(Error, Debug)]
 pub enum AppError {
     #[error(transparent)]
     Std(#[from] StdError),

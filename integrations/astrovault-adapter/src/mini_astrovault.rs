@@ -3,7 +3,7 @@
 
 use std::fmt;
 
-use cosmwasm_std::{Decimal, Uint128};
+use cosmwasm_std::{Decimal, Uint128, Uint256};
 
 pub enum AstrovaultPoolType {
     Standard,
@@ -35,20 +35,20 @@ pub enum AstrovaultCw20HookMsg {
     },
     WithdrawalXassetMode {
         to: Option<String>,
-        expected_return: Option<Vec<Uint128>>,
+        expected_return: Option<Vec<Uint256>>,
     },
     #[serde(rename(serialize = "withdrawal_to_lockup"))]
     WithdrawalToLockupStable {
-        withdrawal_lockup_assets_amount: Vec<Uint128>,
+        withdrawal_lockup_assets_amount: Vec<Uint256>,
         to: Option<String>,
         is_instant_withdrawal: Option<bool>,
-        expected_return: Option<Vec<Uint128>>,
+        expected_return: Option<Vec<Uint256>>,
     },
     #[serde(rename(serialize = "withdrawal_to_lockup"))]
     WithdrawalToLockupRatio {
         to: Option<String>,
         is_instant_withdrawal: Option<bool>,
-        expected_return: Option<Vec<Uint128>>,
+        expected_return: Option<Vec<Uint256>>,
     },
 }
 

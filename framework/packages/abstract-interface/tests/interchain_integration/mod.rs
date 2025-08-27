@@ -2,6 +2,7 @@ pub mod interchain_accounts;
 pub mod module_to_module_interactions;
 
 use abstract_interface::Abstract;
+use cosmwasm_std::StdResult;
 use cw_orch::anyhow;
 use cw_orch::prelude::*;
 use cw_orch_interchain::prelude::*;
@@ -14,7 +15,7 @@ pub fn ibc_abstract_setup<Chain: IbcQueryHandler<Sender = Addr>, IBC: Interchain
     interchain: &IBC,
     origin_chain_id: &str,
     remote_chain_id: &str,
-) -> anyhow::Result<(Abstract<Chain>, Abstract<Chain>)> {
+) -> StdResult<(Abstract<Chain>, Abstract<Chain>)> {
     let origin_chain = interchain.get_chain(origin_chain_id).unwrap();
     let remote_chain = interchain.get_chain(remote_chain_id).unwrap();
 

@@ -7,11 +7,8 @@ use abstract_std::{
     IBC_CLIENT,
 };
 use cosmwasm_schema::{cw_serde, QueryResponses};
-use cosmwasm_std::{
-    from_json, to_json_binary, wasm_execute, AllBalanceResponse, Coin, Response, StdError,
-};
+use cosmwasm_std::{from_json, to_json_binary, wasm_execute, Coin, Response, StdError, StdResult};
 use cw_controllers::AdminError;
-use cw_orch::anyhow::Result as AnyResult;
 use cw_storage_plus::Item;
 
 abstract_app::app_msg_types!(MockAppContract, MockExecMsg, MockQueryMsg);
@@ -93,7 +90,7 @@ use thiserror::Error;
 
 use abstract_app::{AppContract, AppError};
 
-#[derive(Error, Debug, PartialEq)]
+#[derive(Error, Debug)]
 pub enum MockError {
     #[error(transparent)]
     Std(#[from] StdError),
@@ -318,7 +315,7 @@ pub mod test {
     fn assert_remote_module_call_status(
         module: &MockAppRemoteI<MockBech32>,
         source_module_expected: Option<ModuleInfo>,
-    ) -> AnyResult<()> {
+    ) -> StdResult<()> {
         let source_module = module
             .get_received_ibc_module_status()
             .map(|s| s.received)?;
@@ -327,7 +324,7 @@ pub mod test {
         Ok(())
     }
 
-    fn assert_callback_status(module: &MockAppOriginI<MockBech32>, status: bool) -> AnyResult<()> {
+    fn assert_callback_status(module: &MockAppOriginI<MockBech32>, status: bool) -> StdResult<()> {
         let get_received_ibc_callback_status_res: ReceivedIbcCallbackStatus =
             module.get_received_ibc_callback_status()?;
 
@@ -358,7 +355,7 @@ pub mod test {
     use cw_orch_interchain::prelude::*;
 
     #[test]
-    fn target_module_must_exist() -> AnyResult<()> {
+    fn target_module_must_exist() -> StdResult<()> {
         logger_test_init();
         let mock_interchain =
             MockBech32InterchainEnv::new(vec![(JUNO, "juno"), (STARGAZE, "stargaze")]);
@@ -405,7 +402,7 @@ pub mod test {
     }
 
     #[test]
-    fn target_account_must_have_module_installed() -> AnyResult<()> {
+    fn target_account_must_have_module_installed() -> StdResult<()> {
         logger_test_init();
         let mock_interchain =
             MockBech32InterchainEnv::new(vec![(JUNO, "juno"), (STARGAZE, "stargaze")]);
@@ -465,7 +462,7 @@ pub mod test {
     }
 
     #[test]
-    fn works() -> AnyResult<()> {
+    fn works() -> StdResult<()> {
         logger_test_init();
         let mock_interchain =
             MockBech32InterchainEnv::new(vec![(JUNO, "juno"), (STARGAZE, "stargaze")]);
@@ -569,7 +566,7 @@ pub mod test {
     pub const REMOTE_DENOM: &str = "remote_denom";
 
     #[test]
-    fn queries() -> AnyResult<()> {
+    fn queries() -> StdResult<()> {
         logger_test_init();
         let mock_interchain =
             MockBech32InterchainEnv::new(vec![(JUNO, "juno"), (STARGAZE, "stargaze")]);
@@ -626,7 +623,7 @@ pub mod test {
         use super::*;
 
         #[test]
-        fn calling_module_should_match() -> AnyResult<()> {
+        fn calling_module_should_match() -> StdResult<()> {
             logger_test_init();
             let mock_interchain =
                 MockBech32InterchainEnv::new(vec![(JUNO, "juno"), (STARGAZE, "stargaze")]);

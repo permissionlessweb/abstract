@@ -255,10 +255,10 @@ mod test {
         let env = mock_env_validated(deps.api);
         let res = execute(deps.as_mut(), env, message_info(&not_admin, &[]), msg);
         assert_eq!(
-            res,
-            Err(ModuleFactoryError::Ownership(
+            res.unwrap_err().to_string(),
+            ModuleFactoryError::Ownership(
                 cw_ownable::OwnershipError::NotOwner {},
-            ))
+            ).to_string()
         );
 
         Ok(())
