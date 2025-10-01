@@ -53,8 +53,8 @@ serde     = { version = "1.0", default-features = false, features = ["derive"] }
 thiserror = { version = "1.0.50" }
 
 clap               = { version = "4.0.32", features = ["derive"] }
-cw-orch            = { version = "0.27.0" }
-cw-orch-interchain = { version = "0.8.1" }
+cw-orch              = { git = "https://github.com/permissionlessweb/cw-orchestrator", branch = "feat/wasm-path" }
+cw-orch-interchain   = { git = "https://github.com/permissionlessweb/cw-orchestrator", branch = "feat/wasm-path" }
 semver             = "1.0"
 tokio              = { version = "1.4", features = ["full"] }
 
@@ -103,7 +103,7 @@ coverage-helper = { version = "0.2.2" }
 rstest          = "0.17.0"
 
 # Predictable abstract addresses
-cw-blob = { version = "=0.2.0", features = ["library"] }
+cw-blob = {  git = "https://github.com/permissionlessweb/cw-packages", branch = "feat/wasm-path", features = ["library"] }
 
 [profile.dev]
 opt-level = 1
