@@ -8,7 +8,6 @@ readme      = "README.md"
 repository  = "https://github.com/AbstractSDK/abstract"
 version     = { workspace = true }
 
-
 [dependencies]
 abstract-std    = { workspace = true }
 cosmwasm-std    = { workspace = true, features = ["iterator"] }

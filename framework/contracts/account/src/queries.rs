@@ -46,8 +46,8 @@ pub fn handle_config_query(deps: Deps, env: &Env) -> StdResult<Binary> {
     let account_id = ACCOUNT_ID.load(deps.storage)?;
     let abstract_code_id =
         native_addrs::abstract_code_id(&deps.querier, env.contract.address.clone())?;
-    let registry = RegistryContract::new(deps, abstract_code_id)
-        .map_err(|e| StdError::msg(e.to_string()))?;
+    let registry =
+        RegistryContract::new(deps, abstract_code_id).map_err(|e| StdError::msg(e.to_string()))?;
     let module_factory = ModuleFactoryContract::new(deps, abstract_code_id)
         .map_err(|e| StdError::msg(e.to_string()))?;
     let is_suspended = SUSPENSION_STATUS.load(deps.storage)?;
@@ -78,8 +78,8 @@ pub fn handle_module_info_query(
 
     let abstract_code_id =
         native_addrs::abstract_code_id(&deps.querier, env.contract.address.clone())?;
-    let registry = RegistryContract::new(deps, abstract_code_id)
-        .map_err(|e| StdError::msg(e.to_string()))?;
+    let registry =
+        RegistryContract::new(deps, abstract_code_id).map_err(|e| StdError::msg(e.to_string()))?;
 
     let mut resp_vec: Vec<AccountModuleInfo> = vec![];
     for (id, address) in ids_and_addr.into_iter() {
@@ -171,8 +171,8 @@ pub fn query_module_versions(
 
     let abstract_code_id =
         native_addrs::abstract_code_id(&deps.querier, env.contract.address.clone())?;
-    let registry = RegistryContract::new(deps, abstract_code_id)
-        .map_err(|e| StdError::msg(e.to_string()))?;
+    let registry =
+        RegistryContract::new(deps, abstract_code_id).map_err(|e| StdError::msg(e.to_string()))?;
     for (name, address) in addresses.into_iter() {
         let result = query_module_version(deps, address, &registry)?;
         module_versions.insert(name, result);
@@ -212,10 +212,10 @@ mod test {
         objects::AccountId,
     };
     use abstract_testing::{abstract_mock_querier_builder, prelude::*};
-    use cosmwasm_std::testing::*;
+    use cosmwasm_std::{testing::*, StdResult};
 
-    #[coverage_helper::test]
-    fn query_config() -> anyhow::Result<()> {
+    
+    fn query_config() -> StdResult<()> {
         let mut deps = mock_dependencies();
         let abstr = AbstractMockAddrs::new(deps.api);
         deps.querier = abstract_mock_querier_builder(deps.api)

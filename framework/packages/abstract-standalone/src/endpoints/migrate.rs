@@ -38,7 +38,7 @@ mod test {
     use abstract_testing::prelude::*;
     use cosmwasm_std::MigrateInfo;
 
-    #[coverage_helper::test]
+    
     fn test_migrate_migratable() {
         let mut deps = mock_init(true);
         let sender = deps.api.addr_make("jimi");

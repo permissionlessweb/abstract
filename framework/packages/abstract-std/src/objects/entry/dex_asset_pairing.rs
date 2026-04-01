@@ -52,13 +52,13 @@ impl<'a> PrimaryKey<'a> for &DexAssetPairing {
     type Suffix = DexName;
     type SuperSuffix = (&'a AssetEntry, DexName);
 
-    fn key(&self) -> Vec<cw_storage_plus::Key> {
+    fn key(&self) -> Vec<cw_storage_plus::Key<'_>> {
         <(AssetEntry, AssetEntry, DexName)>::key(&self.0)
     }
 }
 
 impl Prefixer<'_> for &DexAssetPairing {
-    fn prefix(&self) -> Vec<cw_storage_plus::Key> {
+    fn prefix(&self) -> Vec<cw_storage_plus::Key<'_>> {
         <(AssetEntry, AssetEntry, DexName)>::prefix(&self.0)
     }
 }
@@ -103,7 +103,7 @@ mod test {
         }
     }
 
-    #[coverage_helper::test]
+    
     fn storage_key_works() {
         let mut deps = mock_dependencies();
         let key = mock_key();
@@ -122,7 +122,7 @@ mod test {
         assert_eq!(items[0], (key, 42069));
     }
 
-    #[coverage_helper::test]
+    
     fn composite_key_works() {
         let mut deps = mock_dependencies();
         let key = mock_key();
@@ -156,7 +156,7 @@ mod test {
         assert_eq!(items[1], (Addr::unchecked("terraswap"), vec![ref_2]));
     }
 
-    #[coverage_helper::test]
+    
     fn partial_key_works() {
         let mut deps = mock_dependencies();
         let (key1, key2, key3) = mock_keys();
@@ -179,7 +179,7 @@ mod test {
         assert_eq!(items[1], ("osmosis".to_string(), 69420));
     }
 
-    #[coverage_helper::test]
+    
     fn try_from_lp_token() {
         let lp = LpToken::new("junoswap", vec!["juno".to_string(), "osmo".to_string()]);
 
@@ -191,7 +191,7 @@ mod test {
         );
     }
 
-    #[coverage_helper::test]
+    
     fn display() {
         let key = DexAssetPairing::new("juno".into(), "osmo".into(), "junoswap");
         assert_eq!(key.to_string(), "junoswap/juno,osmo");

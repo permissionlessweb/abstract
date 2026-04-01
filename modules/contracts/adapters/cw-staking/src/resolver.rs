@@ -18,9 +18,9 @@ pub(crate) fn identify_provider(value: &str) -> Result<Box<dyn Identify>, CwStak
         // abstract_astroport_adapter::ASTROPORT => {
         //     Ok(Box::<abstract_astroport_adapter::staking::Astroport>::default())
         // }
-        abstract_kujira_adapter::staking::BOW => {
-            Ok(Box::<abstract_kujira_adapter::staking::Bow>::default())
-        }
+        // abstract_kujira_adapter::staking::BOW => {
+        //     Ok(Box::<abstract_kujira_adapter::staking::Bow>::default())
+        // }
         abstract_osmosis_adapter::OSMOSIS => {
             Ok(Box::<abstract_osmosis_adapter::staking::Osmosis>::default())
         }

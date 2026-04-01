@@ -162,7 +162,7 @@ fn installed_app_updating_on_subaccount_should_succeed() -> AResult {
                 link: None,
             },
             vec![],
-        )?
+        ).map_err(|e| anyhow::anyhow!("{e}"))?
         .into()],
         &[],
     )?;
@@ -306,7 +306,7 @@ fn sub_account_move_ownership_to_sub_account() -> AResult {
                 ownership::GovAction::AcceptOwnership,
             ),
             vec![],
-        )?
+        ).map_err(|e| anyhow::anyhow!("{e}"))?
         .into()],
         &[],
     )?;
@@ -356,7 +356,7 @@ fn account_updated_to_subaccount() -> AResult {
         ownership::GovAction::AcceptOwnership,
     );
     account_1.execute_msgs(
-        vec![wasm_execute(account_2.addr_str()?, &accept_msg, vec![])?.into()],
+        vec![wasm_execute(account_2.addr_str()?, &accept_msg, vec![]).map_err(|e| anyhow::anyhow!("{e}"))?.into()],
         &[],
     )?;
 
@@ -430,12 +430,15 @@ fn cant_renounce_with_sub_accounts() -> AResult {
         &[],
     )?;
 
-    let err: AccountError = account
+    let err = account
         .update_ownership(ownership::GovAction::RenounceOwnership)
-        .unwrap_err()
-        .downcast()
-        .unwrap();
-    assert_eq!(err.to_string(), AccountError::RenounceWithSubAccount {}.to_string());
+        .unwrap_err();
+    assert!(
+        err.root().to_string().contains(&AccountError::RenounceWithSubAccount {}.to_string()),
+        "Expected error containing '{}', got: {}",
+        AccountError::RenounceWithSubAccount {},
+        err.root()
+    );
     Ok(())
 }
 
@@ -497,7 +500,7 @@ fn account_updated_to_subaccount_without_recursion() -> AResult {
                 &abstract_std::account::ExecuteMsg::<Empty>::UpdateOwnership(
                     GovAction::AcceptOwnership,
                 ),
-            )?,
+            ).map_err(|e| anyhow::anyhow!("{e}"))?,
             funds: Vec::default(),
         }
         .into()],
@@ -536,7 +539,7 @@ fn sub_account_to_regular_account_without_recursion() -> AResult {
                     },
                     expiry: None,
                 },
-            ))?,
+            )).map_err(|e| anyhow::anyhow!("{e}"))?,
             funds: vec![],
         }
         .into()],

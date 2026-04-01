@@ -118,13 +118,15 @@ impl CwStakingCommand for Bow {
             .into_iter()
             .zip(self.tokens.iter())
             .map(|(unstake, token)| {
+                let withdraw_coin: cosmwasm_std::Coin = Coin {
+                    denom: token.lp_token_denom.clone(),
+                    amount: unstake.amount,
+                };
                 let msg: CosmosMsg = wasm_execute(
                     token.staking_contract_address.clone(),
                     &BowStaking::ExecuteMsg::Withdraw {
-                        amount: Coin {
-                            denom: token.lp_token_denom.clone(),
-                            amount: unstake.amount,
-                        },
+                        // Convert from v3 Coin to kujira's v2 Coin via JSON bridge
+                        amount: json_convert!(&withdraw_coin)?,
                     },
                     vec![],
                 )?
@@ -193,7 +195,9 @@ impl CwStakingCommand for Bow {
                         t.staking_contract_address.clone(),
                         &BowStaking::QueryMsg::Stake {
                             denom: t.lp_token_denom.clone().into(),
-                            addr: staker.clone(),
+                            // Convert from v3 Addr to kujira's v2 Addr via JSON bridge
+                            addr: json_convert!(&staker)
+                                .map_err(|e| StdError::msg(e.to_string()))?,
                         },
                     )
                     .map_err(|e| {
@@ -204,7 +208,9 @@ impl CwStakingCommand for Bow {
                             e
                         ))
                     })?;
-                Ok(stake_response.amount)
+                // Convert from kujira's v2 Uint128 to our v3 Uint128 via JSON bridge
+                Ok(json_convert!(&stake_response.amount)
+                    .map_err(|e| StdError::msg(e.to_string()))?)
             })
             .collect::<Result<_, CwStakingError>>()?;
 

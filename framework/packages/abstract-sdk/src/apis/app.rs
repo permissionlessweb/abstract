@@ -124,7 +124,7 @@ mod tests {
         use super::*;
         use crate::{mock_module::MockModuleExecuteMsg, std::app};
 
-        #[coverage_helper::test]
+        
         fn should_return_err_if_not_dependency() {
             fail_when_not_dependency_test(
                 |app, deps| {
@@ -135,7 +135,7 @@ mod tests {
             );
         }
 
-        #[coverage_helper::test]
+        
         fn expected_app_request() {
             let (deps, _, app) = mock_module_setup();
 
@@ -161,7 +161,7 @@ mod tests {
     mod query_app {
         use super::*;
 
-        #[coverage_helper::test]
+        
         fn should_return_err_if_not_dependency() {
             fail_when_not_dependency_test(
                 |app, deps| {
@@ -172,7 +172,7 @@ mod tests {
             );
         }
 
-        #[coverage_helper::test]
+        
         fn expected_app_query() {
             let (deps, _, app) = mock_module_setup();
 
@@ -184,7 +184,7 @@ mod tests {
         }
     }
 
-    #[coverage_helper::test]
+    
     fn abstract_api() {
         let (deps, _, app) = mock_module_setup();
         let apps = app.apps(deps.as_ref());

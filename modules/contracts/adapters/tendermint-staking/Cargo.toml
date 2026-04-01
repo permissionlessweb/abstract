@@ -8,10 +8,6 @@ version     = { workspace = true }
 
 exclude = ["contract.wasm", "hash.txt"]
 
-[[example]]
-name              = "schema"
-required-features = ["schema"]
-
 [lib]
 crate-type = ["cdylib", "rlib"]
 
@@ -20,15 +16,19 @@ default = ["export"]
 export  = []
 schema  = ["abstract-adapter/schema"]
 
-
 # Keep as is until TendermintStake updates.
 [dependencies]
 abstract-adapter = { workspace = true }
 cosmwasm-schema  = { workspace = true }
 cosmwasm-std     = { workspace = true }
-thiserror        = { workspace = true }
 
 cw-orch = { workspace = true }
+schemars         = { workspace = true }
+thiserror        = { workspace = true }
 
 [dev-dependencies]
 abstract-adapter = { workspace = true, features = ["schema"] }
+
+[[example]]
+name              = "schema"
+required-features = ["schema"]

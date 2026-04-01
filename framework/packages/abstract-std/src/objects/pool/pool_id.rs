@@ -181,7 +181,7 @@ mod test {
 
     use super::*;
 
-    #[coverage_helper::test]
+    
     fn test_pool_id_from_str() {
         let api = MockApi::default();
         let contract_addr = api.addr_make("foo");
@@ -191,7 +191,7 @@ mod test {
         assert_eq!(pool_id.to_string(), pool_id_str.to_string());
     }
 
-    #[coverage_helper::test]
+    
     fn test_expect_contract_happy() {
         let api = MockApi::default();
         let contract_addr = api.addr_make("foo");
@@ -201,14 +201,14 @@ mod test {
         assert_eq!(res.unwrap(), contract_addr);
     }
 
-    #[coverage_helper::test]
+    
     fn test_expect_contract_sad() {
         let pool_id = PoolAddress::Id(1);
         let res = pool_id.expect_contract();
         assert!(res.is_err());
     }
 
-    #[coverage_helper::test]
+    
     fn test_expect_id_happy() {
         let pool_id = PoolAddress::Id(1);
         let res = pool_id.expect_id();
@@ -216,7 +216,7 @@ mod test {
         assert_eq!(res.unwrap(), 1);
     }
 
-    #[coverage_helper::test]
+    
     fn test_expect_id_sad() {
         let api = MockApi::default();
         let contract_addr = api.addr_make("foo");

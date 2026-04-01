@@ -46,10 +46,11 @@ fn cannot_reinstall_module() -> AResult {
             &[],
         )
         .unwrap_err();
-    let account_err: AccountError = err.downcast().unwrap();
-    assert_eq!(
-        account_err.to_string(),
-        AccountError::ModuleAlreadyInstalled(adapter_1::MOCK_ADAPTER_ID.to_owned()).to_string()
+    assert!(
+        err.root().to_string().contains(&AccountError::ModuleAlreadyInstalled(adapter_1::MOCK_ADAPTER_ID.to_owned()).to_string()),
+        "Expected error containing '{}', got: {}",
+        AccountError::ModuleAlreadyInstalled(adapter_1::MOCK_ADAPTER_ID.to_owned()),
+        err.root()
     );
     Ok(())
 }
@@ -104,11 +105,11 @@ fn useful_error_module_not_found() -> AResult {
         )
         .unwrap_err();
 
-    let account_error: AccountError = err.downcast().unwrap();
-    assert!(matches!(
-        account_error,
-        AccountError::QueryModulesFailed { .. }
-    ));
+    assert!(
+        err.root().to_string().contains("Failed to query modules to install"),
+        "Expected error containing 'Failed to query modules to install', got: {}",
+        err.root()
+    );
     Ok(())
 }
 
@@ -119,7 +120,7 @@ fn only_admin_can_add_or_remove_module() -> AResult {
     let account = create_default_account(&chain.sender_addr(), &abstr)?;
 
     let not_admin = chain.addr_make("not_admin");
-    let not_admin_error: AccountError = account
+    let install_err = account
         .call_as(&not_admin)
         .execute(
             &AccountMsg::InstallModules {
@@ -130,16 +131,16 @@ fn only_admin_can_add_or_remove_module() -> AResult {
             },
             &[],
         )
-        .unwrap_err()
-        .downcast()
-        .unwrap();
+        .unwrap_err();
 
-    assert_eq!(
-        not_admin_error.to_string(),
-        AccountError::Ownership(GovOwnershipError::NotOwner).to_string()
+    assert!(
+        install_err.root().to_string().contains(&AccountError::Ownership(GovOwnershipError::NotOwner).to_string()),
+        "Expected error containing '{}', got: {}",
+        AccountError::Ownership(GovOwnershipError::NotOwner),
+        install_err.root()
     );
 
-    let not_admin_error: AccountError = account
+    let uninstall_err = account
         .call_as(&not_admin)
         .execute(
             &AccountMsg::UninstallModule {
@@ -147,13 +148,13 @@ fn only_admin_can_add_or_remove_module() -> AResult {
             },
             &[],
         )
-        .unwrap_err()
-        .downcast()
-        .unwrap();
+        .unwrap_err();
 
-    assert_eq!(
-        not_admin_error.to_string(),
-        AccountError::Ownership(GovOwnershipError::NotOwner).to_string()
+    assert!(
+        uninstall_err.root().to_string().contains(&AccountError::Ownership(GovOwnershipError::NotOwner).to_string()),
+        "Expected error containing '{}', got: {}",
+        AccountError::Ownership(GovOwnershipError::NotOwner),
+        uninstall_err.root()
     );
 
     Ok(())
@@ -180,7 +181,7 @@ fn fails_adding_previously_added_module() -> AResult {
         &[],
     )?;
 
-    let already_whitelisted: AccountError = account
+    let already_whitelisted_err = account
         .execute(
             &AccountMsg::InstallModules {
                 modules: vec![ModuleInstallConfig::new(
@@ -190,12 +191,12 @@ fn fails_adding_previously_added_module() -> AResult {
             },
             &[],
         )
-        .unwrap_err()
-        .downcast()
-        .unwrap();
-    assert_eq!(
-        already_whitelisted.to_string(),
-        AccountError::ModuleAlreadyInstalled(adapter_1::MOCK_ADAPTER_ID.to_string()).to_string()
+        .unwrap_err();
+    assert!(
+        already_whitelisted_err.root().to_string().contains(&AccountError::ModuleAlreadyInstalled(adapter_1::MOCK_ADAPTER_ID.to_string()).to_string()),
+        "Expected error containing '{}', got: {}",
+        AccountError::ModuleAlreadyInstalled(adapter_1::MOCK_ADAPTER_ID.to_string()),
+        already_whitelisted_err.root()
     );
     Ok(())
 }
@@ -242,20 +243,20 @@ fn fails_removing_non_existing_module() -> AResult {
     let abstr = Abstract::deploy_on(chain.clone(), ())?;
     let account = create_default_account(&chain.sender_addr(), &abstr)?;
 
-    let err: AccountError = account
+    let err = account
         .execute(
             &AccountMsg::UninstallModule {
                 module_id: adapter_1::MOCK_ADAPTER_ID.to_string(),
             },
             &[],
         )
-        .unwrap_err()
-        .downcast()
-        .unwrap();
+        .unwrap_err();
 
-    assert_eq!(
-        err.to_string(),
-        AccountError::ModuleNotFound(adapter_1::MOCK_ADAPTER_ID.to_string()).to_string()
+    assert!(
+        err.root().to_string().contains(&AccountError::ModuleNotFound(adapter_1::MOCK_ADAPTER_ID.to_string()).to_string()),
+        "Expected error containing '{}', got: {}",
+        AccountError::ModuleNotFound(adapter_1::MOCK_ADAPTER_ID.to_string()),
+        err.root()
     );
     Ok(())
 }

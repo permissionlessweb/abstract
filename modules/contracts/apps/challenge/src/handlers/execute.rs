@@ -398,7 +398,7 @@ fn charge_penalty(
 
     let asset_per_friend = AnsAsset {
         name: challenge.strike_asset,
-        amount: amount_per_friend,
+        amount: amount_per_friend.into(),
     };
 
     let bank = module.bank(deps.as_ref());

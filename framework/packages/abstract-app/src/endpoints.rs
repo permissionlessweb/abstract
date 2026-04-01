@@ -135,7 +135,7 @@ mod test {
     use abstract_testing::prelude::*;
     use cosmwasm_std::{Binary, MessageInfo, MigrateInfo, SubMsgResult};
 
-    #[coverage_helper::test]
+    
     fn exports_endpoints() {
         export_endpoints!(MOCK_APP_WITH_DEP, MockAppContract);
 
@@ -162,7 +162,7 @@ mod test {
             message_info(&abstr.owner, &[]),
             init_msg,
         );
-        assert_eq!(actual_init.unwrap().to_string(), expected_init.unwrap().to_string());
+        assert_eq!(actual_init.unwrap(), expected_init.unwrap());
 
         // exec
         let exec_msg = app::ExecuteMsg::Module(MockExecMsg::DoSomething {});
@@ -178,7 +178,7 @@ mod test {
             message_info(&abstr.owner, &[]),
             exec_msg,
         );
-        assert_eq!(actual_exec.unwrap().to_string(), expected_exec.unwrap().to_string());
+        assert_eq!(actual_exec.unwrap(), expected_exec.unwrap());
 
         // query
         let query_msg = app::QueryMsg::Module(MockQueryMsg::GetSomething {});
@@ -203,13 +203,13 @@ mod test {
         );
         let expected_migrate =
             MOCK_APP_WITH_DEP.migrate(deps.as_mut(), env.clone(), migrate_msg, migrate_info);
-        assert_eq!(actual_migrate.unwrap().to_string(), expected_migrate.unwrap().to_string());
+        assert_eq!(actual_migrate.unwrap(), expected_migrate.unwrap());
 
         // sudo
         let sudo_msg = MockSudoMsg {};
         let actual_sudo = sudo(deps.as_mut(), env.clone(), sudo_msg.clone());
         let expected_sudo = MOCK_APP_WITH_DEP.sudo(deps.as_mut(), env.clone(), sudo_msg);
-        assert_eq!(actual_sudo.unwrap().to_string(), expected_sudo.unwrap().to_string());
+        assert_eq!(actual_sudo.unwrap(), expected_sudo.unwrap());
 
         // reply
         let reply_msg = ::cosmwasm_std::Reply {
@@ -220,10 +220,10 @@ mod test {
         };
         let actual_reply = reply(deps.as_mut(), env.clone(), reply_msg.clone());
         let expected_reply = MOCK_APP_WITH_DEP.reply(deps.as_mut(), env, reply_msg);
-        assert_eq!(actual_reply.unwrap().to_string(), expected_reply.unwrap().to_string());
+        assert_eq!(actual_reply.unwrap(), expected_reply.unwrap());
     }
 
-    #[coverage_helper::test]
+    
     fn exports_endpoints_custom() {
         #[cosmwasm_schema::cw_serde]
         #[derive(cw_orch::ExecuteFns)]
@@ -304,7 +304,7 @@ mod test {
             message_info(&abstr.owner, &[]),
             init_msg,
         );
-        assert_eq!(actual_init.unwrap().to_string(), expected_init.unwrap().to_string());
+        assert_eq!(actual_init.unwrap(), expected_init.unwrap());
 
         // exec
         let exec_msg = app::ExecuteMsg::Module(MockExecMsg::DoSomething {});
@@ -320,7 +320,7 @@ mod test {
             message_info(&abstr.owner, &[]),
             exec_msg,
         );
-        assert_eq!(actual_exec.unwrap().to_string(), expected_exec.unwrap().to_string());
+        assert_eq!(actual_exec.unwrap(), expected_exec.unwrap());
 
         // query
         let query_msg = app::QueryMsg::Module(MockQueryMsg::GetSomething {});
@@ -345,13 +345,13 @@ mod test {
         );
         let expected_migrate =
             MOCK_APP_WITH_DEP.migrate(deps.as_mut(), env.clone(), migrate_msg, migrate_info);
-        assert_eq!(actual_migrate.unwrap().to_string(), expected_migrate.unwrap().to_string());
+        assert_eq!(actual_migrate.unwrap(), expected_migrate.unwrap());
 
         // sudo
         let sudo_msg = MockSudoMsg {};
         let actual_sudo = sudo(deps.as_mut(), env.clone(), sudo_msg.clone());
         let expected_sudo = MOCK_APP_WITH_DEP.sudo(deps.as_mut(), env.clone(), sudo_msg);
-        assert_eq!(actual_sudo.unwrap().to_string(), expected_sudo.unwrap().to_string());
+        assert_eq!(actual_sudo.unwrap(), expected_sudo.unwrap());
 
         // reply
         let reply_msg = ::cosmwasm_std::Reply {
@@ -362,6 +362,6 @@ mod test {
         };
         let actual_reply = reply(deps.as_mut(), env.clone(), reply_msg.clone());
         let expected_reply = MOCK_APP_WITH_DEP.reply(deps.as_mut(), env, reply_msg);
-        assert_eq!(actual_reply.unwrap().to_string(), expected_reply.unwrap().to_string());
+        assert_eq!(actual_reply.unwrap(), expected_reply.unwrap());
     }
 }

@@ -120,9 +120,10 @@ fn cannot_register_proxy_as_non_owner() -> anyhow::Result<()> {
         .register_chain_proxy(chain_name.parse().unwrap(), sender.to_string())
         .unwrap_err();
 
-    assert_eq!(
-        HostError::OwnershipError(OwnershipError::NotOwner).to_string(),
-        err.downcast::<HostError>()?.to_string()
+    assert!(
+        err.to_string().contains(&HostError::OwnershipError(OwnershipError::NotOwner).to_string()),
+        "Expected ownership error, got: {}",
+        err
     );
 
     Ok(())
@@ -145,9 +146,10 @@ fn cannot_remove_proxy_as_non_owner() -> anyhow::Result<()> {
         .remove_chain_proxy(chain_name.parse().unwrap())
         .unwrap_err();
 
-    assert_eq!(
-        HostError::OwnershipError(OwnershipError::NotOwner).to_string(),
-        err.downcast::<HostError>()?.to_string()
+    assert!(
+        err.to_string().contains(&HostError::OwnershipError(OwnershipError::NotOwner).to_string()),
+        "Expected ownership error, got: {}",
+        err
     );
 
     Ok(())

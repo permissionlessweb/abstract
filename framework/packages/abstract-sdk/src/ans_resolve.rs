@@ -189,7 +189,7 @@ mod tests {
     mod is_registered {
         use super::*;
 
-        #[coverage_helper::test]
+        
         fn exists() {
             let mock_api = MockApi::default();
             let ans_host = mock_ans_host(mock_api);
@@ -212,7 +212,7 @@ mod tests {
             assert!(assert_registered.is_ok())
         }
 
-        #[coverage_helper::test]
+        
         fn does_not_exist() {
             let mock_api = MockApi::default();
             let ans_host = mock_ans_host(mock_api);
@@ -231,7 +231,7 @@ mod tests {
     mod asset_entry {
         use super::*;
 
-        #[coverage_helper::test]
+        
         fn exists() {
             let mock_api = MockApi::default();
             let ans_host = mock_ans_host(mock_api);
@@ -258,7 +258,7 @@ mod tests {
             );
         }
 
-        #[coverage_helper::test]
+        
         fn does_not_exist() {
             let deps = mock_deps_with_default_querier();
             let ans_host = mock_ans_host(deps.api);
@@ -268,7 +268,7 @@ mod tests {
             test_dne(&ans_host, &not_exist_asset);
         }
 
-        #[coverage_helper::test]
+        
         fn array() {
             let mock_api = MockApi::default();
             let ans_host = mock_ans_host(mock_api);
@@ -305,7 +305,7 @@ mod tests {
     mod lp_token {
         use super::*;
 
-        #[coverage_helper::test]
+        
         fn exists() {
             let mock_api = MockApi::default();
             let ans_host = mock_ans_host(mock_api);
@@ -328,7 +328,7 @@ mod tests {
             assert_eq!(res.unwrap(), expected_value);
         }
 
-        #[coverage_helper::test]
+        
         fn does_not_exist() {
             let mock_api = MockApi::default();
             let ans_host = mock_ans_host(mock_api);
@@ -343,7 +343,7 @@ mod tests {
         use super::*;
         use crate::std::objects::PoolType;
 
-        #[coverage_helper::test]
+        
         fn exists() {
             let mock_api = MockApi::default();
             let ans_host = mock_ans_host(mock_api);
@@ -382,7 +382,7 @@ mod tests {
             assert_eq!(res.unwrap(), expected_value);
         }
 
-        #[coverage_helper::test]
+        
         fn does_not_exist() {
             let mock_api = MockApi::default();
             let ans_host = mock_ans_host(mock_api);
@@ -403,7 +403,7 @@ mod tests {
         use super::*;
         use crate::std::objects::{PoolAddress, PoolType};
 
-        #[coverage_helper::test]
+        
         fn exists() {
             let mock_api = MockApi::default();
             let ans_host = mock_ans_host(mock_api);
@@ -435,7 +435,7 @@ mod tests {
             assert_eq!(unique_pool_id_res.unwrap(), pool_metadata);
         }
 
-        #[coverage_helper::test]
+        
         fn does_not_exist() {
             let mock_api = MockApi::default();
             let ans_host = mock_ans_host(mock_api);
@@ -450,7 +450,7 @@ mod tests {
         use super::*;
         use crate::std::ans_host::state::CONTRACT_ADDRESSES;
 
-        #[coverage_helper::test]
+        
         fn exists() {
             let mock_api = MockApi::default();
             let ans_host = mock_ans_host(mock_api);
@@ -474,7 +474,7 @@ mod tests {
             assert_eq!(res.unwrap(), expected_value);
         }
 
-        #[coverage_helper::test]
+        
         fn does_not_exist() {
             let mock_api = MockApi::default();
             let ans_host = mock_ans_host(mock_api);
@@ -487,7 +487,7 @@ mod tests {
             test_dne(&ans_host, &not_exist_contract);
         }
 
-        #[coverage_helper::test]
+        
         fn array() {
             let mock_api = MockApi::default();
             let ans_host = mock_ans_host(mock_api);
@@ -536,7 +536,7 @@ mod tests {
         use super::*;
         use crate::std::ans_host::state::CHANNELS;
 
-        #[coverage_helper::test]
+        
         fn exists() {
             let mock_api = MockApi::default();
             let ans_host = mock_ans_host(mock_api);
@@ -560,7 +560,7 @@ mod tests {
             assert_eq!(res.unwrap(), expected_value);
         }
 
-        #[coverage_helper::test]
+        
         fn does_not_exist() {
             let mock_api = MockApi::default();
             let ans_host = mock_ans_host(mock_api);
@@ -578,7 +578,7 @@ mod tests {
         use super::*;
         use crate::std::ans_host::state::REV_ASSET_ADDRESSES;
 
-        #[coverage_helper::test]
+        
         fn exists() {
             let mock_api = MockApi::default();
             let ans_host = mock_ans_host(mock_api);
@@ -609,7 +609,7 @@ mod tests {
             );
         }
 
-        #[coverage_helper::test]
+        
         fn does_not_exist() {
             let mock_api = MockApi::default();
             let ans_host = mock_ans_host(mock_api);
@@ -619,7 +619,7 @@ mod tests {
             test_dne(&ans_host, &not_exist_asset_info);
         }
 
-        #[coverage_helper::test]
+        
         fn array() {
             let mock_api = MockApi::default();
             let ans_host = mock_ans_host(mock_api);

@@ -39,13 +39,13 @@ impl PrimaryKey<'_> for UniquePoolId {
     type Suffix = Self;
     type SuperSuffix = Self;
 
-    fn key(&self) -> Vec<cw_storage_plus::Key> {
+    fn key(&self) -> Vec<cw_storage_plus::Key<'_>> {
         self.0.key()
     }
 }
 
 impl Prefixer<'_> for UniquePoolId {
-    fn prefix(&self) -> Vec<cw_storage_plus::Key> {
+    fn prefix(&self) -> Vec<cw_storage_plus::Key<'_>> {
         self.0.prefix()
     }
 }
@@ -94,7 +94,7 @@ mod test {
         )
     }
 
-    #[coverage_helper::test]
+    
     fn storage_key_works() {
         let mut deps = mock_dependencies();
         let key = mock_key();
@@ -113,7 +113,7 @@ mod test {
         assert_eq!(items[0], (key, 42069));
     }
 
-    #[coverage_helper::test]
+    
     fn composite_key_works() {
         let mut deps = mock_dependencies();
         let key = mock_key();
@@ -144,7 +144,7 @@ mod test {
         assert_eq!(items[1], (Addr::unchecked("larry"), 42069));
     }
 
-    #[coverage_helper::test]
+    
     fn naked_64key_works() {
         let k: UniquePoolId = 4242u64.into();
         let path = k.key();

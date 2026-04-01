@@ -10,9 +10,6 @@ version     = { workspace = true }
 
 exclude = ["contract.wasm", "hash.txt"]
 
-[lints]
-workspace = true
-
 [lib]
 crate-type = ["cdylib", "rlib"]
 
@@ -42,6 +39,9 @@ anyhow             = { workspace = true }
 cosmwasm-schema    = { workspace = true }
 coverage-helper    = { workspace = true }
 cw-orch            = { workspace = true }
+
+[lints]
+workspace = true
 
 [profile.release]
 overflow-checks = true

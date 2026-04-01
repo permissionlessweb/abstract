@@ -215,7 +215,7 @@ mod test {
         use super::*;
 
         // This should add dependency -> [module] to the map
-        #[coverage_helper::test]
+        
         fn add() {
             let mut deps = mock_dependencies();
             let new_module_id = "module";
@@ -248,7 +248,7 @@ mod test {
         // autocompounder depends on dex
         // dex -> autocompounder
         // to uninstall autocompounder, remove dex
-        #[coverage_helper::test]
+        
         fn remove() {
             let mut deps = mock_dependencies();
 

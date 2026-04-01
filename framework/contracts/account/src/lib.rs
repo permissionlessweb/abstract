@@ -42,7 +42,7 @@ mod test_common {
         objects::{account::AccountTrace, gov_type::GovernanceDetails, ownership, AccountId},
     };
     use abstract_testing::prelude::*;
-    use cosmwasm_std::{testing::*, Addr, Empty, OwnedDeps};
+    use cosmwasm_std::{testing::*, Addr, Empty, OwnedDeps, StdResult};
 
     use crate::{contract::AccountResult, error::AccountError, msg::ExecuteMsg};
 
@@ -75,7 +75,7 @@ mod test_common {
         )
     }
 
-    pub fn test_only_owner(msg: ExecuteMsg) -> anyhow::Result<()> {
+    pub fn test_only_owner(msg: ExecuteMsg) -> StdResult<()> {
         let mut deps = mock_dependencies();
         deps.querier = abstract_mock_querier(deps.api);
         let not_owner = deps.api.addr_make("not_owner");
@@ -84,9 +84,7 @@ mod test_common {
         let res = execute_as(&mut deps, &not_owner, msg);
         assert_eq!(
             res.unwrap_err().to_string(),
-            AccountError::Ownership(
-                ownership::GovOwnershipError::NotOwner,
-            ).to_string()
+            AccountError::Ownership(ownership::GovOwnershipError::NotOwner,).to_string()
         );
 
         Ok(())

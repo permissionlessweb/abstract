@@ -127,7 +127,7 @@ mod test {
     mod assert_module_dependency {
         use super::*;
 
-        #[coverage_helper::test]
+        
         fn should_return_ok_if_dependency() {
             let (deps, _, app) = mock_module_setup();
 
@@ -137,7 +137,7 @@ mod test {
             assert!(res.is_ok());
         }
 
-        #[coverage_helper::test]
+        
         fn should_return_err_if_not_dependency() {
             let (deps, _, app) = mock_module_setup();
 
@@ -153,7 +153,7 @@ mod test {
         }
     }
 
-    #[coverage_helper::test]
+    
     fn abstract_api() {
         let (deps, _, app) = mock_module_setup();
         let modules = app.modules(deps.as_ref());

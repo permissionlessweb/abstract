@@ -1,6 +1,7 @@
 use abstract_standalone::sdk::AbstractResponse;
 use cosmwasm_std::{
-    to_json_binary, Addr, Binary, CosmosMsg, Deps, DepsMut, Env, MessageInfo, Reply, StdResult,
+    to_json_binary, Addr, Binary, CosmosMsg, Deps, DepsMut, Env, MessageInfo, MigrateInfo, Reply,
+    StdResult,
 };
 use cw_ica_controller::{
     helpers::{CwIcaControllerCode, CwIcaControllerContract},
@@ -215,7 +216,12 @@ pub fn reply(_deps: DepsMut, _env: Env, msg: Reply) -> MyStandaloneResult {
 
 /// Handle the standalone migrate msg
 #[cfg_attr(feature = "export", cosmwasm_std::entry_point)]
-pub fn migrate(deps: DepsMut, _env: Env, _msg: MyStandaloneMigrateMsg) -> MyStandaloneResult {
+pub fn migrate(
+    deps: DepsMut,
+    _env: Env,
+    _msg: MyStandaloneMigrateMsg,
+    _migrate_info: MigrateInfo,
+) -> MyStandaloneResult {
     // The Abstract Standalone object does version checking and
     MY_STANDALONE.migrate(deps)?;
     Ok(MY_STANDALONE.response("migrate"))

@@ -68,7 +68,7 @@ impl PrimaryKey<'_> for AccountTrace {
     type Suffix = Self;
     type SuperSuffix = Self;
 
-    fn key(&self) -> Vec<cw_storage_plus::Key> {
+    fn key(&self) -> Vec<cw_storage_plus::Key<'_>> {
         let mut serialization_result = match self {
             AccountTrace::Local => LOCAL.key(),
             AccountTrace::Remote(chain_name) => chain_name
@@ -84,7 +84,7 @@ impl PrimaryKey<'_> for AccountTrace {
 }
 
 impl Prefixer<'_> for AccountTrace {
-    fn prefix(&self) -> Vec<Key> {
+    fn prefix(&self) -> Vec<Key<'_>> {
         self.key()
     }
 }
@@ -241,13 +241,13 @@ mod test {
         use super::*;
         use crate::objects::truncated_chain_id::MAX_CHAIN_NAME_LENGTH;
 
-        #[coverage_helper::test]
+        
         fn local_works() {
             let trace = AccountTrace::from_str(LOCAL).unwrap();
             assert_eq!(trace, AccountTrace::Local);
         }
 
-        #[coverage_helper::test]
+        
         fn remote_works() {
             let trace = AccountTrace::from_str("bitcoin").unwrap();
             assert_eq!(
@@ -256,7 +256,7 @@ mod test {
             );
         }
 
-        #[coverage_helper::test]
+        
         fn remote_multi_works() {
             // Here the account originates from ethereum and was then bridged to bitcoin
             let trace = AccountTrace::from_str("bitcoin>ethereum").unwrap();
@@ -270,7 +270,7 @@ mod test {
             );
         }
 
-        #[coverage_helper::test]
+        
         fn remote_multi_multi_works() {
             // Here the account originates from cosmos, and was then bridged to ethereum and was then bridged to bitcoin
             let trace = AccountTrace::from_str("bitcoin>ethereum>cosmos").unwrap();
@@ -286,27 +286,27 @@ mod test {
         }
 
         // now test failures
-        #[coverage_helper::test]
+        
         fn local_empty_fails() {
             AccountTrace::from_str("").unwrap_err();
         }
 
-        #[coverage_helper::test]
+        
         fn local_too_short_fails() {
             AccountTrace::from_str("a").unwrap_err();
         }
 
-        #[coverage_helper::test]
+        
         fn local_too_long_fails() {
             AccountTrace::from_str(&"a".repeat(MAX_CHAIN_NAME_LENGTH + 1)).unwrap_err();
         }
 
-        #[coverage_helper::test]
+        
         fn local_uppercase_fails() {
             AccountTrace::from_str("AAAAA").unwrap_err();
         }
 
-        #[coverage_helper::test]
+        
         fn local_non_alphanumeric_fails() {
             AccountTrace::from_str("a!aoeuoau").unwrap_err();
         }
@@ -331,7 +331,7 @@ mod test {
             ])
         }
 
-        #[coverage_helper::test]
+        
         fn storage_key_works() {
             let mut deps = mock_dependencies();
             let local_key = mock_local_key();
@@ -363,7 +363,7 @@ mod test {
             assert_eq!(items[2], (multihop_key, 69420));
         }
 
-        #[coverage_helper::test]
+        
         fn composite_key_works() {
             let mut deps = mock_dependencies();
             let key = mock_key();

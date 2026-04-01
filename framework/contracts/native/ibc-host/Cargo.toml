@@ -7,9 +7,6 @@ readme      = "README.md"
 repository  = "https://github.com/AbstractSDK/abstract"
 version     = { workspace = true }
 
-[lints]
-workspace = true
-
 [lib]
 crate-type = ["cdylib", "rlib"]
 
@@ -26,7 +23,7 @@ abstract-sdk    = { workspace = true }
 abstract-std    = { workspace = true }
 cosmwasm-schema = { workspace = true }
 cosmwasm-std    = { workspace = true, features = ["stargate"] }
-cw-orch         = { workspace = true }
+cw-orch = { workspace = true }
 cw-ownable      = { workspace = true }
 cw-paginate     = { version = "3.0.0", git = "https://github.com/permissionlessweb/cw-plus-plus" }
 cw-storage-plus = { workspace = true }
@@ -45,4 +42,7 @@ abstract-std       = { workspace = true }
 abstract-testing   = { workspace = true }
 anyhow.workspace   = true
 coverage-helper    = { workspace = true }
-cw-orch            = { workspace = true }
+cw-orch = { workspace = true }
+
+[lints]
+workspace = true

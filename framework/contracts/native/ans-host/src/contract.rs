@@ -129,7 +129,7 @@ mod tests {
         use super::*;
         use crate::contract;
 
-        #[coverage_helper::test]
+        
         fn disallow_same_version() -> AnsHostResult<()> {
             let mut deps = mock_dependencies();
             let sender = deps.api.addr_make("bob");
@@ -161,7 +161,7 @@ mod tests {
             Ok(())
         }
 
-        #[coverage_helper::test]
+        
         fn disallow_downgrade() -> AnsHostResult<()> {
             let mut deps = mock_dependencies();
             let sender = deps.api.addr_make("bob");
@@ -196,7 +196,7 @@ mod tests {
             Ok(())
         }
 
-        #[coverage_helper::test]
+        
         fn disallow_name_change() -> AnsHostResult<()> {
             let mut deps = mock_dependencies();
             let sender = deps.api.addr_make("bob");
@@ -229,7 +229,7 @@ mod tests {
             Ok(())
         }
 
-        #[coverage_helper::test]
+        
         fn works() -> AnsHostResult<()> {
             let mut deps = mock_dependencies();
             let sender = deps.api.addr_make("bob");

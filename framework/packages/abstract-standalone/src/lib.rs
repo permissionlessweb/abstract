@@ -213,7 +213,7 @@ pub mod mock {
     #[macro_export]
     macro_rules! gen_standalone_mock {
         ($name:ident,$id:expr, $version:expr) => {
-            use ::cw_orch::prelude::*;
+            use cw_orch::prelude::*;
             use $crate::mock::{
                 MockExecMsg, MockInitMsg, MockMigrateMsg, MockQueryMsg, MockReceiveMsg,
             };
@@ -270,6 +270,7 @@ pub mod mock {
                 deps: ::cosmwasm_std::DepsMut,
                 env: ::cosmwasm_std::Env,
                 msg: $crate::mock::MockMigrateMsg,
+                _migrate_info: ::cosmwasm_std::MigrateInfo,
             ) -> Result<::cosmwasm_std::Response, $crate::mock::MockError> {
                 MOCK_APP_WITH_DEP.migrate(deps)?;
                 Ok(MOCK_APP_WITH_DEP

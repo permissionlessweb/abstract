@@ -65,17 +65,19 @@ fn cant_reinstall_standalone_after_uninstall() -> AResult {
 
     // Reinstall
     account.uninstall_module(STANDALONE_ID.to_owned())?;
-    let Err(AbstractInterfaceError::Orch(err)) = account.install_standalone(
+    let err = account.install_standalone(
         &standalone,
         &MockInitMsg {
             base: standalone::StandaloneInstantiateMsg {},
             migratable: true,
         },
         &[],
-    ) else {
-        panic!("Expected error");
-    };
-    let account_err: AccountError = err.downcast().unwrap();
-    assert_eq!(account_err.to_string(), AccountError::ProhibitedReinstall {}.to_string());
+    ).unwrap_err();
+    assert!(
+        err.root().to_string().contains(&AccountError::ProhibitedReinstall {}.to_string()),
+        "Expected error containing '{}', got: {}",
+        AccountError::ProhibitedReinstall {},
+        err.root()
+    );
     Ok(())
 }

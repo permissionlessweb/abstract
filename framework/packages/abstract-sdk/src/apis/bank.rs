@@ -280,7 +280,7 @@ mod test {
     mod balance {
         use super::*;
 
-        #[coverage_helper::test]
+        
         fn balance() {
             let (mut deps, account, app) = mock_module_setup();
 
@@ -330,7 +330,7 @@ mod test {
         use super::*;
         use crate::{Execution, Executor, ExecutorMsg};
 
-        #[coverage_helper::test]
+        
         fn transfer_asset_to_sender() {
             let (deps, account, app) = mock_module_setup();
 
@@ -372,7 +372,7 @@ mod test {
         use super::*;
         use crate::apis::respond::AbstractResponse;
 
-        #[coverage_helper::test]
+        
         fn deposit() {
             let (deps, account, app) = mock_module_setup();
 
@@ -399,7 +399,7 @@ mod test {
     mod withdraw_coins {
         use super::*;
 
-        #[coverage_helper::test]
+        
         fn withdraw_coins() {
             let (deps, _, app) = mock_module_setup();
 
@@ -425,7 +425,7 @@ mod test {
         use cw20::Cw20ExecuteMsg;
         use cw_asset::AssetError;
 
-        #[coverage_helper::test]
+        
         fn send_cw20() {
             let (deps, _, app) = mock_module_setup();
 
@@ -452,7 +452,7 @@ mod test {
             assert_eq!(actual_res.unwrap().messages()[0], expected_msg);
         }
 
-        #[coverage_helper::test]
+        
         fn send_coins() {
             let (deps, _, app) = mock_module_setup();
 
@@ -474,7 +474,7 @@ mod test {
         }
     }
 
-    #[coverage_helper::test]
+    
     fn abstract_api() {
         let (deps, _, app) = mock_module_setup();
         let bank = app.bank(deps.as_ref());

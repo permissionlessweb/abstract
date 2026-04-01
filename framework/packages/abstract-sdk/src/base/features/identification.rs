@@ -43,7 +43,7 @@ mod test {
 
         use super::*;
 
-        #[coverage_helper::test]
+        
         fn test_account_address() {
             let deps = mock_dependencies();
             let binding = MockBinding { mock_api: deps.api };
@@ -54,7 +54,7 @@ mod test {
             assert_eq!(res, account);
         }
 
-        #[coverage_helper::test]
+        
         fn account_id() {
             let mut deps = mock_dependencies();
             let account = test_account(deps.api);

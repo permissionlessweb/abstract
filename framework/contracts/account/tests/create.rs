@@ -1,3 +1,4 @@
+use abstract_integration_tests::AResult;
 use abstract_interface::*;
 use abstract_std::{
     account,
@@ -9,8 +10,6 @@ use abstract_std::{
 };
 use abstract_testing::prelude::*;
 use cw_orch::prelude::*;
-
-type AResult = anyhow::Result<()>; // alias for Result<(), anyhow::Error>
 
 #[test]
 fn instantiate() -> AResult {
@@ -58,7 +57,7 @@ fn create_one_account() -> AResult {
         &[],
     )?;
 
-    let account = account_creation.event_attr_value(ABSTRACT_EVENT_TYPE, "account_address")?;
+    let account = account_creation.event_attr_value(ABSTRACT_EVENT_TYPE, "account_address").map_err(|e| anyhow::anyhow!("{e}"))?;
 
     let registry_config = registry.config()?;
     let expected = registry::ConfigResponse {
@@ -122,10 +121,10 @@ fn create_two_accounts() -> AResult {
         &[],
     )?;
 
-    let account1 = account_1.event_attr_value(ABSTRACT_EVENT_TYPE, "account_address")?;
+    let account1 = account_1.event_attr_value(ABSTRACT_EVENT_TYPE, "account_address").map_err(|e| anyhow::anyhow!("{e}"))?;
     let account_1_id = TEST_ACCOUNT_ID;
 
-    let account2 = account_2.event_attr_value(ABSTRACT_EVENT_TYPE, "account_address")?;
+    let account2 = account_2.event_attr_value(ABSTRACT_EVENT_TYPE, "account_address").map_err(|e| anyhow::anyhow!("{e}"))?;
     let account_2_id = AccountId::new(TEST_ACCOUNT_ID.seq() + 1, AccountTrace::Local)?;
 
     let registry_config = registry.config()?;
@@ -173,7 +172,7 @@ fn sender_is_not_admin_monarchy() -> AResult {
         &[],
     )?;
 
-    let account_addr = account_creation.event_attr_value(ABSTRACT_EVENT_TYPE, "account_address")?;
+    let account_addr = account_creation.event_attr_value(ABSTRACT_EVENT_TYPE, "account_address").map_err(|e| anyhow::anyhow!("{e}"))?;
     account.set_address(&Addr::unchecked(&account_addr));
 
     let registered_account = registry.account(TEST_ACCOUNT_ID)?;
@@ -223,7 +222,7 @@ fn sender_is_not_admin_external() -> AResult {
         &[],
     )?;
 
-    let account_addr = account_creation.event_attr_value(ABSTRACT_EVENT_TYPE, "account_address")?;
+    let account_addr = account_creation.event_attr_value(ABSTRACT_EVENT_TYPE, "account_address").map_err(|e| anyhow::anyhow!("{e}"))?;
     account.set_address(&Addr::unchecked(&account_addr));
 
     let account_config = account.config()?;
@@ -269,7 +268,7 @@ fn create_one_account_with_namespace() -> AResult {
         &[],
     )?;
 
-    let account_addr = account_creation.event_attr_value(ABSTRACT_EVENT_TYPE, "account_address")?;
+    let account_addr = account_creation.event_attr_value(ABSTRACT_EVENT_TYPE, "account_address").map_err(|e| anyhow::anyhow!("{e}"))?;
     account.set_address(&Addr::unchecked(&account_addr));
 
     let account_config = account.config()?;

@@ -5,8 +5,8 @@ use abstract_std::{
     ICA_CLIENT,
 };
 use cosmwasm_std::{
-    Addr, Binary, Coin, CosmosMsg, DepsMut, Empty, Env, MessageInfo, StdError, SubMsg, WasmMsg,
-    WasmQuery,
+    Addr, Binary, Coin, CosmosMsg, DepsMut, Empty, Env, MessageInfo, StdError, StdResult, SubMsg,
+    WasmMsg, WasmQuery,
 };
 
 use crate::{
@@ -192,12 +192,12 @@ mod test {
     use abstract_std::objects::ownership::Ownership;
     use abstract_std::{account, IBC_CLIENT};
     use abstract_testing::prelude::*;
-    use cosmwasm_std::{coins, CosmosMsg, SubMsg};
+    use cosmwasm_std::{coins, CosmosMsg, StdResult, SubMsg};
     use cosmwasm_std::{testing::*, Addr};
     use cw_storage_plus::Item;
 
-    #[coverage_helper::test]
-    fn abstract_account_can_execute_on_itself() -> anyhow::Result<()> {
+    
+    fn abstract_account_can_execute_on_itself() -> StdResult<()> {
         let mut deps = mock_dependencies();
         deps.querier = abstract_mock_querier(deps.api);
         mock_init(&mut deps)?;
@@ -233,8 +233,8 @@ mod test {
         use super::*;
 
         #[cfg(feature = "xion")]
-        #[coverage_helper::test]
-        fn admin_actions_not_chained() -> anyhow::Result<()> {
+        
+        fn admin_actions_not_chained() -> StdResult<()> {
             use crate::contract::AccountResult;
             use abstract_sdk::namespaces::OWNERSHIP_STORAGE_KEY;
             use abstract_std::objects::{gov_type::GovernanceDetails, ownership::Ownership};
@@ -291,12 +291,15 @@ mod test {
             // We simulate it's still an admin call
             AUTH_ADMIN.save(deps.as_mut().storage, &true)?;
             let res = execute_from_res(deps.as_mut(), env, res);
-            assert_eq!(res.unwrap_err().to_string(), AccountError::CantChainAdminCalls {}.to_string());
+            assert_eq!(
+                res.unwrap_err().to_string(),
+                AccountError::CantChainAdminCalls {}.to_string()
+            );
             Ok(())
         }
 
-        #[coverage_helper::test]
-        fn only_whitelisted_can_execute() -> anyhow::Result<()> {
+        
+        fn only_whitelisted_can_execute() -> StdResult<()> {
             let mut deps = mock_dependencies();
             deps.querier = abstract_mock_querier(deps.api);
             mock_init(&mut deps)?;
@@ -307,12 +310,15 @@ mod test {
             let env = mock_env_validated(deps.api);
 
             let res = execute(deps.as_mut(), env, info, msg);
-            assert_eq!(res.unwrap_err().to_string(), AccountError::SenderNotWhitelistedOrOwner {}.to_string());
+            assert_eq!(
+                res.unwrap_err().to_string(),
+                AccountError::SenderNotWhitelistedOrOwner {}.to_string()
+            );
             Ok(())
         }
 
-        #[coverage_helper::test]
-        fn forwards_action() -> anyhow::Result<()> {
+        
+        fn forwards_action() -> StdResult<()> {
             let mut deps = mock_dependencies();
             deps.querier = abstract_mock_querier(deps.api);
             let env = mock_env_validated(deps.api);
@@ -358,8 +364,8 @@ mod test {
 
         use super::*;
 
-        #[coverage_helper::test]
-        fn add_module() -> anyhow::Result<()> {
+        
+        fn add_module() -> StdResult<()> {
             let mut deps = mock_dependencies();
             deps.querier = abstract_mock_querier(deps.api);
             let env = mock_env_validated(deps.api);
@@ -432,8 +438,8 @@ mod test {
             Ok(())
         }
 
-        #[coverage_helper::test]
-        fn send_funds() -> anyhow::Result<()> {
+        
+        fn send_funds() -> StdResult<()> {
             let mut deps = mock_dependencies();
             deps.querier = abstract_mock_querier(deps.api);
             let env = mock_env_validated(deps.api);
@@ -516,8 +522,8 @@ mod test {
 
         use super::*;
 
-        #[coverage_helper::test]
-        fn ica_action() -> anyhow::Result<()> {
+        
+        fn ica_action() -> StdResult<()> {
             let mut deps = mock_dependencies();
             deps.querier = abstract_mock_querier(deps.api);
             let env = mock_env_validated(deps.api);

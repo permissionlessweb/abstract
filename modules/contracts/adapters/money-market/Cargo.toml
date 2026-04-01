@@ -10,16 +10,23 @@ version = { workspace = true }
 exclude  = ["contract.wasm", "hash.txt"]
 resolver = "2"
 
+# Supported Moneymarkets
+# mars = ["abstract-mars-adapter/full_integration"]
+# ghost = ["abstract-kujira-adapter/full_integration"]
+
+# osmosis-test = ["dep:cw-orch-osmosis-test-tube"]
+
+# Builds
+[package.metadata.optimizer]
+builds = [
+    # { name = "osmosis", features = [
+    #   "mars",
+    # ] },
+    { name = "kujira", features = ["ghost"] },
+]
 
 [lib]
 crate-type = ["cdylib", "rlib"]
-
-[[example]]
-name = "deploy"
-
-[[example]]
-name              = "schema"
-required-features = ["schema"]
 
 [features]
 default = ["export"]
@@ -27,50 +34,38 @@ export  = []
 schema  = ["abstract-adapter/schema"]
 testing = ["dep:abstract-client", "dep:cw20", "abstract-adapter/test-utils"]
 
-# Supported Moneymarkets
-# mars = ["abstract-mars-adapter/full_integration"]
-ghost = ["abstract-kujira-adapter/full_integration"]
-
-# osmosis-test = ["dep:cw-orch-osmosis-test-tube"]
-
-# Builds
-[package.metadata.optimizer]
-builds = [
-  # { name = "osmosis", features = [
-  #   "mars",
-  # ] },
-  { name = "kujira", features = ["ghost"] },
-]
-
 [dependencies]
-cosmwasm-schema = { workspace = true }
-cosmwasm-std    = { workspace = true }
-cw-asset        = { workspace = true }
-cw-storage-plus = { workspace = true }
-cw20            = { workspace = true, optional = true }
 
 abstract-adapter = { workspace = true }
-cw-orch          = { workspace = true }
 # cw-orch-osmosis-test-tube = { workspace = true, optional = true }
 
 # Local
 abstract-adapter-utils         = { workspace = true }
-abstract-money-market-standard = { workspace = true }
-
-# Kujira #
-abstract-kujira-adapter = { workspace = true }
+# Kujira ## abstract-kujira-adapter = { workspace = true }
 
 # # Mars #
 # abstract-mars-adapter = { workspace = true }
 
 # Testing #
 abstract-client = { workspace = true, optional = true }
+abstract-money-market-standard = { workspace = true }
+cosmwasm-schema = { workspace = true }
+cosmwasm-std    = { workspace = true }
+cw-asset        = { workspace = true }
+cw-orch          = { workspace = true }
+cw-storage-plus = { workspace = true }
+cw20            = { workspace = true, optional = true }
 
 [dev-dependencies]
 abstract-adapter = { workspace = true, features = ["test-utils"] }
 abstract-interface = { workspace = true, features = ["daemon"] }
 anyhow = { workspace = true }
 clap = { workspace = true }
+# abstract-wyndex-adapter = { workspace = true, features = ["local"] }
+
+cw-utils  = { workspace = true }
+cw20      = { workspace = true }
+cw20-base = { workspace = true }
 dotenv = "0.15.0"
 env_logger = "0.11.3"
 mockdex-bundle = { workspace = true }
@@ -81,8 +76,9 @@ money-market = { path = ".", features = [
 semver = { workspace = true }
 tokio = { workspace = true }
 
-# abstract-wyndex-adapter = { workspace = true, features = ["local"] }
+[[example]]
+name = "deploy"
 
-cw-utils  = { workspace = true }
-cw20      = { workspace = true }
-cw20-base = { workspace = true }
+[[example]]
+name              = "schema"
+required-features = ["schema"]

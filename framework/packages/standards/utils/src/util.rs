@@ -1,4 +1,4 @@
-use cosmwasm_std::{to_json_binary, Addr, Coin, CosmosMsg, StdResult, Uint256, WasmMsg};
+use cosmwasm_std::{to_json_binary, Addr, Coin, CosmosMsg, StdResult, WasmMsg};
 use cw20::Cw20ExecuteMsg;
 use cw_asset::{Asset, AssetInfo};
 

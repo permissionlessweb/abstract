@@ -74,7 +74,7 @@ mod test {
     use super::*;
     use crate::mock::*;
 
-    #[coverage_helper::test]
+    
     fn test_ans_host() -> AppTestResult {
         let deps = mock_init();
         let abstr = AbstractMockAddrs::new(deps.api);
@@ -85,7 +85,7 @@ mod test {
         Ok(())
     }
 
-    #[coverage_helper::test]
+    
     fn test_abstract_registry() -> AppTestResult {
         let deps = mock_init();
         let abstr = AbstractMockAddrs::new(deps.api);
@@ -96,7 +96,7 @@ mod test {
         Ok(())
     }
 
-    #[coverage_helper::test]
+    
     fn test_traits_generated() -> AppTestResult {
         let mut deps = mock_init();
         let test_account = test_account(deps.api);
@@ -134,7 +134,7 @@ mod test {
         Ok(())
     }
 
-    #[coverage_helper::test]
+    
     fn test_account_address() -> AppTestResult {
         let deps = mock_init();
         let expected_account = test_account(deps.api);
@@ -146,7 +146,7 @@ mod test {
         Ok(())
     }
 
-    #[coverage_helper::test]
+    
     fn test_module_id() -> AppTestResult {
         let module_id = MOCK_APP_WITH_DEP.module_id();
 

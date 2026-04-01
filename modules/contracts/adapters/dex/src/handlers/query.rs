@@ -7,7 +7,7 @@ use abstract_dex_standard::{
     },
     DexError,
 };
-use cosmwasm_std::{to_json_binary, Binary, Deps, Env, StdError};
+use cosmwasm_std::{to_json_binary, Binary, Deps, Env, StdError, Uint128};
 
 use crate::{
     contract::{DexAdapter, DexResult},
@@ -153,7 +153,7 @@ pub fn simulate_swap(
         return_amount,
         spread_amount,
         commission: (commission_asset.into(), commission_amount),
-        usage_fee: adapter_fee,
+        usage_fee: Uint128::try_from(adapter_fee).unwrap_or(Uint128::MAX),
     };
     Ok(resp)
 }

@@ -28,7 +28,8 @@ pub struct PoolSettings {
 
 /// This is enum that includes all of the messages we use in astrovault cw20 hook
 /// It's separated for minimizing the size of the wasm
-#[cosmwasm_schema::cw_serde]
+#[derive(cosmwasm_schema::serde::Serialize)]
+#[serde(rename_all = "snake_case", crate = "::cosmwasm_schema::serde")]
 pub enum AstrovaultCw20HookMsg {
     WithdrawLiquidity {
         to: Option<String>,
@@ -37,14 +38,14 @@ pub enum AstrovaultCw20HookMsg {
         to: Option<String>,
         expected_return: Option<Vec<Uint256>>,
     },
-    #[serde(rename(serialize = "withdrawal_to_lockup"))]
+    #[serde(rename = "withdrawal_to_lockup")]
     WithdrawalToLockupStable {
         withdrawal_lockup_assets_amount: Vec<Uint256>,
         to: Option<String>,
         is_instant_withdrawal: Option<bool>,
         expected_return: Option<Vec<Uint256>>,
     },
-    #[serde(rename(serialize = "withdrawal_to_lockup"))]
+    #[serde(rename = "withdrawal_to_lockup")]
     WithdrawalToLockupRatio {
         to: Option<String>,
         is_instant_withdrawal: Option<bool>,
@@ -54,9 +55,10 @@ pub enum AstrovaultCw20HookMsg {
 
 /// This is enum that includes all of the messages we use in astrovault execution
 /// It's separated for minimizing the size of the wasm
-#[cosmwasm_schema::cw_serde]
+#[derive(cosmwasm_schema::serde::Serialize)]
+#[serde(rename_all = "snake_case", crate = "::cosmwasm_schema::serde")]
 pub enum AstrovaultDexExecuteMsg {
-    #[serde(rename(serialize = "swap"))]
+    #[serde(rename = "swap")]
     SwapStandard {
         // cw20 hook don't have this field, need to skip this one
         #[serde(skip_serializing_if = "Option::is_none")]
@@ -66,13 +68,13 @@ pub enum AstrovaultDexExecuteMsg {
         expected_return: Option<Uint128>,
         to: Option<String>,
     },
-    #[serde(rename(serialize = "swap"))]
+    #[serde(rename = "swap")]
     SwapStable {
         swap_to_asset_index: u32,
         to: Option<String>,
         expected_return: Option<Uint128>,
     },
-    #[serde(rename(serialize = "swap"))]
+    #[serde(rename = "swap")]
     SwapRatio {
         to: Option<String>,
         expected_return: Option<Uint128>,
@@ -83,13 +85,13 @@ pub enum AstrovaultDexExecuteMsg {
         receiver: Option<String>,
         direct_staking: Option<cosmwasm_std::Empty>,
     },
-    #[serde(rename(serialize = "deposit"))]
+    #[serde(rename = "deposit")]
     DepositStable {
         assets_amount: Vec<Uint128>,
         receiver: Option<String>,
         direct_staking: Option<cosmwasm_std::Empty>,
     },
-    #[serde(rename(serialize = "deposit"))]
+    #[serde(rename = "deposit")]
     DepositRatio {
         assets_amount: [Uint128; 2],
         receiver: Option<String>,
@@ -100,7 +102,8 @@ pub enum AstrovaultDexExecuteMsg {
 
 /// This is enum that includes all of the messages we use in astrovault queries
 /// It's separated for minimizing the size of the wasm
-#[cosmwasm_schema::cw_serde]
+#[derive(cosmwasm_schema::serde::Serialize)]
+#[serde(rename_all = "snake_case", crate = "::cosmwasm_schema::serde")]
 pub enum AstrovaultDexQueryMsg {
     Config {},
     PoolInfo {},
@@ -108,13 +111,13 @@ pub enum AstrovaultDexQueryMsg {
     Simulation {
         offer_asset: AstrovaultAsset,
     },
-    #[serde(rename(serialize = "swap_simulation"))]
+    #[serde(rename = "swap_simulation")]
     SwapSimulationStable {
         amount: Uint128,
         swap_from_asset_index: u32,
         swap_to_asset_index: u32,
     },
-    #[serde(rename(serialize = "swap_simulation"))]
+    #[serde(rename = "swap_simulation")]
     SwapSimulationRatio {
         amount: Uint128,
         swap_from_asset_index: u8,

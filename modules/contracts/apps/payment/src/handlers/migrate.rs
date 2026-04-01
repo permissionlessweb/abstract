@@ -1,5 +1,5 @@
 use abstract_app::sdk::AbstractResponse;
-use cosmwasm_std::{DepsMut, Env};
+use cosmwasm_std::{DepsMut, Env, MigrateInfo};
 
 use crate::{
     contract::{AppResult, PaymentApp},
@@ -13,6 +13,7 @@ pub fn migrate_handler(
     _env: Env,
     module: PaymentApp,
     _msg: AppMigrateMsg,
+    _migrate_info: MigrateInfo,
 ) -> AppResult {
     Ok(module.response("migrate"))
 }

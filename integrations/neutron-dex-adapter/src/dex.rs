@@ -22,7 +22,7 @@ use ::{
     abstract_dex_standard::{DexCommand, DexError, Fee, FeeOnInput, Return, Spread, SwapNode},
     abstract_sdk::feature_objects::{AnsHost, RegistryContract},
     abstract_sdk::std::objects::PoolAddress,
-    cosmwasm_std::{CosmosMsg, Decimal, Deps},
+    cosmwasm_std::{AnyMsg, Binary, CosmosMsg, Decimal, Deps},
     cw_asset::{Asset, AssetInfo},
     neutron_std::types::neutron::dex::{MsgMultiHopSwap, MultiHopRoute},
 };
@@ -69,7 +69,7 @@ impl DexCommand for Neutron {
             pick_best_route: false,
         };
 
-        Ok(vec![swap_msg.into()])
+        Ok(vec![neutron_msg_to_cosmos_msg(swap_msg)])
     }
 
     fn swap_route(
@@ -105,7 +105,7 @@ impl DexCommand for Neutron {
             exit_limit_price: "0".to_string(),
             pick_best_route: false,
         };
-        Ok(vec![swap_msg.into()])
+        Ok(vec![neutron_msg_to_cosmos_msg(swap_msg)])
     }
 
     fn provide_liquidity(
@@ -136,4 +136,18 @@ impl DexCommand for Neutron {
     ) -> Result<(Return, Spread, Fee, FeeOnInput), DexError> {
         unimplemented!();
     }
+}
+
+/// Convert a neutron-std protobuf message to a v3 CosmosMsg::Any.
+///
+/// neutron-std's `CosmwasmExt` derive generates `From<Msg> for CosmosMsg<T>` using
+/// cosmwasm-std v2 types. Since this adapter uses cosmwasm-std v3, we manually
+/// construct the v3 `CosmosMsg::Any(AnyMsg { ... })` using the protobuf bytes
+/// and type URL from the `CosmwasmExt`-generated methods.
+#[cfg(feature = "full_integration")]
+fn neutron_msg_to_cosmos_msg(msg: MsgMultiHopSwap) -> CosmosMsg {
+    CosmosMsg::Any(AnyMsg {
+        type_url: MsgMultiHopSwap::TYPE_URL.to_string(),
+        value: Binary::new(msg.to_proto_bytes()),
+    })
 }

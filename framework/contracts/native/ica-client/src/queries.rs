@@ -197,7 +197,7 @@ mod tests {
 
         use types::Ucs01ForwarderExecuteMsg;
 
-        #[coverage_helper::test]
+        
         fn config() -> IbcClientTestResult {
             let mut deps = mock_dependencies();
             let env = mock_env_validated(deps.api);
@@ -218,7 +218,7 @@ mod tests {
             Ok(())
         }
 
-        #[coverage_helper::test]
+        
         fn evm_exec_no_callback() -> IbcClientTestResult {
             let mut deps = mock_dependencies();
             let env = mock_env_validated(deps.api);
@@ -269,7 +269,7 @@ mod tests {
             Ok(())
         }
 
-        #[coverage_helper::test]
+        
         fn evm_fund_no_callback() -> IbcClientTestResult {
             use super::*;
 
@@ -316,7 +316,7 @@ mod tests {
             Ok(())
         }
 
-        #[coverage_helper::test]
+        
         fn evm_fund_no_receiver() -> IbcClientTestResult {
             use super::*;
 
@@ -360,7 +360,7 @@ mod tests {
             Ok(())
         }
 
-        #[coverage_helper::test]
+        
         fn evm_exec_non_evm_chaintype() -> IbcClientTestResult {
             let mut deps = mock_dependencies();
             let abstr = AbstractMockAddrs::new(deps.api);

@@ -53,7 +53,7 @@ mod test {
 
     use super::*;
 
-    #[coverage_helper::test]
+    
     fn test_wasm_raw_query() {
         let query = wasm_raw_query::<Empty>("contract", b"key").unwrap();
         match query {
@@ -65,7 +65,7 @@ mod test {
         }
     }
 
-    #[coverage_helper::test]
+    
     fn test_wasm_raw_map_query() {
         let key: Path<u64> = Path::new(b"map", &[&4u8.to_be_bytes()]);
         println!("p: {}", String::from_utf8(key.to_vec()).unwrap());

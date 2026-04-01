@@ -1,0 +1,272 @@
+{
+  "nodes": {
+    "flake-utils": {
+      "inputs": {
+        "systems": "systems"
+      },
+      "locked": {
+        "lastModified": 1731533236,
+        "narHash": "sha256-l0KFg5HjrsfsO/JpG+r7fRrqm12kzFHyUHqHCVpMMbI=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "11707dc2f618dd54ca8739b309ec4fc024de578b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "fork-cosmos-rust": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1727191855,
+        "narHash": "sha256-Sx9RPqSP/NyFAwHW4oQOEcWA0wFJ23+42ed1ZcI/dcM=",
+        "owner": "CyberHoward",
+        "repo": "cosmos-rust",
+        "rev": "2350dd516aaeb64907a7d6d13782c24483221bb1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "CyberHoward",
+        "ref": "patch-1",
+        "repo": "cosmos-rust",
+        "type": "github"
+      }
+    },
+    "fork-cw-asset": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1756237716,
+        "narHash": "sha256-eYUUhYHBH93RFMJvQVxOOp8i/hKrz8I39u6xrYdqsdI=",
+        "owner": "permissionlessweb",
+        "repo": "cw-asset",
+        "rev": "cd85dd4ae8acba2c4672fde8bf1948fd5e84f5e0",
+        "type": "github"
+      },
+      "original": {
+        "owner": "permissionlessweb",
+        "repo": "cw-asset",
+        "type": "github"
+      }
+    },
+    "fork-cw-minus": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1756152751,
+        "narHash": "sha256-bje+i2l+qNarI12SuecfyNschBNmfCzhtfU2e/cyYbc=",
+        "owner": "permissionlessweb",
+        "repo": "cw-minus",
+        "rev": "82f19460eb6b0f8b6c995c77ce3c90de69730cb2",
+        "type": "github"
+      },
+      "original": {
+        "owner": "permissionlessweb",
+        "repo": "cw-minus",
+        "type": "github"
+      }
+    },
+    "fork-cw-orchestrator": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1756240983,
+        "narHash": "sha256-59SO64zGhCLlMhc9R3FgH+MHRLLSfCoV++fLuk3P/NU=",
+        "owner": "permissionlessweb",
+        "repo": "cw-orchestrator",
+        "rev": "ff94f0474bda8a420cfd61c67199b2eacc768f9f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "permissionlessweb",
+        "repo": "cw-orchestrator",
+        "type": "github"
+      }
+    },
+    "fork-cw-packages": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1756225127,
+        "narHash": "sha256-O3e5jomzzPh60KO2zfV/RZO6VLTjvnEmRphwI6zfyDk=",
+        "owner": "permissionlessweb",
+        "repo": "cw-packages",
+        "rev": "4e40caa55b58d3e04c196ccd8503e8e5167cbce1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "permissionlessweb",
+        "repo": "cw-packages",
+        "type": "github"
+      }
+    },
+    "fork-cw-plus": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1756233318,
+        "narHash": "sha256-9SqmUigTogUZI5ZQlm29diTRNp6ozuXqa7G97B3nayE=",
+        "owner": "permissionlessweb",
+        "repo": "cw-plus",
+        "rev": "c74717433db9fcd86ac408c1b7fbc0c35caefaa3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "permissionlessweb",
+        "repo": "cw-plus",
+        "type": "github"
+      }
+    },
+    "fork-cw-plus-plus": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1755454580,
+        "narHash": "sha256-CEnGPI+oELyBiwtncIxKi7Ena6yh22ZBj+Ac1NhzQuE=",
+        "owner": "permissionlessweb",
+        "repo": "cw-plus-plus",
+        "rev": "8a4c87ee0ed3124a73443c5ab57f0586e72e714b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "permissionlessweb",
+        "repo": "cw-plus-plus",
+        "type": "github"
+      }
+    },
+    "fork-osmosis-rust": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1756225285,
+        "narHash": "sha256-tNdwief3DzXCqdKSg87u/ZTE+Rr8B5dJFhD2OMzfIDA=",
+        "owner": "permissionlessweb",
+        "repo": "osmosis-rust",
+        "rev": "9667eb525c6e6a81827848e77b5c31b433c2acef",
+        "type": "github"
+      },
+      "original": {
+        "owner": "permissionlessweb",
+        "repo": "osmosis-rust",
+        "type": "github"
+      }
+    },
+    "fork-polytone-cw3": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1756242182,
+        "narHash": "sha256-6coxDjrhsk9T/t7JfjzP+ppO2z0cVJH2I84Z0zd0ndM=",
+        "owner": "permissionlessweb",
+        "repo": "polytone",
+        "rev": "56a00a5a1228fc7a367c843d0872f4604a7e353b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "permissionlessweb",
+        "ref": "bump/cw3",
+        "repo": "polytone",
+        "type": "github"
+      }
+    },
+    "fork-polytone-cw3-evm": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1756242401,
+        "narHash": "sha256-aQ2n7sYs1WE3rPHoHkgtmNh8UziI0wofrqkpr4TfEhY=",
+        "owner": "permissionlessweb",
+        "repo": "polytone",
+        "rev": "ccaaba421945ccc12aeb011cdd4970d7e2c2460f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "permissionlessweb",
+        "ref": "bump/cw3-evm",
+        "repo": "polytone",
+        "type": "github"
+      }
+    },
+    "fork-wynddex": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1732640569,
+        "narHash": "sha256-kn6BbhFbCFyDLQdwpyFtR9DpA5jGVFGCI7Cpr8uevqE=",
+        "owner": "abstractsdk",
+        "repo": "wynddex",
+        "rev": "cbe316f17c4a89d0c3938ea66747a5ff1fc5a5e9",
+        "type": "github"
+      },
+      "original": {
+        "owner": "abstractsdk",
+        "repo": "wynddex",
+        "type": "github"
+      }
+    },
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1773389992,
+        "narHash": "sha256-wvfdLLWJ2I9oEpDd9PfMA8osfIZicoQ5MT1jIwNs9Tk=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "c06b4ae3d6599a672a6210b7021d699c351eebda",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "root": {
+      "inputs": {
+        "flake-utils": "flake-utils",
+        "fork-cosmos-rust": "fork-cosmos-rust",
+        "fork-cw-asset": "fork-cw-asset",
+        "fork-cw-minus": "fork-cw-minus",
+        "fork-cw-orchestrator": "fork-cw-orchestrator",
+        "fork-cw-packages": "fork-cw-packages",
+        "fork-cw-plus": "fork-cw-plus",
+        "fork-cw-plus-plus": "fork-cw-plus-plus",
+        "fork-osmosis-rust": "fork-osmosis-rust",
+        "fork-polytone-cw3": "fork-polytone-cw3",
+        "fork-polytone-cw3-evm": "fork-polytone-cw3-evm",
+        "fork-wynddex": "fork-wynddex",
+        "nixpkgs": "nixpkgs",
+        "rust-overlay": "rust-overlay"
+      }
+    },
+    "rust-overlay": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1773544328,
+        "narHash": "sha256-Iv+qez54LAz+isij4APBk31VWA//Go81hwFOXr5iWTw=",
+        "owner": "oxalica",
+        "repo": "rust-overlay",
+        "rev": "4f977d776793c8bfbfdd7eca7835847ccc48874e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "oxalica",
+        "repo": "rust-overlay",
+        "type": "github"
+      }
+    },
+    "systems": {
+      "locked": {
+        "lastModified": 1681028828,
+        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
+        "owner": "nix-systems",
+        "repo": "default",
+        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-systems",
+        "repo": "default",
+        "type": "github"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}

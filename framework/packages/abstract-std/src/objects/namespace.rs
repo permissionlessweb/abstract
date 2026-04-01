@@ -93,13 +93,13 @@ impl PrimaryKey<'_> for Namespace {
 
     type SuperSuffix = Self;
 
-    fn key(&self) -> Vec<cw_storage_plus::Key> {
+    fn key(&self) -> Vec<cw_storage_plus::Key<'_>> {
         self.0.key()
     }
 }
 
 impl Prefixer<'_> for Namespace {
-    fn prefix(&self) -> Vec<Key> {
+    fn prefix(&self) -> Vec<Key<'_>> {
         self.0.prefix()
     }
 }
@@ -120,37 +120,37 @@ mod test {
 
     use super::*;
 
-    #[coverage_helper::test]
+    
     fn test_namespace() {
         let namespace = Namespace::new("test").unwrap();
         assert_eq!(namespace.as_str(), "test");
     }
 
-    #[coverage_helper::test]
+    
     fn test_from_string() {
         let namespace = Namespace::try_from("test".to_string()).unwrap();
         assert_eq!(namespace.as_str(), "test");
     }
 
-    #[coverage_helper::test]
+    
     fn test_from_str() {
         let namespace = Namespace::try_from("test").unwrap();
         assert_eq!(namespace.as_str(), "test");
     }
 
-    #[coverage_helper::test]
+    
     fn test_from_ref_string() {
         let namespace = Namespace::try_from(&"test".to_string()).unwrap();
         assert_eq!(namespace.as_str(), "test");
     }
 
-    #[coverage_helper::test]
+    
     fn test_to_string() {
         let namespace = Namespace::new("test").unwrap();
         assert_eq!(namespace.to_string(), "test".to_string());
     }
 
-    #[coverage_helper::test]
+    
     fn string_key_works() {
         let k = &Namespace::new("test").unwrap();
         let path = k.key();

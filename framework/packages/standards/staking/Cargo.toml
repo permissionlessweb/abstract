@@ -8,7 +8,6 @@ name        = "abstract-staking-standard"
 resolver    = "2"
 version     = { workspace = true }
 
-
 [lib]
 crate-type = ["cdylib", "rlib"]
 
@@ -18,17 +17,17 @@ export  = []
 
 # Keep as is until TendermintStake updates.
 [dependencies]
-cosmwasm-schema = { workspace = true }
-cosmwasm-std    = { workspace = true }
-cw-asset        = { workspace = true }
-cw-utils        = { workspace = true }
-thiserror       = { workspace = true }
 
 abstract-adapter       = { workspace = true }
 abstract-adapter-utils = { workspace = true }
 abstract-sdk           = { workspace = true }
 abstract-std           = { workspace = true }
+cosmwasm-schema = { workspace = true }
+cosmwasm-std    = { workspace = true }
+cw-asset        = { workspace = true }
 cw-orch                = { workspace = true }
+cw-utils        = { workspace = true }
+thiserror       = { workspace = true }
 
 [target.'cfg(not(target_arch = "wasm32"))'.dependencies]
 workspace-hack = { version = "0.1", path = "../../../workspace-hack" }

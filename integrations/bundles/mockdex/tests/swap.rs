@@ -42,7 +42,7 @@ fn trading_frozen() {
         )
         .unwrap_err();
 
-    assert_eq!(err.root_cause().to_string(), "Trading has not started yet");
+    assert_eq!(err.to_string(), "Trading has not started yet");
 
     // wait until trading starts
     suite.advance_time(1000);

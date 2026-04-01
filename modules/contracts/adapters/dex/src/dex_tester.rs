@@ -686,6 +686,6 @@ impl<Chain: MutCwEnv, Dex: MockDex> DexTester<Chain, Dex> {
             _ => unreachable!(),
         };
 
-        Ok(balance)
+        Ok(Uint128::try_from(balance)?)
     }
 }

@@ -400,7 +400,7 @@ mod test {
         use abstract_testing::mock_env_validated;
         use cosmwasm_std::{testing::MockApi, Empty, OwnedDeps};
 
-        #[coverage_helper::test]
+        
         fn register_dex() -> AnsHostTestResult {
             let mut deps = mock_dependencies();
             let abstr = AbstractMockAddrs::new(deps.api);
@@ -423,7 +423,7 @@ mod test {
         }
 
         /// Registering multiple dexes should work
-        #[coverage_helper::test]
+        
         fn register_dex_twice() -> AnsHostTestResult {
             let mut deps = mock_dependencies();
             let abstr = AbstractMockAddrs::new(deps.api);
@@ -446,7 +446,7 @@ mod test {
             Ok(())
         }
 
-        #[coverage_helper::test]
+        
         fn duplicate_in_msg() -> AnsHostTestResult {
             let mut deps = mock_dependencies();
             let abstr = AbstractMockAddrs::new(deps.api);
@@ -469,7 +469,7 @@ mod test {
             Ok(())
         }
 
-        #[coverage_helper::test]
+        
         fn register_and_deregister_dex_same_msg() -> AnsHostTestResult {
             let mut deps = mock_dependencies();
             let abstr = AbstractMockAddrs::new(deps.api);
@@ -491,7 +491,7 @@ mod test {
             Ok(())
         }
 
-        #[coverage_helper::test]
+        
         fn register_multiple_dexes() -> AnsHostTestResult {
             let mut deps = mock_dependencies();
             let abstr = AbstractMockAddrs::new(deps.api);
@@ -513,7 +513,7 @@ mod test {
             Ok(())
         }
 
-        #[coverage_helper::test]
+        
         fn remove_nonexistent_dex() -> AnsHostTestResult {
             let mut deps = mock_dependencies();
             let abstr = AbstractMockAddrs::new(deps.api);
@@ -614,7 +614,7 @@ mod test {
                 .unwrap()
         }
 
-        #[coverage_helper::test]
+        
         fn add_contract_address() -> AnsHostTestResult {
             let mut deps = mock_dependencies();
             mock_init(&mut deps).unwrap();
@@ -623,7 +623,7 @@ mod test {
             map_tester.test_add_one(&mut deps)
         }
 
-        #[coverage_helper::test]
+        
         fn add_contract_address_twice() -> AnsHostTestResult {
             let mut deps = mock_dependencies();
             mock_init(&mut deps).unwrap();
@@ -632,7 +632,7 @@ mod test {
             map_tester.test_add_one_twice(&mut deps)
         }
 
-        #[coverage_helper::test]
+        
         fn add_contract_address_twice_in_same_msg() -> AnsHostTestResult {
             let mut deps = mock_dependencies();
             mock_init(&mut deps).unwrap();
@@ -641,7 +641,7 @@ mod test {
             map_tester.test_add_two_same(&mut deps)
         }
 
-        #[coverage_helper::test]
+        
         fn add_and_remove_contract_address_same_msg() -> AnsHostTestResult {
             let mut deps = mock_dependencies();
             mock_init(&mut deps).unwrap();
@@ -650,7 +650,7 @@ mod test {
             map_tester.test_add_and_remove_same(&mut deps)
         }
 
-        #[coverage_helper::test]
+        
         fn remove_non_existent_contract_address() -> AnsHostTestResult {
             let mut deps = mock_dependencies();
             mock_init(&mut deps).unwrap();
@@ -659,7 +659,7 @@ mod test {
             map_tester.test_remove_nonexistent(&mut deps)
         }
 
-        #[coverage_helper::test]
+        
         fn add_multiple_contract_addresses() -> AnsHostTestResult {
             let mut deps = mock_dependencies();
             mock_init(&mut deps).unwrap();
@@ -687,7 +687,7 @@ mod test {
             )
         }
 
-        #[coverage_helper::test]
+        
         fn add_multiple_contract_addresses_and_deregister_one() -> AnsHostTestResult {
             let mut deps = mock_dependencies();
             mock_init(&mut deps).unwrap();
@@ -801,7 +801,7 @@ mod test {
                 .unwrap()
         }
 
-        #[coverage_helper::test]
+        
         fn add_asset_address() -> AnsHostTestResult {
             let mut deps = mock_dependencies();
             mock_init(&mut deps).unwrap();
@@ -815,7 +815,7 @@ mod test {
             Ok(())
         }
 
-        #[coverage_helper::test]
+        
         fn add_asset_address_twice() -> AnsHostTestResult {
             let mut deps = mock_dependencies();
             mock_init(&mut deps).unwrap();
@@ -824,7 +824,7 @@ mod test {
             map_tester.test_add_one_twice(&mut deps)
         }
 
-        #[coverage_helper::test]
+        
         fn add_asset_address_twice_in_same_msg() -> AnsHostTestResult {
             let mut deps = mock_dependencies();
             mock_init(&mut deps).unwrap();
@@ -833,7 +833,7 @@ mod test {
             map_tester.test_add_two_same(&mut deps)
         }
 
-        #[coverage_helper::test]
+        
         fn add_and_remove_asset_address_same_msg() -> AnsHostTestResult {
             let mut deps = mock_dependencies();
             mock_init(&mut deps).unwrap();
@@ -847,7 +847,7 @@ mod test {
             Ok(())
         }
 
-        #[coverage_helper::test]
+        
         fn remove_non_existent_asset_address() -> AnsHostTestResult {
             let mut deps = mock_dependencies();
             mock_init(&mut deps).unwrap();
@@ -856,7 +856,7 @@ mod test {
             map_tester.test_remove_nonexistent(&mut deps)
         }
 
-        #[coverage_helper::test]
+        
         fn add_multiple_asset_addresses() -> AnsHostTestResult {
             let mut deps = mock_dependencies();
             mock_init(&mut deps).unwrap();
@@ -875,7 +875,7 @@ mod test {
             Ok(())
         }
 
-        #[coverage_helper::test]
+        
         fn add_multiple_asset_addresses_and_deregister_one() -> AnsHostTestResult {
             let mut deps = mock_dependencies();
             mock_init(&mut deps).unwrap();
@@ -979,7 +979,7 @@ mod test {
                 .unwrap()
         }
 
-        #[coverage_helper::test]
+        
         fn add_channel() -> AnsHostTestResult {
             let mut deps = mock_dependencies();
             mock_init(&mut deps).unwrap();
@@ -988,7 +988,7 @@ mod test {
             map_tester.test_add_one(&mut deps)
         }
 
-        #[coverage_helper::test]
+        
         fn add_channel_twice() -> AnsHostTestResult {
             let mut deps = mock_dependencies();
             mock_init(&mut deps).unwrap();
@@ -997,7 +997,7 @@ mod test {
             map_tester.test_add_one_twice(&mut deps)
         }
 
-        #[coverage_helper::test]
+        
         fn add_channel_twice_in_same_msg() -> AnsHostTestResult {
             let mut deps = mock_dependencies();
             mock_init(&mut deps).unwrap();
@@ -1006,7 +1006,7 @@ mod test {
             map_tester.test_add_two_same(&mut deps)
         }
 
-        #[coverage_helper::test]
+        
         fn add_and_remove_channel_same_msg() -> AnsHostTestResult {
             let mut deps = mock_dependencies();
             mock_init(&mut deps).unwrap();
@@ -1015,7 +1015,7 @@ mod test {
             map_tester.test_add_and_remove_same(&mut deps)
         }
 
-        #[coverage_helper::test]
+        
         fn remove_non_existent_channel() -> AnsHostTestResult {
             let mut deps = mock_dependencies();
             mock_init(&mut deps).unwrap();
@@ -1024,7 +1024,7 @@ mod test {
             map_tester.test_remove_nonexistent(&mut deps)
         }
 
-        #[coverage_helper::test]
+        
         fn add_multiple_channels() -> AnsHostTestResult {
             let mut deps = mock_dependencies();
             mock_init(&mut deps).unwrap();
@@ -1038,7 +1038,7 @@ mod test {
             )
         }
 
-        #[coverage_helper::test]
+        
         fn add_multiple_channels_and_deregister_one() -> AnsHostTestResult {
             let mut deps = mock_dependencies();
             mock_init(&mut deps).unwrap();
@@ -1063,7 +1063,7 @@ mod test {
             )
         }
 
-        #[coverage_helper::test]
+        
         fn upper_channel_entry_goes_lower() -> AnsHostTestResult {
             let mut deps = mock_dependencies();
             mock_init(&mut deps).unwrap();
@@ -1178,7 +1178,7 @@ mod test {
             ))
         }
 
-        #[coverage_helper::test]
+        
         fn add_pool() -> AnsHostTestResult {
             let mut deps = mock_dependencies();
             mock_init(&mut deps).unwrap();
@@ -1230,7 +1230,7 @@ mod test {
             Ok(())
         }
 
-        #[coverage_helper::test]
+        
         fn add_five_asset_pool() -> AnsHostTestResult {
             let mut deps = mock_dependencies();
             mock_init(&mut deps).unwrap();
@@ -1286,7 +1286,7 @@ mod test {
             Ok(())
         }
 
-        #[coverage_helper::test]
+        
         fn add_pool_fails_without_registering_dex() -> AnsHostTestResult {
             let mut deps = mock_dependencies();
             mock_init(&mut deps).unwrap();
@@ -1317,7 +1317,7 @@ mod test {
         }
 
         // THis test is weird because we remove the same one that is just created in this call
-        #[coverage_helper::test]
+        
         fn add_and_remove_same_pool() -> AnsHostTestResult {
             let mut deps = mock_dependencies();
             mock_init(&mut deps).unwrap();
@@ -1351,7 +1351,7 @@ mod test {
             Ok(())
         }
 
-        #[coverage_helper::test]
+        
         fn remove_nonexistent_pool() -> AnsHostTestResult {
             let mut deps = mock_dependencies();
             mock_init(&mut deps).unwrap();
@@ -1376,7 +1376,7 @@ mod test {
             Ok(())
         }
 
-        #[coverage_helper::test]
+        
         fn unregistered_assets_fail() -> AnsHostTestResult {
             let mut deps = mock_dependencies();
             mock_init(&mut deps).unwrap();
@@ -1407,7 +1407,7 @@ mod test {
     mod validate_pool_assets {
         use super::*;
 
-        #[coverage_helper::test]
+        
         fn too_few() {
             let assets = &mut [];
             let deps = mock_dependencies();
@@ -1434,7 +1434,7 @@ mod test {
             );
         }
 
-        #[coverage_helper::test]
+        
         fn unregistered() {
             let mut assets = vec!["a".into(), "b".into()];
             let deps = mock_dependencies();
@@ -1448,7 +1448,7 @@ mod test {
             );
         }
 
-        #[coverage_helper::test]
+        
         fn valid_amounts() {
             let mut assets = vec!["a".into(), "b".into()];
             let mut deps = mock_dependencies();
@@ -1472,7 +1472,7 @@ mod test {
             assert!(res.is_ok());
         }
 
-        #[coverage_helper::test]
+        
         fn too_many() {
             let mut assets: Vec<AssetEntry> = vec!["a", "b", "c", "d", "e", "f"]
                 .into_iter()

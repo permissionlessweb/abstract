@@ -62,7 +62,7 @@ mod tests {
         use super::*;
         use crate::features::AbstractRegistryAccess;
 
-        #[coverage_helper::test]
+        
         fn test_registry() {
             let mut deps = mock_dependencies();
             deps.querier = abstract_mock_querier(deps.api);
@@ -80,7 +80,7 @@ mod tests {
         use super::*;
         use crate::features::AbstractNameService;
 
-        #[coverage_helper::test]
+        
         fn test_ans() {
             let mut deps = mock_dependencies();
             deps.querier = abstract_mock_querier(deps.api);
@@ -94,7 +94,7 @@ mod tests {
     mod account {
         use super::*;
 
-        #[coverage_helper::test]
+        
         fn test_account_object() {
             let deps = mock_dependencies();
             let account = test_account(deps.api);

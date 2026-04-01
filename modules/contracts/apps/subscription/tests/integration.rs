@@ -13,7 +13,7 @@ use abstract_subscription::{
 
 pub const WEEK_IN_SECONDS: u64 = 7 * 24 * 60 * 60;
 
-use cosmwasm_std::{coins, Decimal, StdError, Uint128, Uint64};
+use cosmwasm_std::{Decimal, Decimal256, StdError, Uint64, Uint128, Uint256, coins};
 use cw20_builder::{Cw20Base, Cw20Coin, ExecuteMsgInterfaceFns, QueryMsgInterfaceFns};
 use cw_asset::{AssetInfo, AssetInfoBase, AssetInfoUnchecked};
 // Use prelude to get all the necessary imports
@@ -44,7 +44,7 @@ fn deploy_emission(client: &AbstractClient<MockBech32>) -> anyhow::Result<Cw20Ba
         .cw20_builder("test", "test", 6)
         .initial_balance(Cw20Coin {
             address: sender.to_string(),
-            amount: Uint128::new(1_000_000),
+            amount: Uint256::new(1_000_000),
         })
         .admin(sender.to_string())
         .instantiate_with_id("abstract:emission_cw20")?)
@@ -60,7 +60,7 @@ fn setup_cw20() -> anyhow::Result<Cw20Subscription> {
         .cw20_builder("test", "test", 6)
         .initial_balance(Cw20Coin {
             address: chain.sender_addr().to_string(),
-            amount: Uint128::new(1_000_000),
+            amount: Uint256::new(1_000_000),
         })
         .admin(chain.sender_addr())
         .instantiate_with_id("abstract:cw20")?;
@@ -75,7 +75,7 @@ fn setup_cw20() -> anyhow::Result<Cw20Subscription> {
         publisher.account().install_app(
             &SubscriptionInstantiateMsg {
                 payment_asset: AssetInfoUnchecked::cw20(cw20_addr.clone()),
-                subscription_cost_per_second: Decimal::from_str("0.000037")?,
+                subscription_cost_per_second: Decimal::from_str("0.000037").unwrap(),
                 subscription_per_second_emissions: EmissionType::None,
                 // 3 days
                 income_averaging_period: INCOME_AVERAGING_PERIOD,
@@ -112,7 +112,7 @@ fn setup_native<'a>(
                 // https://github.com/AbstractSDK/abstract/pull/92#discussion_r1371693550
                 subscription_cost_per_second: Decimal::from_str("0.000037")?,
                 subscription_per_second_emissions: EmissionType::SecondShared(
-                    Decimal::from_str("0.00005")?,
+                    Decimal::from_str("0.00005").unwrap(),
                     AssetInfoBase::Cw20(emissions.addr_str()?),
                 ),
                 income_averaging_period: INCOME_AVERAGING_PERIOD,
@@ -151,9 +151,9 @@ fn successful_install() -> anyhow::Result<()> {
         config,
         SubscriptionConfig {
             payment_asset,
-            subscription_cost_per_second: Decimal::from_str("0.000037")?,
+            subscription_cost_per_second: Decimal::from_str("0.000037").unwrap(),
             subscription_per_second_emissions: EmissionType::SecondShared(
-                Decimal::from_str("0.00005")?,
+                Decimal::from_str("0.00005").unwrap(),
                 AssetInfoBase::Cw20(addr)
             ),
             unsubscribe_hook_addr: None
@@ -171,7 +171,7 @@ fn successful_install() -> anyhow::Result<()> {
         config,
         SubscriptionConfig {
             payment_asset,
-            subscription_cost_per_second: Decimal::from_str("0.000037")?,
+            subscription_cost_per_second: Decimal::from_str("0.000037").unwrap(),
             subscription_per_second_emissions: EmissionType::None,
             unsubscribe_hook_addr: None
         }
@@ -230,7 +230,7 @@ fn subscribe() -> anyhow::Result<()> {
     let twa = query_twa(&client.environment(), subscription_addr.clone());
 
     // expected value for 2 subscribers (cost * period)
-    let two_subs_per_second = Decimal::from_str("0.000037")? * Decimal::from_str("2.0")?;
+    let two_subs_per_second = Decimal::from_str("0.000037").unwrap() * Decimal::from_str("2.0").unwrap();
     let expected_cum = Uint128::from(INCOME_AVERAGING_PERIOD).mul_floor(two_subs_per_second);
     // assert it's equal to the 2 subscribers(rounded)
     assert_eq!(twa.cumulative_value, expected_cum.u128());
@@ -256,7 +256,7 @@ fn subscribe() -> anyhow::Result<()> {
         Uint128::from(INCOME_AVERAGING_PERIOD * Uint64::new(2)).mul_floor(two_subs_per_second);
     // and last one only for one
     let third_sub =
-        Uint128::from(INCOME_AVERAGING_PERIOD).mul_floor(Decimal::from_str("0.000037")?);
+        Uint128::from(INCOME_AVERAGING_PERIOD).mul_floor(Decimal::from_str("0.000037").unwrap());
 
     let expected_value = first_two_subs + third_sub;
 
@@ -301,9 +301,9 @@ fn claim_emissions_week_shared() -> anyhow::Result<()> {
     subscription_app.claim_emissions(subscriber2.to_string())?;
     // check balances
     let balance1 = emission_cw20.balance(subscriber1.to_string())?;
-    let total_amount = Uint128::from(WEEK_IN_SECONDS).mul_floor(Decimal::from_str("0.00005")?);
+    let total_amount = Uint256::from(WEEK_IN_SECONDS).mul_floor(Decimal::from_str("0.00005").unwrap());
     // 2 users
-    let expected_balance = total_amount / Uint128::new(2);
+    let expected_balance = total_amount / Uint256::new(2);
     assert_eq!(balance1.balance, expected_balance);
     let balance2 = emission_cw20.balance(subscriber2.to_string())?;
     assert_eq!(balance2.balance, expected_balance);
@@ -325,11 +325,11 @@ fn claim_emissions_week_shared() -> anyhow::Result<()> {
     assert_eq!(
         balance1.balance,
         // 3 weeks in total
-        expected_balance * Uint128::new(3)
+        expected_balance * Uint256::new(3)
     );
 
     let balance2 = emission_cw20.balance(subscriber2.to_string())?;
-    assert_eq!(balance2.balance, expected_balance * Uint128::new(3));
+    assert_eq!(balance2.balance, expected_balance * Uint256::new(3));
     Ok(())
 }
 
@@ -392,7 +392,7 @@ fn claim_emissions_week_per_user() -> anyhow::Result<()> {
             None,
             None,
             Some(EmissionType::SecondPerUser(
-                Decimal::from_str("0.00005")?,
+                Decimal::from_str("0.00005").unwrap(),
                 AssetInfoBase::Cw20(emission_cw20.addr_str()?),
             )),
             None,
@@ -412,7 +412,7 @@ fn claim_emissions_week_per_user() -> anyhow::Result<()> {
     subscription_app.claim_emissions(subscriber1.to_string())?;
     subscription_app.claim_emissions(subscriber2.to_string())?;
 
-    let expected_balance = Uint128::from(WEEK_IN_SECONDS).mul_floor(Decimal::from_str("0.00005")?);
+    let expected_balance = Uint256::from(WEEK_IN_SECONDS).mul_floor(Decimal::from_str("0.00005").unwrap());
 
     // check balance of user1
     let balance1 = emission_cw20.balance(subscriber1.to_string())?;
@@ -440,10 +440,10 @@ fn claim_emissions_week_per_user() -> anyhow::Result<()> {
     assert_eq!(
         balance1.balance,
         // tree weeks in total
-        expected_balance * Uint128::new(3)
+        expected_balance * Uint256::new(3)
     );
     let balance2 = emission_cw20.balance(subscriber2.to_string())?;
-    assert_eq!(balance2.balance, expected_balance * Uint128::new(3));
+    assert_eq!(balance2.balance, expected_balance * Uint256::new(3));
 
     Ok(())
 }
@@ -466,11 +466,7 @@ fn claim_emissions_errors() -> anyhow::Result<()> {
         .claim_emissions(subscriber1.to_string())
         .unwrap_err();
     let err: SubscriptionError = err.downcast().unwrap();
-    assert!(matches!(
-        err,
-        // can't load subscriber
-        SubscriptionError::Std(StdError::NotFound { .. })
-    ));
+    assert!(matches!(err,SubscriptionError::Std(StdError::msg("not-found"))));
 
     subscription_app
         .call_as(&subscriber1)
@@ -542,7 +538,7 @@ fn unsubscribe() -> anyhow::Result<()> {
     // 5 weeks passed until unsubscribe
     assert_eq!(
         b.balance,
-        Uint128::from(WEEK_IN_SECONDS * 5).mul_floor(Decimal::from_str("0.00005")?)
+        Uint256::from(WEEK_IN_SECONDS * 5).mul_floor(Decimal256::from_str("0.00005"))
     );
     // Unsubscribe on already unsubscribed user should fail
     assert!(subscription_app

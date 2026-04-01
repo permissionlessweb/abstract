@@ -5,13 +5,7 @@ version = { workspace = true }
 
 [lib]
 
-
 [dependencies]
-cosmwasm-schema = { workspace = true }
-cosmwasm-std    = { workspace = true }
-
-cw-orch               = { workspace = true, features = ["daemon"] }
-cw-orch-clone-testing = { workspace = true }
 
 abstract-account           = { workspace = true, features = ["xion"] }
 abstract-app               = { workspace = true, features = ["test-utils"] }
@@ -22,9 +16,14 @@ abstract-std               = { workspace = true }
 abstract-testing           = { workspace = true }
 
 anyhow      = { workspace = true }
-env_logger  = "0.11.3"
-lazy_static = "1.4.0"
-tokio       = { workspace = true }
+cosmwasm-schema = { workspace = true }
+cosmwasm-std    = { workspace = true }
+
+cw-orch               = { workspace = true, features = ["daemon"] }
+cw-orch-clone-testing = { workspace = true }
 
 cw2    = { workspace = true }
+env_logger  = "0.11.3"
+lazy_static = "1.4.0"
 semver = { workspace = true }
+tokio       = { workspace = true }

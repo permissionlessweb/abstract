@@ -1,22 +1,22 @@
 [workspace]
 members = [
-  # "astroport-adapter",
-  "astrovault-adapter",
-  "bundles/*",
-  "osmosis-adapter",
-  "wyndex-adapter",
-  "kujira-adapter",
-  # "mars-adapter",
-  "neutron-dex-adapter",
+    # "astroport-adapter",
+    #"astrovault-adapter",
+    "bundles/*",
+    #"kujira-adapter",
+    # "mars-adapter",
+    "neutron-dex-adapter",
+    "osmosis-adapter",
+    "wyndex-adapter",
 ]
 
 resolver = "2"
 
 [workspace.package]
 authors = [
-  "CyberHoward <cyberhoward@protonmail.com>",
-  "Riada <riada@abstract.money>",
-  "Abstract Money <contact@abstract.money>",
+    "CyberHoward <cyberhoward@protonmail.com>",
+    "Riada <riada@abstract.money>",
+    "Abstract Money <contact@abstract.money>",
 ]
 documentation = "https://docs.abstract.money/"
 edition = "2021"
@@ -27,45 +27,41 @@ repository = "https://github.com/AbstractSDK/abstract"
 version = "0.26.1"
 
 [workspace.dependencies]
-cosmwasm-schema = { version = "3.0.1" }
-cosmwasm-std    = { version = "3.0.1" }
-cw-address-like = { version =  "3.0.1",  git = "https://github.com/permissionlessweb/cw-plus-plus" }
-
-cw-asset        = { version = "4.0", git = "https://github.com/permissionlessweb/cw-asset" }
-
-cw-plus-orch    = { version = "0.25.0" }
-cw-storage-plus = { version = "3.0.0" }
-cw-utils        = { version = "3.0.0" }
-cw2             = { version = "3.0.0" }
-cw-controllers  = { version = "3.0.0" }
-cw-orch            = { version = "0.30.0",  git = "https://github.com/permissionlessweb/cw-orchestrator" }
-cw-ownable      = { version = "3.0.1", git = "https://github.com/permissionlessweb/cw-plus-plus" }
-cw20            = { version = "3.0.0", git = "https://github.com/permissionlessweb/cw-plus" }
-cw20-base       = { version = "3.0.0", features = ["library"],  git = "https://github.com/permissionlessweb/cw-plus" }
-
-
-anyhow = "1.0"
-
-chrono    = { version = "0.4.31", default-features = false }
-clap      = { version = "4.0.32", features = ["derive"] }
-protobuf  = { version = "2", features = ["with-bytes"] }
-schemars  = { version = "0.8.4" }
-semver    = "1.0"
-serde     = { version = "1.0", default-features = false, features = ["derive"] }
-thiserror = { version = "1.0.50" }
-
 ## crates in order of publishing ## see docs/Publishing.md
-
-abstract-adapter   = { version = "0.26.1" }
+abstract-adapter = { version = "0.26.1" }
+abstract-adapter-utils = { version = "0.26.1" }
+abstract-dex-standard = { version = "0.26.1" }
 abstract-interface = { version = "0.26.1" }
-abstract-sdk       = { version = "0.26.1" }
-abstract-std       = { version = "0.26.1" }
-
-abstract-adapter-utils         = { version = "0.26.1" }
-abstract-dex-standard          = { version = "0.26.1" }
 abstract-money-market-standard = { version = "0.26.1" }
-abstract-staking-standard      = { version = "0.26.1" }
-
+abstract-sdk = { version = "0.26.1" }
+abstract-staking-standard = { version = "0.26.1" }
+abstract-std = { version = "0.26.1" }
+anyhow = "1.0"
+chrono = { version = "0.4.31", default-features = false }
+clap = { version = "4.0.32", features = ["derive"] }
+cosmwasm-schema = { version = "3.0.1" }
+cosmwasm-std = { version = "3.0.1" }
+cw-address-like = { path = "../../cw-plus-plus/packages/cw-address-like" }
+cw-asset = { path = "../../cw-asset" }
+cw-controllers = { path = "../../cw-minus/packages/controllers" }
+cw-orch = { path = "../../cw-orchestrator/cw-orch" }
+cw-ownable = { path = "../../cw-plus-plus" }
+cw-plus-orch = { path = "../../cw-orchestrator/cw-orch" }
+cw-storage-plus = { version = "3.0.0" }
+cw-utils = { path = "../../cw-minus/packages/cw-utils" }
+cw2 = { version = "3.0.0" }
+cw20 = { path = "../../cw-plus/packages/cw20" }
+cw20-base = { path = "../../cw-plus/contracts/cw20-base" }
+protobuf = { version = "2", features = ["with-bytes"] }
+schemars = { version = "0.8.22" }
+semver = "1.0"
+serde = { version = "1.0", default-features = false, features = ["derive"] }
+thiserror = { version = "1.0.50" }
+wyndex = { path = "../../wynddex/packages/wyndex" }
+wyndex-factory = { path = "../../wynddex/contracts/factory" }
+wyndex-multi-hop = { path = "../../wynddex/contracts/multi-hop" }
+wyndex-pair = { path = "../../wynddex/contracts/pair" }
+wyndex-stake = { path = "../../wynddex/contracts/stake", features = ["library"] }
 # TODO: REMOVE As soon as new dex-standard published
 [patch.crates-io]
 abstract-adapter               = { path = "../framework/packages/abstract-adapter" }
@@ -77,6 +73,13 @@ abstract-money-market-standard = { path = "../framework/packages/standards/money
 abstract-sdk                   = { path = "../framework/packages/abstract-sdk" }
 abstract-staking-standard      = { path = "../framework/packages/standards/staking" }
 abstract-std                   = { path = "../framework/packages/abstract-std" }
+
+[patch."https://github.com/abstractsdk/wynddex"]
+wyndex           = { path = "../../wynddex/packages/wyndex" }
+wyndex-factory   = { path = "../../wynddex/contracts/factory" }
+wyndex-multi-hop = { path = "../../wynddex/contracts/multi-hop" }
+wyndex-pair      = { path = "../../wynddex/contracts/pair" }
+wyndex-stake     = { path = "../../wynddex/contracts/stake" }
 
 # Backup release profile, will result in warnings during optimization
 [profile.release]

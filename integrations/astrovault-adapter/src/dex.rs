@@ -509,7 +509,8 @@ impl DexCommand for Astrovault {
                 } = deps.querier.query_wasm_smart(
                     pair_address.to_string(),
                     &mini_astrovault::AstrovaultDexQueryMsg::SwapSimulationStable {
-                        amount: offer_asset.amount,
+                        amount: Uint128::try_from(offer_asset.amount)
+                            .map_err(|e| DexError::Std(StdError::msg(e.to_string())))?,
                         swap_from_asset_index: offer_index as u32,
                         swap_to_asset_index: ask_index as u32,
                     },
@@ -549,7 +550,8 @@ impl DexCommand for Astrovault {
                 } = deps.querier.query_wasm_smart(
                     pair_address.to_string(),
                     &mini_astrovault::AstrovaultDexQueryMsg::SwapSimulationRatio {
-                        amount: offer_asset.amount,
+                        amount: Uint128::try_from(offer_asset.amount)
+                            .map_err(|e| DexError::Std(StdError::msg(e.to_string())))?,
                         swap_from_asset_index: offer_index as u8,
                     },
                 )?;
@@ -564,13 +566,15 @@ impl DexCommand for Astrovault {
 fn cw_asset_to_astrovault(asset: &Asset) -> Result<mini_astrovault::AstrovaultAsset, DexError> {
     match &asset.info {
         AssetInfoBase::Native(denom) => Ok(mini_astrovault::AstrovaultAsset {
-            amount: asset.amount,
+            amount: Uint128::try_from(asset.amount)
+                .map_err(|e| DexError::Std(StdError::msg(e.to_string())))?,
             info: mini_astrovault::AstrovaultAssetInfo::NativeToken {
                 denom: denom.clone(),
             },
         }),
         AssetInfoBase::Cw20(contract_addr) => Ok(mini_astrovault::AstrovaultAsset {
-            amount: asset.amount,
+            amount: Uint128::try_from(asset.amount)
+                .map_err(|e| DexError::Std(StdError::msg(e.to_string())))?,
             info: mini_astrovault::AstrovaultAssetInfo::Token {
                 contract_addr: contract_addr.to_string(),
             },

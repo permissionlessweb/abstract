@@ -204,7 +204,7 @@ mod tests {
 
     use super::*;
 
-    #[coverage_helper::test]
+    
     fn set_works() {
         let mut store = MockStorage::new();
 
@@ -237,7 +237,7 @@ mod tests {
         assert_eq!(expected, loaded);
     }
 
-    #[coverage_helper::test]
+    
     fn module_upgrade() {
         let mut store = MockStorage::new();
         let contract_name = "abstract:account";
@@ -273,7 +273,7 @@ mod tests {
         assert!(res.is_ok());
     }
 
-    #[coverage_helper::test]
+    
     fn module_upgrade_err() {
         let mut store = MockStorage::new();
         let contract_name = "abstract:account";

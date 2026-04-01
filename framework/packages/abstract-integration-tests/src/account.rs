@@ -96,7 +96,7 @@ pub fn create_sub_account_with_modules_installed<T: CwEnv>(chain: T) -> AResult 
                 ),
                 ModuleInstallConfig::new(
                     ModuleInfo::from_id(app_1::MOCK_APP_ID, ModuleVersion::Version(V1.to_owned()))?,
-                    Some(to_json_binary(&MockInitMsg {})?),
+                    Some(to_json_binary(&MockInitMsg {}).map_err(|e| anyhow::anyhow!("{e}"))?),
                 ),
             ],
             ..Default::default()
@@ -247,7 +247,7 @@ pub fn create_account_with_installed_module_monetization_and_init_funds<T: MutCw
                 ),
                 ModuleInstallConfig::new(
                     ModuleInfo::from_id(app_1::MOCK_APP_ID, ModuleVersion::Version(V1.to_owned()))?,
-                    Some(to_json_binary(&MockInitMsg {})?),
+                    Some(to_json_binary(&MockInitMsg {}).map_err(|e| anyhow::anyhow!("{e}"))?),
                 ),
                 ModuleInstallConfig::new(
                     ModuleInfo {
@@ -255,7 +255,7 @@ pub fn create_account_with_installed_module_monetization_and_init_funds<T: MutCw
                         name: "standalone".to_owned(),
                         version: V1.into(),
                     },
-                    Some(to_json_binary(&MockInitMsg {})?),
+                    Some(to_json_binary(&MockInitMsg {}).map_err(|e| anyhow::anyhow!("{e}"))?),
                 ),
             ],
             account_id: None,
@@ -267,11 +267,16 @@ pub fn create_account_with_installed_module_monetization_and_init_funds<T: MutCw
         &[coin(18, coin1), coin(20, coin2)],
     )
     .unwrap();
-    let balances = chain
+    let balance1 = chain
         .bank_querier()
-        .balance(&account.address()?, None)
+        .balance(&account.address()?, Some(coin1.to_string()))
         .unwrap();
-    assert_eq!(balances, vec![coin(1, coin1), coin(5, coin2)]);
+    let balance2 = chain
+        .bank_querier()
+        .balance(&account.address()?, Some(coin2.to_string()))
+        .unwrap();
+    assert_eq!(balance1, vec![coin(1, coin1)]);
+    assert_eq!(balance2, vec![coin(5, coin2)]);
     Ok(())
 }
 
@@ -431,7 +436,7 @@ pub fn with_response_data<T: MutCwEnv<Sender = Addr>>(mut chain: T) -> AResult {
                     to_remove: vec![],
                 },
             },
-        ))?,
+        )).map_err(|e| anyhow::anyhow!("{e}"))?,
         &[],
     )?;
 
@@ -451,12 +456,12 @@ pub fn with_response_data<T: MutCwEnv<Sender = Addr>>(mut chain: T) -> AResult {
                 request: MockExecMsg {},
             }),
             vec![],
-        )?
+        ).map_err(|e| anyhow::anyhow!("{e}"))?
         .into(),
         &[],
     )?;
 
-    let response_data_attr_present = resp.event_attr_value("wasm-abstract", "response_data")?;
+    let response_data_attr_present = resp.event_attr_value("wasm-abstract", "response_data").map_err(|e| anyhow::anyhow!("{e}"))?;
     assert_eq!(response_data_attr_present, "true".to_string());
     Ok(())
 }
@@ -493,7 +498,7 @@ pub fn account_move_ownership_to_sub_account<T: CwEnv<Sender = Addr>>(chain: T) 
                 ownership::GovAction::AcceptOwnership,
             ),
             vec![],
-        )?
+        ).map_err(|e| anyhow::anyhow!("{e}"))?
         .into()],
         &[],
     )?;

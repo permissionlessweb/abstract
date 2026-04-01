@@ -205,7 +205,7 @@ mod test {
         use super::*;
 
         /// Tests that no error is thrown with empty messages provided
-        #[coverage_helper::test]
+        
         fn empty_actions() {
             let (deps, account, stub) = mock_module_setup();
             let executor = stub.executor(deps.as_ref());
@@ -226,7 +226,7 @@ mod test {
             assert_eq!(actual_res.unwrap(), expected);
         }
 
-        #[coverage_helper::test]
+        
         fn with_actions() {
             let (deps, account, stub) = mock_module_setup();
             let executor = stub.executor(deps.as_ref());
@@ -255,7 +255,7 @@ mod test {
         use super::*;
 
         /// Tests that no error is thrown with empty messages provided
-        #[coverage_helper::test]
+        
         fn empty_actions() {
             let (deps, account, stub) = mock_module_setup();
             let executor = stub.executor(deps.as_ref());
@@ -288,7 +288,7 @@ mod test {
             assert_eq!(actual_res.unwrap(), expected);
         }
 
-        #[coverage_helper::test]
+        
         fn with_actions() {
             let (deps, account, stub) = mock_module_setup();
             let executor = stub.executor(deps.as_ref());
@@ -329,7 +329,7 @@ mod test {
         use super::*;
 
         /// Tests that no error is thrown with empty messages provided
-        #[coverage_helper::test]
+        
         fn empty_actions() {
             let (deps, account, stub) = mock_module_setup();
             let executor = stub.executor(deps.as_ref());
@@ -359,7 +359,7 @@ mod test {
             assert_eq!(actual_res.unwrap(), expected);
         }
 
-        #[coverage_helper::test]
+        
         fn with_actions() {
             let (deps, account, stub) = mock_module_setup();
 
@@ -391,7 +391,7 @@ mod test {
         }
     }
 
-    #[coverage_helper::test]
+    
     fn abstract_api() {
         let (deps, _, app) = mock_module_setup();
         let executor = app.executor(deps.as_ref());

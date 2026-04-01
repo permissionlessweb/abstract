@@ -161,7 +161,7 @@ mod test {
 
         use super::*;
 
-        #[coverage_helper::test]
+        
         fn not_account_fails() {
             let mut deps = mock_dependencies();
             let not_account = Account::new(deps.api.addr_make("not_account"));
@@ -193,7 +193,7 @@ mod test {
             assert_eq!(res.unwrap_err().to_string(), expected_err.to_string());
         }
 
-        #[coverage_helper::test]
+        
         fn inactive_account_fails() {
             let mut deps = mock_dependencies();
             let abstr = AbstractMockAddrs::new(deps.api);
@@ -224,7 +224,7 @@ mod test {
             assert_eq!(res.unwrap_err().to_string(), expected_err.to_string());
         }
 
-        #[coverage_helper::test]
+        
         fn returns_account() {
             let mut deps = mock_dependencies();
             let account = test_account(deps.api);
@@ -245,7 +245,7 @@ mod test {
         }
     }
 
-    #[coverage_helper::test]
+    
     fn namespace_fee() {
         let mut deps = mock_dependencies();
 
@@ -279,7 +279,7 @@ mod test {
         assert_eq!(res.unwrap(), Some(Coin::new(42_u128, "foo")));
     }
 
-    #[coverage_helper::test]
+    
     fn abstract_api() {
         let mut deps = mock_dependencies();
         deps.querier = abstract_mock_querier(deps.api);

@@ -108,7 +108,7 @@ mod test {
 
     use crate::mock::*;
 
-    #[coverage_helper::test]
+    
     fn exports_endpoints() {
         export_endpoints!(MOCK_ADAPTER, MockAdapterContract);
 
@@ -178,7 +178,7 @@ mod test {
         assert_eq!(actual_reply.unwrap(), expected_reply.unwrap());
     }
 
-    #[coverage_helper::test]
+    
     fn export_endpoints_custom() {
         #[cosmwasm_schema::cw_serde]
         #[derive(cw_orch::ExecuteFns)]

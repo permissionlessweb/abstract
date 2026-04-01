@@ -7,10 +7,6 @@ name        = "abstract-std"
 readme      = "README.md"
 repository  = "https://github.com/AbstractSDK/abstract"
 version     = { workspace = true }
-# Note: Never change version line, there's too many dependencies on abstract-std, just patch workspace instead
-
-[lints]
-workspace = true
 
 [features]
 # for quicker tests, cargo test --lib
@@ -29,14 +25,14 @@ cw-ownable      = { workspace = true }
 cw-storage-plus = { workspace = true }
 cw-utils        = { workspace = true }
 cw2             = { workspace = true }
+
+## Stringify function names
+function_name = { version = "0.3.0" }
 schemars        = { workspace = true }
 semver          = { workspace = true, features = ["serde"] }
 serde           = { workspace = true }
 sha2            = { version = "0.10.9", default-features = false }
 thiserror       = { workspace = true }
-
-## Stringify function names
-function_name = { version = "0.3.0" }
 
 [target.'cfg(not(target_arch = "wasm32"))'.dependencies]
 workspace-hack = { version = "0.1", path = "../../workspace-hack" }
@@ -47,3 +43,7 @@ anyhow           = { workspace = true }
 coverage-helper  = { workspace = true }
 cw20-base        = { workspace = true }
 rstest           = { workspace = true }
+# Note: Never change version line, there's too many dependencies on abstract-std, just patch workspace instead
+
+[lints]
+workspace = true

@@ -57,7 +57,7 @@ pub async fn assert_wallet_balance(mut chains: Vec<ChainInfoOwned>) -> Vec<Chain
             fee,
             gas_denom
         );
-        if fee > balance.amount.u128() {
+        if fee > cosmwasm_std::Uint128::try_from(balance.amount).unwrap().u128() {
             panic!("Not enough funds on chain {} to deploy the contract. Needed: {}{} but only have: {}{}", chain_info.chain_id, fee, gas_denom, balance.amount, gas_denom);
         }
         // check if we have enough funds

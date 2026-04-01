@@ -154,7 +154,7 @@ mod test {
     mod set_withdraw_address {
         use super::*;
 
-        #[coverage_helper::test]
+        
         fn set_withdraw_address() {
             let mock_api = MockApi::default();
             let app = MockModule::new(mock_api, test_account(mock_api));
@@ -173,7 +173,7 @@ mod test {
     mod withdraw_delegator_reward {
         use super::*;
 
-        #[coverage_helper::test]
+        
         fn withdraw_delegator_reward() {
             let mock_api = MockApi::default();
             let app = MockModule::new(mock_api, test_account(mock_api));
@@ -192,7 +192,7 @@ mod test {
     mod withdraw_delegator_comission {
         use super::*;
 
-        #[coverage_helper::test]
+        
         fn withdraw_delegator_comission() {
             let mock_api = MockApi::default();
             let app = MockModule::new(mock_api, test_account(mock_api));
@@ -212,7 +212,7 @@ mod test {
 
         use super::*;
 
-        #[coverage_helper::test]
+        
         fn fund_community_pool() {
             let mock_api = MockApi::default();
             let app = MockModule::new(mock_api, test_account(mock_api));

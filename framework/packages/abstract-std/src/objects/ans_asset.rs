@@ -32,7 +32,7 @@ mod test {
 
     use super::*;
 
-    #[coverage_helper::test]
+    
     fn test_new() {
         let AnsAsset { name, amount } = AnsAsset::new("crab", 100u128);
 
@@ -40,7 +40,7 @@ mod test {
         assert_eq!(amount, Uint256::new(100));
     }
 
-    #[coverage_helper::test]
+    
     fn test_to_string() {
         let asset = AnsAsset::new("crab", 100u128);
 

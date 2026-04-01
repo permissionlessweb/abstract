@@ -8,12 +8,6 @@ version.workspace = true
 [lib]
 
 [dependencies]
-cosmwasm-std       = { workspace = true }
-cw-orch            = { workspace = true, features = ["daemon"] }
-cw-orch-interchain = { workspace = true, features = ["daemon"] }
-cw-orch-proto      = { workspace = true }
-cw-utils           = { workspace = true }
-cw2                = { workspace = true }
 
 abstract-adapter   = { workspace = true, features = ["test-utils"] }
 abstract-app       = { workspace = true, features = ["test-utils"] }
@@ -25,21 +19,27 @@ abstract-std       = { workspace = true }
 abstract-testing   = { workspace = true }
 
 anyhow     = { workspace = true }
-dotenv     = "0.15.0"
-env_logger = "0.11.3"
-log        = "0.4.14"
-tokio      = { workspace = true }
-
-ibc-relayer-types = "0.29"
 
 base64                    = "0.22.1"
 cosmwasm-schema.workspace = true
-cw-controllers            = { workspace = true }
-cw-orch-polytone          = { workspace = true }
-cw-storage-plus.workspace = true
-polytone                  = { workspace = true }
-thiserror.workspace       = true
+cosmwasm-std       = { workspace = true }
 # Testing contract
 counter-contract = { version = "0.27.0" } # Use tag if breaks
+cw-controllers            = { workspace = true }
+cw-orch            = { workspace = true, features = ["daemon"] }
+cw-orch-interchain = { workspace = true, features = ["daemon"] }
+cw-orch-polytone          = { workspace = true }
+cw-orch-proto      = { workspace = true }
+cw-storage-plus.workspace = true
+cw-utils           = { workspace = true }
+cw2                = { workspace = true }
+dotenv     = "0.15.0"
+env_logger = "0.11.3"
+
+ibc-relayer-types = "0.29"
+log        = "0.4.14"
 
 ping-pong = { path = "../../modules/contracts/apps/ping-pong" }
+polytone                  = { workspace = true }
+thiserror.workspace       = true
+tokio      = { workspace = true }

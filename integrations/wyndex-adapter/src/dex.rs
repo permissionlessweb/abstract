@@ -20,7 +20,7 @@ use ::{
         coins_in_assets, cw_approve_msgs, DexCommand, DexError, Fee, FeeOnInput, Return, Spread,
     },
     abstract_sdk::std::objects::PoolAddress,
-    cosmwasm_std::{to_json_binary, wasm_execute, CosmosMsg, Decimal, Deps, Uint128},
+    cosmwasm_std::{to_json_binary, wasm_execute, CosmosMsg, Decimal, Deps, Uint128, Uint256},
     cw20::Cw20ExecuteMsg,
     cw_asset::{Asset, AssetInfo, AssetInfoBase},
     wyndex::pair::*,
@@ -45,8 +45,10 @@ impl DexCommand for WynDex {
                 &ExecuteMsg::Swap {
                     offer_asset: cw_asset_to_wyndex(&offer_asset)?,
                     ask_asset_info: None,
-                    belief_price,
-                    max_spread,
+                    belief_price: belief_price
+                        .map(|d| json_convert!(&d))
+                        .transpose()?,
+                    max_spread: max_spread.map(|d| json_convert!(&d)).transpose()?,
                     to: None,
                     referral_address: None,
                     referral_commission: None,
@@ -61,8 +63,10 @@ impl DexCommand for WynDex {
                     amount: offer_asset.amount,
                     msg: to_json_binary(&Cw20HookMsg::Swap {
                         ask_asset_info: None,
-                        belief_price,
-                        max_spread,
+                        belief_price: belief_price
+                            .map(|d| json_convert!(&d))
+                            .transpose()?,
+                        max_spread: max_spread.map(|d| json_convert!(&d)).transpose()?,
                         to: None,
                         referral_address: None,
                         referral_commission: None,
@@ -106,7 +110,7 @@ impl DexCommand for WynDex {
                 non_zero_offer_asset.info.clone(),
                 non_zero_offer_asset
                     .amount
-                    .checked_div(Uint128::from(2u128))
+                    .checked_div(Uint256::from(2u128))
                     .unwrap(),
             );
 
@@ -141,7 +145,7 @@ impl DexCommand for WynDex {
         // execute msg
         let msg = ExecuteMsg::ProvideLiquidity {
             assets: wyndex_assets,
-            slippage_tolerance: max_spread,
+            slippage_tolerance: max_spread.map(|d| json_convert!(&d)).transpose()?,
             receiver: None,
         };
 
@@ -192,7 +196,13 @@ impl DexCommand for WynDex {
             },
         )?;
         // commission paid in result asset
-        Ok((return_amount, spread_amount, commission_amount, false))
+        // Convert from wyndex's v2 Uint128 to our v3 Uint128 via JSON bridge
+        Ok((
+            json_convert!(&return_amount)?,
+            json_convert!(&spread_amount)?,
+            json_convert!(&commission_amount)?,
+            false,
+        ))
     }
 }
 
@@ -200,11 +210,12 @@ impl DexCommand for WynDex {
 fn cw_asset_to_wyndex(asset: &Asset) -> Result<wyndex::asset::Asset, DexError> {
     match &asset.info {
         AssetInfoBase::Native(denom) => Ok(wyndex::asset::Asset {
-            amount: asset.amount,
+            // Convert v3 Uint256 to wyndex's v2 Uint128 via JSON bridge
+            amount: json_convert!(&asset.amount).map_err(|e| DexError::Std(e))?,
             info: wyndex::asset::AssetInfo::Native(denom.clone()),
         }),
         AssetInfoBase::Cw20(contract_addr) => Ok(wyndex::asset::Asset {
-            amount: asset.amount,
+            amount: json_convert!(&asset.amount).map_err(|e| DexError::Std(e))?,
             info: wyndex::asset::AssetInfo::Token(contract_addr.to_string()),
         }),
         _ => Err(DexError::UnsupportedAssetType(asset.to_string())),

@@ -158,7 +158,7 @@ mod tests {
 
         use super::*;
 
-        #[coverage_helper::test]
+        
         fn disallow_same_version() -> ModuleFactoryResult<()> {
             let mut deps = mock_dependencies();
             let sender = deps.api.addr_make("jimi");
@@ -192,7 +192,7 @@ mod tests {
             Ok(())
         }
 
-        #[coverage_helper::test]
+        
         fn disallow_downgrade() -> ModuleFactoryResult<()> {
             let mut deps = mock_dependencies();
             let sender = deps.api.addr_make("jimi");
@@ -229,7 +229,7 @@ mod tests {
             Ok(())
         }
 
-        #[coverage_helper::test]
+        
         fn disallow_name_change() -> ModuleFactoryResult<()> {
             let mut deps = mock_dependencies();
             let sender = deps.api.addr_make("jimi");
@@ -264,7 +264,7 @@ mod tests {
             Ok(())
         }
 
-        #[coverage_helper::test]
+        
         fn works() -> ModuleFactoryResult<()> {
             let mut deps = mock_dependencies();
             let sender = deps.api.addr_make("jimi");

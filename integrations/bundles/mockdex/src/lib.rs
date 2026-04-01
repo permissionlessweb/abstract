@@ -106,7 +106,7 @@ pub fn create_new_cw20<Chain: CwEnv, T: Into<Uint128>>(
         name: "test".to_string(),
         initial_balances: vec![Cw20Coin {
             address: minter.clone().into(),
-            amount: balance.into(),
+            amount: cosmwasm_std::Uint256::from(Into::<Uint128>::into(balance)),
         }],
         marketing: None,
     };
@@ -219,8 +219,8 @@ impl Deploy<MockBech32> for WynDex {
                 wyndex::factory::PairType::Xyk {},
                 [eur_info.clone(), wynd_info.clone()],
                 Some(PartialStakeConfig {
-                    tokens_per_power: Some(Uint256::new(100)),
-                    min_bond: Some(Uint256::new(100)),
+                    tokens_per_power: Some(Uint128::new(100)),
+                    min_bond: Some(Uint128::new(100)),
                     ..Default::default()
                 }),
                 None,

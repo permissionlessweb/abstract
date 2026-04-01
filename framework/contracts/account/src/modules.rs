@@ -95,7 +95,9 @@ pub fn _install_modules(
     for (ModuleResponse { module, .. }, init_msg) in modules.into_iter().zip(init_msgs) {
         // Check if module is already enabled.
         if ACCOUNT_MODULES.has(deps.storage, &module.info.module_id()) {
-            return Err(AccountError::ModuleAlreadyInstalled(module.info.module_id()));
+            return Err(AccountError::ModuleAlreadyInstalled(
+                module.info.module_id(),
+            ));
         }
         installed_modules.push(module.info.id_with_version());
 
@@ -362,8 +364,8 @@ mod tests {
 
         use super::*;
 
-        #[coverage_helper::test]
-        fn should_allow_migrate_msg() -> anyhow::Result<()> {
+        
+        fn should_allow_migrate_msg() -> StdResult<()> {
             let mut deps = mock_dependencies();
             deps.querier = abstract_mock_querier(deps.api);
             mock_init(&mut deps)?;
@@ -387,8 +389,8 @@ mod tests {
 
         use super::*;
 
-        #[coverage_helper::test]
-        fn manual_adds_module_to_account_modules() -> anyhow::Result<()> {
+        
+        fn manual_adds_module_to_account_modules() -> StdResult<()> {
             let mut deps = mock_dependencies();
             deps.querier = abstract_mock_querier(deps.api);
             let module1_addr = deps.api.addr_make("module1");
@@ -414,8 +416,8 @@ mod tests {
             Ok(())
         }
 
-        #[coverage_helper::test]
-        fn missing_id() -> anyhow::Result<()> {
+        
+        fn missing_id() -> StdResult<()> {
             let mut deps = mock_dependencies();
             deps.querier = abstract_mock_querier(deps.api);
 
@@ -425,13 +427,16 @@ mod tests {
                 vec![("".to_string(), Addr::unchecked("module1_addr"))];
 
             let res = update_module_addresses(deps.as_mut(), to_add, vec![]);
-            assert_eq!(res.unwrap_err().to_string(), AccountError::InvalidModuleName {}.to_string());
+            assert_eq!(
+                res.unwrap_err().to_string(),
+                AccountError::InvalidModuleName {}.to_string()
+            );
 
             Ok(())
         }
 
-        #[coverage_helper::test]
-        fn manual_removes_module_from_account_modules() -> anyhow::Result<()> {
+        
+        fn manual_removes_module_from_account_modules() -> StdResult<()> {
             let mut deps = mock_dependencies();
             deps.querier = abstract_mock_querier(deps.api);
             mock_init(&mut deps)?;
@@ -455,8 +460,8 @@ mod tests {
             Ok(())
         }
 
-        #[coverage_helper::test]
-        fn only_account_owner() -> anyhow::Result<()> {
+        
+        fn only_account_owner() -> StdResult<()> {
             let mut deps = mock_dependencies();
             deps.querier = abstract_mock_querier(deps.api);
             let abstr = AbstractMockAddrs::new(deps.api);
@@ -495,8 +500,8 @@ mod tests {
 
         use super::*;
 
-        #[coverage_helper::test]
-        fn only_owner() -> anyhow::Result<()> {
+        
+        fn only_owner() -> StdResult<()> {
             let msg = ExecuteMsg::UninstallModule {
                 module_id: "test:module".to_string(),
             };
@@ -504,8 +509,8 @@ mod tests {
             test_only_owner(msg)
         }
 
-        #[coverage_helper::test]
-        fn errors_with_existing_dependents() -> anyhow::Result<()> {
+        
+        fn errors_with_existing_dependents() -> StdResult<()> {
             let mut deps = mock_dependencies();
             deps.querier = abstract_mock_querier(deps.api);
             let abstr = AbstractMockAddrs::new(deps.api);
@@ -524,9 +529,7 @@ mod tests {
             let res = execute_as(&mut deps, &owner, msg);
             assert_eq!(
                 res.unwrap_err().to_string(),
-                AccountError::ModuleHasDependents(Vec::from_iter(
-                    dependents,
-                )).to_string()
+                AccountError::ModuleHasDependents(Vec::from_iter(dependents,)).to_string()
             );
 
             Ok(())
@@ -539,8 +542,8 @@ mod tests {
 
         use super::*;
 
-        #[coverage_helper::test]
-        fn only_owner() -> anyhow::Result<()> {
+        
+        fn only_owner() -> StdResult<()> {
             let msg = ExecuteMsg::ExecuteOnModule {
                 module_id: TEST_MODULE_ID.to_string(),
                 exec_msg: to_json_binary(&"some msg")?,
@@ -559,12 +562,15 @@ mod tests {
             )?;
 
             let res = execute_as(&mut deps, &not_owner, msg);
-            assert_eq!(res.unwrap_err().to_string(), AccountError::SenderNotWhitelistedOrOwner {}.to_string());
+            assert_eq!(
+                res.unwrap_err().to_string(),
+                AccountError::SenderNotWhitelistedOrOwner {}.to_string()
+            );
             Ok(())
         }
 
-        #[coverage_helper::test]
-        fn fails_with_nonexistent_module() -> anyhow::Result<()> {
+        
+        fn fails_with_nonexistent_module() -> StdResult<()> {
             let mut deps = mock_dependencies();
             deps.querier = abstract_mock_querier(deps.api);
             let abstr = AbstractMockAddrs::new(deps.api);
@@ -580,13 +586,16 @@ mod tests {
             };
 
             let res = execute_as(&mut deps, &owner, msg);
-            assert_eq!(res.unwrap_err().to_string(), AccountError::ModuleNotFound(missing_module).to_string());
+            assert_eq!(
+                res.unwrap_err().to_string(),
+                AccountError::ModuleNotFound(missing_module).to_string()
+            );
 
             Ok(())
         }
 
-        #[coverage_helper::test]
-        fn forwards_exec_to_module() -> anyhow::Result<()> {
+        
+        fn forwards_exec_to_module() -> StdResult<()> {
             let mut deps = mock_dependencies();
             deps.querier = abstract_mock_querier(deps.api);
             let abstr = AbstractMockAddrs::new(deps.api);

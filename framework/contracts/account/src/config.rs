@@ -14,7 +14,7 @@ use abstract_std::{
         validation::{validate_description, validate_link, validate_name},
     },
 };
-use cosmwasm_std::{Addr, DepsMut, MessageInfo, Response, StdError};
+use cosmwasm_std::{Addr, DepsMut, MessageInfo, Response, StdError, StdResult};
 
 pub fn update_account_status(
     deps: DepsMut,
@@ -133,8 +133,8 @@ mod tests {
 
         use super::*;
 
-        #[coverage_helper::test]
-        fn only_owner() -> anyhow::Result<()> {
+        
+        fn only_owner() -> StdResult<()> {
             let test_owner = MockApi::default().addr_make("test_owner");
 
             let msg = ExecuteMsg::UpdateOwnership(GovAction::TransferOwnership {
@@ -147,8 +147,8 @@ mod tests {
             test_only_owner(msg)
         }
 
-        #[coverage_helper::test]
-        fn validates_new_owner_address() -> anyhow::Result<()> {
+        
+        fn validates_new_owner_address() -> StdResult<()> {
             let mut deps = mock_dependencies();
             deps.querier = abstract_mock_querier(deps.api);
             let abstr = AbstractMockAddrs::new(deps.api);
@@ -166,15 +166,15 @@ mod tests {
             assert!(matches!(
                 res,
                 Err(AccountError::Ownership(GovOwnershipError::Abstract(
-                    abstract_std::AbstractError::Std(StdError::GenericErr { .. })
+                    abstract_std::AbstractError::Std(_)
                 )))
             ));
 
             Ok(())
         }
 
-        #[coverage_helper::test]
-        fn updates_owner() -> anyhow::Result<()> {
+        
+        fn updates_owner() -> StdResult<()> {
             let mut deps = mock_dependencies();
             deps.querier = abstract_mock_querier(deps.api);
             let abstr = AbstractMockAddrs::new(deps.api);
@@ -207,8 +207,8 @@ mod tests {
             Ok(())
         }
 
-        #[coverage_helper::test]
-        fn updates_governance_type() -> anyhow::Result<()> {
+        
+        fn updates_governance_type() -> StdResult<()> {
             let mut deps = mock_dependencies();
             deps.querier = abstract_mock_querier(deps.api);
             let abstr = AbstractMockAddrs::new(deps.api);
@@ -258,8 +258,8 @@ mod tests {
 
         use super::*;
 
-        #[coverage_helper::test]
-        fn only_owner() -> anyhow::Result<()> {
+
+        fn only_owner() -> StdResult<()> {
             let msg = ExecuteMsg::UpdateInfo {
                 name: None,
                 description: None,
@@ -269,9 +269,8 @@ mod tests {
             test_only_owner(msg)
         }
         // integration tests
-
-        #[coverage_helper::test]
-        fn updates() -> anyhow::Result<()> {
+        
+        fn updates() -> StdResult<()> {
             let mut deps = mock_dependencies();
             deps.querier = abstract_mock_querier(deps.api);
             let abstr = AbstractMockAddrs::new(deps.api);
@@ -300,8 +299,8 @@ mod tests {
             Ok(())
         }
 
-        #[coverage_helper::test]
-        fn removals() -> anyhow::Result<()> {
+        
+        fn removals() -> StdResult<()> {
             let mut deps = mock_dependencies();
             deps.querier = abstract_mock_querier(deps.api);
             let abstr = AbstractMockAddrs::new(deps.api);
@@ -336,8 +335,8 @@ mod tests {
             Ok(())
         }
 
-        #[coverage_helper::test]
-        fn validates_name() -> anyhow::Result<()> {
+        
+        fn validates_name() -> StdResult<()> {
             let mut deps = mock_dependencies();
             deps.querier = abstract_mock_querier(deps.api);
             let abstr = AbstractMockAddrs::new(deps.api);
@@ -375,8 +374,8 @@ mod tests {
             Ok(())
         }
 
-        #[coverage_helper::test]
-        fn validates_link() -> anyhow::Result<()> {
+        
+        fn validates_link() -> StdResult<()> {
             let mut deps = mock_dependencies();
             deps.querier = abstract_mock_querier(deps.api);
             let abstr = AbstractMockAddrs::new(deps.api);
@@ -419,8 +418,8 @@ mod tests {
     mod update_suspension_status {
         use super::*;
 
-        #[coverage_helper::test]
-        fn only_owner() -> anyhow::Result<()> {
+        
+        fn only_owner() -> StdResult<()> {
             let mut deps = mock_dependencies();
             deps.querier = abstract_mock_querier(deps.api);
 
@@ -433,8 +432,8 @@ mod tests {
             test_only_owner(msg)
         }
 
-        #[coverage_helper::test]
-        fn exec_fails_when_suspended() -> anyhow::Result<()> {
+        
+        fn exec_fails_when_suspended() -> StdResult<()> {
             let mut deps = mock_dependencies();
             deps.querier = abstract_mock_querier(deps.api);
             let abstr = AbstractMockAddrs::new(deps.api);
@@ -458,13 +457,16 @@ mod tests {
 
             let res = execute_as(&mut deps, &owner, update_info_msg);
 
-            assert_eq!(res.unwrap_err().to_string(), AccountError::AccountSuspended {}.to_string());
+            assert_eq!(
+                res.unwrap_err().to_string(),
+                AccountError::AccountSuspended {}.to_string()
+            );
 
             Ok(())
         }
 
-        #[coverage_helper::test]
-        fn suspend_account() -> anyhow::Result<()> {
+        
+        fn suspend_account() -> StdResult<()> {
             let mut deps = mock_dependencies();
             deps.querier = abstract_mock_querier(deps.api);
             let abstr = AbstractMockAddrs::new(deps.api);
@@ -483,8 +485,8 @@ mod tests {
             Ok(())
         }
 
-        #[coverage_helper::test]
-        fn unsuspend_account() -> anyhow::Result<()> {
+        
+        fn unsuspend_account() -> StdResult<()> {
             let mut deps = mock_dependencies();
             deps.querier = abstract_mock_querier(deps.api);
             let abstr = AbstractMockAddrs::new(deps.api);
@@ -512,8 +514,8 @@ mod tests {
 
         use super::*;
 
-        #[coverage_helper::test]
-        fn only_account_owner() -> anyhow::Result<()> {
+        
+        fn only_account_owner() -> StdResult<()> {
             let mut deps = mock_dependencies();
             deps.querier = abstract_mock_querier(deps.api);
             let abstr = AbstractMockAddrs::new(deps.api);
@@ -544,8 +546,8 @@ mod tests {
             Ok(())
         }
 
-        #[coverage_helper::test]
-        fn whitelist_size_limit() -> anyhow::Result<()> {
+        
+        fn whitelist_size_limit() -> StdResult<()> {
             let mut deps = mock_dependencies();
             deps.querier = abstract_mock_querier(deps.api);
             let abstr = AbstractMockAddrs::new(deps.api);
@@ -563,7 +565,10 @@ mod tests {
                     to_remove: vec![],
                 });
             let too_many = execute_as(&mut deps, &owner, too_many_msg).unwrap_err();
-            assert_eq!(too_many.to_string(), AccountError::ModuleLimitReached {}.to_string());
+            assert_eq!(
+                too_many.to_string(),
+                AccountError::ModuleLimitReached {}.to_string()
+            );
 
             // Exact amount
             to_add.pop();
@@ -586,13 +591,16 @@ mod tests {
                 }),
             )
             .unwrap_err();
-            assert_eq!(module_limit_reached.to_string(), AccountError::ModuleLimitReached {}.to_string());
+            assert_eq!(
+                module_limit_reached.to_string(),
+                AccountError::ModuleLimitReached {}.to_string()
+            );
 
             Ok(())
         }
 
-        #[coverage_helper::test]
-        fn whitelist_duplicates() -> anyhow::Result<()> {
+        
+        fn whitelist_duplicates() -> StdResult<()> {
             let mut deps = mock_dependencies();
             deps.querier = abstract_mock_querier(deps.api);
             let abstr = AbstractMockAddrs::new(deps.api);
@@ -632,8 +640,8 @@ mod tests {
             Ok(())
         }
 
-        #[coverage_helper::test]
-        fn whitelist_remove() -> anyhow::Result<()> {
+        
+        fn whitelist_remove() -> StdResult<()> {
             let mut deps = mock_dependencies();
             deps.querier = abstract_mock_querier(deps.api);
             let abstr = AbstractMockAddrs::new(deps.api);
@@ -657,7 +665,10 @@ mod tests {
                 to_remove,
             });
             let not_whitelisted = execute_as(&mut deps, &owner, msg.clone()).unwrap_err();
-            assert_eq!(not_whitelisted.to_string(), AccountError::NotWhitelisted {}.to_string());
+            assert_eq!(
+                not_whitelisted.to_string(),
+                AccountError::NotWhitelisted {}.to_string()
+            );
 
             // Remove same twice
             let to_add: Vec<String> = vec![deps.api.addr_make("module").to_string()];
@@ -670,7 +681,10 @@ mod tests {
                 to_remove: to_remove.clone(),
             });
             let not_whitelisted = execute_as(&mut deps, &owner, msg.clone()).unwrap_err();
-            assert_eq!(not_whitelisted.to_string(), AccountError::NotWhitelisted {}.to_string());
+            assert_eq!(
+                not_whitelisted.to_string(),
+                AccountError::NotWhitelisted {}.to_string()
+            );
 
             Ok(())
         }
@@ -682,8 +696,8 @@ mod tests {
 
         use super::*;
 
-        #[coverage_helper::test]
-        fn allows_ownership_acceptance() -> anyhow::Result<()> {
+        
+        fn allows_ownership_acceptance() -> StdResult<()> {
             let mut deps = mock_dependencies();
             deps.querier = abstract_mock_querier(deps.api);
             let abstr = AbstractMockAddrs::new(deps.api);

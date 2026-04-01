@@ -25,11 +25,12 @@ use ::{
     abstract_sdk::std::objects::PoolAddress,
     cosmwasm_std::{
         wasm_execute, Addr, Coin, CosmosMsg, Decimal, Decimal256, Deps, StdError, StdResult,
-        Uint128,
+        Uint128, Uint256,
     },
     cw_asset::{Asset, AssetInfo, AssetInfoBase},
     kujira::{bow, fin},
 };
+
 
 #[cfg(feature = "full_integration")]
 impl DexCommand for Fin {
@@ -52,14 +53,14 @@ impl DexCommand for Fin {
             AssetInfo::Native(_) => vec![wasm_execute(
                 fin_pair_address.to_string(),
                 &fin::ExecuteMsg::Swap {
-                    offer_asset: Some(Coin::try_from(&offer_asset)?),
+                    offer_asset: Some(json_convert!(&Coin::try_from(&offer_asset)?)?),
                     belief_price: if let Some(belief_price) = belief_price {
-                        Some(decimal2decimal256(belief_price)?)
+                        Some(json_convert!(&decimal2decimal256(belief_price)?)?)
                     } else {
                         None
                     },
                     max_spread: if let Some(max_spread) = max_spread {
-                        Some(decimal2decimal256(max_spread)?)
+                        Some(json_convert!(&decimal2decimal256(max_spread)?)?)
                     } else {
                         None
                     },
@@ -108,7 +109,7 @@ impl DexCommand for Fin {
                 non_zero_offer_asset.info.clone(),
                 non_zero_offer_asset
                     .amount
-                    .checked_div(Uint128::from(2u128))
+                    .checked_div(Uint256::from(2u128))
                     .unwrap(),
             );
 
@@ -137,7 +138,7 @@ impl DexCommand for Fin {
 
         // execute msg
         let msg = bow::market_maker::ExecuteMsg::Deposit {
-            max_slippage: max_spread,
+            max_slippage: max_spread.map(|d| json_convert!(&d)).transpose()?,
             callback: None,
         };
 
@@ -193,12 +194,11 @@ impl DexCommand for Fin {
             },
         )?;
         // commission paid in result asset
-        Ok((
-            Uint128::try_from(return_amount).unwrap(),
-            Uint128::try_from(spread_amount).unwrap(),
-            Uint128::try_from(commission_amount).unwrap(),
-            false,
-        ))
+        // Convert from kujira's cosmwasm-std v2 Uint256 to our v3 Uint128 via JSON bridge
+        let return_amount: Uint128 = json_convert!(&return_amount)?;
+        let spread_amount: Uint128 = json_convert!(&spread_amount)?;
+        let commission_amount: Uint128 = json_convert!(&commission_amount)?;
+        Ok((return_amount, spread_amount, commission_amount, false))
     }
 }
 
@@ -206,7 +206,8 @@ impl DexCommand for Fin {
 fn cw_asset_to_kujira(asset: &Asset) -> Result<kujira::Asset, DexError> {
     match &asset.info {
         AssetInfoBase::Native(denom) => Ok(kujira::Asset {
-            amount: asset.amount,
+            // Convert v3 Uint256 to kujira's v2 Uint128 via JSON bridge
+            amount: json_convert!(&asset.amount).map_err(|e| DexError::Std(e))?,
             info: kujira::AssetInfo::NativeToken {
                 denom: denom.into(),
             },
