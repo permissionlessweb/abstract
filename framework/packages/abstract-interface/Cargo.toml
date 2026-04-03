@@ -24,7 +24,7 @@ anyhow     = "1.0"
 bip32              = { version = "0.5.2" }
 
 # Predictable abstract addresses
-cosmrs  = { version = "0.22.0" }
+cosmrs  = { workspace = true }
 cosmwasm-schema = { workspace = true }
 cosmwasm-std    = { workspace = true }
 cw-address-like = { workspace = true }

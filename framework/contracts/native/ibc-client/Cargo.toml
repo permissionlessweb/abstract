@@ -41,8 +41,8 @@ cosmwasm-schema    = { workspace = true }
 coverage-helper = { workspace = true }
 cw-orch = { workspace = true }
 cw-orch-interchain = { workspace = true }
-ibc-proto       = { version = "0.47.0", default-features = false }
-prost           = { version = "0.13.1", default-features = false }
+ibc-proto       = { workspace = true }
+prost           = { version = "0.14.3", default-features = false }
 
 [lints]
 workspace = true

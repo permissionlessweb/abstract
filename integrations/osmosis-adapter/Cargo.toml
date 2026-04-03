@@ -22,4 +22,4 @@ cosmwasm-std              = { workspace = true, features = ["stargate"] }
 cw-asset                  = { workspace = true, optional = true }
 cw-utils                  = { workspace = true, optional = true }
 cw20                      = { workspace = true, optional = true }
-osmosis-std = { path = "../../../osmosis-rust/packages/osmosis-std", optional = true }
+osmosis-std = { workspace = true, optional = true }

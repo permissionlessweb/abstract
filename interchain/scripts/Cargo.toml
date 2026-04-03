@@ -25,8 +25,8 @@ bitcoin     = { version = "0.32.2" }
 challenge-app = { workspace = true }
 
 clap             = { workspace = true }
-cosmos-sdk-proto = { version = "0.27.0", features = ["grpc-transport", "cosmwasm"] }
-cosmrs = { git = "https://github.com/permissionlessweb/cosmos-rust", features = ["dev", "cosmwasm", "grpc"] }
+cosmos-sdk-proto = { workspace = true }
+cosmrs = { workspace = true }
 
 cosmwasm-schema.workspace = true
 cosmwasm-std          = { workspace = true }
@@ -34,7 +34,7 @@ cw-asset              = { workspace = true }
 cw-controllers        = { workspace = true }
 cw-orch               = { workspace = true, features = ["daemon"] }
 cw-orch-clone-testing = { workspace = true }
-cw-orch-core     = { path = "../../../cw-orchestrator/packages/cw-orch-core" }
+cw-orch-core     = { workspace = true }
 cw-orch-daemon   = { workspace = true }
 cw-orch-interchain    = { workspace = true, features = ["daemon"] }
 cw-orch-polytone      = { workspace = true }

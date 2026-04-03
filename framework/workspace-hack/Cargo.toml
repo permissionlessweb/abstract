@@ -20,8 +20,8 @@ byteorder = { version = "1", features = ["i128"] }
 bytes = { version = "1", default-features = false, features = ["serde"] }
 cosmwasm-std = { version = "3", features = ["cosmwasm_2_0", "staking", "stargate"] }
 cw-orch = { version = "0.30.0", features = ["daemon", "snapshot-testing"], path = "../../../cw-orchestrator/cw-orch" }
-cw-orch-interchain = { version = "0.8", features = ["daemon"] }
-cw20-base = { version = "2", default-features = false, features = ["library"] }
+cw-orch-interchain = { version = "0.8", features = ["daemon"], path = "../../../cw-orchestrator/cw-orch-interchain" }
+cw20-base = { path = "../../../cw-plus/contracts/cw20-base" }
 der = { version = "0.7", default-features = false, features = ["oid", "pem", "std"] }
 deranged = { version = "0.3", default-features = false, features = ["powerfmt", "std"] }
 digest = { version = "0.10", features = ["mac", "oid", "std"] }
@@ -34,7 +34,7 @@ log = { version = "0.4", default-features = false, features = ["std"] }
 memchr = { version = "2" }
 num-traits = { version = "0.2", default-features = false, features = ["i128", "libm", "std"] }
 ppv-lite86 = { version = "0.2", default-features = false, features = ["simd", "std"] }
-prost = { version = "0.13", default-features = false, features = ["prost-derive", "std"] }
+prost = { version = "0.14", default-features = false, features = ["prost-derive", "std"] }
 rand = { version = "0.8" }
 rand_chacha = { version = "0.3", default-features = false, features = ["std"] }
 ripemd = { version = "0.1" }
@@ -45,7 +45,7 @@ serde_json = { version = "1", features = ["alloc"] }
 sha2 = { version = "0.10", features = ["oid"] }
 spki = { version = "0.7", default-features = false, features = ["pem", "std"] }
 subtle-encoding = { version = "0.5", features = ["bech32-preview"] }
-tendermint-proto = { version = "0.39", features = ["std"] }
+tendermint-proto = { path = "../../../tendermint-rs/proto" }
 time = { version = "0.3", default-features = false, features = ["macros", "parsing", "std"] }
 zeroize = { version = "1", features = ["zeroize_derive"] }
 
@@ -56,8 +56,8 @@ byteorder = { version = "1", features = ["i128"] }
 bytes = { version = "1", default-features = false, features = ["serde"] }
 cosmwasm-std = { version = "3", features = ["cosmwasm_2_0", "staking", "stargate"] }
 cw-orch = { version = "0.30.0", features = ["daemon", "snapshot-testing"], path = "../../../cw-orchestrator/cw-orch" }
-cw-orch-interchain = { version = "0.8", features = ["daemon"] }
-cw20-base = { version = "2", default-features = false, features = ["library"] }
+cw-orch-interchain = { version = "0.8", features = ["daemon"], path = "../../../cw-orchestrator/cw-orch-interchain" }
+cw20-base = { path = "../../../cw-plus/contracts/cw20-base" }
 der = { version = "0.7", default-features = false, features = ["oid", "pem", "std"] }
 deranged = { version = "0.3", default-features = false, features = ["powerfmt", "std"] }
 digest = { version = "0.10", features = ["mac", "oid", "std"] }
@@ -70,7 +70,7 @@ log = { version = "0.4", default-features = false, features = ["std"] }
 memchr = { version = "2" }
 num-traits = { version = "0.2", default-features = false, features = ["i128", "libm", "std"] }
 ppv-lite86 = { version = "0.2", default-features = false, features = ["simd", "std"] }
-prost = { version = "0.13", default-features = false, features = ["prost-derive", "std"] }
+prost = { version = "0.14", default-features = false, features = ["prost-derive", "std"] }
 rand = { version = "0.8" }
 rand_chacha = { version = "0.3", default-features = false, features = ["std"] }
 ripemd = { version = "0.1" }
@@ -83,7 +83,7 @@ spki = { version = "0.7", default-features = false, features = ["pem", "std"] }
 subtle-encoding = { version = "0.5", features = ["bech32-preview"] }
 syn-dff4ba8e3ae991db = { package = "syn", version = "1", features = ["extra-traits", "full", "visit", "visit-mut"] }
 syn-f595c2ba2a3f28df = { package = "syn", version = "2", features = ["extra-traits", "full", "visit", "visit-mut"] }
-tendermint-proto = { version = "0.39", features = ["std"] }
+tendermint-proto = { path = "../../../tendermint-rs/proto" }
 time = { version = "0.3", default-features = false, features = ["macros", "parsing", "std"] }
 zeroize = { version = "1", features = ["zeroize_derive"] }
 
@@ -99,11 +99,11 @@ bs58 = { version = "0.5", features = ["check"] }
 bytes = { version = "1" }
 chrono = { version = "0.4", features = ["serde"] }
 console = { version = "0.15" }
-cosmos-sdk-proto = { version = "0.27", default-features = false, features = ["cosmwasm", "grpc-transport"] }
-cosmrs = { version = "0.22.0", features = ["cosmwasm", "dev", "grpc"] }
+cosmos-sdk-proto = { path = "../../../cosmos-rust/cosmos-sdk-proto" }
+cosmrs = { path = "../../../cosmos-rust/cosmrs" }
 crossbeam-epoch = { version = "0.9" }
 crunchy = { version = "0.2", features = ["std"] }
-cw1-whitelist = { version = "2", default-features = false, features = ["library"] }
+cw1-whitelist = { path = "../../../cw-plus/contracts/cw1-whitelist" }
 ed25519 = { version = "2", features = ["alloc", "serde"] }
 ed25519-dalek = { version = "2", features = ["rand_core", "serde"] }
 either = { version = "1" }
@@ -121,7 +121,7 @@ getrandom = { version = "0.2", default-features = false, features = ["js"] }
 group = { version = "0.13", default-features = false, features = ["alloc"] }
 hex-conservative = { version = "0.1", default-features = false, features = ["std"] }
 hyper = { version = "0.14", features = ["client", "http1", "http2", "runtime", "server", "stream"] }
-ics23 = { version = "0.12" }
+ics23 = { git = "https://github.com/permissionlessweb/ics23"}
 informalsystems-pbjson = { version = "0.7", default-features = false, features = ["std"] }
 k256 = { version = "0.13", default-features = false, features = ["alloc", "ecdsa"] }
 lazy_static = { version = "1", default-features = false, features = ["spin_no_std"] }
@@ -167,11 +167,11 @@ bs58 = { version = "0.5", features = ["check"] }
 bytes = { version = "1" }
 chrono = { version = "0.4", features = ["serde"] }
 console = { version = "0.15" }
-cosmos-sdk-proto = { version = "0.27", default-features = false, features = ["cosmwasm", "grpc-transport"] }
-cosmrs = { version = "0.22.0", features = ["cosmwasm", "dev", "grpc"] }
+cosmos-sdk-proto = { path = "../../../cosmos-rust/cosmos-sdk-proto" }
+cosmrs = { path = "../../../cosmos-rust/cosmrs" }
 crossbeam-epoch = { version = "0.9" }
 crunchy = { version = "0.2", features = ["std"] }
-cw1-whitelist = { version = "2", default-features = false, features = ["library"] }
+cw1-whitelist = { path = "../../../cw-plus/contracts/cw1-whitelist" }
 ed25519 = { version = "2", features = ["alloc", "serde"] }
 ed25519-dalek = { version = "2", features = ["rand_core", "serde"] }
 either = { version = "1" }
@@ -189,7 +189,7 @@ getrandom = { version = "0.2", default-features = false, features = ["js"] }
 group = { version = "0.13", default-features = false, features = ["alloc"] }
 hex-conservative = { version = "0.1", default-features = false, features = ["std"] }
 hyper = { version = "0.14", features = ["client", "http1", "http2", "runtime", "server", "stream"] }
-ics23 = { version = "0.12" }
+ics23 = { git = "https://github.com/permissionlessweb/ics23"}
 informalsystems-pbjson = { version = "0.7", default-features = false, features = ["std"] }
 k256 = { version = "0.13", default-features = false, features = ["alloc", "ecdsa"] }
 lazy_static = { version = "1", default-features = false, features = ["spin_no_std"] }
@@ -235,11 +235,11 @@ bs58 = { version = "0.5", features = ["check"] }
 bytes = { version = "1" }
 chrono = { version = "0.4", features = ["serde"] }
 console = { version = "0.15" }
-cosmos-sdk-proto = { version = "0.27", default-features = false, features = ["cosmwasm", "grpc-transport"] }
-cosmrs = { version = "0.22.0", features = ["cosmwasm", "dev", "grpc"] }
+cosmos-sdk-proto = { path = "../../../cosmos-rust/cosmos-sdk-proto" }
+cosmrs = { path = "../../../cosmos-rust/cosmrs" }
 crossbeam-epoch = { version = "0.9" }
 crunchy = { version = "0.2", features = ["std"] }
-cw1-whitelist = { version = "2", default-features = false, features = ["library"] }
+cw1-whitelist = { path = "../../../cw-plus/contracts/cw1-whitelist" }
 ed25519 = { version = "2", features = ["alloc", "serde"] }
 ed25519-dalek = { version = "2", features = ["rand_core", "serde"] }
 either = { version = "1" }
@@ -257,7 +257,7 @@ getrandom = { version = "0.2", default-features = false, features = ["js"] }
 group = { version = "0.13", default-features = false, features = ["alloc"] }
 hex-conservative = { version = "0.1", default-features = false, features = ["std"] }
 hyper = { version = "0.14", features = ["client", "http1", "http2", "runtime", "server", "stream"] }
-ics23 = { version = "0.12" }
+ics23 = { git = "https://github.com/permissionlessweb/ics23"}
 informalsystems-pbjson = { version = "0.7", default-features = false, features = ["std"] }
 k256 = { version = "0.13", default-features = false, features = ["alloc", "ecdsa"] }
 lazy_static = { version = "1", default-features = false, features = ["spin_no_std"] }
@@ -302,11 +302,11 @@ bs58 = { version = "0.5", features = ["check"] }
 bytes = { version = "1" }
 chrono = { version = "0.4", features = ["serde"] }
 console = { version = "0.15" }
-cosmos-sdk-proto = { version = "0.27", default-features = false, features = ["cosmwasm", "grpc-transport"] }
-cosmrs = { version = "0.22.0", features = ["cosmwasm", "dev", "grpc"] }
+cosmos-sdk-proto = { path = "../../../cosmos-rust/cosmos-sdk-proto" }
+cosmrs = { path = "../../../cosmos-rust/cosmrs" }
 crossbeam-epoch = { version = "0.9" }
 crunchy = { version = "0.2", features = ["std"] }
-cw1-whitelist = { version = "2", default-features = false, features = ["library"] }
+cw1-whitelist = { path = "../../../cw-plus/contracts/cw1-whitelist" }
 ed25519 = { version = "2", features = ["alloc", "serde"] }
 ed25519-dalek = { version = "2", features = ["rand_core", "serde"] }
 either = { version = "1" }
@@ -324,7 +324,7 @@ getrandom = { version = "0.2", default-features = false, features = ["js"] }
 group = { version = "0.13", default-features = false, features = ["alloc"] }
 hex-conservative = { version = "0.1", default-features = false, features = ["std"] }
 hyper = { version = "0.14", features = ["client", "http1", "http2", "runtime", "server", "stream"] }
-ics23 = { version = "0.12" }
+ics23 = { git = "https://github.com/permissionlessweb/ics23"}
 informalsystems-pbjson = { version = "0.7", default-features = false, features = ["std"] }
 k256 = { version = "0.13", default-features = false, features = ["alloc", "ecdsa"] }
 lazy_static = { version = "1", default-features = false, features = ["spin_no_std"] }
