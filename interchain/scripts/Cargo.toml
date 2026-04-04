@@ -59,4 +59,4 @@ thiserror             = { workspace = true }
 tokio                 = { workspace = true, features = ["full"] }
 tonic       = { version = "0.14.5" }
 url                   = "2.4.1"
-xion_sdk_proto   = { version = "0.24.0-pre", package = "cosmos-sdk-proto", git = "https://github.com/CyberHoward/cosmos-rust.git", branch = "patch-1", features = ["cosmwasm"] }
+xion_sdk_proto = { package = "cosmos-sdk-proto", git = "https://github.com/permissionlessweb/cosmos-rust", branch = "main", features = ["cosmwasm"] }

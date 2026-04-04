@@ -61,37 +61,37 @@ anybuf    = { version = "1.0.0" }
 ## Testing
 anyhow          = "1"
 clap               = { version = "4.0.32", features = ["derive"] }
-cosmwasm-schema = { version = "3.0.4" }
-cosmwasm-std    = { version = "3.0.4", features = ["cosmwasm_3_0"] }
+cosmwasm-schema = { git = "https://github.com/permissionlessweb/cosmwasm", branch = "mvp" }
+cosmwasm-std = { git = "https://github.com/permissionlessweb/cosmwasm", branch = "mvp" }
 coverage-helper = { version = "0.2.2" }
-cw-address-like = { path = "../../cw-plus-plus/packages/address-like" }
-cw-asset        = { path = "../../cw-asset" }
+cw-address-like = { git = "https://github.com/permissionlessweb/cw-plus-plus", branch = "main" }
+cw-asset = { git = "https://github.com/permissionlessweb/cw-asset", branch = "main" }
 cw-blob = { features = ["library"], path = "../../cw-packages/contracts/cw-blob" }
 cw-clearable    = { path = "../../cw-packages/cw-clearable" }
-cw-controllers     = { path = "../../cw-minus/packages/controllers" }
-cw-orch            = { path = "../../cw-orchestrator/cw-orch" }
+cw-controllers = { git = "https://github.com/permissionlessweb/cw-minus", branch = "main" }
+cw-orch = { git = "https://github.com/permissionlessweb/cw-orchestrator", branch = "main" }
 cw-orch-interchain = { path = "../../cw-orchestrator/cw-orch-interchain" }
-cw-orch-polytone = { package = "abstract-cw-orch-polytone", path = "../../polytone/packages/cw-orch-polytone" }
-cw-ownable      = { path = "../../cw-plus-plus/packages/ownable" }
-cw-storage-plus = { version = "3.0.1" }
-cw-utils        = { path = "../../cw-minus/packages/cw-utils" }
+cw-orch-polytone = { package = "abstract-cw-orch-polytone", git = "https://github.com/permissionlessweb/polytone", branch = "bump/cw3" }
+cw-ownable = { git = "https://github.com/permissionlessweb/cw-plus-plus", branch = "main" }
+cw-storage-plus = { git = "https://github.com/permissionlessweb/cw-storage-plus", branch = "mvp" }
+cw-utils = { git = "https://github.com/permissionlessweb/cw-minus", branch = "main" }
 
-cw2             = { path = "../../cw-minus/packages/cw2" }
+cw2 = { git = "https://github.com/permissionlessweb/cw-minus", branch = "main" }
 
-cw20            = { path = "../../cw-plus/packages/cw20" }
-cw20-base       = { path = "../../cw-plus/contracts/cw20-base" }
+cw20 = { git = "https://github.com/permissionlessweb/cw-plus", branch = "main" }
+cw20-base = { git = "https://github.com/permissionlessweb/cw-plus", branch = "main" }
 
-cosmos-sdk-proto = { path = "../../cosmos-rust/cosmos-sdk-proto", default-features = false }
-cosmrs           = { path = "../../cosmos-rust/cosmrs" }
-cw-plus-interface = { package = "cw-plus-orch", path = "../../cw-orchestrator/packages/integrations/cw-plus" }
-ibc-proto        = { path = "../../ibc-proto-rs", default-features = false }
+cosmos-sdk-proto = { git = "https://github.com/permissionlessweb/cosmos-rust", branch = "main" }
+cosmrs = { git = "https://github.com/permissionlessweb/cosmos-rust", branch = "main" }
+cw-plus-interface = { package = "cw-plus-orch", git = "https://github.com/permissionlessweb/cw-orchestrator", branch = "main" }
+ibc-proto = { git = "https://github.com/permissionlessweb/ibc-proto-rs", branch = "main" }
 
 # Ibc
 ibc-client = { package = "abstract-ibc-client", path = "contracts/native/ibc-client" }
 ibc-host   = { package = "abstract-ibc-host", path = "contracts/native/ibc-host" }
 module-factory     = { package = "abstract-module-factory", path = "contracts/native/module-factory" }
-polytone         = { package = "abstract-polytone", path = "../../polytone/packages/polytone" }
-polytone-note    = { package = "abstract-polytone-note", path = "../../polytone/contracts/main/note" }
+polytone = { package = "abstract-polytone", git = "https://github.com/permissionlessweb/polytone", branch = "bump/cw3" }
+polytone-note = { package = "abstract-polytone-note", git = "https://github.com/permissionlessweb/polytone", branch = "bump/cw3" }
 protobuf  = { version = "2", features = ["with-bytes"] }
 registry           = { package = "abstract-registry", path = "contracts/native/registry" }
 rstest          = "0.17.0"
@@ -107,20 +107,20 @@ tokio              = { version = "1.4", features = ["full"] }
 cw-orch-core     = { path = "../../cw-orchestrator/packages/cw-orch-core" }
 cw-orch-mock     = { path = "../../cw-orchestrator/packages/cw-orch-mock" }
 cw-orch-traits   = { path = "../../cw-orchestrator/packages/cw-orch-traits" }
-tendermint       = { path = "../../tendermint-rs/tendermint" }
-tendermint-proto = { path = "../../tendermint-rs/proto" }
-tendermint-rpc   = { path = "../../tendermint-rs/rpc" }
-abstract-cw-multi-test = { path = "../../cw-multi-test-fork" }
-clone-cw-multi-test = { path = "../../clone-cw-multi-test" }
-abstract-polytone-voice = { package = "abstract-polytone-voice", path = "../../polytone/contracts/main/voice" }
-abstract-polytone-proxy = { package = "abstract-polytone-proxy", path = "../../polytone/contracts/main/proxy" }
-osmosis-std = { path = "../../osmosis-rust/packages/osmosis-std" }
-osmosis-test-tube = { path = "../../osmosis-test-tube/packages/osmosis-test-tube" }
-neutron-std = { path = "../../neutron-std/packages/neutron-std" }
-neutron-test-tube = { path = "../../neutron-test-tube/packages/neutron-test-tube" }
-simple-ica = { path = "../../cw-ibc-demo/packages/simple-ica" }
-simple-ica-controller = { path = "../../cw-ibc-demo/contracts/simple-ica-controller" }
-simple-ica-host = { path = "../../cw-ibc-demo/contracts/simple-ica-host" }
+tendermint = { git = "https://github.com/permissionlessweb/tendermint-rs", branch = "main" }
+tendermint-proto = { git = "https://github.com/permissionlessweb/tendermint-rs", branch = "main" }
+tendermint-rpc = { git = "https://github.com/permissionlessweb/tendermint-rs", branch = "main" }
+abstract-cw-multi-test = { git = "https://github.com/permissionlessweb/cw-multi-test-fork", branch = "bump/cw3/official-ibc-fork" }
+clone-cw-multi-test = { git = "https://github.com/permissionlessweb/cw-multi-test-fork", branch = "cw3/adapt_for_local_execution" }
+abstract-polytone-voice = { git = "https://github.com/permissionlessweb/polytone", branch = "bump/cw3" }
+abstract-polytone-proxy = { git = "https://github.com/permissionlessweb/polytone", branch = "bump/cw3" }
+osmosis-std = { git = "https://github.com/permissionlessweb/osmosis-rust", branch = "main" }
+osmosis-test-tube = { git = "https://github.com/permissionlessweb/osmosis-test-tube", branch = "main" }
+neutron-std = { git = "https://github.com/permissionlessweb/neutron-std", branch = "feat/cw3" }
+neutron-test-tube = { git = "https://github.com/permissionlessweb/neutron-test-tube", branch = "main" }
+simple-ica = { git = "https://github.com/permissionlessweb/cw-ibc-demo", branch = "cosmwasm3" }
+simple-ica-controller = { git = "https://github.com/permissionlessweb/cw-ibc-demo", branch = "cosmwasm3" }
+simple-ica-host = { git = "https://github.com/permissionlessweb/cw-ibc-demo", branch = "cosmwasm3" }
 
 [patch.crates-io]
 nam-blst = { path = "../../nam-blst/bindings/rust" }
