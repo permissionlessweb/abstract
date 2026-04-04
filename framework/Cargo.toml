@@ -54,7 +54,7 @@ abstract-staking-standard = { path = "packages/standards/staking" }
 abstract-standalone = { path = "packages/abstract-standalone", version = "0.26.1" }
 abstract-std     = { version = "0.26.1", path = "packages/abstract-std" }
 abstract-testing = { version = "0.26.1", path = "packages/abstract-testing" }
-abstract-xion    = { package = "xion-account", version = "=0.1.1", features = ["library"], path = "../../xion-account/contracts/account" }
+abstract-xion = { package = "xion-account", git = "https://github.com/permissionlessweb/contracts", branch = "cw3", features = ["library"] }
 ans-host           = { package = "abstract-ans-host", path = "contracts/native/ans-host" }
 anybuf    = { version = "1.0.0" }
 
@@ -66,8 +66,8 @@ cosmwasm-std = { git = "https://github.com/permissionlessweb/cosmwasm", branch =
 coverage-helper = { version = "0.2.2" }
 cw-address-like = { git = "https://github.com/permissionlessweb/cw-plus-plus", branch = "feat/mvp" }
 cw-asset = { git = "https://github.com/permissionlessweb/cw-asset", branch = "main" }
-cw-blob = { features = ["library"], path = "../../cw-packages/contracts/cw-blob" }
-cw-clearable    = { path = "../../cw-packages/cw-clearable" }
+cw-blob = { git = "https://github.com/permissionlessweb/cw-packages", branch = "feat/cw3" }
+cw-clearable = { git = "https://github.com/permissionlessweb/cw-packages", branch = "feat/cw3" }
 cw-controllers = { git = "https://github.com/permissionlessweb/cw-minus", branch = "main" }
 cw-orch = { git = "https://github.com/permissionlessweb/cw-orchestrator", branch = "cw3" }
 cw-orch-interchain = { path = "../../cw-orchestrator/cw-orch-interchain" }
@@ -123,8 +123,11 @@ simple-ica-controller = { git = "https://github.com/permissionlessweb/cw-ibc-dem
 simple-ica-host = { git = "https://github.com/permissionlessweb/cw-ibc-demo", branch = "cosmwasm3" }
 
 [patch.crates-io]
-nam-blst = { path = "../../nam-blst/bindings/rust" }
 
+# Fork patches (managed by dep-switch.py)
+
+# Fork patches (managed by dep-switch.py)
+nam-blst = { git = "https://github.com/permissionlessweb/blst", branch = "main" }
 [workspace.lints.rust]
 unexpected_cfgs = { level = "warn", check-cfg = ['cfg(coverage,coverage_nightly)'] }
 

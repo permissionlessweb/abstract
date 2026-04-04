@@ -48,7 +48,7 @@ abstract-sdk       = { path = "../framework/packages/abstract-sdk" }
 abstract-std       = { path = "../framework/packages/abstract-std" }
 abstract-testing   = { path = "../framework/packages/abstract-testing" }
 
-abstract-xion = { package = "xion-account", version = "=0.1.1", features = ["library"], path = "../../xion-account/contracts/account" }
+abstract-xion = { package = "xion-account", git = "https://github.com/permissionlessweb/contracts", branch = "cw3", features = ["library"] }
 
 ## Testing
 anyhow = "1"
@@ -62,7 +62,7 @@ cosmos-sdk-proto = { git = "https://github.com/permissionlessweb/cosmos-rust", b
 cosmrs = { git = "https://github.com/permissionlessweb/cosmos-rust", branch = "main" }
 cw-address-like = { git = "https://github.com/permissionlessweb/cw-plus-plus", branch = "feat/mvp" }
 cw-asset = { git = "https://github.com/permissionlessweb/cw-asset", branch = "main" }
-cw-blob          = { features = ["library"], path = "../../cw-packages/contracts/cw-blob" }
+cw-blob = { git = "https://github.com/permissionlessweb/cw-packages", branch = "feat/cw3" }
 cw-controllers = { git = "https://github.com/permissionlessweb/cw-minus", branch = "main" }
 #polytone         = { package = "abstract-polytone", version = "2.0.0", git = "https://github.com/permissionlessweb/polytone", branch = "bump/cw3"  }
 #polytone-note    = { package = "abstract-polytone-note", version = "5.0.0", git = "https://github.com/permissionlessweb/polytone", branch = "bump/cw3"  }
@@ -128,20 +128,11 @@ tokio  = { version = "1.33.0", features = ["full"] }
 
 # Backup release profile, will result in warnings during optimization
 [patch.crates-io]
-nam-blst = { path = "../../nam-blst/bindings/rust" }
 
 # Fork patches (managed by dep-switch.py)
 
 # Fork patches (managed by dep-switch.py)
-
-# Fork patches (managed by dep-switch.py)
-
-# Fork patches (managed by dep-switch.py)
-
-# Fork patches (managed by dep-switch.py)
-
-# Fork patches (managed by dep-switch.py)
-cosmwasm-vm = { git = "https://github.com/permissionlessweb/cosmwasm", branch = "mvp" }
+nam-blst = { git = "https://github.com/permissionlessweb/blst", branch = "main" }
 [profile.release]
 codegen-units    = 1
 debug            = false
