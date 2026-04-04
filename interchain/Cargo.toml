@@ -74,12 +74,12 @@ cw-controllers = { git = "https://github.com/permissionlessweb/cw-minus", branch
 #cw-orch-polytone = { package = "abstract-cw-orch-polytone", version = "6.0.1", git = "https://github.com/permissionlessweb/polytone", branch = "bump/cw3"  }
 
 cw-orch = { git = "https://github.com/permissionlessweb/cw-orchestrator", branch = "cw3" }
-cw-orch-clone-testing   = { path = "../../cw-orchestrator/packages/clone-testing" }
-cw-orch-core     = { path = "../../cw-orchestrator/packages/cw-orch-core" }
-cw-orch-daemon    = { path = "../../cw-orchestrator/cw-orch-daemon" }
-cw-orch-interchain = { path = "../../cw-orchestrator/cw-orch-interchain" }
+cw-orch-clone-testing   = { git = "https://github.com/permissionlessweb/cw-orchestrator", branch = "cw3" }
+cw-orch-core     = { git = "https://github.com/permissionlessweb/cw-orchestrator", branch = "cw3" }
+cw-orch-daemon    = { git = "https://github.com/permissionlessweb/cw-orchestrator", branch = "cw3" }
+cw-orch-interchain = { git = "https://github.com/permissionlessweb/cw-orchestrator", branch = "cw3" }
 cw-orch-polytone = { package = "abstract-cw-orch-polytone", git = "https://github.com/permissionlessweb/polytone", branch = "bump/cw3" }
-cw-orch-proto    = { path = "../../cw-orchestrator/packages/interchain/proto" }
+cw-orch-proto    = { git = "https://github.com/permissionlessweb/cw-orchestrator", branch = "cw3" }
 cw-ownable = { git = "https://github.com/permissionlessweb/cw-plus-plus", branch = "feat/mvp" }
 cw-storage-plus = { git = "https://github.com/permissionlessweb/cw-storage-plus", branch = "mvp" }
 cw-utils = { git = "https://github.com/permissionlessweb/cw-minus", branch = "main" }
@@ -99,8 +99,8 @@ abstract-adapter-utils = { path = "../framework/packages/standards/utils" }
 abstract-dex-standard = { path = "../framework/packages/standards/dex" }
 abstract-staking-standard = { path = "../framework/packages/standards/staking" }
 abstract-money-market-standard = { path = "../framework/packages/standards/money-market" }
-cw-orch-mock = { path = "../../cw-orchestrator/packages/cw-orch-mock" }
-cw-orch-traits = { path = "../../cw-orchestrator/packages/cw-orch-traits" }
+cw-orch-mock = { git = "https://github.com/permissionlessweb/cw-orchestrator", branch = "cw3" }
+cw-orch-traits = { git = "https://github.com/permissionlessweb/cw-orchestrator", branch = "cw3" }
 cw-plus-orch = { git = "https://github.com/permissionlessweb/cw-orchestrator", branch = "cw3" }
 ibc-proto = { git = "https://github.com/permissionlessweb/ibc-proto-rs", branch = "main" }
 tendermint = { git = "https://github.com/permissionlessweb/tendermint-rs", branch = "main" }
@@ -128,6 +128,8 @@ tokio  = { version = "1.33.0", features = ["full"] }
 
 # Backup release profile, will result in warnings during optimization
 [patch.crates-io]
+
+# Fork patches (managed by dep-switch.py)
 
 # Fork patches (managed by dep-switch.py)
 

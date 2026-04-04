@@ -70,7 +70,7 @@ cw-blob = { git = "https://github.com/permissionlessweb/cw-packages", branch = "
 cw-clearable = { git = "https://github.com/permissionlessweb/cw-packages", branch = "feat/cw3" }
 cw-controllers = { git = "https://github.com/permissionlessweb/cw-minus", branch = "main" }
 cw-orch = { git = "https://github.com/permissionlessweb/cw-orchestrator", branch = "cw3" }
-cw-orch-interchain = { path = "../../cw-orchestrator/cw-orch-interchain" }
+cw-orch-interchain = { git = "https://github.com/permissionlessweb/cw-orchestrator", branch = "cw3" }
 cw-orch-polytone = { package = "abstract-cw-orch-polytone", git = "https://github.com/permissionlessweb/polytone", branch = "bump/cw3" }
 cw-ownable = { git = "https://github.com/permissionlessweb/cw-plus-plus", branch = "feat/mvp" }
 cw-storage-plus = { git = "https://github.com/permissionlessweb/cw-storage-plus", branch = "mvp" }
@@ -104,9 +104,9 @@ thiserror = { version = "1.0.50" }
 tokio              = { version = "1.4", features = ["full"] }
 
 # Additional local forks (transitive deps)
-cw-orch-core     = { path = "../../cw-orchestrator/packages/cw-orch-core" }
-cw-orch-mock     = { path = "../../cw-orchestrator/packages/cw-orch-mock" }
-cw-orch-traits   = { path = "../../cw-orchestrator/packages/cw-orch-traits" }
+cw-orch-core     = { git = "https://github.com/permissionlessweb/cw-orchestrator", branch = "cw3" }
+cw-orch-mock     = { git = "https://github.com/permissionlessweb/cw-orchestrator", branch = "cw3" }
+cw-orch-traits   = { git = "https://github.com/permissionlessweb/cw-orchestrator", branch = "cw3" }
 tendermint = { git = "https://github.com/permissionlessweb/tendermint-rs", branch = "main" }
 tendermint-proto = { git = "https://github.com/permissionlessweb/tendermint-rs", branch = "main" }
 tendermint-rpc = { git = "https://github.com/permissionlessweb/tendermint-rs", branch = "main" }
@@ -123,6 +123,8 @@ simple-ica-controller = { git = "https://github.com/permissionlessweb/cw-ibc-dem
 simple-ica-host = { git = "https://github.com/permissionlessweb/cw-ibc-demo", branch = "cosmwasm3" }
 
 [patch.crates-io]
+
+# Fork patches (managed by dep-switch.py)
 
 # Fork patches (managed by dep-switch.py)
 

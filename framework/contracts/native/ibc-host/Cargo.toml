@@ -25,7 +25,7 @@ cosmwasm-schema = { workspace = true }
 cosmwasm-std    = { workspace = true, features = ["stargate"] }
 cw-orch = { workspace = true }
 cw-ownable      = { workspace = true }
-cw-paginate     = { path = "../../../../../cw-plus-plus/packages/paginate" }
+cw-paginate     = { git = "https://github.com/permissionlessweb/cw-plus-plus", branch = "feat/mvp" }
 cw-storage-plus = { workspace = true }
 cw-utils        = { workspace = true }
 cw2             = { workspace = true }

@@ -64,9 +64,9 @@ wyndex-factory = { git = "https://github.com/permissionlessweb/wynddex", branch 
 wyndex-multi-hop = { git = "https://github.com/permissionlessweb/wynddex", branch = "mvp" }
 wyndex-pair = { git = "https://github.com/permissionlessweb/wynddex", branch = "mvp" }
 wyndex-stake = { git = "https://github.com/permissionlessweb/wynddex", branch = "mvp" }
-cw-orch-core = { path = "../../cw-orchestrator/packages/cw-orch-core" }
-cw-orch-mock = { path = "../../cw-orchestrator/packages/cw-orch-mock" }
-cw-orch-traits = { path = "../../cw-orchestrator/packages/cw-orch-traits" }
+cw-orch-core = { git = "https://github.com/permissionlessweb/cw-orchestrator", branch = "cw3" }
+cw-orch-mock = { git = "https://github.com/permissionlessweb/cw-orchestrator", branch = "cw3" }
+cw-orch-traits = { git = "https://github.com/permissionlessweb/cw-orchestrator", branch = "cw3" }
 cosmrs = { git = "https://github.com/permissionlessweb/cosmos-rust", branch = "main" }
 cosmos-sdk-proto = { git = "https://github.com/permissionlessweb/cosmos-rust", branch = "main" }
 ibc-proto = { git = "https://github.com/permissionlessweb/ibc-proto-rs", branch = "main" }
@@ -88,6 +88,8 @@ simple-ica-host = { git = "https://github.com/permissionlessweb/cw-ibc-demo", br
 
 # Backup release profile, will result in warnings during optimization
 [patch.crates-io]
+
+# Fork patches (managed by dep-switch.py)
 
 # Fork patches (managed by dep-switch.py)
 
