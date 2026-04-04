@@ -64,15 +64,15 @@ clap               = { version = "4.0.32", features = ["derive"] }
 cosmwasm-schema = { git = "https://github.com/permissionlessweb/cosmwasm", branch = "mvp" }
 cosmwasm-std = { git = "https://github.com/permissionlessweb/cosmwasm", branch = "mvp" }
 coverage-helper = { version = "0.2.2" }
-cw-address-like = { git = "https://github.com/permissionlessweb/cw-plus-plus", branch = "main" }
+cw-address-like = { git = "https://github.com/permissionlessweb/cw-plus-plus", branch = "feat/mvp" }
 cw-asset = { git = "https://github.com/permissionlessweb/cw-asset", branch = "main" }
 cw-blob = { features = ["library"], path = "../../cw-packages/contracts/cw-blob" }
 cw-clearable    = { path = "../../cw-packages/cw-clearable" }
 cw-controllers = { git = "https://github.com/permissionlessweb/cw-minus", branch = "main" }
-cw-orch = { git = "https://github.com/permissionlessweb/cw-orchestrator", branch = "main" }
+cw-orch = { git = "https://github.com/permissionlessweb/cw-orchestrator", branch = "cw3" }
 cw-orch-interchain = { path = "../../cw-orchestrator/cw-orch-interchain" }
 cw-orch-polytone = { package = "abstract-cw-orch-polytone", git = "https://github.com/permissionlessweb/polytone", branch = "bump/cw3" }
-cw-ownable = { git = "https://github.com/permissionlessweb/cw-plus-plus", branch = "main" }
+cw-ownable = { git = "https://github.com/permissionlessweb/cw-plus-plus", branch = "feat/mvp" }
 cw-storage-plus = { git = "https://github.com/permissionlessweb/cw-storage-plus", branch = "mvp" }
 cw-utils = { git = "https://github.com/permissionlessweb/cw-minus", branch = "main" }
 
@@ -83,7 +83,7 @@ cw20-base = { git = "https://github.com/permissionlessweb/cw-plus", branch = "ma
 
 cosmos-sdk-proto = { git = "https://github.com/permissionlessweb/cosmos-rust", branch = "main" }
 cosmrs = { git = "https://github.com/permissionlessweb/cosmos-rust", branch = "main" }
-cw-plus-interface = { package = "cw-plus-orch", git = "https://github.com/permissionlessweb/cw-orchestrator", branch = "main" }
+cw-plus-interface = { package = "cw-plus-orch", git = "https://github.com/permissionlessweb/cw-orchestrator", branch = "cw3" }
 ibc-proto = { git = "https://github.com/permissionlessweb/ibc-proto-rs", branch = "main" }
 
 # Ibc
@@ -114,10 +114,10 @@ abstract-cw-multi-test = { git = "https://github.com/permissionlessweb/cw-multi-
 clone-cw-multi-test = { git = "https://github.com/permissionlessweb/cw-multi-test-fork", branch = "cw3/adapt_for_local_execution" }
 abstract-polytone-voice = { git = "https://github.com/permissionlessweb/polytone", branch = "bump/cw3" }
 abstract-polytone-proxy = { git = "https://github.com/permissionlessweb/polytone", branch = "bump/cw3" }
-osmosis-std = { git = "https://github.com/permissionlessweb/osmosis-rust", branch = "main" }
-osmosis-test-tube = { git = "https://github.com/permissionlessweb/osmosis-test-tube", branch = "main" }
+osmosis-std = { git = "https://github.com/permissionlessweb/osmosis-rust", branch = "cw3" }
+osmosis-test-tube = { git = "https://github.com/permissionlessweb/osmosis-test-tube", branch = "cw3" }
 neutron-std = { git = "https://github.com/permissionlessweb/neutron-std", branch = "feat/cw3" }
-neutron-test-tube = { git = "https://github.com/permissionlessweb/neutron-test-tube", branch = "main" }
+neutron-test-tube = { git = "https://github.com/permissionlessweb/neutron-test-tube", branch = "dev" }
 simple-ica = { git = "https://github.com/permissionlessweb/cw-ibc-demo", branch = "cosmwasm3" }
 simple-ica-controller = { git = "https://github.com/permissionlessweb/cw-ibc-demo", branch = "cosmwasm3" }
 simple-ica-host = { git = "https://github.com/permissionlessweb/cw-ibc-demo", branch = "cosmwasm3" }

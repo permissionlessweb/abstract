@@ -59,17 +59,17 @@ clap   = { version = "4.0.32", features = ["derive"] }
 cosmwasm-schema = { git = "https://github.com/permissionlessweb/cosmwasm", branch = "mvp" }
 cosmwasm-std = { git = "https://github.com/permissionlessweb/cosmwasm", branch = "mvp" }
 croncat-app          = { path = "./contracts/apps/croncat", default-features = false }
-cw-address-like = { git = "https://github.com/permissionlessweb/cw-plus-plus", branch = "main" }
+cw-address-like = { git = "https://github.com/permissionlessweb/cw-plus-plus", branch = "feat/mvp" }
 cw-asset = { git = "https://github.com/permissionlessweb/cw-asset", branch = "main" }
 cw-controllers = { git = "https://github.com/permissionlessweb/cw-minus", branch = "main" }
 cw-ica-controller = { path = "../../cw-ica-controller", default-features = false }
-cw-orch = { git = "https://github.com/permissionlessweb/cw-orchestrator", branch = "main" }
+cw-orch = { git = "https://github.com/permissionlessweb/cw-orchestrator", branch = "cw3" }
 cw-orch-interchain   = { path = "../../cw-orchestrator/cw-orch-interchain" }
 cw-orch-neutron-test-tube = { path = "../../cw-orchestrator/packages/cw-orch-neutron-test-tube" }
 cw-orch-osmosis-test-tube = { path = "../../cw-orchestrator/packages/cw-orch-osmosis-test-tube" }
 cw-orch-polytone = { package = "abstract-cw-orch-polytone", git = "https://github.com/permissionlessweb/polytone", branch = "bump/cw3" }
-cw-ownable = { git = "https://github.com/permissionlessweb/cw-plus-plus", branch = "main" }
-cw-plus-orch = { git = "https://github.com/permissionlessweb/cw-orchestrator", branch = "main" }
+cw-ownable = { git = "https://github.com/permissionlessweb/cw-plus-plus", branch = "feat/mvp" }
+cw-plus-orch = { git = "https://github.com/permissionlessweb/cw-orchestrator", branch = "cw3" }
 cw-storage-plus = { git = "https://github.com/permissionlessweb/cw-storage-plus", branch = "mvp" }
 cw-utils = { git = "https://github.com/permissionlessweb/cw-minus", branch = "main" }
 cw2 = { git = "https://github.com/permissionlessweb/cw-minus", branch = "main" }
@@ -79,7 +79,7 @@ dca-app              = { path = "./contracts/apps/dca", default-features = false
 
 mockdex-bundle = { path = "../integrations/bundles/mockdex" }
 neutron-std = { git = "https://github.com/permissionlessweb/neutron-std", branch = "feat/cw3" }
-osmosis-std = { git = "https://github.com/permissionlessweb/osmosis-rust", branch = "main" }
+osmosis-std = { git = "https://github.com/permissionlessweb/osmosis-rust", branch = "cw3" }
 protobuf  = { version = "2", features = ["with-bytes"] }
 rstest = "0.17.0"
 schemars  = { version = "0.8.22" }
@@ -105,8 +105,8 @@ abstract-polytone-note = { git = "https://github.com/permissionlessweb/polytone"
 abstract-polytone-voice = { git = "https://github.com/permissionlessweb/polytone", branch = "bump/cw3" }
 abstract-polytone-proxy = { git = "https://github.com/permissionlessweb/polytone", branch = "bump/cw3" }
 abstract-cw-orch-polytone = { git = "https://github.com/permissionlessweb/polytone", branch = "bump/cw3" }
-osmosis-test-tube = { git = "https://github.com/permissionlessweb/osmosis-test-tube", branch = "main" }
-neutron-test-tube = { git = "https://github.com/permissionlessweb/neutron-test-tube", branch = "main" }
+osmosis-test-tube = { git = "https://github.com/permissionlessweb/osmosis-test-tube", branch = "cw3" }
+neutron-test-tube = { git = "https://github.com/permissionlessweb/neutron-test-tube", branch = "dev" }
 simple-ica = { git = "https://github.com/permissionlessweb/cw-ibc-demo", branch = "cosmwasm3" }
 simple-ica-controller = { git = "https://github.com/permissionlessweb/cw-ibc-demo", branch = "cosmwasm3" }
 simple-ica-host = { git = "https://github.com/permissionlessweb/cw-ibc-demo", branch = "cosmwasm3" }
