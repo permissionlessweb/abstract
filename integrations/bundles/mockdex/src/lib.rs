@@ -160,8 +160,8 @@ impl Deploy<MockBech32> for WynDex {
         let mut suite = SuiteBuilder::new()
             .with_stake_config(DefaultStakeConfig {
                 staking_code_id: 0,
-                tokens_per_power: Uint128::new(1),
-                min_bond: Uint128::new(1),
+                tokens_per_power: Uint128::new(1).into(),
+                min_bond: Uint128::new(1).into(),
                 unbonding_periods: vec![1, 2],
                 max_distributions: 1,
                 converter: None,
@@ -181,8 +181,8 @@ impl Deploy<MockBech32> for WynDex {
                 wyndex::factory::PairType::Xyk {},
                 [eur_info.clone(), usd_info.clone()],
                 Some(PartialStakeConfig {
-                    tokens_per_power: Some(Uint128::new(100)),
-                    min_bond: Some(Uint128::new(100)),
+                    tokens_per_power: Some(Uint128::new(100).into()),
+                    min_bond: Some(Uint128::new(100).into()),
                     ..Default::default()
                 }),
                 None,
@@ -219,8 +219,8 @@ impl Deploy<MockBech32> for WynDex {
                 wyndex::factory::PairType::Xyk {},
                 [eur_info.clone(), wynd_info.clone()],
                 Some(PartialStakeConfig {
-                    tokens_per_power: Some(Uint128::new(100)),
-                    min_bond: Some(Uint128::new(100)),
+                    tokens_per_power: Some(Uint128::new(100).into()),
+                    min_bond: Some(Uint128::new(100).into()),
                     ..Default::default()
                 }),
                 None,
@@ -255,7 +255,7 @@ impl Deploy<MockBech32> for WynDex {
                 &owner,
                 vec![eur_info.clone(), usd_info.clone()],
                 wynd_info.clone(),
-                vec![(1, Decimal::percent(50)), (2, Decimal::one())],
+                vec![(1, Decimal::percent(50).into()), (2, Decimal::one().into())],
             )
             .unwrap();
 
@@ -268,8 +268,8 @@ impl Deploy<MockBech32> for WynDex {
                 wyndex::factory::PairType::Xyk {},
                 [eur_info.clone(), raw_info.clone()],
                 Some(PartialStakeConfig {
-                    tokens_per_power: Some(Uint128::new(100)),
-                    min_bond: Some(Uint128::new(100)),
+                    tokens_per_power: Some(Uint128::new(100).into()),
+                    min_bond: Some(Uint128::new(100).into()),
                     ..Default::default()
                 }),
                 None,
@@ -309,7 +309,7 @@ impl Deploy<MockBech32> for WynDex {
                 &owner,
                 vec![raw_info.clone(), eur_info.clone()],
                 wynd_info.clone(),
-                vec![(1, Decimal::percent(50)), (2, Decimal::one())],
+                vec![(1, Decimal::percent(50).into()), (2, Decimal::one().into())],
             )
             .unwrap();
 
@@ -320,8 +320,8 @@ impl Deploy<MockBech32> for WynDex {
                 wyndex::factory::PairType::Xyk {},
                 [raw_2_info.clone(), raw_info.clone()],
                 Some(PartialStakeConfig {
-                    tokens_per_power: Some(Uint128::new(100)),
-                    min_bond: Some(Uint128::new(100)),
+                    tokens_per_power: Some(Uint128::new(100).into()),
+                    min_bond: Some(Uint128::new(100).into()),
                     ..Default::default()
                 }),
                 None,
@@ -364,7 +364,7 @@ impl Deploy<MockBech32> for WynDex {
                 &owner,
                 vec![raw_info, raw_2_info.clone()],
                 wynd_info.clone(),
-                vec![(1, Decimal::percent(50)), (2, Decimal::one())],
+                vec![(1, Decimal::percent(50).into()), (2, Decimal::one().into())],
             )
             .unwrap();
 

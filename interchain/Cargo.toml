@@ -32,21 +32,21 @@ version = "0.26.1"
 
 [workspace.dependencies]
 # Modules
-abstract-account = { version = "0.26.1" }
+abstract-account = { path = "../framework/contracts/account" }
 
 # Keep these as path, creates cirular dependency otherwise
 # Only need to re-publish all contracts if a re-publish of abstract-interface is required
-abstract-adapter   = { version = "0.26.1" }
-abstract-app       = { version = "0.26.1" }
-abstract-client    = { version = "0.26.1" }
+abstract-adapter   = { path = "../framework/packages/abstract-adapter" }
+abstract-app       = { path = "../framework/packages/abstract-app" }
+abstract-client    = { path = "../framework/packages/abstract-client" }
 # dca-app = { path = "../modules/contracts/apps/dca" }
 abstract-cw-staking           = { path = "../modules/contracts/adapters/cw-staking" }
 abstract-dex-adapter          = { path = "../modules/contracts/adapters/dex" }
-abstract-interface = { version = "0.26.1" }
+abstract-interface = { path = "../framework/packages/abstract-interface" }
 abstract-money-market-adapter = { path = "../modules/contracts/adapters/money-market" }
-abstract-sdk       = { version = "0.26.1" }
-abstract-std       = { version = "0.26.1" }
-abstract-testing   = { version = "0.26.1" }
+abstract-sdk       = { path = "../framework/packages/abstract-sdk" }
+abstract-std       = { path = "../framework/packages/abstract-std" }
+abstract-testing   = { path = "../framework/packages/abstract-testing" }
 
 abstract-xion = { package = "xion-account", version = "=0.1.1", features = ["library"], path = "../../xion-account/contracts/account" }
 
@@ -58,12 +58,12 @@ challenge-app = { path = "../modules/contracts/apps/challenge" }
 clap   = { version = "4.0.32", features = ["derive"] }
 cosmwasm-schema = { version = "3.0.4" }
 cosmwasm-std    = { version = "3.0.4" }
-cosmos-sdk-proto = { version = "0.27.0" }
-cosmrs           = { version = "0.22.0" }
-cw-address-like = { version = "3.0.1" }
-cw-asset        = { version = "4.0.0" }
+cosmos-sdk-proto = { path = "../../cosmos-rust/cosmos-sdk-proto" }
+cosmrs           = { path = "../../cosmos-rust/cosmrs" }
+cw-address-like = { path = "../../cw-plus-plus/packages/address-like" }
+cw-asset        = { path = "../../cw-asset" }
 cw-blob          = { features = ["library"], path = "../../cw-packages/contracts/cw-blob" }
-cw-controllers  = { version = "3.0.0" }
+cw-controllers  = { path = "../../cw-minus/packages/controllers" }
 #polytone         = { package = "abstract-polytone", version = "2.0.0", git = "https://github.com/permissionlessweb/polytone", branch = "bump/cw3"  }
 #polytone-note    = { package = "abstract-polytone-note", version = "5.0.0", git = "https://github.com/permissionlessweb/polytone", branch = "bump/cw3"  }
 #cw-orch            = { version = "0.30.0", path = "../../../cw-orchestrator/cw-orch"}
@@ -73,26 +73,50 @@ cw-controllers  = { version = "3.0.0" }
 #cw-orch-proto         = { version = "0.9.0", path = "../../../cw-orchestrator/cw-orch"}
 #cw-orch-polytone = { package = "abstract-cw-orch-polytone", version = "6.0.1", git = "https://github.com/permissionlessweb/polytone", branch = "bump/cw3"  }
 
-cw-orch            = { version = "0.28.0" }
-cw-orch-clone-testing   = { version = "0.8.0" }
-cw-orch-core     = { version = "2.1.4" }
-cw-orch-daemon    = { version = "0.29.2" }
-cw-orch-interchain = { version = "0.9.0" }
-cw-orch-polytone = { package = "abstract-cw-orch-polytone", version = "6.0.0" }
-cw-orch-proto    = { version = "0.10.0" }
-cw-ownable      = { version = "2.1.0" }
-cw-storage-plus = "3.0.0"
-cw-utils        = { version = "3.0.0" }
-cw2             = { version = "3.0.0" }
-cw20            = { version = "2.0.0" }
-cw20-base       = { version = "2.0.0" }
-polytone         = { package = "abstract-polytone", version = "3.0.0-rc" }
-polytone-note    = { package = "abstract-polytone-note", version = "5.0.0" }
+cw-orch            = { path = "../../cw-orchestrator/cw-orch" }
+cw-orch-clone-testing   = { path = "../../cw-orchestrator/packages/clone-testing" }
+cw-orch-core     = { path = "../../cw-orchestrator/packages/cw-orch-core" }
+cw-orch-daemon    = { path = "../../cw-orchestrator/cw-orch-daemon" }
+cw-orch-interchain = { path = "../../cw-orchestrator/cw-orch-interchain" }
+cw-orch-polytone = { package = "abstract-cw-orch-polytone", path = "../../polytone/packages/cw-orch-polytone" }
+cw-orch-proto    = { path = "../../cw-orchestrator/packages/interchain/proto" }
+cw-ownable      = { path = "../../cw-plus-plus/packages/ownable" }
+cw-storage-plus = "3.0.1"
+cw-utils        = { path = "../../cw-minus/packages/cw-utils" }
+cw2             = { path = "../../cw-minus/packages/cw2" }
+cw20            = { path = "../../cw-plus/packages/cw20" }
+cw20-base       = { path = "../../cw-plus/contracts/cw20-base" }
+polytone         = { package = "abstract-polytone", path = "../../polytone/packages/polytone" }
+polytone-note    = { package = "abstract-polytone-note", path = "../../polytone/contracts/main/note" }
 # cw20            = { version = "2.0.0" }# cw20-base       = { version = "2.0.0", features = ["library"] }
 
 # cw-address-like = { version = "2.0" }
 # cw-asset        = { version = "4.0" }
 # cw-ownable      = { version = "2.0" }
+
+abstract-macros = { path = "../framework/packages/abstract-macros" }
+abstract-adapter-utils = { path = "../framework/packages/standards/utils" }
+abstract-dex-standard = { path = "../framework/packages/standards/dex" }
+abstract-staking-standard = { path = "../framework/packages/standards/staking" }
+abstract-money-market-standard = { path = "../framework/packages/standards/money-market" }
+cw-orch-mock = { path = "../../cw-orchestrator/packages/cw-orch-mock" }
+cw-orch-traits = { path = "../../cw-orchestrator/packages/cw-orch-traits" }
+cw-plus-orch = { path = "../../cw-orchestrator/packages/integrations/cw-plus" }
+ibc-proto = { path = "../../ibc-proto-rs" }
+tendermint = { path = "../../tendermint-rs/tendermint" }
+tendermint-proto = { path = "../../tendermint-rs/proto" }
+tendermint-rpc = { path = "../../tendermint-rs/rpc" }
+abstract-cw-multi-test = { path = "../../cw-multi-test-fork" }
+clone-cw-multi-test = { path = "../../clone-cw-multi-test" }
+abstract-polytone-voice = { path = "../../polytone/contracts/main/voice" }
+abstract-polytone-proxy = { path = "../../polytone/contracts/main/proxy" }
+osmosis-std = { path = "../../osmosis-rust/packages/osmosis-std" }
+osmosis-test-tube = { path = "../../osmosis-test-tube/packages/osmosis-test-tube" }
+neutron-std = { path = "../../neutron-std/packages/neutron-std" }
+neutron-test-tube = { path = "../../neutron-test-tube/packages/neutron-test-tube" }
+simple-ica = { path = "../../cw-ibc-demo/packages/simple-ica" }
+simple-ica-controller = { path = "../../cw-ibc-demo/contracts/simple-ica-controller" }
+simple-ica-host = { path = "../../cw-ibc-demo/contracts/simple-ica-host" }
 
 protobuf  = { version = "2", features = ["with-bytes"] }
 rstest = "0.17.0"
@@ -102,81 +126,11 @@ serde     = { version = "1.0", default-features = false, features = ["derive"] }
 thiserror = { version = "1.0.49" }
 tokio  = { version = "1.33.0", features = ["full"] }
 
-[patch.crates-io]
-# Framework packages
-abstract-account = { path = "../framework/contracts/account" }
-abstract-adapter = { path = "../framework/packages/abstract-adapter" }
-abstract-adapter-utils = { path = "../framework/packages/standards/utils" }
-abstract-app = { path = "../framework/packages/abstract-app" }
-abstract-client = { path = "../framework/packages/abstract-client" }
-abstract-dex-standard = { path = "../framework/packages/standards/dex" }
-abstract-interface = { path = "../framework/packages/abstract-interface" }
-abstract-macros = { path = "../framework/packages/abstract-macros" }
-abstract-money-market-standard = { path = "../framework/packages/standards/money-market" }
-abstract-sdk = { path = "../framework/packages/abstract-sdk" }
-abstract-staking-standard = { path = "../framework/packages/standards/staking" }
-abstract-std = { path = "../framework/packages/abstract-std" }
-abstract-testing = { path = "../framework/packages/abstract-testing" }
-# External forks - cw-plus
-cw20 = { path = "../../cw-plus/packages/cw20" }
-cw20-base = { path = "../../cw-plus/contracts/cw20-base" }
-# External forks - cw-minus
-cw-utils = { path = "../../cw-minus/packages/cw-utils" }
-cw2 = { path = "../../cw-minus/packages/cw2" }
-cw-controllers = { path = "../../cw-minus/packages/controllers" }
-# External forks - cw-plus-plus
-cw-address-like = { path = "../../cw-plus-plus/packages/address-like" }
-cw-ownable = { path = "../../cw-plus-plus/packages/ownable" }
-# External forks - cw-asset
-cw-asset = { path = "../../cw-asset" }
-# Polytone
-abstract-polytone = { path = "../../polytone/packages/polytone" }
-abstract-polytone-note = { path = "../../polytone/contracts/main/note" }
-abstract-cw-orch-polytone = { path = "../../polytone/packages/cw-orch-polytone" }
-# cosmos-rust
-cosmrs = { path = "../../cosmos-rust/cosmrs" }
-cosmos-sdk-proto = { path = "../../cosmos-rust/cosmos-sdk-proto" }
-# cw-orchestrator
-cw-orch = { path = "../../cw-orchestrator/cw-orch" }
-cw-orch-core = { path = "../../cw-orchestrator/packages/cw-orch-core" }
-cw-orch-mock = { path = "../../cw-orchestrator/packages/cw-orch-mock" }
-cw-orch-traits = { path = "../../cw-orchestrator/packages/cw-orch-traits" }
-cw-orch-clone-testing = { path = "../../cw-orchestrator/packages/clone-testing" }
-cw-orch-daemon = { path = "../../cw-orchestrator/cw-orch-daemon" }
-cw-orch-proto = { path = "../../cw-orchestrator/packages/interchain/proto" }
-cw-plus-orch = { path = "../../cw-orchestrator/packages/integrations/cw-plus" }
-# ibc-proto
-ibc-proto = { path = "../../ibc-proto-rs" }
-# tendermint-rs
-tendermint-proto = { path = "../../tendermint-rs/proto" }
-tendermint = { path = "../../tendermint-rs/tendermint" }
-tendermint-rpc = { path = "../../tendermint-rs/rpc" }
-# cw-multi-test-fork
-abstract-cw-multi-test = { path = "../../cw-multi-test-fork" }
-clone-cw-multi-test = { path = "../../clone-cw-multi-test" }
-# polytone
-abstract-polytone-voice = { path = "../../polytone/contracts/main/voice" }
-abstract-polytone-proxy = { path = "../../polytone/contracts/main/proxy" }
-# osmosis & neutron
-osmosis-std = { path = "../../osmosis-rust/packages/osmosis-std" }
-osmosis-test-tube = { path = "../../osmosis-test-tube/packages/osmosis-test-tube" }
-neutron-std = { path = "../../neutron-std/packages/neutron-std" }
-neutron-test-tube = { path = "../../neutron-test-tube/packages/neutron-test-tube" }
-# cw-ibc-demo
-simple-ica = { path = "../../cw-ibc-demo/packages/simple-ica" }
-simple-ica-controller = { path = "../../cw-ibc-demo/contracts/simple-ica-controller" }
-simple-ica-host = { path = "../../cw-ibc-demo/contracts/simple-ica-host" }
-
-[patch.'https://github.com/permissionlessweb/cw-orchestrator']
-cw-orch = { path = "../../cw-orchestrator/cw-orch" }
-cw-orch-core = { path = "../../cw-orchestrator/packages/cw-orch-core" }
-cw-orch-mock = { path = "../../cw-orchestrator/packages/cw-orch-mock" }
-cw-orch-traits = { path = "../../cw-orchestrator/packages/cw-orch-traits" }
-
-[patch.'https://github.com/permissionlessweb/cw-multi-test-fork']
-abstract-cw-multi-test = { path = "../../cw-multi-test-fork" }
-
 # Backup release profile, will result in warnings during optimization
+[patch.crates-io]
+nam-blst = { path = "../../nam-blst/bindings/rust" }
+cosmwasm-vm = { path = "../../cosmwasm/packages/vm" }
+
 [profile.release]
 codegen-units    = 1
 debug            = false

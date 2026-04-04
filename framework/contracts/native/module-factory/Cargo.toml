@@ -30,9 +30,6 @@ semver          = { workspace = true }
 serde-cw-value  = { workspace = true }
 thiserror       = { workspace = true }
 
-[target.'cfg(not(target_arch = "wasm32"))'.dependencies]
-workspace-hack = { version = "0.1", path = "../../../workspace-hack" }
-
 [dev-dependencies]
 abstract-integration-tests = { workspace = true }
 abstract-interface         = { workspace = true }

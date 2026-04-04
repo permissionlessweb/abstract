@@ -16,9 +16,6 @@ default    = []
 interchain = ["dep:cw-orch-interchain", "abstract-interface/interchain"]
 test-utils = ["cw20", "cw20-base", "cw-plus-interface", "abstract-interface/testing"]
 
-[target.'cfg(not(target_arch = "wasm32"))'.dependencies]
-workspace-hack = { version = "0.1", path = "../../workspace-hack" }
-
 [dependencies]
 
 # Keep this as a version and update when publishing new versions

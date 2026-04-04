@@ -34,7 +34,7 @@ abstract-money-market-adapter = { workspace = true, features = [
 anyhow      = { workspace = true }
 # astroport = { version = "3.11.1" }
 # kujira = { version = "0.8" }
-astrovault = { version = "2.0.1" }
+# astrovault = { version = "2.0.1" }
 cosmwasm-std          = { workspace = true }
 cw-asset              = { workspace = true }
 cw-orch               = { workspace = true, features = ["daemon"] }

@@ -574,8 +574,8 @@ impl Suite {
             self.multi_hop.clone(),
             &ExecuteMsg::AssertMinimumReceive {
                 asset_info,
-                prev_balance: Uint128::zero(),
-                minimum_receive: minimum_receive.into(),
+                prev_balance: Uint128::zero().into(),
+                minimum_receive: minimum_receive.into().into(),
                 receiver: receiver.into(),
             },
             &[],
@@ -609,13 +609,13 @@ impl Suite {
         let amount: SimulateSwapOperationsResponse = self.app().wrap().query_wasm_smart(
             self.multi_hop.clone(),
             &QueryMsg::SimulateSwapOperations {
-                offer_amount: offer_amount.into(),
+                offer_amount: Into::<Uint128>::into(offer_amount).into(),
                 operations,
                 referral: false,
                 referral_commission: None,
             },
         )?;
-        Ok(amount.amount.into())
+        Ok(Uint128::try_from(amount.amount).unwrap().u128())
     }
 
     pub fn query_simulate_swap_operations_ref(
@@ -627,13 +627,13 @@ impl Suite {
         let amount: SimulateSwapOperationsResponse = self.app().wrap().query_wasm_smart(
             self.multi_hop.clone(),
             &QueryMsg::SimulateSwapOperations {
-                offer_amount: offer_amount.into(),
+                offer_amount: Into::<Uint128>::into(offer_amount).into(),
                 operations,
                 referral: true,
-                referral_commission: referral_commission.into(),
+                referral_commission: referral_commission.into().map(Into::into),
             },
         )?;
-        Ok(amount.amount.into())
+        Ok(Uint128::try_from(amount.amount).unwrap().u128())
     }
 
     /// Queries the info of the given pair from the factory
@@ -685,7 +685,7 @@ impl Suite {
                 unbonding_period: self.unbonding_period_or_default(unbonding_period),
             },
         )?;
-        Ok(staked.stake.u128())
+        Ok(Uint128::try_from(staked.stake).unwrap().u128())
     }
 
     pub fn query_staked_periods(
@@ -706,7 +706,7 @@ impl Suite {
             .app()
             .wrap()
             .query_wasm_smart(pair_info.staking_addr, &StakeQueryMsg::TotalStaked {})?;
-        Ok(total_staked.total_staked.u128())
+        Ok(Uint128::try_from(total_staked.total_staked).unwrap().u128())
     }
 
     pub fn query_claims(
@@ -753,7 +753,7 @@ impl Suite {
         Ok(rewards
             .rewards
             .into_iter()
-            .map(|(a, p)| (a, p.u128()))
+            .map(|(a, p)| (a, Uint128::try_from(p).unwrap().u128()))
             .filter(|(_, p)| *p > 0)
             .collect())
     }
@@ -771,7 +771,7 @@ impl Suite {
         Ok(rewards
             .rewards
             .into_iter()
-            .map(|(a, p)| (a, p.u128()))
+            .map(|(a, p)| (a, Uint128::try_from(p).unwrap().u128()))
             .filter(|(_, p)| *p > 0)
             .collect())
     }

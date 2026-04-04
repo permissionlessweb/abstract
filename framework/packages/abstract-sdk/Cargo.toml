@@ -37,9 +37,6 @@ serde            = { workspace = true }
 serde-cw-value   = { workspace = true }
 thiserror        = { workspace = true }
 
-[target.'cfg(not(target_arch = "wasm32"))'.dependencies]
-workspace-hack = { version = "0.1", path = "../../workspace-hack" }
-
 [dev-dependencies]
 # Set our own feature when running tests!
 abstract-sdk = { path = ".", features = ["test-utils"] }

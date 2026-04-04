@@ -24,9 +24,9 @@ pub(crate) fn identify_provider(value: &str) -> Result<Box<dyn Identify>, CwStak
         abstract_osmosis_adapter::OSMOSIS => {
             Ok(Box::<abstract_osmosis_adapter::staking::Osmosis>::default())
         }
-        abstract_astrovault_adapter::ASTROVAULT => {
-            Ok(Box::<abstract_astrovault_adapter::staking::Astrovault>::default())
-        }
+        // abstract_astrovault_adapter::ASTROVAULT => {
+        //     Ok(Box::<abstract_astrovault_adapter::staking::Astrovault>::default())
+        // }
         _ => Err(CwStakingError::UnknownStaking(value.to_string())),
     }
 }

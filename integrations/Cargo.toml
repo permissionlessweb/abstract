@@ -28,32 +28,32 @@ version = "0.26.1"
 
 [workspace.dependencies]
 ## crates in order of publishing ## see docs/Publishing.md
-abstract-adapter = { version = "0.26.1" }
-abstract-adapter-utils = { version = "0.26.1" }
-abstract-dex-standard = { version = "0.26.1" }
-abstract-interface = { version = "0.26.1" }
-abstract-money-market-standard = { version = "0.26.1" }
-abstract-sdk = { version = "0.26.1" }
-abstract-staking-standard = { version = "0.26.1" }
-abstract-std = { version = "0.26.1" }
+abstract-adapter = { path = "../framework/packages/abstract-adapter" }
+abstract-adapter-utils = { path = "../framework/packages/standards/utils" }
+abstract-dex-standard = { path = "../framework/packages/standards/dex" }
+abstract-interface = { path = "../framework/packages/abstract-interface" }
+abstract-money-market-standard = { path = "../framework/packages/standards/money-market" }
+abstract-sdk = { path = "../framework/packages/abstract-sdk" }
+abstract-staking-standard = { path = "../framework/packages/standards/staking" }
+abstract-std = { path = "../framework/packages/abstract-std" }
 anyhow = "1.0"
 chrono = { version = "0.4.31", default-features = false }
 clap = { version = "4.0.32", features = ["derive"] }
-cosmwasm-schema = { version = "3.0.1" }
-cosmwasm-std = { version = "3.0.1" }
-cw-address-like = { version = "2.0.0" }
-cw-asset = { version = "4.0.0" }
-cw-controllers = { version = "2.0.0" }
-cw-orch = { version = "0.28.0" }
-cw-ownable = { version = "2.1.0" }
-cw-plus-orch = { version = "0.25.0" }
-cw-storage-plus = { version = "3.0.0" }
-cw-utils = { version = "3.0.0" }
-cw2 = { version = "3.0.0" }
-cw20 = { version = "3.0.0" }
-cw20-base = { version = "3.0.0" }
-neutron-std = { version = "9.1.0" }
-osmosis-std = { version = "0.27.0" }
+cosmwasm-schema = { version = "3.0.4" }
+cosmwasm-std = { version = "3.0.4" }
+cw-address-like = { path = "../../cw-plus-plus/packages/address-like" }
+cw-asset = { path = "../../cw-asset" }
+cw-controllers = { path = "../../cw-minus/packages/controllers" }
+cw-orch = { path = "../../cw-orchestrator/cw-orch" }
+cw-ownable = { path = "../../cw-plus-plus/packages/ownable" }
+cw-plus-orch = { path = "../../cw-orchestrator/packages/integrations/cw-plus" }
+cw-storage-plus = { version = "3.0.1" }
+cw-utils = { path = "../../cw-minus/packages/cw-utils" }
+cw2 = { path = "../../cw-minus/packages/cw2" }
+cw20 = { path = "../../cw-plus/packages/cw20" }
+cw20-base = { path = "../../cw-plus/contracts/cw20-base" }
+neutron-std = { path = "../../neutron-std/packages/neutron-std" }
+osmosis-std = { path = "../../osmosis-rust/packages/osmosis-std" }
 protobuf = { version = "2", features = ["with-bytes"] }
 schemars = { version = "0.8.22" }
 semver = "1.0"
@@ -64,72 +64,32 @@ wyndex-factory = { path = "../../wynddex/contracts/factory" }
 wyndex-multi-hop = { path = "../../wynddex/contracts/multi-hop" }
 wyndex-pair = { path = "../../wynddex/contracts/pair" }
 wyndex-stake = { path = "../../wynddex/contracts/stake", features = ["library"] }
-
-[patch.crates-io]
-# Framework packages
-abstract-adapter = { path = "../framework/packages/abstract-adapter" }
-abstract-adapter-utils = { path = "../framework/packages/standards/utils" }
-abstract-dex-standard = { path = "../framework/packages/standards/dex" }
-abstract-interface = { path = "../framework/packages/abstract-interface" }
-abstract-macros = { path = "../framework/packages/abstract-macros" }
-abstract-money-market-standard = { path = "../framework/packages/standards/money-market" }
-abstract-sdk = { path = "../framework/packages/abstract-sdk" }
-abstract-staking-standard = { path = "../framework/packages/standards/staking" }
-abstract-std = { path = "../framework/packages/abstract-std" }
-# External forks - cw-plus
-cw20 = { path = "../../cw-plus/packages/cw20" }
-cw20-base = { path = "../../cw-plus/contracts/cw20-base" }
-# External forks - cw-minus
-cw-utils = { path = "../../cw-minus/packages/cw-utils" }
-cw2 = { path = "../../cw-minus/packages/cw2" }
-cw-controllers = { path = "../../cw-minus/packages/controllers" }
-# External forks - cw-plus-plus
-cw-address-like = { path = "../../cw-plus-plus/packages/address-like" }
-cw-ownable = { path = "../../cw-plus-plus/packages/ownable" }
-# External forks - cw-asset
-cw-asset = { path = "../../cw-asset" }
-# cw-orchestrator
-cw-orch = { path = "../../cw-orchestrator/cw-orch" }
 cw-orch-core = { path = "../../cw-orchestrator/packages/cw-orch-core" }
 cw-orch-mock = { path = "../../cw-orchestrator/packages/cw-orch-mock" }
 cw-orch-traits = { path = "../../cw-orchestrator/packages/cw-orch-traits" }
-cw-plus-orch = { path = "../../cw-orchestrator/packages/integrations/cw-plus" }
-# cosmos-rust
 cosmrs = { path = "../../cosmos-rust/cosmrs" }
 cosmos-sdk-proto = { path = "../../cosmos-rust/cosmos-sdk-proto" }
-# ibc-proto
 ibc-proto = { path = "../../ibc-proto-rs" }
-# tendermint-rs
-tendermint-proto = { path = "../../tendermint-rs/proto" }
 tendermint = { path = "../../tendermint-rs/tendermint" }
+tendermint-proto = { path = "../../tendermint-rs/proto" }
 tendermint-rpc = { path = "../../tendermint-rs/rpc" }
-# cw-multi-test-fork
 abstract-cw-multi-test = { path = "../../cw-multi-test-fork" }
 clone-cw-multi-test = { path = "../../clone-cw-multi-test" }
-# polytone
 abstract-polytone = { path = "../../polytone/packages/polytone" }
 abstract-polytone-note = { path = "../../polytone/contracts/main/note" }
 abstract-polytone-voice = { path = "../../polytone/contracts/main/voice" }
 abstract-polytone-proxy = { path = "../../polytone/contracts/main/proxy" }
 abstract-cw-orch-polytone = { path = "../../polytone/packages/cw-orch-polytone" }
-# osmosis & neutron
-osmosis-std = { path = "../../osmosis-rust/packages/osmosis-std" }
 osmosis-test-tube = { path = "../../osmosis-test-tube/packages/osmosis-test-tube" }
-neutron-std = { path = "../../neutron-std/packages/neutron-std" }
 neutron-test-tube = { path = "../../neutron-test-tube/packages/neutron-test-tube" }
-# cw-ibc-demo
 simple-ica = { path = "../../cw-ibc-demo/packages/simple-ica" }
 simple-ica-controller = { path = "../../cw-ibc-demo/contracts/simple-ica-controller" }
 simple-ica-host = { path = "../../cw-ibc-demo/contracts/simple-ica-host" }
 
-[patch."https://github.com/abstractsdk/wynddex"]
-wyndex           = { path = "../../wynddex/packages/wyndex" }
-wyndex-factory   = { path = "../../wynddex/contracts/factory" }
-wyndex-multi-hop = { path = "../../wynddex/contracts/multi-hop" }
-wyndex-pair      = { path = "../../wynddex/contracts/pair" }
-wyndex-stake     = { path = "../../wynddex/contracts/stake" }
-
 # Backup release profile, will result in warnings during optimization
+[patch.crates-io]
+nam-blst = { path = "../../nam-blst/bindings/rust" }
+
 [profile.release]
 codegen-units    = 1
 debug            = false

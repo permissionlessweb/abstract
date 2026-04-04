@@ -24,9 +24,9 @@ pub(crate) fn identify_exchange(value: &str) -> Result<Box<dyn Identify>, DexErr
         abstract_osmosis_adapter::OSMOSIS => {
             Ok(Box::<abstract_osmosis_adapter::dex::Osmosis>::default())
         }
-        abstract_astrovault_adapter::ASTROVAULT => {
-            Ok(Box::<abstract_astrovault_adapter::dex::Astrovault>::default())
-        }
+        // abstract_astrovault_adapter::ASTROVAULT => {
+        //     Ok(Box::<abstract_astrovault_adapter::dex::Astrovault>::default())
+        // }
         _ => Err(DexError::UnknownDex(value.to_owned())),
     }
 }
