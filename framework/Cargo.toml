@@ -127,7 +127,7 @@ simple-ica-host = { git = "https://github.com/permissionlessweb/cw-ibc-demo", br
 # Fork patches (managed by dep-switch.py)
 
 # Fork patches (managed by dep-switch.py)
-nam-blst = { git = "https://github.com/permissionlessweb/blst", branch = "main" }
+nam-blst = { git = "https://github.com/permissionlessweb/blst", branch = "master" }
 [workspace.lints.rust]
 unexpected_cfgs = { level = "warn", check-cfg = ['cfg(coverage,coverage_nightly)'] }
 

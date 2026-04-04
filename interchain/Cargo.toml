@@ -132,7 +132,7 @@ tokio  = { version = "1.33.0", features = ["full"] }
 # Fork patches (managed by dep-switch.py)
 
 # Fork patches (managed by dep-switch.py)
-nam-blst = { git = "https://github.com/permissionlessweb/blst", branch = "main" }
+nam-blst = { git = "https://github.com/permissionlessweb/blst", branch = "master" }
 [profile.release]
 codegen-units    = 1
 debug            = false
