@@ -75,17 +75,6 @@ impl PartialEq for SubscriptionError {
     
     fn eq(&self, other: &Self) -> bool {
         match (self, other) {
-            (Self::Std(l0), Self::Std(r0)) => l0.to_string() == r0.to_string(),
-            (Self::Abstract(l0), Self::Abstract(r0)) => l0.to_string() == r0.to_string(),
-            (Self::AbstractSdk(l0), Self::AbstractSdk(r0)) => l0.to_string() == r0.to_string(),
-            (Self::Asset(l0), Self::Asset(r0)) => l0.to_string() == r0.to_string(),
-            (Self::AdminError(l0), Self::AdminError(r0)) => l0.to_string() == r0.to_string(),
-            (Self::DecimalError(l0), Self::DecimalError(r0)) => l0 == r0,
-            (Self::AppError(l0), Self::AppError(r0)) => l0.to_string() == r0.to_string(),
-            (Self::Overflow(l0), Self::Overflow(r0)) => l0 == r0,
-            (Self::CheckedMultiplyFractionError(l0), Self::CheckedMultiplyFractionError(r0)) => l0 == r0,
-            (Self::WrongToken(l0), Self::WrongToken(r0)) => l0 == r0,
-            (Self::InsufficientPayment(l0, l1), Self::InsufficientPayment(r0, r1)) => l0 == r0 && l1 == r1,
             _ => core::mem::discriminant(self) == core::mem::discriminant(other),
         }
     }

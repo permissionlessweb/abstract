@@ -26,7 +26,7 @@ cosmwasm-std       = { workspace = true }
 # counter-contract = { version = "0.27.0" } # Removed: pulls duplicate hermes/tendermint from registry
 cw-controllers            = { workspace = true }
 cw-orch            = { workspace = true, features = ["daemon"] }
-cw-orch-interchain = { workspace = true, features = ["daemon"] }
+cw-orch-interchain = { workspace = true, features = ["starship"] }
 cw-orch-polytone          = { workspace = true }
 cw-orch-proto      = { workspace = true }
 cw-storage-plus.workspace = true

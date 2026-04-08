@@ -118,7 +118,7 @@ dependencies = [
 [[package]]
 name = "abstract-cw-multi-test"
 version = "3.0.0-rc"
-source = "git+https://github.com/permissionlessweb/cw-multi-test-fork?branch=bump%2Fcw3%2Fofficial-ibc-fork#b8f72f4f89cc46a2aff09d785e1f7a0e781fce45"
+source = "git+https://github.com/permissionlessweb/cw-multi-test-fork?branch=bump%2Fcw3%2Fofficial-ibc-fork#74c12ab685231ca5c9429dbc92dd5e7870d9f921"
 dependencies = [
  "bech32 0.11.1",
  "cosmwasm-schema",
@@ -129,7 +129,7 @@ dependencies = [
  "hex",
  "itertools 0.14.0",
  "log",
- "prost 0.14.3",
+ "prost",
  "schemars 0.8.22",
  "serde",
  "serde_json",
@@ -141,7 +141,7 @@ dependencies = [
 [[package]]
 name = "abstract-cw-orch-polytone"
 version = "6.0.1"
-source = "git+https://github.com/permissionlessweb/polytone?branch=bump%2Fcw3#fdef734d4d4a028477ce296333396a72d72eac7a"
+source = "git+https://github.com/permissionlessweb/polytone?branch=bump%2Fcw3#31a4faba81ca6652d51dc4c06bdd240e766e1b03"
 dependencies = [
  "abstract-polytone-note",
  "abstract-polytone-proxy",
@@ -190,7 +190,7 @@ dependencies = [
  "cw-orch",
  "cw-storage-plus",
  "cw20",
- "prost 0.14.3",
+ "prost",
  "serde_json",
 ]
 
@@ -475,7 +475,7 @@ dependencies = [
 [[package]]
 name = "abstract-polytone"
 version = "2.0.0"
-source = "git+https://github.com/permissionlessweb/polytone?branch=bump%2Fcw3#fdef734d4d4a028477ce296333396a72d72eac7a"
+source = "git+https://github.com/permissionlessweb/polytone?branch=bump%2Fcw3#31a4faba81ca6652d51dc4c06bdd240e766e1b03"
 dependencies = [
  "cosmwasm-schema",
  "cosmwasm-std",
@@ -486,7 +486,7 @@ dependencies = [
 [[package]]
 name = "abstract-polytone-note"
 version = "5.0.0"
-source = "git+https://github.com/permissionlessweb/polytone?branch=bump%2Fcw3#fdef734d4d4a028477ce296333396a72d72eac7a"
+source = "git+https://github.com/permissionlessweb/polytone?branch=bump%2Fcw3#31a4faba81ca6652d51dc4c06bdd240e766e1b03"
 dependencies = [
  "abstract-polytone",
  "cosmwasm-schema",
@@ -501,7 +501,7 @@ dependencies = [
 [[package]]
 name = "abstract-polytone-proxy"
 version = "5.0.0"
-source = "git+https://github.com/permissionlessweb/polytone?branch=bump%2Fcw3#fdef734d4d4a028477ce296333396a72d72eac7a"
+source = "git+https://github.com/permissionlessweb/polytone?branch=bump%2Fcw3#31a4faba81ca6652d51dc4c06bdd240e766e1b03"
 dependencies = [
  "abstract-polytone",
  "cosmwasm-schema",
@@ -516,7 +516,7 @@ dependencies = [
 [[package]]
 name = "abstract-polytone-voice"
 version = "5.0.0"
-source = "git+https://github.com/permissionlessweb/polytone?branch=bump%2Fcw3#fdef734d4d4a028477ce296333396a72d72eac7a"
+source = "git+https://github.com/permissionlessweb/polytone?branch=bump%2Fcw3#31a4faba81ca6652d51dc4c06bdd240e766e1b03"
 dependencies = [
  "abstract-polytone",
  "abstract-polytone-proxy",
@@ -582,8 +582,8 @@ dependencies = [
  "dotenv",
  "env_logger 0.11.10",
  "log",
- "prost 0.14.3",
- "prost-types 0.14.3",
+ "prost",
+ "prost-types",
  "reqwest 0.11.27",
  "semver 1.0.28",
  "serde",
@@ -3158,7 +3158,7 @@ dependencies = [
  "itertools 0.13.0",
  "log",
  "num-bigint",
- "prost 0.14.3",
+ "prost",
  "rustc-serialize",
  "schemars 0.8.22",
  "serde",
@@ -3193,7 +3193,7 @@ dependencies = [
 [[package]]
 name = "cnidarium"
 version = "0.84.0"
-source = "git+https://github.com/permissionlessweb/cnidarium?branch=main#b9889886f7d6576443bce5c6cd7768a02386928e"
+source = "git+https://github.com/permissionlessweb/cnidarium?branch=main#8df48e90ba75bb61dcb5c5abec790154ad526755"
 dependencies = [
  "anyhow",
  "async-trait",
@@ -3203,21 +3203,21 @@ dependencies = [
  "hex",
  "ibc-proto",
  "ibc-types",
- "ics23 0.12.0 (git+https://github.com/permissionlessweb/ics23?branch=stable)",
+ "ics23",
  "jmt",
  "metrics",
  "once_cell",
  "parking_lot",
  "pbjson",
  "pin-project",
- "prost 0.14.3",
+ "prost",
  "regex",
  "rocksdb",
  "serde",
  "sha2 0.10.9",
  "smallvec",
  "tempfile",
- "tendermint 0.40.4 (git+https://github.com/permissionlessweb/tendermint-rs?branch=main)",
+ "tendermint",
  "tokio",
  "tokio-stream",
  "tonic",
@@ -3228,13 +3228,13 @@ dependencies = [
 [[package]]
 name = "cnidarium-component"
 version = "2.1.1"
-source = "git+https://github.com/permissionlessweb/penumbra?branch=main#86a196eeea21254e00129d89a6c81d1316382f91"
+source = "git+https://github.com/permissionlessweb/penumbra?branch=main#68e483d16eb3ed0ff31934bf43e740d18bd4d805"
 dependencies = [
  "anyhow",
  "async-trait",
  "cnidarium",
  "hex",
- "tendermint 0.40.4 (git+https://github.com/permissionlessweb/tendermint-rs?branch=main)",
+ "tendermint",
 ]
 
 [[package]]
@@ -3510,14 +3510,14 @@ dependencies = [
 [[package]]
 name = "cosmos-sdk-proto"
 version = "0.28.0"
-source = "git+https://github.com/permissionlessweb/cosmos-rust?branch=main#2017200e4180dec8ed19fdc0cd633279d6b3c6f9"
+source = "git+https://github.com/permissionlessweb/cosmos-rust?branch=main#51a9e50dda277801d3abd7ff0d332d37fbc25a91"
 dependencies = [
  "bytes",
  "http-body-util",
  "informalsystems-pbjson 0.7.0 (git+https://github.com/permissionlessweb/pbjson?branch=main)",
- "prost 0.14.3",
+ "prost",
  "serde",
- "tendermint-proto 0.40.4 (git+https://github.com/permissionlessweb/tendermint-rs?branch=main)",
+ "tendermint-proto",
  "tonic",
  "tonic-prost",
 ]
@@ -3525,7 +3525,7 @@ dependencies = [
 [[package]]
 name = "cosmrs"
 version = "0.23.0"
-source = "git+https://github.com/permissionlessweb/cosmos-rust?branch=main#2017200e4180dec8ed19fdc0cd633279d6b3c6f9"
+source = "git+https://github.com/permissionlessweb/cosmos-rust?branch=main#51a9e50dda277801d3abd7ff0d332d37fbc25a91"
 dependencies = [
  "bip32",
  "cosmos-sdk-proto",
@@ -3537,7 +3537,7 @@ dependencies = [
  "serde_json",
  "signature",
  "subtle-encoding",
- "tendermint 0.40.4 (git+https://github.com/permissionlessweb/tendermint-rs?branch=main)",
+ "tendermint",
  "tendermint-rpc",
  "thiserror 1.0.69",
  "tokio",
@@ -3956,7 +3956,7 @@ dependencies = [
 [[package]]
 name = "cw-address-like"
 version = "3.0.1"
-source = "git+https://github.com/permissionlessweb/cw-plus-plus?branch=feat%2Fmvp#9746e93a5672080189463799e827fdd9f7a95153"
+source = "git+https://github.com/permissionlessweb/cw-plus-plus?branch=feat%2Fmvp#7b852e92cc9217b5c948cd32d1f1a44e12a8be51"
 dependencies = [
  "cosmwasm-std",
 ]
@@ -3964,7 +3964,7 @@ dependencies = [
 [[package]]
 name = "cw-asset"
 version = "4.0.0"
-source = "git+https://github.com/permissionlessweb/cw-asset?branch=main#141c4ecb256d55a5033cafb8e8f3bfd11585360a"
+source = "git+https://github.com/permissionlessweb/cw-asset?branch=main#fb7b1fe82aba1d12a3b08b96fd31a6de696f7e33"
 dependencies = [
  "cosmwasm-schema",
  "cosmwasm-std",
@@ -3997,7 +3997,7 @@ dependencies = [
 [[package]]
 name = "cw-controllers"
 version = "3.0.0"
-source = "git+https://github.com/permissionlessweb/cw-minus?branch=main#47c2b4c18f6d9b7e1b607dc21ee29d7756dc6f06"
+source = "git+https://github.com/permissionlessweb/cw-minus?branch=main#3dcc39ed9c9199b08fff90b9e4a57b464ccc855f"
 dependencies = [
  "cosmwasm-schema",
  "cosmwasm-std",
@@ -4011,7 +4011,7 @@ dependencies = [
 [[package]]
 name = "cw-orch"
 version = "0.30.0"
-source = "git+https://github.com/permissionlessweb/cw-orchestrator?branch=cw3#c613d61d1148239385b14f59d0c2c50468e5d837"
+source = "git+https://github.com/permissionlessweb/cw-orchestrator?branch=cw3#ec4d693aad80ee70ddbd77c3b78c9807bedb6be0"
 dependencies = [
  "anyhow",
  "cosmrs",
@@ -4035,7 +4035,7 @@ dependencies = [
 [[package]]
 name = "cw-orch-clone-testing"
 version = "0.9.2"
-source = "git+https://github.com/permissionlessweb/cw-orchestrator?branch=cw3#c613d61d1148239385b14f59d0c2c50468e5d837"
+source = "git+https://github.com/permissionlessweb/cw-orchestrator?branch=cw3#ec4d693aad80ee70ddbd77c3b78c9807bedb6be0"
 dependencies = [
  "anyhow",
  "clone-cw-multi-test",
@@ -4055,7 +4055,7 @@ dependencies = [
 [[package]]
 name = "cw-orch-contract-derive"
 version = "0.21.1"
-source = "git+https://github.com/permissionlessweb/cw-orchestrator?branch=cw3#c613d61d1148239385b14f59d0c2c50468e5d837"
+source = "git+https://github.com/permissionlessweb/cw-orchestrator?branch=cw3#ec4d693aad80ee70ddbd77c3b78c9807bedb6be0"
 dependencies = [
  "convert_case 0.6.0",
  "quote",
@@ -4065,7 +4065,7 @@ dependencies = [
 [[package]]
 name = "cw-orch-core"
 version = "2.1.4"
-source = "git+https://github.com/permissionlessweb/cw-orchestrator?branch=cw3#c613d61d1148239385b14f59d0c2c50468e5d837"
+source = "git+https://github.com/permissionlessweb/cw-orchestrator?branch=cw3#ec4d693aad80ee70ddbd77c3b78c9807bedb6be0"
 dependencies = [
  "abstract-cw-multi-test",
  "anyhow",
@@ -4084,7 +4084,7 @@ dependencies = [
 [[package]]
 name = "cw-orch-daemon"
 version = "0.29.0"
-source = "git+https://github.com/permissionlessweb/cw-orchestrator?branch=cw3#c613d61d1148239385b14f59d0c2c50468e5d837"
+source = "git+https://github.com/permissionlessweb/cw-orchestrator?branch=cw3#ec4d693aad80ee70ddbd77c3b78c9807bedb6be0"
 dependencies = [
  "anyhow",
  "async-recursion",
@@ -4111,8 +4111,8 @@ dependencies = [
  "libc-print",
  "log",
  "once_cell",
- "prost 0.14.3",
- "prost-types 0.14.3",
+ "prost",
+ "prost-types",
  "rand_core 0.6.4",
  "reqwest 0.12.28",
  "ring 0.17.14",
@@ -4131,7 +4131,7 @@ dependencies = [
 [[package]]
 name = "cw-orch-fns-derive"
 version = "0.23.1"
-source = "git+https://github.com/permissionlessweb/cw-orchestrator?branch=cw3#c613d61d1148239385b14f59d0c2c50468e5d837"
+source = "git+https://github.com/permissionlessweb/cw-orchestrator?branch=cw3#ec4d693aad80ee70ddbd77c3b78c9807bedb6be0"
 dependencies = [
  "convert_case 0.6.0",
  "proc-macro2 1.0.106",
@@ -4142,7 +4142,7 @@ dependencies = [
 [[package]]
 name = "cw-orch-from-interface-derive"
 version = "0.1.0"
-source = "git+https://github.com/permissionlessweb/cw-orchestrator?branch=cw3#c613d61d1148239385b14f59d0c2c50468e5d837"
+source = "git+https://github.com/permissionlessweb/cw-orchestrator?branch=cw3#ec4d693aad80ee70ddbd77c3b78c9807bedb6be0"
 dependencies = [
  "proc-macro2 1.0.106",
  "quote",
@@ -4152,7 +4152,7 @@ dependencies = [
 [[package]]
 name = "cw-orch-interchain"
 version = "0.8.1"
-source = "git+https://github.com/permissionlessweb/cw-orchestrator?branch=cw3#c613d61d1148239385b14f59d0c2c50468e5d837"
+source = "git+https://github.com/permissionlessweb/cw-orchestrator?branch=cw3#ec4d693aad80ee70ddbd77c3b78c9807bedb6be0"
 dependencies = [
  "cosmwasm-std",
  "cw-orch-interchain-core",
@@ -4168,7 +4168,7 @@ dependencies = [
 [[package]]
 name = "cw-orch-interchain-core"
 version = "0.9.2"
-source = "git+https://github.com/permissionlessweb/cw-orchestrator?branch=cw3#c613d61d1148239385b14f59d0c2c50468e5d837"
+source = "git+https://github.com/permissionlessweb/cw-orchestrator?branch=cw3#ec4d693aad80ee70ddbd77c3b78c9807bedb6be0"
 dependencies = [
  "base64 0.22.1",
  "cosmwasm-schema",
@@ -4179,7 +4179,7 @@ dependencies = [
  "futures",
  "ibc-relayer-types",
  "log",
- "prost 0.14.3",
+ "prost",
  "serde",
  "serde_json",
  "thiserror 1.0.69",
@@ -4190,7 +4190,7 @@ dependencies = [
 [[package]]
 name = "cw-orch-interchain-daemon"
 version = "0.9.0"
-source = "git+https://github.com/permissionlessweb/cw-orchestrator?branch=cw3#c613d61d1148239385b14f59d0c2c50468e5d837"
+source = "git+https://github.com/permissionlessweb/cw-orchestrator?branch=cw3#ec4d693aad80ee70ddbd77c3b78c9807bedb6be0"
 dependencies = [
  "async-recursion",
  "base64 0.22.1",
@@ -4219,7 +4219,7 @@ dependencies = [
 [[package]]
 name = "cw-orch-interchain-mock"
 version = "0.9.0"
-source = "git+https://github.com/permissionlessweb/cw-orchestrator?branch=cw3#c613d61d1148239385b14f59d0c2c50468e5d837"
+source = "git+https://github.com/permissionlessweb/cw-orchestrator?branch=cw3#ec4d693aad80ee70ddbd77c3b78c9807bedb6be0"
 dependencies = [
  "anyhow",
  "cosmrs",
@@ -4238,7 +4238,7 @@ dependencies = [
 [[package]]
 name = "cw-orch-mock"
 version = "0.24.4"
-source = "git+https://github.com/permissionlessweb/cw-orchestrator?branch=cw3#c613d61d1148239385b14f59d0c2c50468e5d837"
+source = "git+https://github.com/permissionlessweb/cw-orchestrator?branch=cw3#ec4d693aad80ee70ddbd77c3b78c9807bedb6be0"
 dependencies = [
  "abstract-cw-multi-test",
  "cosmos-sdk-proto",
@@ -4253,7 +4253,7 @@ dependencies = [
 [[package]]
 name = "cw-orch-networks"
 version = "0.24.10"
-source = "git+https://github.com/permissionlessweb/cw-orchestrator?branch=cw3#c613d61d1148239385b14f59d0c2c50468e5d837"
+source = "git+https://github.com/permissionlessweb/cw-orchestrator?branch=cw3#ec4d693aad80ee70ddbd77c3b78c9807bedb6be0"
 dependencies = [
  "cw-orch-core",
  "serde",
@@ -4262,7 +4262,7 @@ dependencies = [
 [[package]]
 name = "cw-orch-proto"
 version = "0.9.0"
-source = "git+https://github.com/permissionlessweb/cw-orchestrator?branch=cw3#c613d61d1148239385b14f59d0c2c50468e5d837"
+source = "git+https://github.com/permissionlessweb/cw-orchestrator?branch=cw3#ec4d693aad80ee70ddbd77c3b78c9807bedb6be0"
 dependencies = [
  "anyhow",
  "cosmwasm-std",
@@ -4273,8 +4273,8 @@ dependencies = [
  "ibc-relayer-types",
  "log",
  "osmosis-std",
- "prost 0.14.3",
- "prost-types 0.14.3",
+ "prost",
+ "prost-types",
  "tokio",
  "tonic",
 ]
@@ -4282,7 +4282,7 @@ dependencies = [
 [[package]]
 name = "cw-orch-starship"
 version = "0.7.0"
-source = "git+https://github.com/permissionlessweb/cw-orchestrator?branch=cw3#c613d61d1148239385b14f59d0c2c50468e5d837"
+source = "git+https://github.com/permissionlessweb/cw-orchestrator?branch=cw3#ec4d693aad80ee70ddbd77c3b78c9807bedb6be0"
 dependencies = [
  "cosmwasm-std",
  "cw-orch-core",
@@ -4305,16 +4305,16 @@ dependencies = [
 [[package]]
 name = "cw-orch-traits"
 version = "0.25.0"
-source = "git+https://github.com/permissionlessweb/cw-orchestrator?branch=cw3#c613d61d1148239385b14f59d0c2c50468e5d837"
+source = "git+https://github.com/permissionlessweb/cw-orchestrator?branch=cw3#ec4d693aad80ee70ddbd77c3b78c9807bedb6be0"
 dependencies = [
  "cw-orch-core",
- "prost-types 0.14.3",
+ "prost-types",
 ]
 
 [[package]]
 name = "cw-ownable"
 version = "3.0.1"
-source = "git+https://github.com/permissionlessweb/cw-plus-plus?branch=feat%2Fmvp#9746e93a5672080189463799e827fdd9f7a95153"
+source = "git+https://github.com/permissionlessweb/cw-plus-plus?branch=feat%2Fmvp#7b852e92cc9217b5c948cd32d1f1a44e12a8be51"
 dependencies = [
  "cosmwasm-schema",
  "cosmwasm-std",
@@ -4328,7 +4328,7 @@ dependencies = [
 [[package]]
 name = "cw-ownable-derive"
 version = "3.0.1"
-source = "git+https://github.com/permissionlessweb/cw-plus-plus?branch=feat%2Fmvp#9746e93a5672080189463799e827fdd9f7a95153"
+source = "git+https://github.com/permissionlessweb/cw-plus-plus?branch=feat%2Fmvp#7b852e92cc9217b5c948cd32d1f1a44e12a8be51"
 dependencies = [
  "proc-macro2 1.0.106",
  "quote",
@@ -4338,7 +4338,7 @@ dependencies = [
 [[package]]
 name = "cw-paginate"
 version = "3.0.1"
-source = "git+https://github.com/permissionlessweb/cw-plus-plus?branch=feat%2Fmvp#9746e93a5672080189463799e827fdd9f7a95153"
+source = "git+https://github.com/permissionlessweb/cw-plus-plus?branch=feat%2Fmvp#7b852e92cc9217b5c948cd32d1f1a44e12a8be51"
 dependencies = [
  "cosmwasm-std",
  "cw-storage-plus",
@@ -4348,7 +4348,7 @@ dependencies = [
 [[package]]
 name = "cw-plus-orch"
 version = "0.25.0"
-source = "git+https://github.com/permissionlessweb/cw-orchestrator?branch=cw3#c613d61d1148239385b14f59d0c2c50468e5d837"
+source = "git+https://github.com/permissionlessweb/cw-orchestrator?branch=cw3#ec4d693aad80ee70ddbd77c3b78c9807bedb6be0"
 dependencies = [
  "cosmwasm-schema",
  "cosmwasm-std",
@@ -4410,7 +4410,7 @@ dependencies = [
 [[package]]
 name = "cw-utils"
 version = "3.0.0"
-source = "git+https://github.com/permissionlessweb/cw-minus?branch=main#47c2b4c18f6d9b7e1b607dc21ee29d7756dc6f06"
+source = "git+https://github.com/permissionlessweb/cw-minus?branch=main#3dcc39ed9c9199b08fff90b9e4a57b464ccc855f"
 dependencies = [
  "cosmwasm-schema",
  "cosmwasm-std",
@@ -4467,7 +4467,7 @@ dependencies = [
 [[package]]
 name = "cw2"
 version = "3.0.0"
-source = "git+https://github.com/permissionlessweb/cw-minus?branch=main#47c2b4c18f6d9b7e1b607dc21ee29d7756dc6f06"
+source = "git+https://github.com/permissionlessweb/cw-minus?branch=main#3dcc39ed9c9199b08fff90b9e4a57b464ccc855f"
 dependencies = [
  "cosmwasm-schema",
  "cosmwasm-std",
@@ -4827,7 +4827,7 @@ dependencies = [
 [[package]]
 name = "decaf377-fmd"
 version = "2.1.1"
-source = "git+https://github.com/permissionlessweb/penumbra?branch=main#86a196eeea21254e00129d89a6c81d1316382f91"
+source = "git+https://github.com/permissionlessweb/penumbra?branch=main#68e483d16eb3ed0ff31934bf43e740d18bd4d805"
 dependencies = [
  "ark-ff 0.4.2",
  "ark-serialize 0.4.2",
@@ -4841,7 +4841,7 @@ dependencies = [
 [[package]]
 name = "decaf377-frost"
 version = "2.1.1"
-source = "git+https://github.com/permissionlessweb/penumbra?branch=main#86a196eeea21254e00129d89a6c81d1316382f91"
+source = "git+https://github.com/permissionlessweb/penumbra?branch=main#68e483d16eb3ed0ff31934bf43e740d18bd4d805"
 dependencies = [
  "anyhow",
  "ark-ff 0.4.2",
@@ -4857,7 +4857,7 @@ dependencies = [
 [[package]]
 name = "decaf377-ka"
 version = "2.1.1"
-source = "git+https://github.com/permissionlessweb/penumbra?branch=main#86a196eeea21254e00129d89a6c81d1316382f91"
+source = "git+https://github.com/permissionlessweb/penumbra?branch=main#68e483d16eb3ed0ff31934bf43e740d18bd4d805"
 dependencies = [
  "ark-ff 0.4.2",
  "decaf377",
@@ -6858,7 +6858,7 @@ dependencies = [
  "indexmap 2.13.1",
  "slab",
  "tokio",
- "tokio-util 0.7.18",
+ "tokio-util",
  "tracing",
 ]
 
@@ -6877,7 +6877,7 @@ dependencies = [
  "indexmap 2.13.1",
  "slab",
  "tokio",
- "tokio-util 0.7.18",
+ "tokio-util",
  "tracing",
 ]
 
@@ -7515,7 +7515,7 @@ dependencies = [
 [[package]]
 name = "ibc-chain-registry"
 version = "0.32.2"
-source = "git+https://github.com/permissionlessweb/hermes?branch=master#91cb8238e0b93bb0a0f19c7e5e0a100925e0048a"
+source = "git+https://github.com/permissionlessweb/hermes?branch=master#e893a315518a35ea37f413407554904206cc7a11"
 dependencies = [
  "async-trait",
  "flex-error",
@@ -7546,7 +7546,7 @@ dependencies = [
  "ibc-core-host",
  "ibc-primitives",
  "serde",
- "tendermint 0.40.4 (git+https://github.com/permissionlessweb/tendermint-rs?branch=main)",
+ "tendermint",
  "tendermint-light-client-verifier",
 ]
 
@@ -7562,9 +7562,9 @@ dependencies = [
  "ibc-primitives",
  "ibc-proto",
  "serde",
- "tendermint 0.40.4 (git+https://github.com/permissionlessweb/tendermint-rs?branch=main)",
+ "tendermint",
  "tendermint-light-client-verifier",
- "tendermint-proto 0.40.4 (git+https://github.com/permissionlessweb/tendermint-rs?branch=main)",
+ "tendermint-proto",
 ]
 
 [[package]]
@@ -7641,7 +7641,7 @@ dependencies = [
  "serde",
  "sha2 0.10.9",
  "subtle-encoding",
- "tendermint 0.40.4 (git+https://github.com/permissionlessweb/tendermint-rs?branch=main)",
+ "tendermint",
 ]
 
 [[package]]
@@ -7670,7 +7670,7 @@ dependencies = [
  "ibc-core-host-types",
  "ibc-primitives",
  "subtle-encoding",
- "tendermint 0.40.4 (git+https://github.com/permissionlessweb/tendermint-rs?branch=main)",
+ "tendermint",
 ]
 
 [[package]]
@@ -7690,7 +7690,7 @@ dependencies = [
  "schemars 0.8.22",
  "serde",
  "subtle-encoding",
- "tendermint 0.40.4 (git+https://github.com/permissionlessweb/tendermint-rs?branch=main)",
+ "tendermint",
 ]
 
 [[package]]
@@ -7704,7 +7704,7 @@ dependencies = [
  "ibc-core-host-types",
  "ibc-primitives",
  "ibc-proto",
- "ics23 0.12.0 (git+https://github.com/permissionlessweb/ics23?branch=stable)",
+ "ics23",
  "parity-scale-codec",
  "scale-info",
  "schemars 0.8.22",
@@ -7723,7 +7723,7 @@ dependencies = [
  "ibc-core-handler-types",
  "ibc-core-host",
  "ibc-primitives",
- "prost 0.14.3",
+ "prost",
 ]
 
 [[package]]
@@ -7744,7 +7744,7 @@ dependencies = [
  "schemars 0.8.22",
  "serde",
  "subtle-encoding",
- "tendermint 0.40.4 (git+https://github.com/permissionlessweb/tendermint-rs?branch=main)",
+ "tendermint",
 ]
 
 [[package]]
@@ -7783,7 +7783,7 @@ dependencies = [
  "schemars 0.8.22",
  "serde",
  "subtle-encoding",
- "tendermint 0.40.4 (git+https://github.com/permissionlessweb/tendermint-rs?branch=main)",
+ "tendermint",
 ]
 
 [[package]]
@@ -7824,7 +7824,7 @@ dependencies = [
  "serde",
  "sha2 0.10.9",
  "subtle-encoding",
- "tendermint 0.40.4 (git+https://github.com/permissionlessweb/tendermint-rs?branch=main)",
+ "tendermint",
 ]
 
 [[package]]
@@ -7838,7 +7838,7 @@ dependencies = [
  "displaydoc",
  "ibc-primitives",
  "parity-scale-codec",
- "prost 0.14.3",
+ "prost",
  "scale-info",
  "schemars 0.8.22",
  "serde",
@@ -7874,7 +7874,7 @@ dependencies = [
  "schemars 0.8.22",
  "serde",
  "subtle-encoding",
- "tendermint 0.40.4 (git+https://github.com/permissionlessweb/tendermint-rs?branch=main)",
+ "tendermint",
 ]
 
 [[package]]
@@ -7901,7 +7901,7 @@ dependencies = [
 [[package]]
 name = "ibc-middleware-module"
 version = "0.2.0"
-source = "git+https://github.com/permissionlessweb/ibc-middleware?branch=main#12ff82556db736939c3c53aa43bc93d56702d2cb"
+source = "git+https://github.com/permissionlessweb/ibc-middleware?branch=main#f64c4715287933f7b28e1e132b157200b5a8452c"
 dependencies = [
  "ibc-core-channel-types",
  "ibc-core-host-types",
@@ -7913,7 +7913,7 @@ dependencies = [
 [[package]]
 name = "ibc-middleware-module-macros"
 version = "0.2.0"
-source = "git+https://github.com/permissionlessweb/ibc-middleware?branch=main#12ff82556db736939c3c53aa43bc93d56702d2cb"
+source = "git+https://github.com/permissionlessweb/ibc-middleware?branch=main#f64c4715287933f7b28e1e132b157200b5a8452c"
 dependencies = [
  "proc-macro2 1.0.106",
  "quote",
@@ -7922,7 +7922,7 @@ dependencies = [
 [[package]]
 name = "ibc-middleware-overflow-receive"
 version = "0.5.0"
-source = "git+https://github.com/permissionlessweb/ibc-middleware?branch=main#12ff82556db736939c3c53aa43bc93d56702d2cb"
+source = "git+https://github.com/permissionlessweb/ibc-middleware?branch=main#f64c4715287933f7b28e1e132b157200b5a8452c"
 dependencies = [
  "ibc-app-transfer-types",
  "ibc-core-channel-types",
@@ -7939,7 +7939,7 @@ dependencies = [
 [[package]]
 name = "ibc-middleware-packet-forward"
 version = "0.10.0"
-source = "git+https://github.com/permissionlessweb/ibc-middleware?branch=main#12ff82556db736939c3c53aa43bc93d56702d2cb"
+source = "git+https://github.com/permissionlessweb/ibc-middleware?branch=main#f64c4715287933f7b28e1e132b157200b5a8452c"
 dependencies = [
  "borsh",
  "dur",
@@ -7967,7 +7967,7 @@ dependencies = [
  "displaydoc",
  "ibc-proto",
  "parity-scale-codec",
- "prost 0.14.3",
+ "prost",
  "scale-info",
  "schemars 0.8.22",
  "serde",
@@ -7983,13 +7983,13 @@ dependencies = [
  "bytes",
  "cosmos-sdk-proto",
  "flex-error",
- "ics23 0.12.0 (git+https://github.com/permissionlessweb/ics23?branch=stable)",
+ "ics23",
  "informalsystems-pbjson 0.7.0 (git+https://github.com/permissionlessweb/pbjson?branch=main)",
- "prost 0.14.3",
+ "prost",
  "schemars 0.8.22",
  "serde",
  "subtle-encoding",
- "tendermint-proto 0.40.4 (git+https://github.com/permissionlessweb/tendermint-rs?branch=main)",
+ "tendermint-proto",
  "tonic",
  "tonic-prost",
 ]
@@ -7997,7 +7997,7 @@ dependencies = [
 [[package]]
 name = "ibc-relayer"
 version = "0.32.2"
-source = "git+https://github.com/permissionlessweb/hermes?branch=master#91cb8238e0b93bb0a0f19c7e5e0a100925e0048a"
+source = "git+https://github.com/permissionlessweb/hermes?branch=master#e893a315518a35ea37f413407554904206cc7a11"
 dependencies = [
  "anyhow",
  "async-stream",
@@ -8038,7 +8038,7 @@ dependencies = [
  "penumbra-sdk-transaction",
  "penumbra-sdk-view",
  "penumbra-sdk-wallet",
- "prost 0.14.3",
+ "prost",
  "regex",
  "reqwest 0.11.27",
  "retry",
@@ -8053,11 +8053,11 @@ dependencies = [
  "signature",
  "strum 0.25.0",
  "subtle-encoding",
- "tendermint 0.40.4 (git+https://github.com/permissionlessweb/tendermint-rs?branch=main)",
+ "tendermint",
  "tendermint-light-client",
  "tendermint-light-client-detector",
  "tendermint-light-client-verifier",
- "tendermint-proto 0.40.4 (git+https://github.com/permissionlessweb/tendermint-rs?branch=main)",
+ "tendermint-proto",
  "tendermint-rpc",
  "thiserror 1.0.69",
  "tiny-bip39 1.0.0",
@@ -8074,25 +8074,25 @@ dependencies = [
 [[package]]
 name = "ibc-relayer-types"
 version = "0.32.2"
-source = "git+https://github.com/permissionlessweb/hermes?branch=master#91cb8238e0b93bb0a0f19c7e5e0a100925e0048a"
+source = "git+https://github.com/permissionlessweb/hermes?branch=master#e893a315518a35ea37f413407554904206cc7a11"
 dependencies = [
  "bytes",
  "derive_more 0.99.20",
  "flex-error",
  "ibc-proto",
- "ics23 0.12.0 (git+https://github.com/permissionlessweb/ics23?branch=stable)",
+ "ics23",
  "itertools 0.14.0",
  "num-rational",
  "primitive-types 0.12.2",
- "prost 0.14.3",
+ "prost",
  "regex",
  "serde",
  "serde_derive",
  "serde_json",
  "subtle-encoding",
- "tendermint 0.40.4 (git+https://github.com/permissionlessweb/tendermint-rs?branch=main)",
+ "tendermint",
  "tendermint-light-client-verifier",
- "tendermint-proto 0.40.4 (git+https://github.com/permissionlessweb/tendermint-rs?branch=main)",
+ "tendermint-proto",
  "time",
  "tracing",
  "uint 0.9.5",
@@ -8101,7 +8101,7 @@ dependencies = [
 [[package]]
 name = "ibc-telemetry"
 version = "0.32.2"
-source = "git+https://github.com/permissionlessweb/hermes?branch=master#91cb8238e0b93bb0a0f19c7e5e0a100925e0048a"
+source = "git+https://github.com/permissionlessweb/hermes?branch=master#e893a315518a35ea37f413407554904206cc7a11"
 dependencies = [
  "axum",
  "axum-server",
@@ -8115,7 +8115,7 @@ dependencies = [
  "prometheus",
  "serde",
  "serde_json",
- "tendermint 0.40.4 (git+https://github.com/permissionlessweb/tendermint-rs?branch=main)",
+ "tendermint",
  "tokio",
  "tracing",
 ]
@@ -8153,18 +8153,18 @@ dependencies = [
  "ibc-types-domain-type",
  "ibc-types-identifier",
  "ibc-types-timestamp",
- "ics23 0.12.0 (git+https://github.com/permissionlessweb/ics23?branch=stable)",
+ "ics23",
  "num-traits",
  "proc-macro2 0.1.10",
- "prost 0.14.3",
+ "prost",
  "safe-regex",
  "serde",
  "serde_derive",
  "serde_json",
  "sha2 0.10.9",
  "subtle-encoding",
- "tendermint 0.40.4 (git+https://github.com/permissionlessweb/tendermint-rs?branch=main)",
- "tendermint-proto 0.40.4 (git+https://github.com/permissionlessweb/tendermint-rs?branch=main)",
+ "tendermint",
+ "tendermint-proto",
  "time",
  "tracing",
 ]
@@ -8182,16 +8182,16 @@ dependencies = [
  "ibc-types-domain-type",
  "ibc-types-identifier",
  "ibc-types-timestamp",
- "ics23 0.12.0 (git+https://github.com/permissionlessweb/ics23?branch=stable)",
+ "ics23",
  "num-traits",
- "prost 0.14.3",
+ "prost",
  "serde",
  "serde_derive",
  "serde_json",
  "sha2 0.10.9",
  "subtle-encoding",
- "tendermint 0.40.4 (git+https://github.com/permissionlessweb/tendermint-rs?branch=main)",
- "tendermint-proto 0.40.4 (git+https://github.com/permissionlessweb/tendermint-rs?branch=main)",
+ "tendermint",
+ "tendermint-proto",
  "time",
 ]
 
@@ -8211,19 +8211,19 @@ dependencies = [
  "ibc-types-domain-type",
  "ibc-types-identifier",
  "ibc-types-timestamp",
- "ics23 0.12.0 (git+https://github.com/permissionlessweb/ics23?branch=stable)",
+ "ics23",
  "num-traits",
  "primitive-types 0.12.2",
- "prost 0.14.3",
+ "prost",
  "safe-regex",
  "serde",
  "serde_derive",
  "serde_json",
  "sha2 0.10.9",
  "subtle-encoding",
- "tendermint 0.40.4 (git+https://github.com/permissionlessweb/tendermint-rs?branch=main)",
+ "tendermint",
  "tendermint-light-client-verifier",
- "tendermint-proto 0.40.4 (git+https://github.com/permissionlessweb/tendermint-rs?branch=main)",
+ "tendermint-proto",
  "time",
  "tracing",
  "uint 0.9.5",
@@ -8244,17 +8244,17 @@ dependencies = [
  "ibc-types-domain-type",
  "ibc-types-identifier",
  "ibc-types-timestamp",
- "ics23 0.12.0 (git+https://github.com/permissionlessweb/ics23?branch=stable)",
+ "ics23",
  "num-traits",
- "prost 0.14.3",
+ "prost",
  "safe-regex",
  "serde",
  "serde_derive",
  "serde_json",
  "sha2 0.10.9",
  "subtle-encoding",
- "tendermint 0.40.4 (git+https://github.com/permissionlessweb/tendermint-rs?branch=main)",
- "tendermint-proto 0.40.4 (git+https://github.com/permissionlessweb/tendermint-rs?branch=main)",
+ "tendermint",
+ "tendermint-proto",
  "time",
 ]
 
@@ -8265,7 +8265,7 @@ source = "git+https://github.com/permissionlessweb/ibc-types?branch=main#f51ebc3
 dependencies = [
  "anyhow",
  "bytes",
- "prost 0.14.3",
+ "prost",
 ]
 
 [[package]]
@@ -8296,19 +8296,19 @@ dependencies = [
  "ibc-types-domain-type",
  "ibc-types-identifier",
  "ibc-types-timestamp",
- "ics23 0.12.0 (git+https://github.com/permissionlessweb/ics23?branch=stable)",
+ "ics23",
  "num-traits",
  "primitive-types 0.12.2",
- "prost 0.14.3",
+ "prost",
  "safe-regex",
  "serde",
  "serde_derive",
  "serde_json",
  "sha2 0.10.9",
  "subtle-encoding",
- "tendermint 0.40.4 (git+https://github.com/permissionlessweb/tendermint-rs?branch=main)",
+ "tendermint",
  "tendermint-light-client-verifier",
- "tendermint-proto 0.40.4 (git+https://github.com/permissionlessweb/tendermint-rs?branch=main)",
+ "tendermint-proto",
  "time",
  "tracing",
  "uint 0.9.5",
@@ -8326,13 +8326,13 @@ dependencies = [
  "ibc-types-core-client",
  "ibc-types-core-connection",
  "num-traits",
- "prost 0.14.3",
+ "prost",
  "serde",
  "serde_derive",
  "serde_json",
  "subtle-encoding",
- "tendermint 0.40.4 (git+https://github.com/permissionlessweb/tendermint-rs?branch=main)",
- "tendermint-proto 0.40.4 (git+https://github.com/permissionlessweb/tendermint-rs?branch=main)",
+ "tendermint",
+ "tendermint-proto",
  "time",
 ]
 
@@ -8344,13 +8344,13 @@ dependencies = [
  "bytes",
  "displaydoc",
  "num-traits",
- "prost 0.14.3",
+ "prost",
  "serde",
  "serde_derive",
  "serde_json",
  "subtle-encoding",
- "tendermint 0.40.4 (git+https://github.com/permissionlessweb/tendermint-rs?branch=main)",
- "tendermint-proto 0.40.4 (git+https://github.com/permissionlessweb/tendermint-rs?branch=main)",
+ "tendermint",
+ "tendermint-proto",
  "time",
 ]
 
@@ -8379,25 +8379,6 @@ dependencies = [
 [[package]]
 name = "ics23"
 version = "0.12.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "73b17f1a5bd7d12ad30a21445cfa5f52fd7651cb3243ba866f9916b1ec112f12"
-dependencies = [
- "anyhow",
- "blake2",
- "blake3",
- "bytes",
- "hex",
- "informalsystems-pbjson 0.7.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "prost 0.13.5",
- "ripemd",
- "serde",
- "sha2 0.10.9",
- "sha3",
-]
-
-[[package]]
-name = "ics23"
-version = "0.12.0"
 source = "git+https://github.com/permissionlessweb/ics23?branch=stable#310d48268948be7bf4e04e86c68af59ee0f92c69"
 dependencies = [
  "anyhow",
@@ -8406,7 +8387,7 @@ dependencies = [
  "bytes",
  "hex",
  "informalsystems-pbjson 0.7.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "prost 0.14.3",
+ "prost",
  "ripemd",
  "serde",
  "sha2 0.10.9",
@@ -8674,8 +8655,8 @@ source = "git+https://github.com/permissionlessweb/pbjson?branch=main#df9ae64ffc
 dependencies = [
  "heck 0.4.1",
  "itertools 0.12.1",
- "prost 0.14.3",
- "prost-types 0.14.3",
+ "prost",
+ "prost-types",
 ]
 
 [[package]]
@@ -8687,7 +8668,7 @@ dependencies = [
  "chrono",
  "informalsystems-pbjson 0.7.0 (git+https://github.com/permissionlessweb/pbjson?branch=main)",
  "informalsystems-pbjson-build",
- "prost 0.14.3",
+ "prost",
  "prost-build",
  "serde",
 ]
@@ -8842,14 +8823,14 @@ dependencies = [
 [[package]]
 name = "jmt"
 version = "0.12.0"
-source = "git+https://github.com/penumbra-zone/jmt?branch=main#9b363c656aba7bb4cf197f02050e355b43d6d71d"
+source = "git+https://github.com/permissionlessweb/jmt?branch=main#fc83eb8cdb350861ca67b4ab5f86ba5fd24910fd"
 dependencies = [
  "anyhow",
  "borsh",
  "digest 0.10.7",
  "hashbrown 0.13.2",
  "hex",
- "ics23 0.12.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "ics23",
  "itertools 0.10.5",
  "mirai-annotations",
  "num-derive",
@@ -9116,7 +9097,7 @@ dependencies = [
  "thiserror 1.0.69",
  "tokio",
  "tokio-tungstenite 0.23.1",
- "tokio-util 0.7.18",
+ "tokio-util",
  "tower 0.4.13",
  "tower-http 0.5.2",
  "tracing",
@@ -9176,7 +9157,7 @@ dependencies = [
  "serde_json",
  "thiserror 1.0.69",
  "tokio",
- "tokio-util 0.7.18",
+ "tokio-util",
  "tracing",
 ]
 
@@ -9884,7 +9865,7 @@ source = "git+https://github.com/permissionlessweb/sparse-merkle-tree?branch=mai
 dependencies = [
  "borsh",
  "cfg-if",
- "ics23 0.12.0 (git+https://github.com/permissionlessweb/ics23?branch=stable)",
+ "ics23",
  "itertools 0.14.0",
  "sha2 0.10.9",
 ]
@@ -9892,7 +9873,7 @@ dependencies = [
 [[package]]
 name = "namada_account"
 version = "0.251.0"
-source = "git+https://github.com/permissionlessweb/namada?branch=main#79b4feb2e79ad7b0688d8d5fb84de42250189d27"
+source = "git+https://github.com/permissionlessweb/namada?branch=main#06628f59024a61ccc91d21ac8217eb44b9638d8e"
 dependencies = [
  "borsh",
  "namada_core",
@@ -9904,7 +9885,7 @@ dependencies = [
 [[package]]
 name = "namada_controller"
 version = "0.251.0"
-source = "git+https://github.com/permissionlessweb/namada?branch=main#79b4feb2e79ad7b0688d8d5fb84de42250189d27"
+source = "git+https://github.com/permissionlessweb/namada?branch=main#06628f59024a61ccc91d21ac8217eb44b9638d8e"
 dependencies = [
  "namada_core",
  "smooth-operator",
@@ -9914,7 +9895,7 @@ dependencies = [
 [[package]]
 name = "namada_core"
 version = "0.251.0"
-source = "git+https://github.com/permissionlessweb/namada?branch=main#79b4feb2e79ad7b0688d8d5fb84de42250189d27"
+source = "git+https://github.com/permissionlessweb/namada?branch=main#06628f59024a61ccc91d21ac8217eb44b9638d8e"
 dependencies = [
  "bech32 0.11.1",
  "borsh",
@@ -9925,7 +9906,7 @@ dependencies = [
  "ethbridge-structs",
  "eyre",
  "ibc",
- "ics23 0.12.0 (git+https://github.com/permissionlessweb/ics23?branch=stable)",
+ "ics23",
  "impl-num-traits",
  "k256",
  "lazy_static",
@@ -9939,7 +9920,7 @@ dependencies = [
  "num256",
  "num_enum",
  "primitive-types 0.13.1",
- "prost-types 0.14.3",
+ "prost-types",
  "rand 0.8.5",
  "rand_core 0.6.4",
  "rayon",
@@ -9948,8 +9929,8 @@ dependencies = [
  "serde_json",
  "sha2 0.10.9",
  "smooth-operator",
- "tendermint 0.40.4 (git+https://github.com/permissionlessweb/tendermint-rs?branch=main)",
- "tendermint-proto 0.40.4 (git+https://github.com/permissionlessweb/tendermint-rs?branch=main)",
+ "tendermint",
+ "tendermint-proto",
  "thiserror 2.0.18",
  "tiny-keccak",
  "tokio",
@@ -9963,7 +9944,7 @@ dependencies = [
 [[package]]
 name = "namada_ethereum_bridge"
 version = "0.251.0"
-source = "git+https://github.com/permissionlessweb/namada?branch=main#79b4feb2e79ad7b0688d8d5fb84de42250189d27"
+source = "git+https://github.com/permissionlessweb/namada?branch=main#06628f59024a61ccc91d21ac8217eb44b9638d8e"
 dependencies = [
  "borsh",
  "ethers",
@@ -9991,7 +9972,7 @@ dependencies = [
 [[package]]
 name = "namada_events"
 version = "0.251.0"
-source = "git+https://github.com/permissionlessweb/namada?branch=main#79b4feb2e79ad7b0688d8d5fb84de42250189d27"
+source = "git+https://github.com/permissionlessweb/namada?branch=main#06628f59024a61ccc91d21ac8217eb44b9638d8e"
 dependencies = [
  "borsh",
  "namada_core",
@@ -10005,7 +9986,7 @@ dependencies = [
 [[package]]
 name = "namada_gas"
 version = "0.251.0"
-source = "git+https://github.com/permissionlessweb/namada?branch=main#79b4feb2e79ad7b0688d8d5fb84de42250189d27"
+source = "git+https://github.com/permissionlessweb/namada?branch=main#06628f59024a61ccc91d21ac8217eb44b9638d8e"
 dependencies = [
  "borsh",
  "namada_core",
@@ -10018,7 +9999,7 @@ dependencies = [
 [[package]]
 name = "namada_governance"
 version = "0.251.0"
-source = "git+https://github.com/permissionlessweb/namada?branch=main#79b4feb2e79ad7b0688d8d5fb84de42250189d27"
+source = "git+https://github.com/permissionlessweb/namada?branch=main#06628f59024a61ccc91d21ac8217eb44b9638d8e"
 dependencies = [
  "borsh",
  "itertools 0.14.0",
@@ -10041,7 +10022,7 @@ dependencies = [
 [[package]]
 name = "namada_ibc"
 version = "0.251.0"
-source = "git+https://github.com/permissionlessweb/namada?branch=main#79b4feb2e79ad7b0688d8d5fb84de42250189d27"
+source = "git+https://github.com/permissionlessweb/namada?branch=main#06628f59024a61ccc91d21ac8217eb44b9638d8e"
 dependencies = [
  "borsh",
  "data-encoding",
@@ -10052,7 +10033,7 @@ dependencies = [
  "ibc-middleware-module-macros",
  "ibc-middleware-overflow-receive",
  "ibc-middleware-packet-forward",
- "ics23 0.12.0 (git+https://github.com/permissionlessweb/ics23?branch=stable)",
+ "ics23",
  "konst",
  "masp_primitives",
  "namada_core",
@@ -10064,7 +10045,7 @@ dependencies = [
  "namada_tx",
  "namada_vp",
  "primitive-types 0.13.1",
- "prost 0.14.3",
+ "prost",
  "serde",
  "serde_json",
  "sha2 0.10.9",
@@ -10076,7 +10057,7 @@ dependencies = [
 [[package]]
 name = "namada_io"
 version = "0.251.0"
-source = "git+https://github.com/permissionlessweb/namada?branch=main#79b4feb2e79ad7b0688d8d5fb84de42250189d27"
+source = "git+https://github.com/permissionlessweb/namada?branch=main#06628f59024a61ccc91d21ac8217eb44b9638d8e"
 dependencies = [
  "async-trait",
  "kdam",
@@ -10089,7 +10070,7 @@ dependencies = [
 [[package]]
 name = "namada_macros"
 version = "0.251.0"
-source = "git+https://github.com/permissionlessweb/namada?branch=main#79b4feb2e79ad7b0688d8d5fb84de42250189d27"
+source = "git+https://github.com/permissionlessweb/namada?branch=main#06628f59024a61ccc91d21ac8217eb44b9638d8e"
 dependencies = [
  "data-encoding",
  "proc-macro2 1.0.106",
@@ -10101,22 +10082,22 @@ dependencies = [
 [[package]]
 name = "namada_merkle_tree"
 version = "0.251.0"
-source = "git+https://github.com/permissionlessweb/namada?branch=main#79b4feb2e79ad7b0688d8d5fb84de42250189d27"
+source = "git+https://github.com/permissionlessweb/namada?branch=main#06628f59024a61ccc91d21ac8217eb44b9638d8e"
 dependencies = [
  "borsh",
  "eyre",
- "ics23 0.12.0 (git+https://github.com/permissionlessweb/ics23?branch=stable)",
+ "ics23",
  "nam-sparse-merkle-tree",
  "namada_core",
  "namada_macros",
- "prost 0.14.3",
+ "prost",
  "thiserror 2.0.18",
 ]
 
 [[package]]
 name = "namada_parameters"
 version = "0.251.0"
-source = "git+https://github.com/permissionlessweb/namada?branch=main#79b4feb2e79ad7b0688d8d5fb84de42250189d27"
+source = "git+https://github.com/permissionlessweb/namada?branch=main#06628f59024a61ccc91d21ac8217eb44b9638d8e"
 dependencies = [
  "namada_core",
  "namada_macros",
@@ -10131,7 +10112,7 @@ dependencies = [
 [[package]]
 name = "namada_proof_of_stake"
 version = "0.251.0"
-source = "git+https://github.com/permissionlessweb/namada?branch=main#79b4feb2e79ad7b0688d8d5fb84de42250189d27"
+source = "git+https://github.com/permissionlessweb/namada?branch=main#06628f59024a61ccc91d21ac8217eb44b9638d8e"
 dependencies = [
  "borsh",
  "itertools 0.14.0",
@@ -10155,7 +10136,7 @@ dependencies = [
 [[package]]
 name = "namada_replay_protection"
 version = "0.251.0"
-source = "git+https://github.com/permissionlessweb/namada?branch=main#79b4feb2e79ad7b0688d8d5fb84de42250189d27"
+source = "git+https://github.com/permissionlessweb/namada?branch=main#06628f59024a61ccc91d21ac8217eb44b9638d8e"
 dependencies = [
  "namada_core",
 ]
@@ -10163,7 +10144,7 @@ dependencies = [
 [[package]]
 name = "namada_sdk"
 version = "0.251.0"
-source = "git+https://github.com/permissionlessweb/namada?branch=main#79b4feb2e79ad7b0688d8d5fb84de42250189d27"
+source = "git+https://github.com/permissionlessweb/namada?branch=main#06628f59024a61ccc91d21ac8217eb44b9638d8e"
 dependencies = [
  "async-trait",
  "bech32 0.11.1",
@@ -10208,7 +10189,7 @@ dependencies = [
  "owo-colors",
  "paste",
  "patricia_tree",
- "prost 0.14.3",
+ "prost",
  "rand 0.8.5",
  "rand_core 0.6.4",
  "rayon",
@@ -10233,7 +10214,7 @@ dependencies = [
 [[package]]
 name = "namada_shielded_token"
 version = "0.251.0"
-source = "git+https://github.com/permissionlessweb/namada?branch=main#79b4feb2e79ad7b0688d8d5fb84de42250189d27"
+source = "git+https://github.com/permissionlessweb/namada?branch=main#06628f59024a61ccc91d21ac8217eb44b9638d8e"
 dependencies = [
  "async-trait",
  "borsh",
@@ -10276,7 +10257,7 @@ dependencies = [
 [[package]]
 name = "namada_state"
 version = "0.251.0"
-source = "git+https://github.com/permissionlessweb/namada?branch=main#79b4feb2e79ad7b0688d8d5fb84de42250189d27"
+source = "git+https://github.com/permissionlessweb/namada?branch=main#06628f59024a61ccc91d21ac8217eb44b9638d8e"
 dependencies = [
  "borsh",
  "clru",
@@ -10299,7 +10280,7 @@ dependencies = [
 [[package]]
 name = "namada_storage"
 version = "0.251.0"
-source = "git+https://github.com/permissionlessweb/namada?branch=main#79b4feb2e79ad7b0688d8d5fb84de42250189d27"
+source = "git+https://github.com/permissionlessweb/namada?branch=main#06628f59024a61ccc91d21ac8217eb44b9638d8e"
 dependencies = [
  "borsh",
  "itertools 0.14.0",
@@ -10318,7 +10299,7 @@ dependencies = [
 [[package]]
 name = "namada_systems"
 version = "0.251.0"
-source = "git+https://github.com/permissionlessweb/namada?branch=main#79b4feb2e79ad7b0688d8d5fb84de42250189d27"
+source = "git+https://github.com/permissionlessweb/namada?branch=main#06628f59024a61ccc91d21ac8217eb44b9638d8e"
 dependencies = [
  "namada_core",
  "namada_events",
@@ -10328,7 +10309,7 @@ dependencies = [
 [[package]]
 name = "namada_token"
 version = "0.251.0"
-source = "git+https://github.com/permissionlessweb/namada?branch=main#79b4feb2e79ad7b0688d8d5fb84de42250189d27"
+source = "git+https://github.com/permissionlessweb/namada?branch=main#06628f59024a61ccc91d21ac8217eb44b9638d8e"
 dependencies = [
  "borsh",
  "namada_core",
@@ -10346,7 +10327,7 @@ dependencies = [
 [[package]]
 name = "namada_trans_token"
 version = "0.251.0"
-source = "git+https://github.com/permissionlessweb/namada?branch=main#79b4feb2e79ad7b0688d8d5fb84de42250189d27"
+source = "git+https://github.com/permissionlessweb/namada?branch=main#06628f59024a61ccc91d21ac8217eb44b9638d8e"
 dependencies = [
  "konst",
  "namada_core",
@@ -10363,7 +10344,7 @@ dependencies = [
 [[package]]
 name = "namada_tx"
 version = "0.251.0"
-source = "git+https://github.com/permissionlessweb/namada?branch=main#79b4feb2e79ad7b0688d8d5fb84de42250189d27"
+source = "git+https://github.com/permissionlessweb/namada?branch=main#06628f59024a61ccc91d21ac8217eb44b9638d8e"
 dependencies = [
  "ark-bls12-381",
  "bitflags 2.11.0",
@@ -10379,8 +10360,8 @@ dependencies = [
  "namada_macros",
  "num-derive",
  "num-traits",
- "prost 0.14.3",
- "prost-types 0.14.3",
+ "prost",
+ "prost-types",
  "rand_core 0.6.4",
  "serde",
  "serde_json",
@@ -10392,7 +10373,7 @@ dependencies = [
 [[package]]
 name = "namada_tx_env"
 version = "0.251.0"
-source = "git+https://github.com/permissionlessweb/namada?branch=main#79b4feb2e79ad7b0688d8d5fb84de42250189d27"
+source = "git+https://github.com/permissionlessweb/namada?branch=main#06628f59024a61ccc91d21ac8217eb44b9638d8e"
 dependencies = [
  "namada_core",
  "namada_events",
@@ -10402,7 +10383,7 @@ dependencies = [
 [[package]]
 name = "namada_vm"
 version = "0.251.0"
-source = "git+https://github.com/permissionlessweb/namada?branch=main#79b4feb2e79ad7b0688d8d5fb84de42250189d27"
+source = "git+https://github.com/permissionlessweb/namada?branch=main#06628f59024a61ccc91d21ac8217eb44b9638d8e"
 dependencies = [
  "borsh",
  "clru",
@@ -10426,7 +10407,7 @@ dependencies = [
 [[package]]
 name = "namada_vote_ext"
 version = "0.251.0"
-source = "git+https://github.com/permissionlessweb/namada?branch=main#79b4feb2e79ad7b0688d8d5fb84de42250189d27"
+source = "git+https://github.com/permissionlessweb/namada?branch=main#06628f59024a61ccc91d21ac8217eb44b9638d8e"
 dependencies = [
  "borsh",
  "namada_core",
@@ -10438,7 +10419,7 @@ dependencies = [
 [[package]]
 name = "namada_vp"
 version = "0.251.0"
-source = "git+https://github.com/permissionlessweb/namada?branch=main#79b4feb2e79ad7b0688d8d5fb84de42250189d27"
+source = "git+https://github.com/permissionlessweb/namada?branch=main#06628f59024a61ccc91d21ac8217eb44b9638d8e"
 dependencies = [
  "namada_core",
  "namada_events",
@@ -10454,7 +10435,7 @@ dependencies = [
 [[package]]
 name = "namada_vp_env"
 version = "0.251.0"
-source = "git+https://github.com/permissionlessweb/namada?branch=main#79b4feb2e79ad7b0688d8d5fb84de42250189d27"
+source = "git+https://github.com/permissionlessweb/namada?branch=main#06628f59024a61ccc91d21ac8217eb44b9638d8e"
 dependencies = [
  "derivative",
  "masp_primitives",
@@ -10469,7 +10450,7 @@ dependencies = [
 [[package]]
 name = "namada_wallet"
 version = "0.251.0"
-source = "git+https://github.com/permissionlessweb/namada?branch=main#79b4feb2e79ad7b0688d8d5fb84de42250189d27"
+source = "git+https://github.com/permissionlessweb/namada?branch=main#06628f59024a61ccc91d21ac8217eb44b9638d8e"
 dependencies = [
  "bimap",
  "bip32",
@@ -10982,8 +10963,8 @@ dependencies = [
  "cosmwasm-std",
  "cw-schema",
  "osmosis-std-derive",
- "prost 0.14.3",
- "prost-types 0.14.3",
+ "prost",
+ "prost-types",
  "schemars 0.8.22",
  "serde",
  "serde-cw-value",
@@ -10996,7 +10977,7 @@ source = "git+https://github.com/permissionlessweb/osmosis-rust?branch=cw3#7e985
 dependencies = [
  "itertools 0.10.5",
  "proc-macro2 1.0.106",
- "prost-types 0.14.3",
+ "prost-types",
  "quote",
  "syn 1.0.109",
 ]
@@ -11268,7 +11249,7 @@ dependencies = [
 [[package]]
 name = "penumbra-sdk-app"
 version = "2.1.1"
-source = "git+https://github.com/permissionlessweb/penumbra?branch=main#86a196eeea21254e00129d89a6c81d1316382f91"
+source = "git+https://github.com/permissionlessweb/penumbra?branch=main#68e483d16eb3ed0ff31934bf43e740d18bd4d805"
 dependencies = [
  "anyhow",
  "ark-ff 0.4.2",
@@ -11285,7 +11266,7 @@ dependencies = [
  "hex",
  "ibc-proto",
  "ibc-types",
- "ics23 0.12.0 (git+https://github.com/permissionlessweb/ics23?branch=stable)",
+ "ics23",
  "im",
  "jmt",
  "metrics",
@@ -11312,7 +11293,7 @@ dependencies = [
  "penumbra-sdk-tower-trace",
  "penumbra-sdk-transaction",
  "penumbra-sdk-txhash",
- "prost 0.13.5",
+ "prost",
  "rand_chacha 0.3.1",
  "regex",
  "serde",
@@ -11321,11 +11302,11 @@ dependencies = [
  "serde_with",
  "sha2 0.10.9",
  "tempfile",
- "tendermint 0.40.4 (git+https://github.com/permissionlessweb/tendermint-rs?branch=main)",
+ "tendermint",
  "tendermint-light-client-verifier",
- "tendermint-proto 0.40.4 (git+https://github.com/permissionlessweb/tendermint-rs?branch=main)",
+ "tendermint-proto",
  "tokio",
- "tokio-util 0.7.18",
+ "tokio-util",
  "tower 0.4.13",
  "tower-abci",
  "tower-actor",
@@ -11337,7 +11318,7 @@ dependencies = [
 [[package]]
 name = "penumbra-sdk-asset"
 version = "2.1.1"
-source = "git+https://github.com/permissionlessweb/penumbra?branch=main#86a196eeea21254e00129d89a6c81d1316382f91"
+source = "git+https://github.com/permissionlessweb/penumbra?branch=main#68e483d16eb3ed0ff31934bf43e740d18bd4d805"
 dependencies = [
  "anyhow",
  "ark-ff 0.4.2",
@@ -11377,7 +11358,7 @@ dependencies = [
 [[package]]
 name = "penumbra-sdk-auction"
 version = "2.1.1"
-source = "git+https://github.com/permissionlessweb/penumbra?branch=main#86a196eeea21254e00129d89a6c81d1316382f91"
+source = "git+https://github.com/permissionlessweb/penumbra?branch=main#68e483d16eb3ed0ff31934bf43e740d18bd4d805"
 dependencies = [
  "anyhow",
  "ark-ff 0.4.2",
@@ -11406,8 +11387,8 @@ dependencies = [
  "penumbra-sdk-shielded-pool",
  "penumbra-sdk-tct",
  "penumbra-sdk-txhash",
- "prost 0.13.5",
- "prost-types 0.13.5",
+ "prost",
+ "prost-types",
  "rand_chacha 0.3.1",
  "rand_core 0.6.4",
  "regex",
@@ -11415,14 +11396,14 @@ dependencies = [
  "serde_with",
  "sha2 0.10.9",
  "tap",
- "tendermint 0.40.4 (git+https://github.com/permissionlessweb/tendermint-rs?branch=main)",
+ "tendermint",
  "tracing",
 ]
 
 [[package]]
 name = "penumbra-sdk-community-pool"
 version = "2.1.1"
-source = "git+https://github.com/permissionlessweb/penumbra?branch=main#86a196eeea21254e00129d89a6c81d1316382f91"
+source = "git+https://github.com/permissionlessweb/penumbra?branch=main#68e483d16eb3ed0ff31934bf43e740d18bd4d805"
 dependencies = [
  "anyhow",
  "ark-ff 0.4.2",
@@ -11441,10 +11422,10 @@ dependencies = [
  "penumbra-sdk-sct",
  "penumbra-sdk-shielded-pool",
  "penumbra-sdk-txhash",
- "prost 0.13.5",
+ "prost",
  "serde",
  "sha2 0.10.9",
- "tendermint 0.40.4 (git+https://github.com/permissionlessweb/tendermint-rs?branch=main)",
+ "tendermint",
  "tendermint-light-client-verifier",
  "tracing",
 ]
@@ -11452,7 +11433,7 @@ dependencies = [
 [[package]]
 name = "penumbra-sdk-compact-block"
 version = "2.1.1"
-source = "git+https://github.com/permissionlessweb/penumbra?branch=main#86a196eeea21254e00129d89a6c81d1316382f91"
+source = "git+https://github.com/permissionlessweb/penumbra?branch=main#68e483d16eb3ed0ff31934bf43e740d18bd4d805"
 dependencies = [
  "anyhow",
  "ark-ff 0.4.2",
@@ -11476,14 +11457,14 @@ dependencies = [
  "rand 0.8.5",
  "rand_core 0.6.4",
  "serde",
- "tendermint 0.40.4 (git+https://github.com/permissionlessweb/tendermint-rs?branch=main)",
+ "tendermint",
  "tracing",
 ]
 
 [[package]]
 name = "penumbra-sdk-custody"
 version = "2.1.1"
-source = "git+https://github.com/permissionlessweb/penumbra?branch=main#86a196eeea21254e00129d89a6c81d1316382f91"
+source = "git+https://github.com/permissionlessweb/penumbra?branch=main#68e483d16eb3ed0ff31934bf43e740d18bd4d805"
 dependencies = [
  "anyhow",
  "argon2",
@@ -11506,7 +11487,7 @@ dependencies = [
  "penumbra-sdk-stake",
  "penumbra-sdk-transaction",
  "penumbra-sdk-txhash",
- "prost 0.13.5",
+ "prost",
  "rand_core 0.6.4",
  "serde",
  "serde_json",
@@ -11519,7 +11500,7 @@ dependencies = [
 [[package]]
 name = "penumbra-sdk-dex"
 version = "2.1.1"
-source = "git+https://github.com/permissionlessweb/penumbra?branch=main#86a196eeea21254e00129d89a6c81d1316382f91"
+source = "git+https://github.com/permissionlessweb/penumbra?branch=main#68e483d16eb3ed0ff31934bf43e740d18bd4d805"
 dependencies = [
  "anyhow",
  "ark-ff 0.4.2",
@@ -11556,14 +11537,14 @@ dependencies = [
  "penumbra-sdk-tct",
  "penumbra-sdk-txhash",
  "poseidon377",
- "prost 0.13.5",
+ "prost",
  "rand_core 0.6.4",
  "regex",
  "serde",
  "serde_json",
  "sha2 0.10.9",
  "tap",
- "tendermint 0.40.4 (git+https://github.com/permissionlessweb/tendermint-rs?branch=main)",
+ "tendermint",
  "tendermint-light-client-verifier",
  "thiserror 1.0.69",
  "tokio-stream",
@@ -11573,7 +11554,7 @@ dependencies = [
 [[package]]
 name = "penumbra-sdk-distributions"
 version = "2.1.1"
-source = "git+https://github.com/permissionlessweb/penumbra?branch=main#86a196eeea21254e00129d89a6c81d1316382f91"
+source = "git+https://github.com/permissionlessweb/penumbra?branch=main#68e483d16eb3ed0ff31934bf43e740d18bd4d805"
 dependencies = [
  "anyhow",
  "async-trait",
@@ -11582,14 +11563,14 @@ dependencies = [
  "penumbra-sdk-proto",
  "penumbra-sdk-sct",
  "serde",
- "tendermint 0.40.4 (git+https://github.com/permissionlessweb/tendermint-rs?branch=main)",
+ "tendermint",
  "tracing",
 ]
 
 [[package]]
 name = "penumbra-sdk-fee"
 version = "2.1.1"
-source = "git+https://github.com/permissionlessweb/penumbra?branch=main#86a196eeea21254e00129d89a6c81d1316382f91"
+source = "git+https://github.com/permissionlessweb/penumbra?branch=main#68e483d16eb3ed0ff31934bf43e740d18bd4d805"
 dependencies = [
  "anyhow",
  "ark-ff 0.4.2",
@@ -11608,7 +11589,7 @@ dependencies = [
  "rand 0.8.5",
  "rand_core 0.6.4",
  "serde",
- "tendermint 0.40.4 (git+https://github.com/permissionlessweb/tendermint-rs?branch=main)",
+ "tendermint",
  "tonic",
  "tracing",
 ]
@@ -11616,7 +11597,7 @@ dependencies = [
 [[package]]
 name = "penumbra-sdk-funding"
 version = "2.1.1"
-source = "git+https://github.com/permissionlessweb/penumbra?branch=main#86a196eeea21254e00129d89a6c81d1316382f91"
+source = "git+https://github.com/permissionlessweb/penumbra?branch=main#68e483d16eb3ed0ff31934bf43e740d18bd4d805"
 dependencies = [
  "anyhow",
  "ark-groth16",
@@ -11640,14 +11621,14 @@ dependencies = [
  "penumbra-sdk-txhash",
  "rand 0.8.5",
  "serde",
- "tendermint 0.40.4 (git+https://github.com/permissionlessweb/tendermint-rs?branch=main)",
+ "tendermint",
  "tracing",
 ]
 
 [[package]]
 name = "penumbra-sdk-governance"
 version = "2.1.1"
-source = "git+https://github.com/permissionlessweb/penumbra?branch=main#86a196eeea21254e00129d89a6c81d1316382f91"
+source = "git+https://github.com/permissionlessweb/penumbra?branch=main#68e483d16eb3ed0ff31934bf43e740d18bd4d805"
 dependencies = [
  "anyhow",
  "ark-ff 0.4.2",
@@ -11688,7 +11669,7 @@ dependencies = [
  "serde",
  "serde_json",
  "tap",
- "tendermint 0.40.4 (git+https://github.com/permissionlessweb/tendermint-rs?branch=main)",
+ "tendermint",
  "thiserror 1.0.69",
  "tracing",
 ]
@@ -11696,7 +11677,7 @@ dependencies = [
 [[package]]
 name = "penumbra-sdk-ibc"
 version = "2.1.1"
-source = "git+https://github.com/permissionlessweb/penumbra?branch=main#86a196eeea21254e00129d89a6c81d1316382f91"
+source = "git+https://github.com/permissionlessweb/penumbra?branch=main#68e483d16eb3ed0ff31934bf43e740d18bd4d805"
 dependencies = [
  "anyhow",
  "ark-ff 0.4.2",
@@ -11708,7 +11689,7 @@ dependencies = [
  "hex",
  "ibc-proto",
  "ibc-types",
- "ics23 0.12.0 (git+https://github.com/permissionlessweb/ics23?branch=stable)",
+ "ics23",
  "informalsystems-pbjson-types",
  "metrics",
  "num-traits",
@@ -11718,12 +11699,12 @@ dependencies = [
  "penumbra-sdk-proto",
  "penumbra-sdk-sct",
  "penumbra-sdk-txhash",
- "prost 0.13.5",
+ "prost",
  "regex",
  "serde",
  "serde_json",
  "sha2 0.10.9",
- "tendermint 0.40.4 (git+https://github.com/permissionlessweb/tendermint-rs?branch=main)",
+ "tendermint",
  "tendermint-light-client-verifier",
  "time",
  "tower 0.4.13",
@@ -11733,7 +11714,7 @@ dependencies = [
 [[package]]
 name = "penumbra-sdk-keys"
 version = "2.1.1"
-source = "git+https://github.com/permissionlessweb/penumbra?branch=main#86a196eeea21254e00129d89a6c81d1316382f91"
+source = "git+https://github.com/permissionlessweb/penumbra?branch=main#68e483d16eb3ed0ff31934bf43e740d18bd4d805"
 dependencies = [
  "aes",
  "anyhow",
@@ -11777,7 +11758,7 @@ dependencies = [
 [[package]]
 name = "penumbra-sdk-num"
 version = "2.1.1"
-source = "git+https://github.com/permissionlessweb/penumbra?branch=main#86a196eeea21254e00129d89a6c81d1316382f91"
+source = "git+https://github.com/permissionlessweb/penumbra?branch=main#68e483d16eb3ed0ff31934bf43e740d18bd4d805"
 dependencies = [
  "anyhow",
  "ark-ff 0.4.2",
@@ -11813,7 +11794,7 @@ dependencies = [
 [[package]]
 name = "penumbra-sdk-proof-params"
 version = "2.1.1"
-source = "git+https://github.com/permissionlessweb/penumbra?branch=main#86a196eeea21254e00129d89a6c81d1316382f91"
+source = "git+https://github.com/permissionlessweb/penumbra?branch=main#68e483d16eb3ed0ff31934bf43e740d18bd4d805"
 dependencies = [
  "anyhow",
  "ark-ec 0.4.2",
@@ -11842,7 +11823,7 @@ dependencies = [
 [[package]]
 name = "penumbra-sdk-proto"
 version = "2.1.1"
-source = "git+https://github.com/permissionlessweb/penumbra?branch=main#86a196eeea21254e00129d89a6c81d1316382f91"
+source = "git+https://github.com/permissionlessweb/penumbra?branch=main#68e483d16eb3ed0ff31934bf43e740d18bd4d805"
 dependencies = [
  "anyhow",
  "async-trait",
@@ -11857,16 +11838,17 @@ dependencies = [
  "http-body-util",
  "ibc-proto",
  "ibc-types",
- "ics23 0.12.0 (git+https://github.com/permissionlessweb/ics23?branch=stable)",
+ "ics23",
  "informalsystems-pbjson 0.7.0 (git+https://github.com/permissionlessweb/pbjson?branch=main)",
  "informalsystems-pbjson-types",
  "pin-project",
- "prost 0.13.5",
+ "prost",
  "serde",
  "serde_json",
  "subtle-encoding",
- "tendermint 0.40.4 (git+https://github.com/permissionlessweb/tendermint-rs?branch=main)",
+ "tendermint",
  "tonic",
+ "tonic-prost",
  "tower 0.4.13",
  "tracing",
 ]
@@ -11874,7 +11856,7 @@ dependencies = [
 [[package]]
 name = "penumbra-sdk-sct"
 version = "2.1.1"
-source = "git+https://github.com/permissionlessweb/penumbra?branch=main#86a196eeea21254e00129d89a6c81d1316382f91"
+source = "git+https://github.com/permissionlessweb/penumbra?branch=main#68e483d16eb3ed0ff31934bf43e740d18bd4d805"
 dependencies = [
  "anyhow",
  "ark-ff 0.4.2",
@@ -11903,7 +11885,7 @@ dependencies = [
  "rand 0.8.5",
  "rand_core 0.6.4",
  "serde",
- "tendermint 0.40.4 (git+https://github.com/permissionlessweb/tendermint-rs?branch=main)",
+ "tendermint",
  "tonic",
  "tracing",
 ]
@@ -11911,7 +11893,7 @@ dependencies = [
 [[package]]
 name = "penumbra-sdk-shielded-pool"
 version = "2.1.1"
-source = "git+https://github.com/permissionlessweb/penumbra?branch=main#86a196eeea21254e00129d89a6c81d1316382f91"
+source = "git+https://github.com/permissionlessweb/penumbra?branch=main#68e483d16eb3ed0ff31934bf43e740d18bd4d805"
 dependencies = [
  "anyhow",
  "ark-ff 0.4.2",
@@ -11947,14 +11929,14 @@ dependencies = [
  "penumbra-sdk-tct",
  "penumbra-sdk-txhash",
  "poseidon377",
- "prost 0.13.5",
+ "prost",
  "rand 0.8.5",
  "rand_core 0.6.4",
  "regex",
  "serde",
  "serde_json",
  "tap",
- "tendermint 0.40.4 (git+https://github.com/permissionlessweb/tendermint-rs?branch=main)",
+ "tendermint",
  "thiserror 1.0.69",
  "tonic",
  "tracing",
@@ -11963,7 +11945,7 @@ dependencies = [
 [[package]]
 name = "penumbra-sdk-stake"
 version = "2.1.1"
-source = "git+https://github.com/permissionlessweb/penumbra?branch=main#86a196eeea21254e00129d89a6c81d1316382f91"
+source = "git+https://github.com/permissionlessweb/penumbra?branch=main#68e483d16eb3ed0ff31934bf43e740d18bd4d805"
 dependencies = [
  "anyhow",
  "ark-ff 0.4.2",
@@ -11997,14 +11979,14 @@ dependencies = [
  "serde_with",
  "sha2 0.10.9",
  "tap",
- "tendermint 0.40.4 (git+https://github.com/permissionlessweb/tendermint-rs?branch=main)",
+ "tendermint",
  "tracing",
 ]
 
 [[package]]
 name = "penumbra-sdk-tct"
 version = "2.1.1"
-source = "git+https://github.com/permissionlessweb/penumbra?branch=main#86a196eeea21254e00129d89a6c81d1316382f91"
+source = "git+https://github.com/permissionlessweb/penumbra?branch=main#68e483d16eb3ed0ff31934bf43e740d18bd4d805"
 dependencies = [
  "ark-ed-on-bls12-377",
  "ark-ff 0.4.2",
@@ -12033,7 +12015,7 @@ dependencies = [
 [[package]]
 name = "penumbra-sdk-tower-trace"
 version = "2.1.1"
-source = "git+https://github.com/permissionlessweb/penumbra?branch=main#86a196eeea21254e00129d89a6c81d1316382f91"
+source = "git+https://github.com/permissionlessweb/penumbra?branch=main#68e483d16eb3ed0ff31934bf43e740d18bd4d805"
 dependencies = [
  "futures",
  "hex",
@@ -12041,11 +12023,11 @@ dependencies = [
  "pin-project",
  "pin-project-lite",
  "sha2 0.10.9",
- "tendermint 0.40.4 (git+https://github.com/permissionlessweb/tendermint-rs?branch=main)",
- "tendermint-proto 0.40.4 (git+https://github.com/permissionlessweb/tendermint-rs?branch=main)",
+ "tendermint",
+ "tendermint-proto",
  "tokio",
  "tokio-stream",
- "tokio-util 0.7.18",
+ "tokio-util",
  "tonic",
  "tower 0.4.13",
  "tower-service",
@@ -12055,7 +12037,7 @@ dependencies = [
 [[package]]
 name = "penumbra-sdk-transaction"
 version = "2.1.1"
-source = "git+https://github.com/permissionlessweb/penumbra?branch=main#86a196eeea21254e00129d89a6c81d1316382f91"
+source = "git+https://github.com/permissionlessweb/penumbra?branch=main#68e483d16eb3ed0ff31934bf43e740d18bd4d805"
 dependencies = [
  "anyhow",
  "ark-ff 0.4.2",
@@ -12108,7 +12090,7 @@ dependencies = [
 [[package]]
 name = "penumbra-sdk-txhash"
 version = "2.1.1"
-source = "git+https://github.com/permissionlessweb/penumbra?branch=main#86a196eeea21254e00129d89a6c81d1316382f91"
+source = "git+https://github.com/permissionlessweb/penumbra?branch=main#68e483d16eb3ed0ff31934bf43e740d18bd4d805"
 dependencies = [
  "anyhow",
  "blake2b_simd 1.0.4",
@@ -12122,7 +12104,7 @@ dependencies = [
 [[package]]
 name = "penumbra-sdk-view"
 version = "2.1.1"
-source = "git+https://github.com/permissionlessweb/penumbra?branch=main#86a196eeea21254e00129d89a6c81d1316382f91"
+source = "git+https://github.com/permissionlessweb/penumbra?branch=main#68e483d16eb3ed0ff31934bf43e740d18bd4d805"
 dependencies = [
  "anyhow",
  "ark-std 0.4.0",
@@ -12161,7 +12143,7 @@ dependencies = [
  "penumbra-sdk-stake",
  "penumbra-sdk-tct",
  "penumbra-sdk-transaction",
- "prost 0.13.5",
+ "prost",
  "r2d2",
  "r2d2_sqlite",
  "rand 0.8.5",
@@ -12170,7 +12152,7 @@ dependencies = [
  "serde_json",
  "sha2 0.10.9",
  "tap",
- "tendermint 0.40.4 (git+https://github.com/permissionlessweb/tendermint-rs?branch=main)",
+ "tendermint",
  "tokio",
  "tokio-stream",
  "tonic",
@@ -12182,7 +12164,7 @@ dependencies = [
 [[package]]
 name = "penumbra-sdk-wallet"
 version = "2.1.1"
-source = "git+https://github.com/permissionlessweb/penumbra?branch=main#86a196eeea21254e00129d89a6c81d1316382f91"
+source = "git+https://github.com/permissionlessweb/penumbra?branch=main#68e483d16eb3ed0ff31934bf43e740d18bd4d805"
 dependencies = [
  "anyhow",
  "ark-std 0.4.0",
@@ -12442,7 +12424,7 @@ dependencies = [
 [[package]]
 name = "polytone-evm"
 version = "2.0.0"
-source = "git+https://github.com/permissionlessweb/polytone?branch=bump%2Fcw3-evm#214a3fc4df300b322ef6d20f986d24ba89bcfcbe"
+source = "git+https://github.com/permissionlessweb/polytone?branch=bump%2Fcw3-evm#d9d9ce5e9b42aeede66aee0839522d4223d82dd8"
 dependencies = [
  "alloy",
  "alloy-sol-types",
@@ -12757,22 +12739,12 @@ dependencies = [
 
 [[package]]
 name = "prost"
-version = "0.13.5"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "2796faa41db3ec313a31f7624d9286acf277b52de526150b7e69f3debf891ee5"
-dependencies = [
- "bytes",
- "prost-derive 0.13.5",
-]
-
-[[package]]
-name = "prost"
 version = "0.14.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "d2ea70524a2f82d518bce41317d0fae74151505651af45faf1ffbd6fd33f0568"
 dependencies = [
  "bytes",
- "prost-derive 0.14.3",
+ "prost-derive",
 ]
 
 [[package]]
@@ -12787,26 +12759,13 @@ dependencies = [
  "multimap",
  "petgraph 0.8.3",
  "prettyplease",
- "prost 0.14.3",
- "prost-types 0.14.3",
+ "prost",
+ "prost-types",
  "pulldown-cmark",
  "pulldown-cmark-to-cmark",
  "regex",
  "syn 2.0.117",
  "tempfile",
-]
-
-[[package]]
-name = "prost-derive"
-version = "0.13.5"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "8a56d757972c98b346a9b766e3f02746cde6dd1cd1d1d563472929fdd74bec4d"
-dependencies = [
- "anyhow",
- "itertools 0.14.0",
- "proc-macro2 1.0.106",
- "quote",
- "syn 2.0.117",
 ]
 
 [[package]]
@@ -12824,20 +12783,11 @@ dependencies = [
 
 [[package]]
 name = "prost-types"
-version = "0.13.5"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "52c2c1bf36ddb1a1c396b3601a3cec27c2462e45f07c386894ec3ccf5332bd16"
-dependencies = [
- "prost 0.13.5",
-]
-
-[[package]]
-name = "prost-types"
 version = "0.14.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "8991c4cbdb8bc5b11f0b074ffe286c30e523de90fee5ba8132f1399f23cb3dd7"
 dependencies = [
- "prost 0.14.3",
+ "prost",
 ]
 
 [[package]]
@@ -15307,34 +15257,6 @@ dependencies = [
 [[package]]
 name = "tendermint"
 version = "0.40.4"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "fc997743ecfd4864bbca8170d68d9b2bee24653b034210752c2d883ef4b838b1"
-dependencies = [
- "bytes",
- "digest 0.10.7",
- "ed25519",
- "ed25519-consensus",
- "flex-error",
- "futures",
- "num-traits",
- "once_cell",
- "prost 0.13.5",
- "serde",
- "serde_bytes",
- "serde_json",
- "serde_repr",
- "sha2 0.10.9",
- "signature",
- "subtle",
- "subtle-encoding",
- "tendermint-proto 0.40.4 (registry+https://github.com/rust-lang/crates.io-index)",
- "time",
- "zeroize",
-]
-
-[[package]]
-name = "tendermint"
-version = "0.40.4"
 source = "git+https://github.com/permissionlessweb/tendermint-rs?branch=main#84af40465b4b393d66f0761d90b2863ff0f7191a"
 dependencies = [
  "bytes",
@@ -15346,7 +15268,7 @@ dependencies = [
  "k256",
  "num-traits",
  "once_cell",
- "prost 0.14.3",
+ "prost",
  "ripemd",
  "serde",
  "serde_bytes",
@@ -15356,7 +15278,7 @@ dependencies = [
  "signature",
  "subtle",
  "subtle-encoding",
- "tendermint-proto 0.40.4 (git+https://github.com/permissionlessweb/tendermint-rs?branch=main)",
+ "tendermint-proto",
  "time",
  "zeroize",
 ]
@@ -15369,7 +15291,7 @@ dependencies = [
  "flex-error",
  "serde",
  "serde_json",
- "tendermint 0.40.4 (git+https://github.com/permissionlessweb/tendermint-rs?branch=main)",
+ "tendermint",
  "toml 0.8.23",
  "url",
 ]
@@ -15390,7 +15312,7 @@ dependencies = [
  "serde_derive",
  "serde_json",
  "static_assertions",
- "tendermint 0.40.4 (git+https://github.com/permissionlessweb/tendermint-rs?branch=main)",
+ "tendermint",
  "tendermint-light-client-verifier",
  "tendermint-rpc",
  "time",
@@ -15412,9 +15334,9 @@ dependencies = [
  "serde_derive",
  "serde_json",
  "static_assertions",
- "tendermint 0.40.4 (git+https://github.com/permissionlessweb/tendermint-rs?branch=main)",
+ "tendermint",
  "tendermint-light-client",
- "tendermint-proto 0.40.4 (git+https://github.com/permissionlessweb/tendermint-rs?branch=main)",
+ "tendermint-proto",
  "tendermint-rpc",
  "time",
  "tracing",
@@ -15428,22 +15350,7 @@ dependencies = [
  "derive_more 0.99.20",
  "flex-error",
  "serde",
- "tendermint 0.40.4 (git+https://github.com/permissionlessweb/tendermint-rs?branch=main)",
- "time",
-]
-
-[[package]]
-name = "tendermint-proto"
-version = "0.40.4"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d2c40e13d39ca19082d8a7ed22de7595979350319833698f8b1080f29620a094"
-dependencies = [
- "bytes",
- "flex-error",
- "prost 0.13.5",
- "serde",
- "serde_bytes",
- "subtle-encoding",
+ "tendermint",
  "time",
 ]
 
@@ -15456,7 +15363,7 @@ dependencies = [
  "bytes",
  "flex-error",
  "parity-scale-codec",
- "prost 0.14.3",
+ "prost",
  "scale-info",
  "schemars 0.8.22",
  "serde",
@@ -15486,9 +15393,9 @@ dependencies = [
  "serde_json",
  "subtle",
  "subtle-encoding",
- "tendermint 0.40.4 (git+https://github.com/permissionlessweb/tendermint-rs?branch=main)",
+ "tendermint",
  "tendermint-config",
- "tendermint-proto 0.40.4 (git+https://github.com/permissionlessweb/tendermint-rs?branch=main)",
+ "tendermint-proto",
  "thiserror 1.0.69",
  "time",
  "tokio",
@@ -15776,7 +15683,7 @@ dependencies = [
  "futures-core",
  "pin-project-lite",
  "tokio",
- "tokio-util 0.7.18",
+ "tokio-util",
 ]
 
 [[package]]
@@ -15804,20 +15711,6 @@ dependencies = [
  "log",
  "tokio",
  "tungstenite 0.23.0",
-]
-
-[[package]]
-name = "tokio-util"
-version = "0.6.10"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "36943ee01a6d67977dd3f84a5a1d2efeb4ada3a1ae771cadfaa535d9d9fc6507"
-dependencies = [
- "bytes",
- "futures-core",
- "futures-sink",
- "log",
- "pin-project-lite",
- "tokio",
 ]
 
 [[package]]
@@ -15982,7 +15875,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "a55376a0bbaa4975a3f10d009ad763d8f4108f067c7c2e74f3001fb49778d309"
 dependencies = [
  "bytes",
- "prost 0.14.3",
+ "prost",
  "tonic",
 ]
 
@@ -15995,7 +15888,7 @@ dependencies = [
  "prettyplease",
  "proc-macro2 1.0.106",
  "prost-build",
- "prost-types 0.14.3",
+ "prost-types",
  "quote",
  "syn 2.0.117",
  "tempfile",
@@ -16017,7 +15910,7 @@ dependencies = [
  "rand 0.8.5",
  "slab",
  "tokio",
- "tokio-util 0.7.18",
+ "tokio-util",
  "tower-layer",
  "tower-service",
  "tracing",
@@ -16036,7 +15929,7 @@ dependencies = [
  "slab",
  "sync_wrapper 1.0.2",
  "tokio",
- "tokio-util 0.7.18",
+ "tokio-util",
  "tower-layer",
  "tower-service",
  "tracing",
@@ -16044,20 +15937,19 @@ dependencies = [
 
 [[package]]
 name = "tower-abci"
-version = "0.18.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "4f3458c29aae68bfc21edc8482ee7ecce8e5dfbb0d07a8034f96fa304525391f"
+version = "0.19.1"
+source = "git+https://github.com/permissionlessweb/tower-abci?branch=main#1e02c8bcc9019d3f2cc3bb921611cbe995d5b9df"
 dependencies = [
  "bytes",
  "futures",
  "pin-project",
- "prost 0.13.5",
- "tendermint 0.40.4 (registry+https://github.com/rust-lang/crates.io-index)",
- "tendermint-proto 0.40.4 (registry+https://github.com/rust-lang/crates.io-index)",
+ "prost",
+ "tendermint",
+ "tendermint-proto",
  "tokio",
  "tokio-stream",
- "tokio-util 0.6.10",
- "tower 0.4.13",
+ "tokio-util",
+ "tower 0.5.3",
  "tracing",
 ]
 
@@ -16071,7 +15963,7 @@ dependencies = [
  "pin-project",
  "thiserror 1.0.69",
  "tokio",
- "tokio-util 0.7.18",
+ "tokio-util",
  "tower 0.4.13",
  "tracing",
 ]
@@ -16112,7 +16004,7 @@ dependencies = [
  "iri-string",
  "pin-project-lite",
  "tokio",
- "tokio-util 0.7.18",
+ "tokio-util",
  "tower 0.5.3",
  "tower-layer",
  "tower-service",
@@ -17621,7 +17513,7 @@ dependencies = [
 [[package]]
 name = "xion-account"
 version = "0.1.1"
-source = "git+https://github.com/permissionlessweb/contracts?branch=cw3#e78ebbd1ca1619a5d4b8ee5eb372bc1ed162d866"
+source = "git+https://github.com/permissionlessweb/contracts?branch=cw3#5ab629abcd2db19d39c85a4a18e2d6f1a0e7d60a"
 dependencies = [
  "base64 0.22.1",
  "bech32 0.9.1",

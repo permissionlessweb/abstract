@@ -61,7 +61,7 @@ abstract-testing = { workspace = true }
 coverage-helper  = { workspace = true }
 
 cw-orch            = { workspace = true, features = ["daemon"] }
-cw-orch-interchain = { workspace = true }
+cw-orch-interchain = { workspace = true, features = ["starship"] }
 dotenv             = "0.15.0"
 env_logger         = "0.11.3"
 

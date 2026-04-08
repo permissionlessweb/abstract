@@ -64,15 +64,6 @@ cw-address-like = { git = "https://github.com/permissionlessweb/cw-plus-plus", b
 cw-asset = { git = "https://github.com/permissionlessweb/cw-asset", branch = "main" }
 cw-blob = { git = "https://github.com/permissionlessweb/cw-packages", branch = "feat/cw3" }
 cw-controllers = { git = "https://github.com/permissionlessweb/cw-minus", branch = "main" }
-#polytone         = { package = "abstract-polytone", version = "2.0.0", git = "https://github.com/permissionlessweb/polytone", branch = "bump/cw3"  }
-#polytone-note    = { package = "abstract-polytone-note", version = "5.0.0", git = "https://github.com/permissionlessweb/polytone", branch = "bump/cw3"  }
-#cw-orch            = { version = "0.30.0", path = "../../../cw-orchestrator/cw-orch"}
-#cw-orch-clone-testing = { version = "0.9.0", path = "../../../cw-orchestrator/cw-orch"}
-#cw-orch-daemon        = { version = "0.29.0", path = "../../../cw-orchestrator/cw-orch"}
-#cw-orch-interchain = { version = "0.8.1", path = "../../../cw-orchestrator/cw-orch"}
-#cw-orch-proto         = { version = "0.9.0", path = "../../../cw-orchestrator/cw-orch"}
-#cw-orch-polytone = { package = "abstract-cw-orch-polytone", version = "6.0.1", git = "https://github.com/permissionlessweb/polytone", branch = "bump/cw3"  }
-
 cw-orch = { git = "https://github.com/permissionlessweb/cw-orchestrator", branch = "cw3" }
 cw-orch-clone-testing   = { git = "https://github.com/permissionlessweb/cw-orchestrator", branch = "cw3" }
 cw-orch-core     = { git = "https://github.com/permissionlessweb/cw-orchestrator", branch = "cw3" }
@@ -88,12 +79,6 @@ cw20 = { git = "https://github.com/permissionlessweb/cw-plus", branch = "main" }
 cw20-base = { git = "https://github.com/permissionlessweb/cw-plus", branch = "main" }
 polytone = { package = "abstract-polytone", git = "https://github.com/permissionlessweb/polytone", branch = "bump/cw3" }
 polytone-note = { package = "abstract-polytone-note", git = "https://github.com/permissionlessweb/polytone", branch = "bump/cw3" }
-# cw20            = { version = "2.0.0" }# cw20-base       = { version = "2.0.0", features = ["library"] }
-
-# cw-address-like = { version = "2.0" }
-# cw-asset        = { version = "4.0" }
-# cw-ownable      = { version = "2.0" }
-
 abstract-macros = { path = "../framework/packages/abstract-macros" }
 abstract-adapter-utils = { path = "../framework/packages/standards/utils" }
 abstract-dex-standard = { path = "../framework/packages/standards/dex" }
@@ -128,13 +113,8 @@ tokio  = { version = "1.33.0", features = ["full"] }
 
 # Backup release profile, will result in warnings during optimization
 [patch.crates-io]
-
-# Fork patches (managed by dep-switch.py)
-
-# Fork patches (managed by dep-switch.py)
-
-# Fork patches (managed by dep-switch.py)
 nam-blst = { git = "https://github.com/permissionlessweb/blst", branch = "master" }
+
 [profile.release]
 codegen-units    = 1
 debug            = false

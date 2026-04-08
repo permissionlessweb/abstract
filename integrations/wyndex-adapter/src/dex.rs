@@ -20,7 +20,7 @@ use ::{
         coins_in_assets, cw_approve_msgs, DexCommand, DexError, Fee, FeeOnInput, Return, Spread,
     },
     abstract_sdk::std::objects::PoolAddress,
-    cosmwasm_std::{to_json_binary, wasm_execute, CosmosMsg, Decimal, Deps, Uint128, Uint256},
+    cosmwasm_std::{to_json_binary, wasm_execute, CosmosMsg, Decimal, Deps,  Uint256},
     cw20::Cw20ExecuteMsg,
     cw_asset::{Asset, AssetInfo, AssetInfoBase},
     wyndex::pair::*,
