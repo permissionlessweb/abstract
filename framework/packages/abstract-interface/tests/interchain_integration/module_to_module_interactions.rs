@@ -28,6 +28,7 @@ pub enum MockExecMsg {
     QuerySomethingIbc {
         remote_chain: TruncatedChainId,
         address: String,
+        denom: String,
     },
     QueryModuleIbc {
         remote_chain: TruncatedChainId,
@@ -174,6 +175,7 @@ pub const fn mock_app(id: &'static str, version: &'static str) -> MockAppContrac
             MockExecMsg::QuerySomethingIbc {
                 address,
                 remote_chain,
+                denom,
             } => {
                 let ibc_client_addr = app.modules(deps.as_ref()).module_address(IBC_CLIENT)?;
                 // We send an IBC Client module message
@@ -184,9 +186,8 @@ pub const fn mock_app(id: &'static str, version: &'static str) -> MockAppContrac
                         callback: Callback {
                             msg: to_json_binary(&MockCallbackMsg::BalanceQuery)?,
                         },
-                        // TODO: BankQuery::AllBalances removed in cosmwasm-std v3
                         queries: vec![cosmwasm_std::QueryRequest::Bank(
-                            cosmwasm_std::BankQuery::Balance { address, denom: "ujuno".to_string() },
+                            cosmwasm_std::BankQuery::Balance { address, denom },
                         )],
                     },
                     vec![],
@@ -594,7 +595,7 @@ pub mod test {
 
         origin_account.install_app(&app, &MockInitMsg {}, &[])?;
 
-        let query_response = app.query_something_ibc(remote_address.to_string(), remote_name)?;
+        let query_response = app.query_something_ibc(remote_address.to_string(), REMOTE_DENOM.to_string(), remote_name)?;
 
         let get_received_ibc_query_callback_status_res: ReceivedIbcQueryCallbackStatus =
             app.get_received_ibc_query_callback_status().unwrap();

@@ -123,35 +123,8 @@ simple-ica-controller = { path = "../../cw-ibc-demo/contracts/simple-ica-control
 simple-ica-host = { path = "../../cw-ibc-demo/contracts/simple-ica-host" }
 
 [patch.crates-io]
-# Fork patches (managed by dep-switch.py)
-
-
-# Fork patches (managed by dep-switch.py)
-
-# Fork patches (managed by dep-switch.py)
-
-# Fork patches (managed by dep-switch.py)
-
-# Fork patches (managed by dep-switch.py)
-
-# Fork patches (managed by dep-switch.py)
-
-# Fork patches (managed by dep-switch.py)
-
-# Fork patches (managed by dep-switch.py)
-
-# Fork patches (managed by dep-switch.py)
-
-# Fork patches (managed by dep-switch.py)
-
-# Fork patches (managed by dep-switch.py)
-
-# Fork patches (managed by dep-switch.py)
-
-# Fork patches (managed by dep-switch.py)
-
-# Fork patches (managed by dep-switch.py)
 nam-blst = { path = "../../nam-blst/bindings/rust" }
+
 [workspace.lints.rust]
 unexpected_cfgs = { level = "warn", check-cfg = ['cfg(coverage,coverage_nightly)'] }
 

@@ -959,11 +959,8 @@ fn cant_create_sub_accounts_for_another_user() -> anyhow::Result<()> {
     else {
         panic!("Expected cw-orch error")
     };
-    let err: AccountError = err.downcast().unwrap();
-    assert!(matches!(
-        err,
-        AccountError::SubAccountCreatorNotAccount { .. }
-    ));
+ 
+    assert!(err.to_string().contains(&AccountError::SubAccountCreatorNotAccount { account: account.address()?.into_string(),caller: chain.sender_addr().to_string() }.to_string()));
     Ok(())
 }
 
@@ -1239,15 +1236,7 @@ fn create_account_with_expected_account_id() -> anyhow::Result<()> {
     else {
         panic!("Expected cw-orch error")
     };
-    let err: RegistryError = err.downcast().unwrap();
-    assert_eq!(
-        err.to_string(),
-        RegistryError::InvalidAccountSequence {
-            expected: 1,
-            actual: 10,
-        }
-        .to_string()
-    );
+    assert!(err.to_string().contains(& RegistryError::InvalidAccountSequence {expected: 1,actual: 10}.to_string()));
 
     // Can create if right id
     let account = client
@@ -1267,11 +1256,8 @@ fn create_account_with_expected_account_id() -> anyhow::Result<()> {
     else {
         panic!("Expected cw-orch error")
     };
-    let err: RegistryError = err.downcast().unwrap();
-    assert_eq!(
-        err.to_string(),
-        RegistryError::AccountAlreadyExists(AccountId::local(0)).to_string()
-    );
+ 
+    assert!(err.to_string().contains(&RegistryError::AccountAlreadyExists(AccountId::local(0)).to_string()));
 
     // Can create sub-account if right id
     let sub_account = client

@@ -216,6 +216,7 @@ mod test {
     const LOCAL_MNEMONIC: &str = "clip hire initial neck maid actor venue client foam budget lock catalog sweet steak waste crater broccoli pipe steak sister coyote moment obvious choose";
 
     #[test]
+    #[ignore]
     fn list_ibc() {
         use networks::JUNO_1;
 

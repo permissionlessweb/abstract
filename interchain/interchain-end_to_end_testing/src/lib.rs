@@ -101,11 +101,11 @@ pub fn abstract_starship_interfaces(
     // Send some funds for deploying abstract
     juno.rt_handle.block_on(juno.sender().bank_send(
         &juno.sender_addr(),
-        &coins(10_000_000_000_000, juno.chain_info().gas_denom.clone()),
+        &coins(10_000_000_000_000u128, juno.chain_info().gas_denom.clone()),
     ))?;
     juno2.rt_handle.block_on(juno2.sender().bank_send(
         &juno2.sender_addr(),
-        &coins(10_000_000_000_000, juno2.chain_info().gas_denom.clone()),
+        &coins(10_000_000_000_000u128, juno2.chain_info().gas_denom.clone()),
     ))?;
     let abstr_juno = Abstract::deploy_on(juno.clone(), ())?;
     let abstr_juno2 = Abstract::deploy_on(juno2.clone(), ())?;

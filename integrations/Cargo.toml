@@ -124,6 +124,8 @@ simple-ica-host = { path = "../../cw-ibc-demo/contracts/simple-ica-host" }
 # Fork patches (managed by dep-switch.py)
 
 # Fork patches (managed by dep-switch.py)
+
+# Fork patches (managed by dep-switch.py)
 nam-blst = { path = "../../nam-blst/bindings/rust" }
 [profile.release]
 codegen-units    = 1

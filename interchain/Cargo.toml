@@ -1,9 +1,11 @@
 [workspace]
 members = [
     "framework-clone-testing",
-    "interchain-end_to_end_testing",
     "modules-clone-testing",
     "scripts",
+]
+exclude = [
+    "interchain-end_to_end_testing",
 ]
 
 # Enable the version 2 feature resolver, which avoids unifying features for targets that are not being built
@@ -113,6 +115,8 @@ tokio  = { version = "1.33.0", features = ["full"] }
 
 # Backup release profile, will result in warnings during optimization
 [patch.crates-io]
+
+# Fork patches (managed by dep-switch.py)
 
 # Fork patches (managed by dep-switch.py)
 

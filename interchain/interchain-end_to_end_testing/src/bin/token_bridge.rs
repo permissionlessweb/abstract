@@ -9,7 +9,7 @@ use std::time::{SystemTime, UNIX_EPOCH};
 
 use abstract_interchain_tests::{JUNO, STARGAZE};
 use anyhow::Result as AnyResult;
-use cosmwasm_std::{coin, Uint128};
+use cosmwasm_std::{coin, Uint256};
 use cw_orch::prelude::queriers::Ibc;
 use cw_orch::prelude::*;
 use cw_orch_interchain::prelude::*;
@@ -83,7 +83,7 @@ pub fn token_bridge() -> AnyResult<()> {
         .balance(&stargaze.sender_addr(), Some(denom.clone()))
         .unwrap();
 
-    assert_eq!(balance[0].amount, Uint128::from(test_amount));
+    assert_eq!(balance[0].amount, Uint256::from(test_amount));
 
     // Send all back
     transfer_tokens(
@@ -104,7 +104,7 @@ pub fn token_bridge() -> AnyResult<()> {
         .balance(&stargaze.sender_addr(), Some(denom.clone()))
         .unwrap();
 
-    assert_eq!(balance[0].amount, Uint128::zero());
+    assert_eq!(balance[0].amount, Uint256::zero());
 
     Ok(())
 }

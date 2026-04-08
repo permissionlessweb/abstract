@@ -62,7 +62,7 @@ croncat-app          = { path = "./contracts/apps/croncat", default-features = f
 cw-address-like = { path = "../../ZK/cw/zk-plus-plus/packages/address-like" }
 cw-asset = { path = "../../cw-asset" }
 cw-controllers = { path = "../../ZK/cw/zk-cw-minus/packages/controllers" }
-cw-ica-controller = { git = "https://github.com/permissionlessweb/cw-ica-controller", branch = "bump/cw3", default-features = false }
+cw-ica-controller = { path = "../../cw-ica-controller" }
 cw-orch = { path = "../../cw-orchestrator/cw-orch" }
 cw-orch-interchain = { path = "../../cw-orchestrator/cw-orch-interchain" }
 cw-orch-neutron-test-tube = { path = "../../cw-orchestrator/packages/cw-orch-neutron-test-tube" }
@@ -113,6 +113,8 @@ simple-ica-host = { path = "../../cw-ibc-demo/contracts/simple-ica-host" }
 
 # Backup release profile, will result in warnings during optimization
 [patch.crates-io]
+
+# Fork patches (managed by dep-switch.py)
 
 # Fork patches (managed by dep-switch.py)
 
