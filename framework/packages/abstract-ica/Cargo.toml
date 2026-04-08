@@ -21,7 +21,7 @@ cw-ownable      = { workspace = true }
 map-macro       = "0.3.0"
 
 # EVM
-polytone-evm = { git = "https://github.com/permissionlessweb/polytone", branch = "bump/cw3-evm" }
+polytone-evm = { path = "../../../../polytone-evm/packages/polytone-evm" }
 
 [dev-dependencies]
 abstract-testing = { path = "../abstract-testing" }

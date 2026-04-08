@@ -3806,7 +3806,7 @@ dependencies = [
 [[package]]
 name = "cw-asset"
 version = "4.0.0"
-source = "git+https://github.com/permissionlessweb/cw-asset?branch=main#fb7b1fe82aba1d12a3b08b96fd31a6de696f7e33"
+source = "git+https://github.com/permissionlessweb/cw-asset?branch=main#7a65ed82bf05684cff5c9065e111dac5444cab00"
 dependencies = [
  "cosmwasm-schema",
  "cosmwasm-std",
@@ -3839,7 +3839,7 @@ dependencies = [
 [[package]]
 name = "cw-controllers"
 version = "3.0.0"
-source = "git+https://github.com/permissionlessweb/cw-minus?branch=main#3dcc39ed9c9199b08fff90b9e4a57b464ccc855f"
+source = "git+https://github.com/permissionlessweb/cw-minus?branch=main#54e7f82f24278a41f29e8f10aa5069ac775e9b99"
 dependencies = [
  "cosmwasm-schema",
  "cosmwasm-std",
@@ -3853,7 +3853,7 @@ dependencies = [
 [[package]]
 name = "cw-ica-controller"
 version = "0.20.0"
-source = "git+https://github.com/permissionlessweb/cw-ica-controller?branch=bump%2Fcw3#b7d124063c4a2e982a43beee073960171cafbf3f"
+source = "git+https://github.com/permissionlessweb/cw-ica-controller?branch=bump%2Fcw3#2b8869b3d311fee3858da77ea0217a1535c93107"
 dependencies = [
  "anybuf 0.5.2",
  "cosmos-sdk-proto",
@@ -4288,7 +4288,7 @@ dependencies = [
 [[package]]
 name = "cw-utils"
 version = "3.0.0"
-source = "git+https://github.com/permissionlessweb/cw-minus?branch=main#3dcc39ed9c9199b08fff90b9e4a57b464ccc855f"
+source = "git+https://github.com/permissionlessweb/cw-minus?branch=main#54e7f82f24278a41f29e8f10aa5069ac775e9b99"
 dependencies = [
  "cosmwasm-schema",
  "cosmwasm-std",
@@ -4345,7 +4345,7 @@ dependencies = [
 [[package]]
 name = "cw2"
 version = "3.0.0"
-source = "git+https://github.com/permissionlessweb/cw-minus?branch=main#3dcc39ed9c9199b08fff90b9e4a57b464ccc855f"
+source = "git+https://github.com/permissionlessweb/cw-minus?branch=main#54e7f82f24278a41f29e8f10aa5069ac775e9b99"
 dependencies = [
  "cosmwasm-schema",
  "cosmwasm-std",
@@ -5857,9 +5857,9 @@ checksum = "7360491ce676a36bf9bb3c56c1aa791658183a54d2744120f27285738d90465a"
 
 [[package]]
 name = "fastrand"
-version = "2.4.0"
+version = "2.4.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a043dc74da1e37d6afe657061213aa6f425f855399a11d3463c6ecccc4dfda1f"
+checksum = "9f1f227452a390804cdb637b74a86990f2a7d7ba4b7d5693aac9b4dd6defd8d6"
 
 [[package]]
 name = "fastrlp"
@@ -12299,7 +12299,7 @@ version = "3.5.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "e67ba7e9b2b56446f1d419b1d807906278ffa1a658a8a5d8a39dcb1f5a78614f"
 dependencies = [
- "toml_edit 0.25.10+spec-1.1.0",
+ "toml_edit 0.25.11+spec-1.1.0",
 ]
 
 [[package]]
@@ -15381,9 +15381,9 @@ dependencies = [
 
 [[package]]
 name = "toml_edit"
-version = "0.25.10+spec-1.1.0"
+version = "0.25.11+spec-1.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a82418ca169e235e6c399a84e395ab6debeb3bc90edc959bf0f48647c6a32d1b"
+checksum = "0b59c4d22ed448339746c59b905d24568fcbb3ab65a500494f7b8c3e97739f2b"
 dependencies = [
  "indexmap 2.13.1",
  "toml_datetime 1.1.1+spec-1.1.0",

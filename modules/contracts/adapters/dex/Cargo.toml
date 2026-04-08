@@ -118,11 +118,10 @@ dex = { path = ".", features = [
   "testing",
   "local"
 ], package = "abstract-dex-adapter" }
-dotenv             = "0.15.0"
-env_logger         = "0.11.3"
-mockdex-bundle     = { workspace = true }
-neutron-std                 = { workspace = true }
-# osmosis-std = { version = "0.26.0", git = "https://github.com/permissionlessweb/osmosis-rust" }
+dotenv = "0.15.0"
+env_logger = "0.11.3"
+mockdex-bundle = { workspace = true }
+neutron-std = { workspace = true }
 osmosis-std = { workspace = true }
 
 prost                       = "0.14.3"

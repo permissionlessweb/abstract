@@ -156,32 +156,8 @@ dependencies = [
 ]
 
 [[package]]
-name = "abstract-cw-multi-test"
-version = "3.0.0-rc"
-source = "git+https://github.com/permissionlessweb/cw-multi-test-fork?branch=bump%2Fcw3%2Fofficial-ibc-fork#74c12ab685231ca5c9429dbc92dd5e7870d9f921"
-dependencies = [
- "bech32 0.11.1",
- "cosmwasm-schema",
- "cosmwasm-std",
- "cw-storage-plus",
- "cw-utils",
- "cw20-ics20",
- "hex",
- "itertools 0.14.0",
- "log",
- "prost",
- "schemars 0.8.22",
- "serde",
- "serde_json",
- "sha2 0.10.9",
- "thiserror 1.0.69",
- "tiny-keccak",
-]
-
-[[package]]
 name = "abstract-cw-orch-polytone"
 version = "6.0.1"
-source = "git+https://github.com/permissionlessweb/polytone?branch=bump%2Fcw3#31a4faba81ca6652d51dc4c06bdd240e766e1b03"
 dependencies = [
  "abstract-polytone-note",
  "abstract-polytone-proxy",
@@ -416,7 +392,6 @@ dependencies = [
 [[package]]
 name = "abstract-polytone"
 version = "2.0.0"
-source = "git+https://github.com/permissionlessweb/polytone?branch=bump%2Fcw3#31a4faba81ca6652d51dc4c06bdd240e766e1b03"
 dependencies = [
  "cosmwasm-schema",
  "cosmwasm-std",
@@ -427,7 +402,6 @@ dependencies = [
 [[package]]
 name = "abstract-polytone-note"
 version = "5.0.0"
-source = "git+https://github.com/permissionlessweb/polytone?branch=bump%2Fcw3#31a4faba81ca6652d51dc4c06bdd240e766e1b03"
 dependencies = [
  "abstract-polytone",
  "cosmwasm-schema",
@@ -442,7 +416,6 @@ dependencies = [
 [[package]]
 name = "abstract-polytone-proxy"
 version = "5.0.0"
-source = "git+https://github.com/permissionlessweb/polytone?branch=bump%2Fcw3#31a4faba81ca6652d51dc4c06bdd240e766e1b03"
 dependencies = [
  "abstract-polytone",
  "cosmwasm-schema",
@@ -457,7 +430,6 @@ dependencies = [
 [[package]]
 name = "abstract-polytone-voice"
 version = "5.0.0"
-source = "git+https://github.com/permissionlessweb/polytone?branch=bump%2Fcw3#31a4faba81ca6652d51dc4c06bdd240e766e1b03"
 dependencies = [
  "abstract-polytone",
  "abstract-polytone-proxy",
@@ -3000,7 +2972,6 @@ dependencies = [
 [[package]]
 name = "cnidarium"
 version = "0.84.0"
-source = "git+https://github.com/permissionlessweb/cnidarium?branch=main#8df48e90ba75bb61dcb5c5abec790154ad526755"
 dependencies = [
  "anyhow",
  "async-trait",
@@ -3035,7 +3006,6 @@ dependencies = [
 [[package]]
 name = "cnidarium-component"
 version = "2.1.1"
-source = "git+https://github.com/permissionlessweb/penumbra?branch=main#68e483d16eb3ed0ff31934bf43e740d18bd4d805"
 dependencies = [
  "anyhow",
  "async-trait",
@@ -3315,11 +3285,10 @@ dependencies = [
 [[package]]
 name = "cosmos-sdk-proto"
 version = "0.28.0"
-source = "git+https://github.com/permissionlessweb/cosmos-rust?branch=main#51a9e50dda277801d3abd7ff0d332d37fbc25a91"
 dependencies = [
  "bytes",
  "http-body-util",
- "informalsystems-pbjson 0.7.0 (git+https://github.com/permissionlessweb/pbjson?branch=main)",
+ "informalsystems-pbjson",
  "prost",
  "serde",
  "tendermint-proto",
@@ -3330,7 +3299,6 @@ dependencies = [
 [[package]]
 name = "cosmrs"
 version = "0.23.0"
-source = "git+https://github.com/permissionlessweb/cosmos-rust?branch=main#51a9e50dda277801d3abd7ff0d332d37fbc25a91"
 dependencies = [
  "bip32",
  "cosmos-sdk-proto",
@@ -3351,12 +3319,10 @@ dependencies = [
 [[package]]
 name = "cosmwasm-core"
 version = "3.0.3-dev"
-source = "git+https://github.com/permissionlessweb/cosmwasm?branch=mvp#d5586deb95247416a6eaf312c8aa3e283e1d15ca"
 
 [[package]]
 name = "cosmwasm-crypto"
 version = "3.0.3-dev"
-source = "git+https://github.com/permissionlessweb/cosmwasm?branch=mvp#d5586deb95247416a6eaf312c8aa3e283e1d15ca"
 dependencies = [
  "ark-bls12-381",
  "ark-ec 0.5.0",
@@ -3380,7 +3346,6 @@ dependencies = [
 [[package]]
 name = "cosmwasm-derive"
 version = "3.0.3-dev"
-source = "git+https://github.com/permissionlessweb/cosmwasm?branch=mvp#d5586deb95247416a6eaf312c8aa3e283e1d15ca"
 dependencies = [
  "proc-macro2 1.0.106",
  "quote",
@@ -3390,7 +3355,6 @@ dependencies = [
 [[package]]
 name = "cosmwasm-schema"
 version = "3.0.3-dev"
-source = "git+https://github.com/permissionlessweb/cosmwasm?branch=mvp#d5586deb95247416a6eaf312c8aa3e283e1d15ca"
 dependencies = [
  "cosmwasm-schema-derive",
  "cw-schema",
@@ -3403,7 +3367,6 @@ dependencies = [
 [[package]]
 name = "cosmwasm-schema-derive"
 version = "3.0.3-dev"
-source = "git+https://github.com/permissionlessweb/cosmwasm?branch=mvp#d5586deb95247416a6eaf312c8aa3e283e1d15ca"
 dependencies = [
  "proc-macro2 1.0.106",
  "quote",
@@ -3413,7 +3376,6 @@ dependencies = [
 [[package]]
 name = "cosmwasm-std"
 version = "3.0.3-dev"
-source = "git+https://github.com/permissionlessweb/cosmwasm?branch=mvp#d5586deb95247416a6eaf312c8aa3e283e1d15ca"
 dependencies = [
  "base64 0.22.1",
  "bech32 0.11.1",
@@ -3626,7 +3588,6 @@ dependencies = [
 [[package]]
 name = "cw-address-like"
 version = "3.0.1"
-source = "git+https://github.com/permissionlessweb/cw-plus-plus?branch=feat%2Fmvp#7b852e92cc9217b5c948cd32d1f1a44e12a8be51"
 dependencies = [
  "cosmwasm-std",
 ]
@@ -3634,7 +3595,6 @@ dependencies = [
 [[package]]
 name = "cw-asset"
 version = "4.0.0"
-source = "git+https://github.com/permissionlessweb/cw-asset?branch=main#fb7b1fe82aba1d12a3b08b96fd31a6de696f7e33"
 dependencies = [
  "cosmwasm-schema",
  "cosmwasm-std",
@@ -3647,7 +3607,6 @@ dependencies = [
 [[package]]
 name = "cw-blob"
 version = "0.2.0"
-source = "git+https://github.com/permissionlessweb/cw-packages?branch=feat%2Fcw3#67822874db4327747f89bf3c5541564866e6aded"
 dependencies = [
  "cosmrs",
  "cosmwasm-std",
@@ -3657,7 +3616,6 @@ dependencies = [
 [[package]]
 name = "cw-clearable"
 version = "0.2.0"
-source = "git+https://github.com/permissionlessweb/cw-packages?branch=feat%2Fcw3#67822874db4327747f89bf3c5541564866e6aded"
 dependencies = [
  "cosmwasm-schema",
  "cosmwasm-std",
@@ -3667,7 +3625,6 @@ dependencies = [
 [[package]]
 name = "cw-controllers"
 version = "3.0.0"
-source = "git+https://github.com/permissionlessweb/cw-minus?branch=main#3dcc39ed9c9199b08fff90b9e4a57b464ccc855f"
 dependencies = [
  "cosmwasm-schema",
  "cosmwasm-std",
@@ -3679,9 +3636,30 @@ dependencies = [
 ]
 
 [[package]]
+name = "cw-multi-test"
+version = "3.0.0-rc"
+dependencies = [
+ "bech32 0.11.1",
+ "cosmwasm-schema",
+ "cosmwasm-std",
+ "cw-storage-plus",
+ "cw-utils",
+ "cw20-ics20",
+ "hex",
+ "itertools 0.14.0",
+ "log",
+ "prost",
+ "schemars 0.8.22",
+ "serde",
+ "serde_json",
+ "sha2 0.10.9",
+ "thiserror 1.0.69",
+ "tiny-keccak",
+]
+
+[[package]]
 name = "cw-orch"
 version = "0.30.0"
-source = "git+https://github.com/permissionlessweb/cw-orchestrator?branch=cw3#ec4d693aad80ee70ddbd77c3b78c9807bedb6be0"
 dependencies = [
  "anyhow",
  "cosmrs",
@@ -3707,7 +3685,6 @@ dependencies = [
 [[package]]
 name = "cw-orch-contract-derive"
 version = "0.21.1"
-source = "git+https://github.com/permissionlessweb/cw-orchestrator?branch=cw3#ec4d693aad80ee70ddbd77c3b78c9807bedb6be0"
 dependencies = [
  "convert_case 0.6.0",
  "quote",
@@ -3717,12 +3694,11 @@ dependencies = [
 [[package]]
 name = "cw-orch-core"
 version = "2.1.4"
-source = "git+https://github.com/permissionlessweb/cw-orchestrator?branch=cw3#ec4d693aad80ee70ddbd77c3b78c9807bedb6be0"
 dependencies = [
- "abstract-cw-multi-test",
  "anyhow",
  "cosmos-sdk-proto",
  "cosmwasm-std",
+ "cw-multi-test",
  "cw-storage-plus",
  "cw-utils",
  "dirs 5.0.1",
@@ -3736,7 +3712,6 @@ dependencies = [
 [[package]]
 name = "cw-orch-daemon"
 version = "0.29.0"
-source = "git+https://github.com/permissionlessweb/cw-orchestrator?branch=cw3#ec4d693aad80ee70ddbd77c3b78c9807bedb6be0"
 dependencies = [
  "anyhow",
  "async-recursion",
@@ -3783,7 +3758,6 @@ dependencies = [
 [[package]]
 name = "cw-orch-fns-derive"
 version = "0.23.1"
-source = "git+https://github.com/permissionlessweb/cw-orchestrator?branch=cw3#ec4d693aad80ee70ddbd77c3b78c9807bedb6be0"
 dependencies = [
  "convert_case 0.6.0",
  "proc-macro2 1.0.106",
@@ -3794,7 +3768,6 @@ dependencies = [
 [[package]]
 name = "cw-orch-from-interface-derive"
 version = "0.1.0"
-source = "git+https://github.com/permissionlessweb/cw-orchestrator?branch=cw3#ec4d693aad80ee70ddbd77c3b78c9807bedb6be0"
 dependencies = [
  "proc-macro2 1.0.106",
  "quote",
@@ -3804,7 +3777,6 @@ dependencies = [
 [[package]]
 name = "cw-orch-interchain"
 version = "0.8.1"
-source = "git+https://github.com/permissionlessweb/cw-orchestrator?branch=cw3#ec4d693aad80ee70ddbd77c3b78c9807bedb6be0"
 dependencies = [
  "cosmwasm-std",
  "cw-orch-interchain-core",
@@ -3820,7 +3792,6 @@ dependencies = [
 [[package]]
 name = "cw-orch-interchain-core"
 version = "0.9.2"
-source = "git+https://github.com/permissionlessweb/cw-orchestrator?branch=cw3#ec4d693aad80ee70ddbd77c3b78c9807bedb6be0"
 dependencies = [
  "base64 0.22.1",
  "cosmwasm-schema",
@@ -3842,7 +3813,6 @@ dependencies = [
 [[package]]
 name = "cw-orch-interchain-daemon"
 version = "0.9.0"
-source = "git+https://github.com/permissionlessweb/cw-orchestrator?branch=cw3#ec4d693aad80ee70ddbd77c3b78c9807bedb6be0"
 dependencies = [
  "async-recursion",
  "base64 0.22.1",
@@ -3871,7 +3841,6 @@ dependencies = [
 [[package]]
 name = "cw-orch-interchain-mock"
 version = "0.9.0"
-source = "git+https://github.com/permissionlessweb/cw-orchestrator?branch=cw3#ec4d693aad80ee70ddbd77c3b78c9807bedb6be0"
 dependencies = [
  "anyhow",
  "cosmrs",
@@ -3890,11 +3859,10 @@ dependencies = [
 [[package]]
 name = "cw-orch-mock"
 version = "0.24.4"
-source = "git+https://github.com/permissionlessweb/cw-orchestrator?branch=cw3#ec4d693aad80ee70ddbd77c3b78c9807bedb6be0"
 dependencies = [
- "abstract-cw-multi-test",
  "cosmos-sdk-proto",
  "cosmwasm-std",
+ "cw-multi-test",
  "cw-orch-core",
  "cw-utils",
  "log",
@@ -3905,7 +3873,6 @@ dependencies = [
 [[package]]
 name = "cw-orch-networks"
 version = "0.24.10"
-source = "git+https://github.com/permissionlessweb/cw-orchestrator?branch=cw3#ec4d693aad80ee70ddbd77c3b78c9807bedb6be0"
 dependencies = [
  "cw-orch-core",
  "serde",
@@ -3914,7 +3881,6 @@ dependencies = [
 [[package]]
 name = "cw-orch-starship"
 version = "0.7.0"
-source = "git+https://github.com/permissionlessweb/cw-orchestrator?branch=cw3#ec4d693aad80ee70ddbd77c3b78c9807bedb6be0"
 dependencies = [
  "cosmwasm-std",
  "cw-orch-core",
@@ -3937,7 +3903,6 @@ dependencies = [
 [[package]]
 name = "cw-orch-traits"
 version = "0.25.0"
-source = "git+https://github.com/permissionlessweb/cw-orchestrator?branch=cw3#ec4d693aad80ee70ddbd77c3b78c9807bedb6be0"
 dependencies = [
  "cw-orch-core",
  "prost-types",
@@ -3946,7 +3911,6 @@ dependencies = [
 [[package]]
 name = "cw-ownable"
 version = "3.0.1"
-source = "git+https://github.com/permissionlessweb/cw-plus-plus?branch=feat%2Fmvp#7b852e92cc9217b5c948cd32d1f1a44e12a8be51"
 dependencies = [
  "cosmwasm-schema",
  "cosmwasm-std",
@@ -3960,7 +3924,6 @@ dependencies = [
 [[package]]
 name = "cw-ownable-derive"
 version = "3.0.1"
-source = "git+https://github.com/permissionlessweb/cw-plus-plus?branch=feat%2Fmvp#7b852e92cc9217b5c948cd32d1f1a44e12a8be51"
 dependencies = [
  "proc-macro2 1.0.106",
  "quote",
@@ -3970,7 +3933,6 @@ dependencies = [
 [[package]]
 name = "cw-paginate"
 version = "3.0.1"
-source = "git+https://github.com/permissionlessweb/cw-plus-plus?branch=feat%2Fmvp#7b852e92cc9217b5c948cd32d1f1a44e12a8be51"
 dependencies = [
  "cosmwasm-std",
  "cw-storage-plus",
@@ -3980,7 +3942,6 @@ dependencies = [
 [[package]]
 name = "cw-plus-orch"
 version = "0.25.0"
-source = "git+https://github.com/permissionlessweb/cw-orchestrator?branch=cw3#ec4d693aad80ee70ddbd77c3b78c9807bedb6be0"
 dependencies = [
  "cosmwasm-schema",
  "cosmwasm-std",
@@ -4005,7 +3966,6 @@ dependencies = [
 [[package]]
 name = "cw-schema"
 version = "3.0.3-dev"
-source = "git+https://github.com/permissionlessweb/cosmwasm?branch=mvp#d5586deb95247416a6eaf312c8aa3e283e1d15ca"
 dependencies = [
  "cw-schema-derive",
  "indexmap 2.13.1",
@@ -4019,7 +3979,6 @@ dependencies = [
 [[package]]
 name = "cw-schema-derive"
 version = "3.0.3-dev"
-source = "git+https://github.com/permissionlessweb/cosmwasm?branch=mvp#d5586deb95247416a6eaf312c8aa3e283e1d15ca"
 dependencies = [
  "heck 0.5.0",
  "itertools 0.13.0",
@@ -4032,7 +3991,6 @@ dependencies = [
 [[package]]
 name = "cw-storage-plus"
 version = "3.0.1"
-source = "git+https://github.com/permissionlessweb/cw-storage-plus?branch=mvp#9cc69e11726116f5d709fde94e05100a0e592fa7"
 dependencies = [
  "cosmwasm-std",
  "schemars 0.8.22",
@@ -4042,7 +4000,6 @@ dependencies = [
 [[package]]
 name = "cw-utils"
 version = "3.0.0"
-source = "git+https://github.com/permissionlessweb/cw-minus?branch=main#3dcc39ed9c9199b08fff90b9e4a57b464ccc855f"
 dependencies = [
  "cosmwasm-schema",
  "cosmwasm-std",
@@ -4054,7 +4011,6 @@ dependencies = [
 [[package]]
 name = "cw1"
 version = "3.0.0"
-source = "git+https://github.com/permissionlessweb/cw-plus?branch=main#27c27971a07ee5482c01afa1de3a4e03206e963f"
 dependencies = [
  "cosmwasm-schema",
  "cosmwasm-std",
@@ -4065,7 +4021,6 @@ dependencies = [
 [[package]]
 name = "cw1-subkeys"
 version = "3.0.0"
-source = "git+https://github.com/permissionlessweb/cw-plus?branch=main#27c27971a07ee5482c01afa1de3a4e03206e963f"
 dependencies = [
  "cosmwasm-schema",
  "cosmwasm-std",
@@ -4083,7 +4038,6 @@ dependencies = [
 [[package]]
 name = "cw1-whitelist"
 version = "3.0.0"
-source = "git+https://github.com/permissionlessweb/cw-plus?branch=main#27c27971a07ee5482c01afa1de3a4e03206e963f"
 dependencies = [
  "cosmwasm-schema",
  "cosmwasm-std",
@@ -4099,7 +4053,6 @@ dependencies = [
 [[package]]
 name = "cw2"
 version = "3.0.0"
-source = "git+https://github.com/permissionlessweb/cw-minus?branch=main#3dcc39ed9c9199b08fff90b9e4a57b464ccc855f"
 dependencies = [
  "cosmwasm-schema",
  "cosmwasm-std",
@@ -4113,7 +4066,6 @@ dependencies = [
 [[package]]
 name = "cw20"
 version = "3.0.0"
-source = "git+https://github.com/permissionlessweb/cw-plus?branch=main#27c27971a07ee5482c01afa1de3a4e03206e963f"
 dependencies = [
  "cosmwasm-schema",
  "cosmwasm-std",
@@ -4125,7 +4077,6 @@ dependencies = [
 [[package]]
 name = "cw20-base"
 version = "3.0.0"
-source = "git+https://github.com/permissionlessweb/cw-plus?branch=main#27c27971a07ee5482c01afa1de3a4e03206e963f"
 dependencies = [
  "cosmwasm-schema",
  "cosmwasm-std",
@@ -4141,7 +4092,6 @@ dependencies = [
 [[package]]
 name = "cw20-ics20"
 version = "3.0.0"
-source = "git+https://github.com/permissionlessweb/cw-plus?branch=main#27c27971a07ee5482c01afa1de3a4e03206e963f"
 dependencies = [
  "cosmwasm-schema",
  "cosmwasm-std",
@@ -4159,7 +4109,6 @@ dependencies = [
 [[package]]
 name = "cw3"
 version = "3.0.0"
-source = "git+https://github.com/permissionlessweb/cw-plus?branch=main#27c27971a07ee5482c01afa1de3a4e03206e963f"
 dependencies = [
  "cosmwasm-schema",
  "cosmwasm-std",
@@ -4173,7 +4122,6 @@ dependencies = [
 [[package]]
 name = "cw3-fixed-multisig"
 version = "3.0.0"
-source = "git+https://github.com/permissionlessweb/cw-plus?branch=main#27c27971a07ee5482c01afa1de3a4e03206e963f"
 dependencies = [
  "cosmwasm-schema",
  "cosmwasm-std",
@@ -4189,7 +4137,6 @@ dependencies = [
 [[package]]
 name = "cw3-flex-multisig"
 version = "3.0.0"
-source = "git+https://github.com/permissionlessweb/cw-plus?branch=main#27c27971a07ee5482c01afa1de3a4e03206e963f"
 dependencies = [
  "cosmwasm-schema",
  "cosmwasm-std",
@@ -4208,7 +4155,6 @@ dependencies = [
 [[package]]
 name = "cw4"
 version = "3.0.0"
-source = "git+https://github.com/permissionlessweb/cw-plus?branch=main#27c27971a07ee5482c01afa1de3a4e03206e963f"
 dependencies = [
  "cosmwasm-schema",
  "cosmwasm-std",
@@ -4220,7 +4166,6 @@ dependencies = [
 [[package]]
 name = "cw4-group"
 version = "3.0.0"
-source = "git+https://github.com/permissionlessweb/cw-plus?branch=main#27c27971a07ee5482c01afa1de3a4e03206e963f"
 dependencies = [
  "cosmwasm-schema",
  "cosmwasm-std",
@@ -4237,7 +4182,6 @@ dependencies = [
 [[package]]
 name = "cw4-stake"
 version = "3.0.0"
-source = "git+https://github.com/permissionlessweb/cw-plus?branch=main#27c27971a07ee5482c01afa1de3a4e03206e963f"
 dependencies = [
  "cosmwasm-schema",
  "cosmwasm-std",
@@ -4425,7 +4369,6 @@ dependencies = [
 [[package]]
 name = "decaf377-fmd"
 version = "2.1.1"
-source = "git+https://github.com/permissionlessweb/penumbra?branch=main#68e483d16eb3ed0ff31934bf43e740d18bd4d805"
 dependencies = [
  "ark-ff 0.4.2",
  "ark-serialize 0.4.2",
@@ -4439,7 +4382,6 @@ dependencies = [
 [[package]]
 name = "decaf377-frost"
 version = "2.1.1"
-source = "git+https://github.com/permissionlessweb/penumbra?branch=main#68e483d16eb3ed0ff31934bf43e740d18bd4d805"
 dependencies = [
  "anyhow",
  "ark-ff 0.4.2",
@@ -4455,7 +4397,6 @@ dependencies = [
 [[package]]
 name = "decaf377-ka"
 version = "2.1.1"
-source = "git+https://github.com/permissionlessweb/penumbra?branch=main#68e483d16eb3ed0ff31934bf43e740d18bd4d805"
 dependencies = [
  "ark-ff 0.4.2",
  "decaf377",
@@ -5533,7 +5474,6 @@ dependencies = [
 [[package]]
 name = "evm-note"
 version = "0.3.1"
-source = "git+https://github.com/permissionlessweb/polytone?branch=bump%2Fcw3-evm#d9d9ce5e9b42aeede66aee0839522d4223d82dd8"
 dependencies = [
  "alloy",
  "alloy-sol-types",
@@ -5618,9 +5558,9 @@ checksum = "7360491ce676a36bf9bb3c56c1aa791658183a54d2744120f27285738d90465a"
 
 [[package]]
 name = "fastrand"
-version = "2.4.0"
+version = "2.4.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a043dc74da1e37d6afe657061213aa6f425f855399a11d3463c6ecccc4dfda1f"
+checksum = "9f1f227452a390804cdb637b74a86990f2a7d7ba4b7d5693aac9b4dd6defd8d6"
 
 [[package]]
 name = "fastrlp"
@@ -6896,20 +6836,18 @@ dependencies = [
 [[package]]
 name = "ibc"
 version = "0.57.0"
-source = "git+https://github.com/permissionlessweb/ibc-rs?branch=main#36fe9f9e675a187870f900784995fce77cb1a536"
 dependencies = [
  "ibc-apps",
  "ibc-clients",
  "ibc-core",
  "ibc-core-host-cosmos",
- "ibc-derive 0.10.1 (git+https://github.com/permissionlessweb/ibc-rs?branch=main)",
+ "ibc-derive 0.10.1",
  "ibc-primitives",
 ]
 
 [[package]]
 name = "ibc-app-nft-transfer"
 version = "0.57.0"
-source = "git+https://github.com/permissionlessweb/ibc-rs?branch=main#36fe9f9e675a187870f900784995fce77cb1a536"
 dependencies = [
  "ibc-app-nft-transfer-types",
  "ibc-core",
@@ -6919,7 +6857,6 @@ dependencies = [
 [[package]]
 name = "ibc-app-nft-transfer-types"
 version = "0.57.0"
-source = "git+https://github.com/permissionlessweb/ibc-rs?branch=main#36fe9f9e675a187870f900784995fce77cb1a536"
 dependencies = [
  "base64 0.22.1",
  "borsh",
@@ -6940,7 +6877,6 @@ dependencies = [
 [[package]]
 name = "ibc-app-transfer"
 version = "0.57.0"
-source = "git+https://github.com/permissionlessweb/ibc-rs?branch=main#36fe9f9e675a187870f900784995fce77cb1a536"
 dependencies = [
  "ibc-app-transfer-types",
  "ibc-core",
@@ -6950,7 +6886,6 @@ dependencies = [
 [[package]]
 name = "ibc-app-transfer-types"
 version = "0.57.0"
-source = "git+https://github.com/permissionlessweb/ibc-rs?branch=main#36fe9f9e675a187870f900784995fce77cb1a536"
 dependencies = [
  "borsh",
  "derive_more 1.0.0",
@@ -6968,7 +6903,6 @@ dependencies = [
 [[package]]
 name = "ibc-apps"
 version = "0.57.0"
-source = "git+https://github.com/permissionlessweb/ibc-rs?branch=main#36fe9f9e675a187870f900784995fce77cb1a536"
 dependencies = [
  "ibc-app-nft-transfer",
  "ibc-app-transfer",
@@ -6977,7 +6911,6 @@ dependencies = [
 [[package]]
 name = "ibc-chain-registry"
 version = "0.32.2"
-source = "git+https://github.com/permissionlessweb/hermes?branch=master#e893a315518a35ea37f413407554904206cc7a11"
 dependencies = [
  "async-trait",
  "flex-error",
@@ -6998,7 +6931,6 @@ dependencies = [
 [[package]]
 name = "ibc-client-tendermint"
 version = "0.57.0"
-source = "git+https://github.com/permissionlessweb/ibc-rs?branch=main#36fe9f9e675a187870f900784995fce77cb1a536"
 dependencies = [
  "derive_more 1.0.0",
  "ibc-client-tendermint-types",
@@ -7015,7 +6947,6 @@ dependencies = [
 [[package]]
 name = "ibc-client-tendermint-types"
 version = "0.57.0"
-source = "git+https://github.com/permissionlessweb/ibc-rs?branch=main#36fe9f9e675a187870f900784995fce77cb1a536"
 dependencies = [
  "displaydoc",
  "ibc-core-client-types",
@@ -7032,7 +6963,6 @@ dependencies = [
 [[package]]
 name = "ibc-client-wasm-types"
 version = "0.57.0"
-source = "git+https://github.com/permissionlessweb/ibc-rs?branch=main#36fe9f9e675a187870f900784995fce77cb1a536"
 dependencies = [
  "base64 0.22.1",
  "displaydoc",
@@ -7046,7 +6976,6 @@ dependencies = [
 [[package]]
 name = "ibc-clients"
 version = "0.57.0"
-source = "git+https://github.com/permissionlessweb/ibc-rs?branch=main#36fe9f9e675a187870f900784995fce77cb1a536"
 dependencies = [
  "ibc-client-tendermint",
  "ibc-client-wasm-types",
@@ -7055,7 +6984,6 @@ dependencies = [
 [[package]]
 name = "ibc-core"
 version = "0.57.0"
-source = "git+https://github.com/permissionlessweb/ibc-rs?branch=main#36fe9f9e675a187870f900784995fce77cb1a536"
 dependencies = [
  "ibc-core-channel",
  "ibc-core-client",
@@ -7064,14 +6992,13 @@ dependencies = [
  "ibc-core-handler",
  "ibc-core-host",
  "ibc-core-router",
- "ibc-derive 0.10.1 (git+https://github.com/permissionlessweb/ibc-rs?branch=main)",
+ "ibc-derive 0.10.1",
  "ibc-primitives",
 ]
 
 [[package]]
 name = "ibc-core-channel"
 version = "0.57.0"
-source = "git+https://github.com/permissionlessweb/ibc-rs?branch=main#36fe9f9e675a187870f900784995fce77cb1a536"
 dependencies = [
  "ibc-core-channel-types",
  "ibc-core-client",
@@ -7086,7 +7013,6 @@ dependencies = [
 [[package]]
 name = "ibc-core-channel-types"
 version = "0.57.0"
-source = "git+https://github.com/permissionlessweb/ibc-rs?branch=main#36fe9f9e675a187870f900784995fce77cb1a536"
 dependencies = [
  "borsh",
  "derive_more 1.0.0",
@@ -7109,7 +7035,6 @@ dependencies = [
 [[package]]
 name = "ibc-core-client"
 version = "0.57.0"
-source = "git+https://github.com/permissionlessweb/ibc-rs?branch=main#36fe9f9e675a187870f900784995fce77cb1a536"
 dependencies = [
  "ibc-core-client-context",
  "ibc-core-client-types",
@@ -7122,7 +7047,6 @@ dependencies = [
 [[package]]
 name = "ibc-core-client-context"
 version = "0.57.0"
-source = "git+https://github.com/permissionlessweb/ibc-rs?branch=main#36fe9f9e675a187870f900784995fce77cb1a536"
 dependencies = [
  "derive_more 1.0.0",
  "displaydoc",
@@ -7138,7 +7062,6 @@ dependencies = [
 [[package]]
 name = "ibc-core-client-types"
 version = "0.57.0"
-source = "git+https://github.com/permissionlessweb/ibc-rs?branch=main#36fe9f9e675a187870f900784995fce77cb1a536"
 dependencies = [
  "borsh",
  "derive_more 1.0.0",
@@ -7158,7 +7081,6 @@ dependencies = [
 [[package]]
 name = "ibc-core-commitment-types"
 version = "0.57.0"
-source = "git+https://github.com/permissionlessweb/ibc-rs?branch=main#36fe9f9e675a187870f900784995fce77cb1a536"
 dependencies = [
  "borsh",
  "derive_more 1.0.0",
@@ -7177,7 +7099,6 @@ dependencies = [
 [[package]]
 name = "ibc-core-connection"
 version = "0.57.0"
-source = "git+https://github.com/permissionlessweb/ibc-rs?branch=main#36fe9f9e675a187870f900784995fce77cb1a536"
 dependencies = [
  "ibc-client-wasm-types",
  "ibc-core-client",
@@ -7191,7 +7112,6 @@ dependencies = [
 [[package]]
 name = "ibc-core-connection-types"
 version = "0.57.0"
-source = "git+https://github.com/permissionlessweb/ibc-rs?branch=main#36fe9f9e675a187870f900784995fce77cb1a536"
 dependencies = [
  "borsh",
  "derive_more 1.0.0",
@@ -7212,7 +7132,6 @@ dependencies = [
 [[package]]
 name = "ibc-core-handler"
 version = "0.57.0"
-source = "git+https://github.com/permissionlessweb/ibc-rs?branch=main#36fe9f9e675a187870f900784995fce77cb1a536"
 dependencies = [
  "ibc-core-channel",
  "ibc-core-client",
@@ -7227,7 +7146,6 @@ dependencies = [
 [[package]]
 name = "ibc-core-handler-types"
 version = "0.57.0"
-source = "git+https://github.com/permissionlessweb/ibc-rs?branch=main#36fe9f9e675a187870f900784995fce77cb1a536"
 dependencies = [
  "borsh",
  "derive_more 1.0.0",
@@ -7251,7 +7169,6 @@ dependencies = [
 [[package]]
 name = "ibc-core-host"
 version = "0.57.0"
-source = "git+https://github.com/permissionlessweb/ibc-rs?branch=main#36fe9f9e675a187870f900784995fce77cb1a536"
 dependencies = [
  "derive_more 1.0.0",
  "displaydoc",
@@ -7269,7 +7186,6 @@ dependencies = [
 [[package]]
 name = "ibc-core-host-cosmos"
 version = "0.57.0"
-source = "git+https://github.com/permissionlessweb/ibc-rs?branch=main#36fe9f9e675a187870f900784995fce77cb1a536"
 dependencies = [
  "derive_more 1.0.0",
  "displaydoc",
@@ -7292,7 +7208,6 @@ dependencies = [
 [[package]]
 name = "ibc-core-host-types"
 version = "0.57.0"
-source = "git+https://github.com/permissionlessweb/ibc-rs?branch=main#36fe9f9e675a187870f900784995fce77cb1a536"
 dependencies = [
  "base64 0.22.1",
  "borsh",
@@ -7309,7 +7224,6 @@ dependencies = [
 [[package]]
 name = "ibc-core-router"
 version = "0.57.0"
-source = "git+https://github.com/permissionlessweb/ibc-rs?branch=main#36fe9f9e675a187870f900784995fce77cb1a536"
 dependencies = [
  "derive_more 1.0.0",
  "displaydoc",
@@ -7323,7 +7237,6 @@ dependencies = [
 [[package]]
 name = "ibc-core-router-types"
 version = "0.57.0"
-source = "git+https://github.com/permissionlessweb/ibc-rs?branch=main#36fe9f9e675a187870f900784995fce77cb1a536"
 dependencies = [
  "borsh",
  "derive_more 1.0.0",
@@ -7342,8 +7255,6 @@ dependencies = [
 [[package]]
 name = "ibc-derive"
 version = "0.10.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "27e93e76ce4da46027a59a5f2c3152e6d4adc4a9d541c782ff69b89e7fa2ccb8"
 dependencies = [
  "proc-macro2 1.0.106",
  "quote",
@@ -7353,7 +7264,8 @@ dependencies = [
 [[package]]
 name = "ibc-derive"
 version = "0.10.1"
-source = "git+https://github.com/permissionlessweb/ibc-rs?branch=main#36fe9f9e675a187870f900784995fce77cb1a536"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "27e93e76ce4da46027a59a5f2c3152e6d4adc4a9d541c782ff69b89e7fa2ccb8"
 dependencies = [
  "proc-macro2 1.0.106",
  "quote",
@@ -7363,7 +7275,6 @@ dependencies = [
 [[package]]
 name = "ibc-middleware-module"
 version = "0.2.0"
-source = "git+https://github.com/permissionlessweb/ibc-middleware?branch=main#f64c4715287933f7b28e1e132b157200b5a8452c"
 dependencies = [
  "ibc-core-channel-types",
  "ibc-core-host-types",
@@ -7375,7 +7286,6 @@ dependencies = [
 [[package]]
 name = "ibc-middleware-module-macros"
 version = "0.2.0"
-source = "git+https://github.com/permissionlessweb/ibc-middleware?branch=main#f64c4715287933f7b28e1e132b157200b5a8452c"
 dependencies = [
  "proc-macro2 1.0.106",
  "quote",
@@ -7384,7 +7294,6 @@ dependencies = [
 [[package]]
 name = "ibc-middleware-overflow-receive"
 version = "0.5.0"
-source = "git+https://github.com/permissionlessweb/ibc-middleware?branch=main#f64c4715287933f7b28e1e132b157200b5a8452c"
 dependencies = [
  "ibc-app-transfer-types",
  "ibc-core-channel-types",
@@ -7401,7 +7310,6 @@ dependencies = [
 [[package]]
 name = "ibc-middleware-packet-forward"
 version = "0.10.0"
-source = "git+https://github.com/permissionlessweb/ibc-middleware?branch=main#f64c4715287933f7b28e1e132b157200b5a8452c"
 dependencies = [
  "borsh",
  "dur",
@@ -7422,7 +7330,6 @@ dependencies = [
 [[package]]
 name = "ibc-primitives"
 version = "0.57.0"
-source = "git+https://github.com/permissionlessweb/ibc-rs?branch=main#36fe9f9e675a187870f900784995fce77cb1a536"
 dependencies = [
  "borsh",
  "derive_more 1.0.0",
@@ -7439,14 +7346,13 @@ dependencies = [
 [[package]]
 name = "ibc-proto"
 version = "0.52.0"
-source = "git+https://github.com/permissionlessweb/ibc-proto-rs?branch=main#675ef5696991d4ea259ad74a7501e3a091b9968b"
 dependencies = [
  "base64 0.22.1",
  "bytes",
  "cosmos-sdk-proto",
  "flex-error",
  "ics23",
- "informalsystems-pbjson 0.7.0 (git+https://github.com/permissionlessweb/pbjson?branch=main)",
+ "informalsystems-pbjson",
  "prost",
  "schemars 0.8.22",
  "serde",
@@ -7459,7 +7365,6 @@ dependencies = [
 [[package]]
 name = "ibc-relayer"
 version = "0.32.2"
-source = "git+https://github.com/permissionlessweb/hermes?branch=master#e893a315518a35ea37f413407554904206cc7a11"
 dependencies = [
  "anyhow",
  "async-stream",
@@ -7536,7 +7441,6 @@ dependencies = [
 [[package]]
 name = "ibc-relayer-types"
 version = "0.32.2"
-source = "git+https://github.com/permissionlessweb/hermes?branch=master#e893a315518a35ea37f413407554904206cc7a11"
 dependencies = [
  "bytes",
  "derive_more 0.99.20",
@@ -7563,7 +7467,6 @@ dependencies = [
 [[package]]
 name = "ibc-telemetry"
 version = "0.32.2"
-source = "git+https://github.com/permissionlessweb/hermes?branch=master#e893a315518a35ea37f413407554904206cc7a11"
 dependencies = [
  "axum",
  "axum-server",
@@ -7585,7 +7488,6 @@ dependencies = [
 [[package]]
 name = "ibc-types"
 version = "0.16.0"
-source = "git+https://github.com/permissionlessweb/ibc-types?branch=main#f51ebc33a752322992203f6236a277511059c7b3"
 dependencies = [
  "ibc-types-core-channel",
  "ibc-types-core-client",
@@ -7602,7 +7504,6 @@ dependencies = [
 [[package]]
 name = "ibc-types-core-channel"
 version = "0.16.0"
-source = "git+https://github.com/permissionlessweb/ibc-types?branch=main#f51ebc33a752322992203f6236a277511059c7b3"
 dependencies = [
  "anyhow",
  "bytes",
@@ -7634,7 +7535,6 @@ dependencies = [
 [[package]]
 name = "ibc-types-core-client"
 version = "0.16.0"
-source = "git+https://github.com/permissionlessweb/ibc-types?branch=main#f51ebc33a752322992203f6236a277511059c7b3"
 dependencies = [
  "anyhow",
  "bytes",
@@ -7660,7 +7560,6 @@ dependencies = [
 [[package]]
 name = "ibc-types-core-commitment"
 version = "0.16.0"
-source = "git+https://github.com/permissionlessweb/ibc-types?branch=main#f51ebc33a752322992203f6236a277511059c7b3"
 dependencies = [
  "anyhow",
  "bytes",
@@ -7694,7 +7593,6 @@ dependencies = [
 [[package]]
 name = "ibc-types-core-connection"
 version = "0.16.0"
-source = "git+https://github.com/permissionlessweb/ibc-types?branch=main#f51ebc33a752322992203f6236a277511059c7b3"
 dependencies = [
  "anyhow",
  "bytes",
@@ -7723,7 +7621,6 @@ dependencies = [
 [[package]]
 name = "ibc-types-domain-type"
 version = "0.16.0"
-source = "git+https://github.com/permissionlessweb/ibc-types?branch=main#f51ebc33a752322992203f6236a277511059c7b3"
 dependencies = [
  "anyhow",
  "bytes",
@@ -7733,7 +7630,6 @@ dependencies = [
 [[package]]
 name = "ibc-types-identifier"
 version = "0.16.0"
-source = "git+https://github.com/permissionlessweb/ibc-types?branch=main#f51ebc33a752322992203f6236a277511059c7b3"
 dependencies = [
  "displaydoc",
  "serde",
@@ -7743,7 +7639,6 @@ dependencies = [
 [[package]]
 name = "ibc-types-lightclients-tendermint"
 version = "0.16.0"
-source = "git+https://github.com/permissionlessweb/ibc-types?branch=main#f51ebc33a752322992203f6236a277511059c7b3"
 dependencies = [
  "anyhow",
  "bytes",
@@ -7779,7 +7674,6 @@ dependencies = [
 [[package]]
 name = "ibc-types-path"
 version = "0.16.0"
-source = "git+https://github.com/permissionlessweb/ibc-types?branch=main#f51ebc33a752322992203f6236a277511059c7b3"
 dependencies = [
  "bytes",
  "derive_more 0.99.20",
@@ -7801,7 +7695,6 @@ dependencies = [
 [[package]]
 name = "ibc-types-timestamp"
 version = "0.16.0"
-source = "git+https://github.com/permissionlessweb/ibc-types?branch=main#f51ebc33a752322992203f6236a277511059c7b3"
 dependencies = [
  "bytes",
  "displaydoc",
@@ -7819,7 +7712,6 @@ dependencies = [
 [[package]]
 name = "ibc-types-transfer"
 version = "0.16.0"
-source = "git+https://github.com/permissionlessweb/ibc-types?branch=main#f51ebc33a752322992203f6236a277511059c7b3"
 dependencies = [
  "displaydoc",
  "serde",
@@ -7841,14 +7733,13 @@ dependencies = [
 [[package]]
 name = "ics23"
 version = "0.12.0"
-source = "git+https://github.com/permissionlessweb/ics23?branch=stable#310d48268948be7bf4e04e86c68af59ee0f92c69"
 dependencies = [
  "anyhow",
  "blake2",
  "blake3",
  "bytes",
  "hex",
- "informalsystems-pbjson 0.7.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "informalsystems-pbjson",
  "prost",
  "ripemd",
  "serde",
@@ -8094,17 +7985,6 @@ dependencies = [
 [[package]]
 name = "informalsystems-pbjson"
 version = "0.7.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "9aa4a0980c8379295100d70854354e78df2ee1c6ca0f96ffe89afeb3140e3a3d"
-dependencies = [
- "base64 0.21.7",
- "serde",
-]
-
-[[package]]
-name = "informalsystems-pbjson"
-version = "0.7.0"
-source = "git+https://github.com/permissionlessweb/pbjson?branch=main#df9ae64ffc106affccdfec2437365f8498ef306d"
 dependencies = [
  "base64 0.21.7",
  "serde",
@@ -8113,7 +7993,6 @@ dependencies = [
 [[package]]
 name = "informalsystems-pbjson-build"
 version = "0.7.0"
-source = "git+https://github.com/permissionlessweb/pbjson?branch=main#df9ae64ffc106affccdfec2437365f8498ef306d"
 dependencies = [
  "heck 0.4.1",
  "itertools 0.12.1",
@@ -8124,11 +8003,10 @@ dependencies = [
 [[package]]
 name = "informalsystems-pbjson-types"
 version = "0.7.0"
-source = "git+https://github.com/permissionlessweb/pbjson?branch=main#df9ae64ffc106affccdfec2437365f8498ef306d"
 dependencies = [
  "bytes",
  "chrono",
- "informalsystems-pbjson 0.7.0 (git+https://github.com/permissionlessweb/pbjson?branch=main)",
+ "informalsystems-pbjson",
  "informalsystems-pbjson-build",
  "prost",
  "prost-build",
@@ -8298,7 +8176,6 @@ dependencies = [
 [[package]]
 name = "jmt"
 version = "0.12.0"
-source = "git+https://github.com/permissionlessweb/jmt?branch=main#fc83eb8cdb350861ca67b4ab5f86ba5fd24910fd"
 dependencies = [
  "anyhow",
  "borsh",
@@ -9142,7 +9019,6 @@ dependencies = [
 [[package]]
 name = "nam-blst"
 version = "0.3.15-nam.0"
-source = "git+https://github.com/permissionlessweb/blst?branch=master#b1eb7f8441fb2841519306dcf2dc9dd8aa51845e"
 dependencies = [
  "cc",
  "glob",
@@ -9258,7 +9134,6 @@ dependencies = [
 [[package]]
 name = "nam-sparse-merkle-tree"
 version = "0.3.3-nam.0"
-source = "git+https://github.com/permissionlessweb/sparse-merkle-tree?branch=main#b5a08e3f5687889fa43b5eb9bb31e8a6a3b50111"
 dependencies = [
  "borsh",
  "cfg-if",
@@ -9270,7 +9145,6 @@ dependencies = [
 [[package]]
 name = "namada_account"
 version = "0.251.0"
-source = "git+https://github.com/permissionlessweb/namada?branch=main#06628f59024a61ccc91d21ac8217eb44b9638d8e"
 dependencies = [
  "borsh",
  "namada_core",
@@ -9282,7 +9156,6 @@ dependencies = [
 [[package]]
 name = "namada_controller"
 version = "0.251.0"
-source = "git+https://github.com/permissionlessweb/namada?branch=main#06628f59024a61ccc91d21ac8217eb44b9638d8e"
 dependencies = [
  "namada_core",
  "smooth-operator",
@@ -9292,7 +9165,6 @@ dependencies = [
 [[package]]
 name = "namada_core"
 version = "0.251.0"
-source = "git+https://github.com/permissionlessweb/namada?branch=main#06628f59024a61ccc91d21ac8217eb44b9638d8e"
 dependencies = [
  "bech32 0.11.1",
  "borsh",
@@ -9341,7 +9213,6 @@ dependencies = [
 [[package]]
 name = "namada_ethereum_bridge"
 version = "0.251.0"
-source = "git+https://github.com/permissionlessweb/namada?branch=main#06628f59024a61ccc91d21ac8217eb44b9638d8e"
 dependencies = [
  "borsh",
  "ethers",
@@ -9369,7 +9240,6 @@ dependencies = [
 [[package]]
 name = "namada_events"
 version = "0.251.0"
-source = "git+https://github.com/permissionlessweb/namada?branch=main#06628f59024a61ccc91d21ac8217eb44b9638d8e"
 dependencies = [
  "borsh",
  "namada_core",
@@ -9383,7 +9253,6 @@ dependencies = [
 [[package]]
 name = "namada_gas"
 version = "0.251.0"
-source = "git+https://github.com/permissionlessweb/namada?branch=main#06628f59024a61ccc91d21ac8217eb44b9638d8e"
 dependencies = [
  "borsh",
  "namada_core",
@@ -9396,7 +9265,6 @@ dependencies = [
 [[package]]
 name = "namada_governance"
 version = "0.251.0"
-source = "git+https://github.com/permissionlessweb/namada?branch=main#06628f59024a61ccc91d21ac8217eb44b9638d8e"
 dependencies = [
  "borsh",
  "itertools 0.14.0",
@@ -9419,7 +9287,6 @@ dependencies = [
 [[package]]
 name = "namada_ibc"
 version = "0.251.0"
-source = "git+https://github.com/permissionlessweb/namada?branch=main#06628f59024a61ccc91d21ac8217eb44b9638d8e"
 dependencies = [
  "borsh",
  "data-encoding",
@@ -9454,7 +9321,6 @@ dependencies = [
 [[package]]
 name = "namada_io"
 version = "0.251.0"
-source = "git+https://github.com/permissionlessweb/namada?branch=main#06628f59024a61ccc91d21ac8217eb44b9638d8e"
 dependencies = [
  "async-trait",
  "kdam",
@@ -9467,7 +9333,6 @@ dependencies = [
 [[package]]
 name = "namada_macros"
 version = "0.251.0"
-source = "git+https://github.com/permissionlessweb/namada?branch=main#06628f59024a61ccc91d21ac8217eb44b9638d8e"
 dependencies = [
  "data-encoding",
  "proc-macro2 1.0.106",
@@ -9479,7 +9344,6 @@ dependencies = [
 [[package]]
 name = "namada_merkle_tree"
 version = "0.251.0"
-source = "git+https://github.com/permissionlessweb/namada?branch=main#06628f59024a61ccc91d21ac8217eb44b9638d8e"
 dependencies = [
  "borsh",
  "eyre",
@@ -9494,7 +9358,6 @@ dependencies = [
 [[package]]
 name = "namada_parameters"
 version = "0.251.0"
-source = "git+https://github.com/permissionlessweb/namada?branch=main#06628f59024a61ccc91d21ac8217eb44b9638d8e"
 dependencies = [
  "namada_core",
  "namada_macros",
@@ -9509,7 +9372,6 @@ dependencies = [
 [[package]]
 name = "namada_proof_of_stake"
 version = "0.251.0"
-source = "git+https://github.com/permissionlessweb/namada?branch=main#06628f59024a61ccc91d21ac8217eb44b9638d8e"
 dependencies = [
  "borsh",
  "itertools 0.14.0",
@@ -9533,7 +9395,6 @@ dependencies = [
 [[package]]
 name = "namada_replay_protection"
 version = "0.251.0"
-source = "git+https://github.com/permissionlessweb/namada?branch=main#06628f59024a61ccc91d21ac8217eb44b9638d8e"
 dependencies = [
  "namada_core",
 ]
@@ -9541,7 +9402,6 @@ dependencies = [
 [[package]]
 name = "namada_sdk"
 version = "0.251.0"
-source = "git+https://github.com/permissionlessweb/namada?branch=main#06628f59024a61ccc91d21ac8217eb44b9638d8e"
 dependencies = [
  "async-trait",
  "bech32 0.11.1",
@@ -9611,7 +9471,6 @@ dependencies = [
 [[package]]
 name = "namada_shielded_token"
 version = "0.251.0"
-source = "git+https://github.com/permissionlessweb/namada?branch=main#06628f59024a61ccc91d21ac8217eb44b9638d8e"
 dependencies = [
  "async-trait",
  "borsh",
@@ -9654,7 +9513,6 @@ dependencies = [
 [[package]]
 name = "namada_state"
 version = "0.251.0"
-source = "git+https://github.com/permissionlessweb/namada?branch=main#06628f59024a61ccc91d21ac8217eb44b9638d8e"
 dependencies = [
  "borsh",
  "clru",
@@ -9677,7 +9535,6 @@ dependencies = [
 [[package]]
 name = "namada_storage"
 version = "0.251.0"
-source = "git+https://github.com/permissionlessweb/namada?branch=main#06628f59024a61ccc91d21ac8217eb44b9638d8e"
 dependencies = [
  "borsh",
  "itertools 0.14.0",
@@ -9696,7 +9553,6 @@ dependencies = [
 [[package]]
 name = "namada_systems"
 version = "0.251.0"
-source = "git+https://github.com/permissionlessweb/namada?branch=main#06628f59024a61ccc91d21ac8217eb44b9638d8e"
 dependencies = [
  "namada_core",
  "namada_events",
@@ -9706,7 +9562,6 @@ dependencies = [
 [[package]]
 name = "namada_token"
 version = "0.251.0"
-source = "git+https://github.com/permissionlessweb/namada?branch=main#06628f59024a61ccc91d21ac8217eb44b9638d8e"
 dependencies = [
  "borsh",
  "namada_core",
@@ -9724,7 +9579,6 @@ dependencies = [
 [[package]]
 name = "namada_trans_token"
 version = "0.251.0"
-source = "git+https://github.com/permissionlessweb/namada?branch=main#06628f59024a61ccc91d21ac8217eb44b9638d8e"
 dependencies = [
  "konst",
  "namada_core",
@@ -9741,7 +9595,6 @@ dependencies = [
 [[package]]
 name = "namada_tx"
 version = "0.251.0"
-source = "git+https://github.com/permissionlessweb/namada?branch=main#06628f59024a61ccc91d21ac8217eb44b9638d8e"
 dependencies = [
  "ark-bls12-381",
  "bitflags 2.11.0",
@@ -9770,7 +9623,6 @@ dependencies = [
 [[package]]
 name = "namada_tx_env"
 version = "0.251.0"
-source = "git+https://github.com/permissionlessweb/namada?branch=main#06628f59024a61ccc91d21ac8217eb44b9638d8e"
 dependencies = [
  "namada_core",
  "namada_events",
@@ -9780,7 +9632,6 @@ dependencies = [
 [[package]]
 name = "namada_vm"
 version = "0.251.0"
-source = "git+https://github.com/permissionlessweb/namada?branch=main#06628f59024a61ccc91d21ac8217eb44b9638d8e"
 dependencies = [
  "borsh",
  "clru",
@@ -9804,7 +9655,6 @@ dependencies = [
 [[package]]
 name = "namada_vote_ext"
 version = "0.251.0"
-source = "git+https://github.com/permissionlessweb/namada?branch=main#06628f59024a61ccc91d21ac8217eb44b9638d8e"
 dependencies = [
  "borsh",
  "namada_core",
@@ -9816,7 +9666,6 @@ dependencies = [
 [[package]]
 name = "namada_vp"
 version = "0.251.0"
-source = "git+https://github.com/permissionlessweb/namada?branch=main#06628f59024a61ccc91d21ac8217eb44b9638d8e"
 dependencies = [
  "namada_core",
  "namada_events",
@@ -9832,7 +9681,6 @@ dependencies = [
 [[package]]
 name = "namada_vp_env"
 version = "0.251.0"
-source = "git+https://github.com/permissionlessweb/namada?branch=main#06628f59024a61ccc91d21ac8217eb44b9638d8e"
 dependencies = [
  "derivative",
  "masp_primitives",
@@ -9847,7 +9695,6 @@ dependencies = [
 [[package]]
 name = "namada_wallet"
 version = "0.251.0"
-source = "git+https://github.com/permissionlessweb/namada?branch=main#06628f59024a61ccc91d21ac8217eb44b9638d8e"
 dependencies = [
  "bimap",
  "bip32",
@@ -10581,7 +10428,6 @@ dependencies = [
 [[package]]
 name = "penumbra-sdk-app"
 version = "2.1.1"
-source = "git+https://github.com/permissionlessweb/penumbra?branch=main#68e483d16eb3ed0ff31934bf43e740d18bd4d805"
 dependencies = [
  "anyhow",
  "ark-ff 0.4.2",
@@ -10650,7 +10496,6 @@ dependencies = [
 [[package]]
 name = "penumbra-sdk-asset"
 version = "2.1.1"
-source = "git+https://github.com/permissionlessweb/penumbra?branch=main#68e483d16eb3ed0ff31934bf43e740d18bd4d805"
 dependencies = [
  "anyhow",
  "ark-ff 0.4.2",
@@ -10690,7 +10535,6 @@ dependencies = [
 [[package]]
 name = "penumbra-sdk-auction"
 version = "2.1.1"
-source = "git+https://github.com/permissionlessweb/penumbra?branch=main#68e483d16eb3ed0ff31934bf43e740d18bd4d805"
 dependencies = [
  "anyhow",
  "ark-ff 0.4.2",
@@ -10735,7 +10579,6 @@ dependencies = [
 [[package]]
 name = "penumbra-sdk-community-pool"
 version = "2.1.1"
-source = "git+https://github.com/permissionlessweb/penumbra?branch=main#68e483d16eb3ed0ff31934bf43e740d18bd4d805"
 dependencies = [
  "anyhow",
  "ark-ff 0.4.2",
@@ -10765,7 +10608,6 @@ dependencies = [
 [[package]]
 name = "penumbra-sdk-compact-block"
 version = "2.1.1"
-source = "git+https://github.com/permissionlessweb/penumbra?branch=main#68e483d16eb3ed0ff31934bf43e740d18bd4d805"
 dependencies = [
  "anyhow",
  "ark-ff 0.4.2",
@@ -10796,7 +10638,6 @@ dependencies = [
 [[package]]
 name = "penumbra-sdk-custody"
 version = "2.1.1"
-source = "git+https://github.com/permissionlessweb/penumbra?branch=main#68e483d16eb3ed0ff31934bf43e740d18bd4d805"
 dependencies = [
  "anyhow",
  "argon2",
@@ -10832,7 +10673,6 @@ dependencies = [
 [[package]]
 name = "penumbra-sdk-dex"
 version = "2.1.1"
-source = "git+https://github.com/permissionlessweb/penumbra?branch=main#68e483d16eb3ed0ff31934bf43e740d18bd4d805"
 dependencies = [
  "anyhow",
  "ark-ff 0.4.2",
@@ -10886,7 +10726,6 @@ dependencies = [
 [[package]]
 name = "penumbra-sdk-distributions"
 version = "2.1.1"
-source = "git+https://github.com/permissionlessweb/penumbra?branch=main#68e483d16eb3ed0ff31934bf43e740d18bd4d805"
 dependencies = [
  "anyhow",
  "async-trait",
@@ -10902,7 +10741,6 @@ dependencies = [
 [[package]]
 name = "penumbra-sdk-fee"
 version = "2.1.1"
-source = "git+https://github.com/permissionlessweb/penumbra?branch=main#68e483d16eb3ed0ff31934bf43e740d18bd4d805"
 dependencies = [
  "anyhow",
  "ark-ff 0.4.2",
@@ -10929,7 +10767,6 @@ dependencies = [
 [[package]]
 name = "penumbra-sdk-funding"
 version = "2.1.1"
-source = "git+https://github.com/permissionlessweb/penumbra?branch=main#68e483d16eb3ed0ff31934bf43e740d18bd4d805"
 dependencies = [
  "anyhow",
  "ark-groth16",
@@ -10960,7 +10797,6 @@ dependencies = [
 [[package]]
 name = "penumbra-sdk-governance"
 version = "2.1.1"
-source = "git+https://github.com/permissionlessweb/penumbra?branch=main#68e483d16eb3ed0ff31934bf43e740d18bd4d805"
 dependencies = [
  "anyhow",
  "ark-ff 0.4.2",
@@ -11009,7 +10845,6 @@ dependencies = [
 [[package]]
 name = "penumbra-sdk-ibc"
 version = "2.1.1"
-source = "git+https://github.com/permissionlessweb/penumbra?branch=main#68e483d16eb3ed0ff31934bf43e740d18bd4d805"
 dependencies = [
  "anyhow",
  "ark-ff 0.4.2",
@@ -11046,7 +10881,6 @@ dependencies = [
 [[package]]
 name = "penumbra-sdk-keys"
 version = "2.1.1"
-source = "git+https://github.com/permissionlessweb/penumbra?branch=main#68e483d16eb3ed0ff31934bf43e740d18bd4d805"
 dependencies = [
  "aes",
  "anyhow",
@@ -11090,7 +10924,6 @@ dependencies = [
 [[package]]
 name = "penumbra-sdk-num"
 version = "2.1.1"
-source = "git+https://github.com/permissionlessweb/penumbra?branch=main#68e483d16eb3ed0ff31934bf43e740d18bd4d805"
 dependencies = [
  "anyhow",
  "ark-ff 0.4.2",
@@ -11126,7 +10959,6 @@ dependencies = [
 [[package]]
 name = "penumbra-sdk-proof-params"
 version = "2.1.1"
-source = "git+https://github.com/permissionlessweb/penumbra?branch=main#68e483d16eb3ed0ff31934bf43e740d18bd4d805"
 dependencies = [
  "anyhow",
  "ark-ec 0.4.2",
@@ -11155,7 +10987,6 @@ dependencies = [
 [[package]]
 name = "penumbra-sdk-proto"
 version = "2.1.1"
-source = "git+https://github.com/permissionlessweb/penumbra?branch=main#68e483d16eb3ed0ff31934bf43e740d18bd4d805"
 dependencies = [
  "anyhow",
  "async-trait",
@@ -11171,7 +11002,7 @@ dependencies = [
  "ibc-proto",
  "ibc-types",
  "ics23",
- "informalsystems-pbjson 0.7.0 (git+https://github.com/permissionlessweb/pbjson?branch=main)",
+ "informalsystems-pbjson",
  "informalsystems-pbjson-types",
  "pin-project",
  "prost",
@@ -11188,7 +11019,6 @@ dependencies = [
 [[package]]
 name = "penumbra-sdk-sct"
 version = "2.1.1"
-source = "git+https://github.com/permissionlessweb/penumbra?branch=main#68e483d16eb3ed0ff31934bf43e740d18bd4d805"
 dependencies = [
  "anyhow",
  "ark-ff 0.4.2",
@@ -11225,7 +11055,6 @@ dependencies = [
 [[package]]
 name = "penumbra-sdk-shielded-pool"
 version = "2.1.1"
-source = "git+https://github.com/permissionlessweb/penumbra?branch=main#68e483d16eb3ed0ff31934bf43e740d18bd4d805"
 dependencies = [
  "anyhow",
  "ark-ff 0.4.2",
@@ -11277,7 +11106,6 @@ dependencies = [
 [[package]]
 name = "penumbra-sdk-stake"
 version = "2.1.1"
-source = "git+https://github.com/permissionlessweb/penumbra?branch=main#68e483d16eb3ed0ff31934bf43e740d18bd4d805"
 dependencies = [
  "anyhow",
  "ark-ff 0.4.2",
@@ -11318,7 +11146,6 @@ dependencies = [
 [[package]]
 name = "penumbra-sdk-tct"
 version = "2.1.1"
-source = "git+https://github.com/permissionlessweb/penumbra?branch=main#68e483d16eb3ed0ff31934bf43e740d18bd4d805"
 dependencies = [
  "ark-ed-on-bls12-377",
  "ark-ff 0.4.2",
@@ -11347,7 +11174,6 @@ dependencies = [
 [[package]]
 name = "penumbra-sdk-tower-trace"
 version = "2.1.1"
-source = "git+https://github.com/permissionlessweb/penumbra?branch=main#68e483d16eb3ed0ff31934bf43e740d18bd4d805"
 dependencies = [
  "futures",
  "hex",
@@ -11369,7 +11195,6 @@ dependencies = [
 [[package]]
 name = "penumbra-sdk-transaction"
 version = "2.1.1"
-source = "git+https://github.com/permissionlessweb/penumbra?branch=main#68e483d16eb3ed0ff31934bf43e740d18bd4d805"
 dependencies = [
  "anyhow",
  "ark-ff 0.4.2",
@@ -11422,7 +11247,6 @@ dependencies = [
 [[package]]
 name = "penumbra-sdk-txhash"
 version = "2.1.1"
-source = "git+https://github.com/permissionlessweb/penumbra?branch=main#68e483d16eb3ed0ff31934bf43e740d18bd4d805"
 dependencies = [
  "anyhow",
  "blake2b_simd 1.0.4",
@@ -11436,7 +11260,6 @@ dependencies = [
 [[package]]
 name = "penumbra-sdk-view"
 version = "2.1.1"
-source = "git+https://github.com/permissionlessweb/penumbra?branch=main#68e483d16eb3ed0ff31934bf43e740d18bd4d805"
 dependencies = [
  "anyhow",
  "ark-std 0.4.0",
@@ -11496,7 +11319,6 @@ dependencies = [
 [[package]]
 name = "penumbra-sdk-wallet"
 version = "2.1.1"
-source = "git+https://github.com/permissionlessweb/penumbra?branch=main#68e483d16eb3ed0ff31934bf43e740d18bd4d805"
 dependencies = [
  "anyhow",
  "ark-std 0.4.0",
@@ -11735,7 +11557,6 @@ dependencies = [
 [[package]]
 name = "polytone-evm"
 version = "2.0.0"
-source = "git+https://github.com/permissionlessweb/polytone?branch=bump%2Fcw3-evm#d9d9ce5e9b42aeede66aee0839522d4223d82dd8"
 dependencies = [
  "alloy",
  "alloy-sol-types",
@@ -11902,7 +11723,7 @@ version = "3.5.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "e67ba7e9b2b56446f1d419b1d807906278ffa1a658a8a5d8a39dcb1f5a78614f"
 dependencies = [
- "toml_edit 0.25.10+spec-1.1.0",
+ "toml_edit 0.25.11+spec-1.1.0",
 ]
 
 [[package]]
@@ -14425,7 +14246,6 @@ dependencies = [
 [[package]]
 name = "tendermint"
 version = "0.40.4"
-source = "git+https://github.com/permissionlessweb/tendermint-rs?branch=main#84af40465b4b393d66f0761d90b2863ff0f7191a"
 dependencies = [
  "bytes",
  "digest 0.10.7",
@@ -14454,7 +14274,6 @@ dependencies = [
 [[package]]
 name = "tendermint-config"
 version = "0.40.4"
-source = "git+https://github.com/permissionlessweb/tendermint-rs?branch=main#84af40465b4b393d66f0761d90b2863ff0f7191a"
 dependencies = [
  "flex-error",
  "serde",
@@ -14467,7 +14286,6 @@ dependencies = [
 [[package]]
 name = "tendermint-light-client"
 version = "0.40.4"
-source = "git+https://github.com/permissionlessweb/tendermint-rs?branch=main#84af40465b4b393d66f0761d90b2863ff0f7191a"
 dependencies = [
  "contracts",
  "crossbeam-channel",
@@ -14491,7 +14309,6 @@ dependencies = [
 [[package]]
 name = "tendermint-light-client-detector"
 version = "0.40.4"
-source = "git+https://github.com/permissionlessweb/tendermint-rs?branch=main#84af40465b4b393d66f0761d90b2863ff0f7191a"
 dependencies = [
  "crossbeam-channel",
  "derive_more 0.99.20",
@@ -14513,7 +14330,6 @@ dependencies = [
 [[package]]
 name = "tendermint-light-client-verifier"
 version = "0.40.4"
-source = "git+https://github.com/permissionlessweb/tendermint-rs?branch=main#84af40465b4b393d66f0761d90b2863ff0f7191a"
 dependencies = [
  "derive_more 0.99.20",
  "flex-error",
@@ -14525,7 +14341,6 @@ dependencies = [
 [[package]]
 name = "tendermint-proto"
 version = "0.40.4"
-source = "git+https://github.com/permissionlessweb/tendermint-rs?branch=main#84af40465b4b393d66f0761d90b2863ff0f7191a"
 dependencies = [
  "borsh",
  "bytes",
@@ -14543,7 +14358,6 @@ dependencies = [
 [[package]]
 name = "tendermint-rpc"
 version = "0.40.4"
-source = "git+https://github.com/permissionlessweb/tendermint-rs?branch=main#84af40465b4b393d66f0761d90b2863ff0f7191a"
 dependencies = [
  "async-trait",
  "async-tungstenite",
@@ -14967,9 +14781,9 @@ dependencies = [
 
 [[package]]
 name = "toml_edit"
-version = "0.25.10+spec-1.1.0"
+version = "0.25.11+spec-1.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a82418ca169e235e6c399a84e395ab6debeb3bc90edc959bf0f48647c6a32d1b"
+checksum = "0b59c4d22ed448339746c59b905d24568fcbb3ab65a500494f7b8c3e97739f2b"
 dependencies = [
  "indexmap 2.13.1",
  "toml_datetime 1.1.1+spec-1.1.0",
@@ -15106,7 +14920,6 @@ dependencies = [
 [[package]]
 name = "tower-abci"
 version = "0.19.1"
-source = "git+https://github.com/permissionlessweb/tower-abci?branch=main#1e02c8bcc9019d3f2cc3bb921611cbe995d5b9df"
 dependencies = [
  "bytes",
  "futures",
@@ -16431,7 +16244,6 @@ dependencies = [
 [[package]]
 name = "xion-account"
 version = "0.1.1"
-source = "git+https://github.com/permissionlessweb/contracts?branch=cw3#5ab629abcd2db19d39c85a4a18e2d6f1a0e7d60a"
 dependencies = [
  "base64 0.22.1",
  "bech32 0.9.1",

@@ -22,7 +22,7 @@ abstract-std    = { workspace = true }
 anybuf          = { workspace = true }
 cosmwasm-std    = { workspace = true, features = ["stargate", "staking"] }
 cw-ownable      = { workspace = true }
-cw-paginate     = { git = "https://github.com/permissionlessweb/cw-plus-plus", branch = "feat/mvp" }
+cw-paginate = { path = "../../../../../ZK/cw/zk-plus-plus/packages/paginate" }
 cw-storage-plus = { workspace = true }
 cw-utils        = { workspace = true }
 cw2             = { workspace = true }
