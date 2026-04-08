@@ -50,7 +50,7 @@ abstract-sdk       = { path = "../framework/packages/abstract-sdk" }
 abstract-std       = { path = "../framework/packages/abstract-std" }
 abstract-testing   = { path = "../framework/packages/abstract-testing" }
 
-abstract-xion = { package = "xion-account", path = "../../xion-account/contracts/account", features = ["library"] }
+abstract-xion = { package = "xion-account", git = "https://github.com/permissionlessweb/contracts", branch = "zk-mvp", features = ["library"] }
 
 ## Testing
 anyhow = "1"
@@ -58,52 +58,52 @@ anyhow = "1"
 challenge-app = { path = "../modules/contracts/apps/challenge" }
 
 clap   = { version = "4.0.32", features = ["derive"] }
-cosmwasm-schema = { path = "../../ZK/cw/zk-cosmwasm/packages/schema" }
-cosmwasm-std = { path = "../../ZK/cw/zk-cosmwasm/packages/std" }
-cosmos-sdk-proto = { path = "../../cosmos-rust/cosmos-sdk-proto" }
-cosmrs = { path = "../../cosmos-rust/cosmrs" }
-cw-address-like = { path = "../../ZK/cw/zk-plus-plus/packages/address-like" }
-cw-asset = { path = "../../cw-asset" }
-cw-blob = { path = "../../cw-packages/contracts/cw-blob" }
-cw-controllers = { path = "../../ZK/cw/zk-cw-minus/packages/controllers" }
-cw-orch = { path = "../../cw-orchestrator/cw-orch" }
-cw-orch-clone-testing = { path = "../../cw-orchestrator/packages/clone-testing" }
-cw-orch-core = { path = "../../cw-orchestrator/packages/cw-orch-core" }
-cw-orch-daemon = { path = "../../cw-orchestrator/cw-orch-daemon" }
-cw-orch-interchain = { path = "../../cw-orchestrator/cw-orch-interchain" }
-cw-orch-polytone = { package = "abstract-cw-orch-polytone", path = "../../polytone/packages/cw-orch-polytone" }
-cw-orch-proto = { path = "../../cw-orchestrator/packages/interchain/proto" }
-cw-ownable = { path = "../../ZK/cw/zk-plus-plus/packages/ownable" }
-cw-storage-plus = { path = "../../ZK/cw/zk-storage-plus" }
-cw-utils = { path = "../../ZK/cw/zk-cw-minus/packages/cw-utils" }
-cw2 = { path = "../../ZK/cw/zk-cw-minus/packages/cw2" }
-cw20 = { path = "../../cw-plus/packages/cw20" }
-cw20-base = { path = "../../cw-plus/contracts/cw20-base" }
-polytone = { package = "abstract-polytone", path = "../../polytone/packages/polytone" }
-polytone-note = { package = "abstract-polytone-note", path = "../../polytone/contracts/main/note" }
+cosmwasm-schema = { git = "https://github.com/permissionlessweb/cosmwasm", branch = "zk-mvp" }
+cosmwasm-std = { git = "https://github.com/permissionlessweb/cosmwasm", branch = "zk-mvp" }
+cosmos-sdk-proto = { git = "https://github.com/permissionlessweb/cosmos-rust", branch = "zk-mvp" }
+cosmrs = { git = "https://github.com/permissionlessweb/cosmos-rust", branch = "zk-mvp" }
+cw-address-like = { git = "https://github.com/permissionlessweb/cw-plus-plus", branch = "zk-mvp" }
+cw-asset = { git = "https://github.com/permissionlessweb/cw-asset", branch = "zk-mvp" }
+cw-blob = { git = "https://github.com/permissionlessweb/cw-packages", branch = "zk-mvp" }
+cw-controllers = { git = "https://github.com/permissionlessweb/cw-minus", branch = "zk-mvp" }
+cw-orch = { git = "https://github.com/permissionlessweb/cw-orchestrator", branch = "zk-mvp" }
+cw-orch-clone-testing = { git = "https://github.com/permissionlessweb/cw-orchestrator", branch = "zk-mvp" }
+cw-orch-core = { git = "https://github.com/permissionlessweb/cw-orchestrator", branch = "zk-mvp" }
+cw-orch-daemon = { git = "https://github.com/permissionlessweb/cw-orchestrator", branch = "zk-mvp" }
+cw-orch-interchain = { git = "https://github.com/permissionlessweb/cw-orchestrator", branch = "zk-mvp" }
+cw-orch-polytone = { package = "abstract-cw-orch-polytone", git = "https://github.com/permissionlessweb/polytone", branch = "zk-mvp" }
+cw-orch-proto = { git = "https://github.com/permissionlessweb/cw-orchestrator", branch = "zk-mvp" }
+cw-ownable = { git = "https://github.com/permissionlessweb/cw-plus-plus", branch = "zk-mvp" }
+cw-storage-plus = { git = "https://github.com/permissionlessweb/cw-storage-plus", branch = "zk-mvp" }
+cw-utils = { git = "https://github.com/permissionlessweb/cw-minus", branch = "zk-mvp" }
+cw2 = { git = "https://github.com/permissionlessweb/cw-minus", branch = "zk-mvp" }
+cw20 = { git = "https://github.com/permissionlessweb/cw-plus", branch = "zk-mvp" }
+cw20-base = { git = "https://github.com/permissionlessweb/cw-plus", branch = "zk-mvp" }
+polytone = { package = "abstract-polytone", git = "https://github.com/permissionlessweb/polytone", branch = "zk-mvp" }
+polytone-note = { package = "abstract-polytone-note", git = "https://github.com/permissionlessweb/polytone", branch = "zk-mvp" }
 abstract-macros = { path = "../framework/packages/abstract-macros" }
 abstract-adapter-utils = { path = "../framework/packages/standards/utils" }
 abstract-dex-standard = { path = "../framework/packages/standards/dex" }
 abstract-staking-standard = { path = "../framework/packages/standards/staking" }
 abstract-money-market-standard = { path = "../framework/packages/standards/money-market" }
-cw-orch-mock = { path = "../../cw-orchestrator/packages/cw-orch-mock" }
-cw-orch-traits = { path = "../../cw-orchestrator/packages/cw-orch-traits" }
-cw-plus-orch = { path = "../../cw-orchestrator/packages/integrations/cw-plus" }
-ibc-proto = { path = "../../ibc-proto-rs" }
-tendermint = { path = "../../tendermint-rs/tendermint" }
-tendermint-proto = { path = "../../tendermint-rs/proto" }
-tendermint-rpc = { path = "../../tendermint-rs/rpc" }
-abstract-cw-multi-test = { path = "../../cw-multi-test-fork" }
-clone-cw-multi-test = { path = "../../clone-cw-multi-test" }
-abstract-polytone-voice = { path = "../../polytone/contracts/main/voice" }
-abstract-polytone-proxy = { path = "../../polytone/contracts/main/proxy" }
-osmosis-std = { path = "../../osmosis-rust/packages/osmosis-std" }
-osmosis-test-tube = { path = "../../osmosis-test-tube/packages/osmosis-test-tube" }
-neutron-std = { path = "../../neutron-std/packages/neutron-std" }
-neutron-test-tube = { path = "../../neutron-test-tube/packages/neutron-test-tube" }
-simple-ica = { path = "../../cw-ibc-demo/packages/simple-ica" }
-simple-ica-controller = { path = "../../cw-ibc-demo/contracts/simple-ica-controller" }
-simple-ica-host = { path = "../../cw-ibc-demo/contracts/simple-ica-host" }
+cw-orch-mock = { git = "https://github.com/permissionlessweb/cw-orchestrator", branch = "zk-mvp" }
+cw-orch-traits = { git = "https://github.com/permissionlessweb/cw-orchestrator", branch = "zk-mvp" }
+cw-plus-orch = { git = "https://github.com/permissionlessweb/cw-orchestrator", branch = "zk-mvp" }
+ibc-proto = { git = "https://github.com/permissionlessweb/ibc-proto-rs", branch = "zk-mvp" }
+tendermint = { git = "https://github.com/permissionlessweb/tendermint-rs", branch = "zk-mvp" }
+tendermint-proto = { git = "https://github.com/permissionlessweb/tendermint-rs", branch = "zk-mvp" }
+tendermint-rpc = { git = "https://github.com/permissionlessweb/tendermint-rs", branch = "zk-mvp" }
+abstract-cw-multi-test = { git = "https://github.com/permissionlessweb/cw-multi-test-fork", branch = "zk-mvp" }
+clone-cw-multi-test = { git = "https://github.com/permissionlessweb/cw-multi-test-fork", branch = "zk-mvp" }
+abstract-polytone-voice = { git = "https://github.com/permissionlessweb/polytone", branch = "zk-mvp" }
+abstract-polytone-proxy = { git = "https://github.com/permissionlessweb/polytone", branch = "zk-mvp" }
+osmosis-std = { git = "https://github.com/permissionlessweb/osmosis-rust", branch = "zk-mvp" }
+osmosis-test-tube = { git = "https://github.com/permissionlessweb/osmosis-test-tube", branch = "zk-mvp" }
+neutron-std = { git = "https://github.com/permissionlessweb/neutron-std", branch = "zk-mvp" }
+neutron-test-tube = { git = "https://github.com/permissionlessweb/neutron-test-tube", branch = "zk-mvp" }
+simple-ica = { git = "https://github.com/permissionlessweb/cw-ibc-demo", branch = "zk-mvp" }
+simple-ica-controller = { git = "https://github.com/permissionlessweb/cw-ibc-demo", branch = "zk-mvp" }
+simple-ica-host = { git = "https://github.com/permissionlessweb/cw-ibc-demo", branch = "zk-mvp" }
 
 protobuf  = { version = "2", features = ["with-bytes"] }
 rstest = "0.17.0"
@@ -116,38 +116,20 @@ tokio  = { version = "1.33.0", features = ["full"] }
 # Backup release profile, will result in warnings during optimization
 [patch.crates-io]
 
-# Fork patches (managed by dep-switch.py)
 
-# Fork patches (managed by dep-switch.py)
 
-# Fork patches (managed by dep-switch.py)
 
-# Fork patches (managed by dep-switch.py)
 
-# Fork patches (managed by dep-switch.py)
 
-# Fork patches (managed by dep-switch.py)
 
-# Fork patches (managed by dep-switch.py)
 
-# Fork patches (managed by dep-switch.py)
 
-# Fork patches (managed by dep-switch.py)
 
-# Fork patches (managed by dep-switch.py)
 
-# Fork patches (managed by dep-switch.py)
 
-# Fork patches (managed by dep-switch.py)
 
-# Fork patches (managed by dep-switch.py)
 
-# Fork patches (managed by dep-switch.py)
-
-# Fork patches (managed by dep-switch.py)
-
-# Fork patches (managed by dep-switch.py)
-nam-blst = { path = "../../nam-blst/bindings/rust" }
+nam-blst = { git = "https://github.com/permissionlessweb/blst", branch = "zk-mvp" }
 [profile.release]
 codegen-units    = 1
 debug            = false
