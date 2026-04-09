@@ -107,8 +107,8 @@ cw-orch-traits = { git = "https://github.com/permissionlessweb/cw-orchestrator",
 tendermint = { git = "https://github.com/permissionlessweb/tendermint-rs", branch = "zk-mvp" }
 tendermint-proto = { git = "https://github.com/permissionlessweb/tendermint-rs", branch = "zk-mvp" }
 tendermint-rpc = { git = "https://github.com/permissionlessweb/tendermint-rs", branch = "zk-mvp" }
-abstract-cw-multi-test = { git = "https://github.com/permissionlessweb/cw-multi-test-fork", branch = "zk-mvp" }
-clone-cw-multi-test = { git = "https://github.com/permissionlessweb/cw-multi-test-fork", branch = "zk-mvp" }
+abstract-cw-multi-test = { package = "abstract-cw-multi-test", git = "https://github.com/permissionlessweb/cw-multi-test-fork", branch = "zk-mvp" }
+clone-cw-multi-test = { package = "abstract-cw-multi-test", git = "https://github.com/permissionlessweb/cw-multi-test-fork", branch = "zk-mvp" }
 abstract-polytone-voice = { git = "https://github.com/permissionlessweb/polytone", branch = "zk-mvp" }
 abstract-polytone-proxy = { git = "https://github.com/permissionlessweb/polytone", branch = "zk-mvp" }
 osmosis-std = { git = "https://github.com/permissionlessweb/osmosis-rust", branch = "zk-mvp" }
@@ -120,6 +120,7 @@ simple-ica-controller = { git = "https://github.com/permissionlessweb/cw-ibc-dem
 simple-ica-host = { git = "https://github.com/permissionlessweb/cw-ibc-demo", branch = "zk-mvp" }
 
 [patch.crates-io]
+
 
 nam-blst = { git = "https://github.com/permissionlessweb/blst", branch = "zk-mvp" }
 [workspace.lints.rust]

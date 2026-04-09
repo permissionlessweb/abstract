@@ -1,11 +1,11 @@
 [workspace]
 members = [
-    "framework-clone-testing",
-    "modules-clone-testing",
     "scripts",
 ]
 exclude = [
     "interchain-end_to_end_testing",
+    "framework-clone-testing",
+    "modules-clone-testing",
 ]
 
 # Enable the version 2 feature resolver, which avoids unifying features for targets that are not being built
@@ -93,8 +93,8 @@ ibc-proto = { git = "https://github.com/permissionlessweb/ibc-proto-rs", branch 
 tendermint = { git = "https://github.com/permissionlessweb/tendermint-rs", branch = "zk-mvp" }
 tendermint-proto = { git = "https://github.com/permissionlessweb/tendermint-rs", branch = "zk-mvp" }
 tendermint-rpc = { git = "https://github.com/permissionlessweb/tendermint-rs", branch = "zk-mvp" }
-abstract-cw-multi-test = { git = "https://github.com/permissionlessweb/cw-multi-test-fork", branch = "zk-mvp" }
-clone-cw-multi-test = { git = "https://github.com/permissionlessweb/cw-multi-test-fork", branch = "zk-mvp" }
+abstract-cw-multi-test = { package = "abstract-cw-multi-test", git = "https://github.com/permissionlessweb/cw-multi-test-fork", branch = "zk-mvp" }
+clone-cw-multi-test = { package = "abstract-cw-multi-test", git = "https://github.com/permissionlessweb/cw-multi-test-fork", branch = "zk-mvp" }
 abstract-polytone-voice = { git = "https://github.com/permissionlessweb/polytone", branch = "zk-mvp" }
 abstract-polytone-proxy = { git = "https://github.com/permissionlessweb/polytone", branch = "zk-mvp" }
 osmosis-std = { git = "https://github.com/permissionlessweb/osmosis-rust", branch = "zk-mvp" }
@@ -115,6 +115,7 @@ tokio  = { version = "1.33.0", features = ["full"] }
 
 # Backup release profile, will result in warnings during optimization
 [patch.crates-io]
+
 
 
 
