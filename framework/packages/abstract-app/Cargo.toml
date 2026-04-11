@@ -24,7 +24,7 @@ test-utils = [
 # Default features only works on the workspace Cargo.toml, so using workspace = true is not possible here
 abstract-ibc-client = { version = "0.26.1", path = "../../contracts/native/ibc-client", default-features = false }
 abstract-ibc-host   = { version = "0.26.1", path = "../../contracts/native/ibc-host", default-features = false }
-abstract-interface  = { version = "0.26.1", path = "../../packages/abstract-interface" }
+abstract-interface = { git = "https://github.com/permissionlessweb/abstract", branch = "zk-mvp" }
 abstract-sdk     = { workspace = true }
 abstract-std     = { workspace = true }
 abstract-testing = { workspace = true, optional = true }

@@ -1,10 +1,8 @@
 [workspace]
-members = [
-    "scripts",
-]
+members = ["scripts"]
 exclude = [
-    "interchain-end_to_end_testing",
     "framework-clone-testing",
+    "interchain-end_to_end_testing",
     "modules-clone-testing",
 ]
 
@@ -44,10 +42,10 @@ abstract-client    = { path = "../framework/packages/abstract-client" }
 # dca-app = { path = "../modules/contracts/apps/dca" }
 abstract-cw-staking           = { path = "../modules/contracts/adapters/cw-staking" }
 abstract-dex-adapter          = { path = "../modules/contracts/adapters/dex" }
-abstract-interface = { path = "../framework/packages/abstract-interface" }
+abstract-interface = { git = "https://github.com/permissionlessweb/abstract", branch = "zk-mvp" }
 abstract-money-market-adapter = { path = "../modules/contracts/adapters/money-market" }
 abstract-sdk       = { path = "../framework/packages/abstract-sdk" }
-abstract-std       = { path = "../framework/packages/abstract-std" }
+abstract-std = { git = "https://github.com/permissionlessweb/abstract", branch = "zk-mvp" }
 abstract-testing   = { path = "../framework/packages/abstract-testing" }
 
 abstract-xion = { package = "xion-account", git = "https://github.com/permissionlessweb/contracts", branch = "zk-mvp", features = ["library"] }
@@ -57,11 +55,20 @@ anyhow = "1"
 # croncat-app = { path = "../modules/contracts/apps/croncat" }
 challenge-app = { path = "../modules/contracts/apps/challenge" }
 
-clap   = { version = "4.0.32", features = ["derive"] }
-cosmwasm-schema = { git = "https://github.com/permissionlessweb/cosmwasm", branch = "zk-mvp" }
-cosmwasm-std = { git = "https://github.com/permissionlessweb/cosmwasm", branch = "zk-mvp" }
+abstract-adapter-utils   = { path = "../framework/packages/standards/utils" }
+abstract-cw-multi-test = { git = "https://github.com/permissionlessweb/cw-multi-test-fork", branch = "zk-mvp" }
+abstract-dex-standard = { path = "../framework/packages/standards/dex" }
+abstract-macros = { path = "../framework/packages/abstract-macros" }
+abstract-money-market-standard = { path = "../framework/packages/standards/money-market" }
+abstract-polytone-proxy = { git = "https://github.com/permissionlessweb/polytone", branch = "zk-mvp" }
+abstract-polytone-voice = { git = "https://github.com/permissionlessweb/polytone", branch = "zk-mvp" }
+abstract-staking-standard = { path = "../framework/packages/standards/staking" }
+clap = { version = "4.0.32", features = ["derive"] }
+clone-cw-multi-test = { git = "https://github.com/permissionlessweb/cw-multi-test-fork", branch = "zk-mvp" }
 cosmos-sdk-proto = { git = "https://github.com/permissionlessweb/cosmos-rust", branch = "zk-mvp" }
 cosmrs = { git = "https://github.com/permissionlessweb/cosmos-rust", branch = "zk-mvp" }
+cosmwasm-schema = { git = "https://github.com/permissionlessweb/cosmwasm", branch = "zk-mvp" }
+cosmwasm-std = { git = "https://github.com/permissionlessweb/cosmwasm", branch = "zk-mvp" }
 cw-address-like = { git = "https://github.com/permissionlessweb/cw-plus-plus", branch = "zk-mvp" }
 cw-asset = { git = "https://github.com/permissionlessweb/cw-asset", branch = "zk-mvp" }
 cw-blob = { git = "https://github.com/permissionlessweb/cw-packages", branch = "zk-mvp" }
@@ -71,39 +78,30 @@ cw-orch-clone-testing = { git = "https://github.com/permissionlessweb/cw-orchest
 cw-orch-core = { git = "https://github.com/permissionlessweb/cw-orchestrator", branch = "zk-mvp" }
 cw-orch-daemon = { git = "https://github.com/permissionlessweb/cw-orchestrator", branch = "zk-mvp" }
 cw-orch-interchain = { git = "https://github.com/permissionlessweb/cw-orchestrator", branch = "zk-mvp" }
+cw-orch-mock = { git = "https://github.com/permissionlessweb/cw-orchestrator", branch = "zk-mvp" }
 cw-orch-polytone = { package = "abstract-cw-orch-polytone", git = "https://github.com/permissionlessweb/polytone", branch = "zk-mvp" }
 cw-orch-proto = { git = "https://github.com/permissionlessweb/cw-orchestrator", branch = "zk-mvp" }
+cw-orch-traits = { git = "https://github.com/permissionlessweb/cw-orchestrator", branch = "zk-mvp" }
 cw-ownable = { git = "https://github.com/permissionlessweb/cw-plus-plus", branch = "zk-mvp" }
+cw-plus-orch = { git = "https://github.com/permissionlessweb/cw-orchestrator", branch = "zk-mvp" }
 cw-storage-plus = { git = "https://github.com/permissionlessweb/cw-storage-plus", branch = "zk-mvp" }
 cw-utils = { git = "https://github.com/permissionlessweb/cw-minus", branch = "zk-mvp" }
 cw2 = { git = "https://github.com/permissionlessweb/cw-minus", branch = "zk-mvp" }
 cw20 = { git = "https://github.com/permissionlessweb/cw-plus", branch = "zk-mvp" }
 cw20-base = { git = "https://github.com/permissionlessweb/cw-plus", branch = "zk-mvp" }
-polytone = { package = "abstract-polytone", git = "https://github.com/permissionlessweb/polytone", branch = "zk-mvp" }
-polytone-note = { package = "abstract-polytone-note", git = "https://github.com/permissionlessweb/polytone", branch = "zk-mvp" }
-abstract-macros = { path = "../framework/packages/abstract-macros" }
-abstract-adapter-utils = { path = "../framework/packages/standards/utils" }
-abstract-dex-standard = { path = "../framework/packages/standards/dex" }
-abstract-staking-standard = { path = "../framework/packages/standards/staking" }
-abstract-money-market-standard = { path = "../framework/packages/standards/money-market" }
-cw-orch-mock = { git = "https://github.com/permissionlessweb/cw-orchestrator", branch = "zk-mvp" }
-cw-orch-traits = { git = "https://github.com/permissionlessweb/cw-orchestrator", branch = "zk-mvp" }
-cw-plus-orch = { git = "https://github.com/permissionlessweb/cw-orchestrator", branch = "zk-mvp" }
 ibc-proto = { git = "https://github.com/permissionlessweb/ibc-proto-rs", branch = "zk-mvp" }
-tendermint = { git = "https://github.com/permissionlessweb/tendermint-rs", branch = "zk-mvp" }
-tendermint-proto = { git = "https://github.com/permissionlessweb/tendermint-rs", branch = "zk-mvp" }
-tendermint-rpc = { git = "https://github.com/permissionlessweb/tendermint-rs", branch = "zk-mvp" }
-abstract-cw-multi-test = { package = "abstract-cw-multi-test", git = "https://github.com/permissionlessweb/cw-multi-test-fork", branch = "zk-mvp" }
-clone-cw-multi-test = { package = "abstract-cw-multi-test", git = "https://github.com/permissionlessweb/cw-multi-test-fork", branch = "zk-mvp" }
-abstract-polytone-voice = { git = "https://github.com/permissionlessweb/polytone", branch = "zk-mvp" }
-abstract-polytone-proxy = { git = "https://github.com/permissionlessweb/polytone", branch = "zk-mvp" }
-osmosis-std = { git = "https://github.com/permissionlessweb/osmosis-rust", branch = "zk-mvp" }
-osmosis-test-tube = { git = "https://github.com/permissionlessweb/osmosis-test-tube", branch = "zk-mvp" }
 neutron-std = { git = "https://github.com/permissionlessweb/neutron-std", branch = "zk-mvp" }
 neutron-test-tube = { git = "https://github.com/permissionlessweb/neutron-test-tube", branch = "zk-mvp" }
+osmosis-std = { git = "https://github.com/permissionlessweb/osmosis-rust", branch = "zk-mvp" }
+osmosis-test-tube = { git = "https://github.com/permissionlessweb/osmosis-test-tube", branch = "zk-mvp" }
+polytone = { package = "abstract-polytone", git = "https://github.com/permissionlessweb/polytone", branch = "zk-mvp" }
+polytone-note = { package = "abstract-polytone-note", git = "https://github.com/permissionlessweb/polytone", branch = "zk-mvp" }
 simple-ica = { git = "https://github.com/permissionlessweb/cw-ibc-demo", branch = "zk-mvp" }
 simple-ica-controller = { git = "https://github.com/permissionlessweb/cw-ibc-demo", branch = "zk-mvp" }
 simple-ica-host = { git = "https://github.com/permissionlessweb/cw-ibc-demo", branch = "zk-mvp" }
+tendermint = { git = "https://github.com/permissionlessweb/tendermint-rs", branch = "zk-mvp" }
+tendermint-proto = { git = "https://github.com/permissionlessweb/tendermint-rs", branch = "zk-mvp" }
+tendermint-rpc = { git = "https://github.com/permissionlessweb/tendermint-rs", branch = "zk-mvp" }
 
 protobuf  = { version = "2", features = ["with-bytes"] }
 rstest = "0.17.0"
@@ -115,20 +113,6 @@ tokio  = { version = "1.33.0", features = ["full"] }
 
 # Backup release profile, will result in warnings during optimization
 [patch.crates-io]
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 nam-blst = { git = "https://github.com/permissionlessweb/blst", branch = "zk-mvp" }
 [profile.release]

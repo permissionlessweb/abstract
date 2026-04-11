@@ -20,7 +20,7 @@ test-utils = ["cw20", "cw20-base", "cw-plus-interface", "abstract-interface/test
 
 # Keep this as a version and update when publishing new versions
 # Default features only works on the workspace Cargo.toml, so using workspace = true is not possible here
-abstract-interface = { path = "../../packages/abstract-interface", version = "0.26.1" }
+abstract-interface = { git = "https://github.com/permissionlessweb/abstract", branch = "zk-mvp" }
 abstract-std.workspace = true
 cosmwasm-std.workspace = true
 cw-asset               = { workspace = true }
