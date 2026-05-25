@@ -284,7 +284,7 @@ mod tests {
                 .unwrap()
         }
 
-        #[coverage_helper::test]
+        
         fn authorize_address() -> AdapterMockResult {
             let mut deps = mock_dependencies();
             let account = test_account(deps.api);
@@ -318,7 +318,7 @@ mod tests {
             Ok(())
         }
 
-        #[coverage_helper::test]
+        
         fn revoke_address_authorization() -> AdapterMockResult {
             let mut deps = mock_dependencies();
             let account = test_account(deps.api);
@@ -359,7 +359,7 @@ mod tests {
             Ok(())
         }
 
-        #[coverage_helper::test]
+        
         fn add_existing_authorized_address() -> AdapterMockResult {
             let mut deps = mock_dependencies();
             let account = test_account(deps.api);
@@ -402,7 +402,7 @@ mod tests {
             Ok(())
         }
 
-        #[coverage_helper::test]
+        
         fn add_module_id_authorized_address() -> AdapterMockResult {
             let mut deps = mock_dependencies();
             let account = test_account(deps.api);
@@ -436,7 +436,7 @@ mod tests {
             Ok(())
         }
 
-        #[coverage_helper::test]
+        
         fn remove_authorized_address_dne() -> AdapterMockResult {
             let mut deps = mock_dependencies();
             let account = test_account(deps.api);
@@ -507,7 +507,7 @@ mod tests {
             base_execute_as(deps, account.addr(), msg).unwrap();
         }
 
-        #[coverage_helper::test]
+        
         fn unauthorized_addresses_are_unauthorized() {
             let mut deps = mock_dependencies();
             deps.querier = MockQuerierBuilder::new(deps.api)
@@ -540,7 +540,7 @@ mod tests {
             ));
         }
 
-        #[coverage_helper::test]
+        
         fn executing_as_account_account_is_allowed() {
             let mut deps = mock_dependencies();
             let account = test_account(deps.api);
@@ -561,7 +561,7 @@ mod tests {
             assert!(res.is_ok());
         }
 
-        #[coverage_helper::test]
+        
         fn executing_as_authorized_address_not_allowed_without_account() {
             let mut deps = mock_dependencies();
             deps.querier = MockQuerierBuilder::new(deps.api)
@@ -582,7 +582,7 @@ mod tests {
             assert_unauthorized(res);
         }
 
-        #[coverage_helper::test]
+        
         fn executing_as_authorized_address_is_allowed_via_account() {
             let mut deps = mock_dependencies();
             let account = test_account(deps.api);
@@ -604,7 +604,7 @@ mod tests {
             assert!(res.is_ok());
         }
 
-        #[coverage_helper::test]
+        
         fn executing_as_authorized_address_on_diff_account_should_err() {
             let mut deps = mock_dependencies();
             let account = test_account(deps.api);

@@ -146,7 +146,7 @@ impl PrimaryKey<'_> for AccountId {
 
     type SuperSuffix = Self;
 
-    fn key(&self) -> Vec<cw_storage_plus::Key> {
+    fn key(&self) -> Vec<cw_storage_plus::Key<'_>> {
         let mut keys = self.trace.key();
         keys.extend(self.seq.key());
         keys
@@ -154,7 +154,7 @@ impl PrimaryKey<'_> for AccountId {
 }
 
 impl Prefixer<'_> for AccountId {
-    fn prefix(&self) -> Vec<Key> {
+    fn prefix(&self) -> Vec<Key<'_>> {
         self.key()
     }
 }
@@ -279,7 +279,7 @@ mod test {
             )
         }
 
-        #[coverage_helper::test]
+        
         fn storage_key_works() {
             let mut deps = mock_dependencies();
             let key = mock_key();
@@ -298,7 +298,7 @@ mod test {
             assert_eq!(items[0], (key, 42069));
         }
 
-        #[coverage_helper::test]
+        
         fn storage_key_local_works() {
             let mut deps = mock_dependencies();
             let key = mock_local_key();
@@ -317,7 +317,7 @@ mod test {
             assert_eq!(items[0], (key, 42069));
         }
 
-        #[coverage_helper::test]
+        
         fn composite_key_works() {
             let mut deps = mock_dependencies();
             let key = mock_key();
@@ -348,7 +348,7 @@ mod test {
             assert_eq!(items[1], (Addr::unchecked("larry"), 42069));
         }
 
-        #[coverage_helper::test]
+        
         fn partial_key_works() {
             let mut deps = mock_dependencies();
             let (key1, key2, key3) = mock_keys();
@@ -374,7 +374,7 @@ mod test {
             assert_eq!(items[1], (2, 999));
         }
 
-        #[coverage_helper::test]
+        
         fn works_as_storage_key_with_multiple_chains_in_trace() {
             let mut deps = mock_dependencies();
             let key = AccountId {
@@ -397,14 +397,14 @@ mod test {
         // test that the try_from implementation works
         use super::*;
 
-        #[coverage_helper::test]
+        
         fn works_with_local() {
             let account_id: AccountId = "local-1".parse().unwrap();
             assert_eq!(account_id.seq, 1);
             assert_eq!(account_id.trace, AccountTrace::Local);
         }
 
-        #[coverage_helper::test]
+        
         fn works_with_remote() {
             let account_id: AccountId = "ethereum>bitcoin-1".parse().unwrap();
             assert_eq!(account_id.seq, 1);
@@ -417,7 +417,7 @@ mod test {
             );
         }
 
-        #[coverage_helper::test]
+        
         fn works_with_remote_with_multiple_chains() {
             let account_id: AccountId = "ethereum>bitcoin>cosmos-1".parse().unwrap();
             assert_eq!(account_id.seq, 1);

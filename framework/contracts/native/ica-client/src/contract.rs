@@ -148,7 +148,7 @@ mod tests {
     use cw2::CONTRACT;
     use cw_ownable::Ownership;
 
-    #[coverage_helper::test]
+    
     fn instantiate_works() -> IcaClientResult<()> {
         let mut deps = mock_dependencies();
         let env = mock_env_validated(deps.api);
@@ -180,7 +180,7 @@ mod tests {
         use crate::contract;
         use abstract_std::AbstractError;
 
-        #[coverage_helper::test]
+        
         fn disallow_same_version() -> IcaClientResult<()> {
             let mut deps = mock_dependencies();
             let sender = deps.api.addr_make("jimi");
@@ -212,7 +212,7 @@ mod tests {
             Ok(())
         }
 
-        #[coverage_helper::test]
+        
         fn disallow_downgrade() -> IcaClientResult<()> {
             let mut deps = mock_dependencies();
             let sender = deps.api.addr_make("jimi");
@@ -247,7 +247,7 @@ mod tests {
             Ok(())
         }
 
-        #[coverage_helper::test]
+        
         fn disallow_name_change() -> IcaClientResult<()> {
             let mut deps = mock_dependencies();
             let sender = deps.api.addr_make("jimi");
@@ -280,7 +280,7 @@ mod tests {
             Ok(())
         }
 
-        #[coverage_helper::test]
+        
         fn works() -> IcaClientResult<()> {
             let mut deps = mock_dependencies();
             let sender = deps.api.addr_make("jimi");

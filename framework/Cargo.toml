@@ -1,9 +1,9 @@
 [workspace]
 members = [
-  "packages/abstract-*",
-  "packages/standards/*",
-  "contracts/native/*",
-  "contracts/account/",
+    "contracts/account/",
+    "contracts/native/*",
+    "packages/abstract-*",
+    "packages/standards/*",
 ]
 
 # Enable the version 2 feature resolver, which avoids unifying features for targets that are not being built
@@ -18,9 +18,9 @@ resolver = "2"
 
 [workspace.package]
 authors = [
-  "CyberHoward <cyberhoward@protonmail.com>",
-  "Riada <riada@abstract.money>",
-  "Abstract Money <contact@abstract.money>",
+    "CyberHoward <cyberhoward@protonmail.com>",
+    "Riada <riada@abstract.money>",
+    "Abstract Money <contact@abstract.money>",
 ]
 documentation = "https://docs.abstract.money/"
 edition = "2021"
@@ -31,84 +31,107 @@ repository = "https://github.com/AbstractSDK/abstract"
 version = "0.26.1"
 
 [workspace.dependencies]
-cosmwasm-schema = { version = "3.0.1" }
-cosmwasm-std    = { version = "3.0.1", features = ["cosmwasm_3_0"] }
-cw-controllers  = { version = "3.0.0", git = "https://github.com/permissionlessweb/cw-minus" }
-cw-utils        = { version = "3.0.0" }
-cw-storage-plus = { version = "3.0.0" }
 
-cw2             = { version = "3.0.0" }
-
-cw20            = { version = "3.0.0", git = "https://github.com/permissionlessweb/cw-plus" }
-cw20-base       = { version = "3.0.0", features = ["library"], git = "https://github.com/permissionlessweb/cw-plus" }
-cw-asset        = { version = "4.0", git = "https://github.com/permissionlessweb/cw-asset" }
-cw-address-like = { version =  "3.0.1", git = "https://github.com/permissionlessweb/cw-plus-plus" }
-cw-ownable      = { version = "3.0.1", git = "https://github.com/permissionlessweb/cw-plus-plus" }
-cw-clearable    = { version = "0.2.0", git = "https://github.com/permissionlessweb/cw-packages" }
-cw-orch            = { version = "0.30.0", git = "https://github.com/permissionlessweb/cw-orchestrator" }
-cw-orch-interchain = { version = "0.8.1", git = "https://github.com/permissionlessweb/cw-orchestrator" }
-cw-blob = { version = "=0.2.0", features = ["library"], git = "https://github.com/permissionlessweb/cw-packages" }
-
-serde-cw-value  = "0.7.0"
-anybuf    = { version = "0.5.0" }
-protobuf  = { version = "2", features = ["with-bytes"] }
-schemars  = "0.8.4"
-serde     = { version = "1.0", default-features = false, features = ["derive"] }
-thiserror = { version = "1.0.50" }
-
-clap               = { version = "4.0.32", features = ["derive"] }
-semver             = "1.0"
-tokio              = { version = "1.4", features = ["full"] }
-
-
-
-cw-orch-polytone = { package = "abstract-cw-orch-polytone", version = "6.0.1", git = "https://github.com/permissionlessweb/polytone", branch = "bump/cw3"  }
-polytone         = { package = "abstract-polytone", version = "2.0.0", git = "https://github.com/permissionlessweb/polytone", branch = "bump/cw3"  }
-polytone-note    = { package = "abstract-polytone-note", version = "5.0.0", git = "https://github.com/permissionlessweb/polytone", branch = "bump/cw3"  }
-
-
+abstract-account = { path = "contracts/account", default-features = false }
 ## crates in order of publishing ## see docs/Publishing.md
 
 abstract-adapter    = { path = "packages/abstract-adapter", version = "0.26.1" }
+abstract-adapter-utils    = { version = "0.26.1", path = "packages/standards/utils" }
 abstract-app        = { path = "packages/abstract-app", version = "0.26.1" }
-abstract-standalone = { path = "packages/abstract-standalone", version = "0.26.1" }
+abstract-dex-standard     = { path = "packages/standards/dex" }
+
+abstract-ica     = { version = "0.26.1", path = "packages/abstract-ica" }
+abstract-integration-tests = { path = "packages/abstract-integration-tests" }
 
 # Keep these as path, creates cirular dependency otherwise
 # Only need to re-publish all contracts if a re-publish of abstract-interface is required
 abstract-interface = { path = "packages/abstract-interface" }
+
+# These should remain fixed and don't need to be re-published (unless changes are made)
+abstract-macros = { version = "0.26.1", path = "packages/abstract-macros" }
+abstract-sdk     = { version = "0.26.1", path = "packages/abstract-sdk" }
+abstract-staking-standard = { path = "packages/standards/staking" }
+abstract-standalone = { path = "packages/abstract-standalone", version = "0.26.1" }
+abstract-std     = { version = "0.26.1", path = "packages/abstract-std" }
+abstract-testing = { version = "0.26.1", path = "packages/abstract-testing" }
+abstract-xion = { package = "xion-account", git = "https://github.com/permissionlessweb/contracts", branch = "cw3", features = ["library"] }
 ans-host           = { package = "abstract-ans-host", path = "contracts/native/ans-host" }
-module-factory     = { package = "abstract-module-factory", path = "contracts/native/module-factory" }
-registry           = { package = "abstract-registry", path = "contracts/native/registry" }
+anybuf    = { version = "1.0.0" }
+
+## Testing
+anyhow          = "1"
+clap               = { version = "4.0.32", features = ["derive"] }
+cosmwasm-schema = { git = "https://github.com/permissionlessweb/cosmwasm", branch = "mvp" }
+cosmwasm-std = { git = "https://github.com/permissionlessweb/cosmwasm", branch = "mvp" }
+coverage-helper = { version = "0.2.2" }
+cw-address-like = { git = "https://github.com/permissionlessweb/cw-plus-plus", branch = "feat/mvp" }
+cw-asset = { git = "https://github.com/permissionlessweb/cw-asset", branch = "main" }
+cw-blob = { git = "https://github.com/permissionlessweb/cw-packages", branch = "feat/cw3" }
+cw-clearable = { git = "https://github.com/permissionlessweb/cw-packages", branch = "feat/cw3" }
+cw-controllers = { git = "https://github.com/permissionlessweb/cw-minus", branch = "main" }
+cw-orch = { git = "https://github.com/permissionlessweb/cw-orchestrator", branch = "cw3" }
+cw-orch-interchain = { git = "https://github.com/permissionlessweb/cw-orchestrator", branch = "cw3" }
+cw-orch-polytone = { package = "abstract-cw-orch-polytone", git = "https://github.com/permissionlessweb/polytone", branch = "bump/cw3" }
+cw-ownable = { git = "https://github.com/permissionlessweb/cw-plus-plus", branch = "feat/mvp" }
+cw-storage-plus = { git = "https://github.com/permissionlessweb/cw-storage-plus", branch = "mvp" }
+cw-utils = { git = "https://github.com/permissionlessweb/cw-minus", branch = "main" }
+
+cw2 = { git = "https://github.com/permissionlessweb/cw-minus", branch = "main" }
+
+cw20 = { git = "https://github.com/permissionlessweb/cw-plus", branch = "main" }
+cw20-base = { git = "https://github.com/permissionlessweb/cw-plus", branch = "main" }
+
+cosmos-sdk-proto = { git = "https://github.com/permissionlessweb/cosmos-rust", branch = "main" }
+cosmrs = { git = "https://github.com/permissionlessweb/cosmos-rust", branch = "main" }
+cw-plus-interface = { package = "cw-plus-orch", git = "https://github.com/permissionlessweb/cw-orchestrator", branch = "cw3" }
+ibc-proto = { git = "https://github.com/permissionlessweb/ibc-proto-rs", branch = "main" }
 
 # Ibc
 ibc-client = { package = "abstract-ibc-client", path = "contracts/native/ibc-client" }
 ibc-host   = { package = "abstract-ibc-host", path = "contracts/native/ibc-host" }
-
-abstract-account = { path = "contracts/account", default-features = false }
-
-abstract-ica     = { version = "0.26.1", path = "packages/abstract-ica" }
-abstract-sdk     = { version = "0.26.1", path = "packages/abstract-sdk" }
-abstract-std     = { version = "0.26.1", path = "packages/abstract-std" }
-abstract-testing = { version = "0.26.1", path = "packages/abstract-testing" }
-abstract-xion    = { package = "xion-account", version = "=0.1.1", features = ["library"] }
-
-# These should remain fixed and don't need to be re-published (unless changes are made)
-abstract-macros = { version = "0.26.1", path = "packages/abstract-macros" }
-
-abstract-adapter-utils    = { version = "0.26.1", path = "packages/standards/utils" }
-abstract-dex-standard     = { path = "packages/standards/dex" }
-abstract-staking-standard = { path = "packages/standards/staking" }
-
-abstract-integration-tests = { path = "packages/abstract-integration-tests" }
-
-## Testing
-anyhow          = "1"
-coverage-helper = { version = "0.2.2" }
+module-factory     = { package = "abstract-module-factory", path = "contracts/native/module-factory" }
+polytone = { package = "abstract-polytone", git = "https://github.com/permissionlessweb/polytone", branch = "bump/cw3" }
+polytone-note = { package = "abstract-polytone-note", git = "https://github.com/permissionlessweb/polytone", branch = "bump/cw3" }
+protobuf  = { version = "2", features = ["with-bytes"] }
+registry           = { package = "abstract-registry", path = "contracts/native/registry" }
 rstest          = "0.17.0"
+schemars  = "0.8.22"
+semver             = "1.0"
+serde     = { version = "1.0", default-features = false, features = ["derive"] }
 
-# Predictable abstract addresses
+serde-cw-value  = "0.7.0"
+thiserror = { version = "1.0.50" }
+tokio              = { version = "1.4", features = ["full"] }
 
+# Additional local forks (transitive deps)
+cw-orch-core     = { git = "https://github.com/permissionlessweb/cw-orchestrator", branch = "cw3" }
+cw-orch-mock     = { git = "https://github.com/permissionlessweb/cw-orchestrator", branch = "cw3" }
+cw-orch-traits   = { git = "https://github.com/permissionlessweb/cw-orchestrator", branch = "cw3" }
+tendermint = { git = "https://github.com/permissionlessweb/tendermint-rs", branch = "main" }
+tendermint-proto = { git = "https://github.com/permissionlessweb/tendermint-rs", branch = "main" }
+tendermint-rpc = { git = "https://github.com/permissionlessweb/tendermint-rs", branch = "main" }
+abstract-cw-multi-test = { git = "https://github.com/permissionlessweb/cw-multi-test-fork", branch = "bump/cw3/official-ibc-fork" }
+clone-cw-multi-test = { git = "https://github.com/permissionlessweb/cw-multi-test-fork", branch = "cw3/adapt_for_local_execution" }
+abstract-polytone-voice = { git = "https://github.com/permissionlessweb/polytone", branch = "bump/cw3" }
+abstract-polytone-proxy = { git = "https://github.com/permissionlessweb/polytone", branch = "bump/cw3" }
+osmosis-std = { git = "https://github.com/permissionlessweb/osmosis-rust", branch = "cw3" }
+osmosis-test-tube = { git = "https://github.com/permissionlessweb/osmosis-test-tube", branch = "cw3" }
+neutron-std = { git = "https://github.com/permissionlessweb/neutron-std", branch = "feat/cw3" }
+neutron-test-tube = { git = "https://github.com/permissionlessweb/neutron-test-tube", branch = "dev" }
+simple-ica = { git = "https://github.com/permissionlessweb/cw-ibc-demo", branch = "cosmwasm3" }
+simple-ica-controller = { git = "https://github.com/permissionlessweb/cw-ibc-demo", branch = "cosmwasm3" }
+simple-ica-host = { git = "https://github.com/permissionlessweb/cw-ibc-demo", branch = "cosmwasm3" }
 
+[patch.crates-io]
+
+# Fork patches (managed by dep-switch.py)
+
+# Fork patches (managed by dep-switch.py)
+
+# Fork patches (managed by dep-switch.py)
+nam-blst = { git = "https://github.com/permissionlessweb/blst", branch = "master" }
+[workspace.lints.rust]
+unexpected_cfgs = { level = "warn", check-cfg = ['cfg(coverage,coverage_nightly)'] }
 
 [profile.dev]
 opt-level = 1
@@ -126,12 +149,3 @@ opt-level        = 's'
 overflow-checks  = true
 panic            = 'abort'
 rpath            = false
-
-
-[workspace.metadata.cargo-udeps.ignore]
-# ensures CI doens't flag workspace-hack as unused dep
-development = ["workspace-hack"]
-normal      = ["workspace-hack"]
-
-[workspace.lints.rust]
-unexpected_cfgs = { level = "warn", check-cfg = ['cfg(coverage,coverage_nightly)'] }

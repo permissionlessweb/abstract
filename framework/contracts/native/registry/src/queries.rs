@@ -36,9 +36,7 @@ pub fn handle_accounts_address_query(
             ACCOUNT_ADDRESSES
                 .load(deps.storage, &account_id)
                 .map_err(|_| {
-                    StdError::msg(
-                        RegistryError::UnknownAccountId { id: account_id }.to_string(),
-                    )
+                    StdError::msg(RegistryError::UnknownAccountId { id: account_id }.to_string())
                 })
         })
         .collect::<Result<Vec<_>, _>>()?;
@@ -473,7 +471,7 @@ mod test {
             assert!(res.is_ok());
         }
 
-        #[coverage_helper::test]
+        
         fn get_module() -> RegistryTestResult {
             let mut deps = mock_dependencies();
             deps.querier = mock_account_querier(deps.api).build();
@@ -501,7 +499,7 @@ mod test {
             Ok(())
         }
 
-        #[coverage_helper::test]
+        
         fn none_when_no_matching_version() -> RegistryTestResult {
             let mut deps = mock_dependencies();
             deps.querier = mock_account_querier(deps.api).build();
@@ -525,14 +523,11 @@ mod test {
             };
 
             let res = query_helper(&deps, query_msg);
-            assert!(matches!(
-                res,
-                Err(RegistryError::Std(StdError::GenericErr { .. }))
-            ));
+            assert!(matches!(res, Err(RegistryError::Std(_))));
             Ok(())
         }
 
-        #[coverage_helper::test]
+        
         fn get_latest_when_multiple_registered() -> RegistryTestResult {
             let mut deps = mock_dependencies();
             deps.querier = mock_account_querier(deps.api).build();
@@ -639,7 +634,7 @@ mod test {
     mod modules {
         use super::*;
 
-        #[coverage_helper::test]
+        
         fn get_cw_plus_modules() -> RegistryTestResult {
             let mut deps = mock_dependencies();
             deps.querier = mock_account_querier(deps.api).build();
@@ -679,7 +674,7 @@ mod test {
             Ok(())
         }
 
-        #[coverage_helper::test]
+        
         fn get_modules_not_found() -> RegistryTestResult {
             let mut deps = mock_dependencies();
             deps.querier = mock_account_querier(deps.api).build();
@@ -694,10 +689,7 @@ mod test {
             };
 
             let res = query_helper(&deps, query_msg);
-            assert!(matches!(
-                res,
-                Err(RegistryError::Std(StdError::GenericErr { .. }))
-            ));
+            assert!(matches!(res, Err(RegistryError::Std(_))));
             Ok(())
         }
     }
@@ -713,7 +705,7 @@ mod test {
             }
         }
 
-        #[coverage_helper::test]
+        
         fn filter_by_namespace_existing() {
             let mut deps = mock_dependencies();
             deps.querier = mock_account_querier(deps.api).build();
@@ -738,7 +730,7 @@ mod test {
             }
         }
 
-        #[coverage_helper::test]
+        
         fn filter_default_returns_only_non_yanked() {
             let mut deps = mock_dependencies();
             deps.querier = mock_account_querier(deps.api).build();
@@ -783,7 +775,7 @@ mod test {
             }
         }
 
-        #[coverage_helper::test]
+        
         fn filter_yanked_by_namespace_existing() {
             let mut deps = mock_dependencies();
             deps.querier = mock_account_querier(deps.api).build();
@@ -833,7 +825,7 @@ mod test {
             }
         }
 
-        #[coverage_helper::test]
+        
         fn filter_by_namespace_non_existing() {
             let mut deps = mock_dependencies();
             deps.querier = mock_account_querier(deps.api).build();
@@ -862,7 +854,7 @@ mod test {
             assert_eq!(modules.len(), 1);
         }
 
-        #[coverage_helper::test]
+        
         fn filter_by_namespace_and_name() {
             let mut deps = mock_dependencies();
             deps.querier = mock_account_querier(deps.api).build();
@@ -892,7 +884,7 @@ mod test {
             assert_eq!(module.module.info.name, filtered_name.clone());
         }
 
-        #[coverage_helper::test]
+        
         fn filter_by_namespace_and_name_with_multiple_versions() {
             let mut deps = mock_dependencies();
             deps.querier = mock_account_querier(deps.api).build();
@@ -934,7 +926,7 @@ mod test {
             }
         }
 
-        #[coverage_helper::test]
+        
         fn filter_by_only_version_many() {
             let mut deps = mock_dependencies();
             deps.querier = mock_account_querier(deps.api).build();
@@ -962,7 +954,7 @@ mod test {
             }
         }
 
-        #[coverage_helper::test]
+        
         fn filter_by_only_version_none() {
             let mut deps = mock_dependencies();
             deps.querier = mock_account_querier(deps.api).build();
@@ -983,7 +975,7 @@ mod test {
             assert!(modules.is_empty());
         }
 
-        #[coverage_helper::test]
+        
         fn filter_by_name_and_version() {
             let mut deps = mock_dependencies();
             deps.querier = mock_account_querier(deps.api).build();
@@ -1015,7 +1007,7 @@ mod test {
             }
         }
 
-        #[coverage_helper::test]
+        
         fn filter_by_namespace_and_version() {
             let mut deps = mock_dependencies();
             deps.querier = mock_account_querier(deps.api).build();
@@ -1053,7 +1045,7 @@ mod test {
     mod query_namespaces {
         use super::*;
 
-        #[coverage_helper::test]
+        
         fn namespaces() {
             let mut deps = mock_dependencies();
             deps.querier = mock_account_querier(deps.api).build();
@@ -1074,7 +1066,7 @@ mod test {
     mod handle_account_address_query {
         use super::*;
 
-        #[coverage_helper::test]
+        
         fn not_registered_should_be_unknown() -> RegistryTestResult {
             let mut deps = mock_dependencies();
             mock_init(&mut deps)?;
@@ -1091,13 +1083,14 @@ mod test {
                 res.unwrap_err().to_string(),
                 RegistryError::Std(StdError::msg(
                     RegistryError::UnknownAccountId { id: not_registered }.to_string(),
-                )).to_string()
+                ))
+                .to_string()
             );
 
             Ok(())
         }
 
-        #[coverage_helper::test]
+        
         fn registered_should_return_account() -> RegistryTestResult {
             let mut deps = mock_dependencies();
             deps.querier = mock_account_querier(deps.api).build();

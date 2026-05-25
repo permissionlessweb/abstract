@@ -1,4 +1,4 @@
-use cosmwasm_std::{coin, from_json, Addr, Decimal, Uint128};
+use cosmwasm_std::{coin, from_json, Addr};
 use wyndex::{
     asset::{AssetInfo, AssetInfoExt},
     factory::PartialStakeConfig,
@@ -11,6 +11,7 @@ use wyndex_stake::{
 
 mod staking {
     use super::*;
+    use cosmwasm_std::{Decimal256, Uint256};
     use cw_orch::mock::MockBech32;
     use cw_orch::prelude::TxHandler;
     use mockdex_bundle::{suite::SuiteBuilder, WYNDEX_OWNER};
@@ -37,8 +38,8 @@ mod staking {
         let mut suite = SuiteBuilder::new()
             .with_stake_config(DefaultStakeConfig {
                 staking_code_id: 0,
-                tokens_per_power: Uint128::new(1),
-                min_bond: Uint128::new(1),
+                tokens_per_power: Uint256::new(1),
+                min_bond: Uint256::new(1),
                 unbonding_periods: vec![1, 2],
                 max_distributions: 1,
                 converter: None,
@@ -52,8 +53,8 @@ mod staking {
                 wyndex::factory::PairType::Xyk {},
                 [ujuno_info.clone(), uluna_info.clone()],
                 Some(PartialStakeConfig {
-                    tokens_per_power: Some(Uint128::new(100)),
-                    min_bond: Some(Uint128::new(100)),
+                    tokens_per_power: Some(Uint256::new(100)),
+                    min_bond: Some(Uint256::new(100)),
                     ..Default::default()
                 }),
                 None,
@@ -83,7 +84,7 @@ mod staking {
                 &owner,
                 vec![ujuno_info.clone(), uluna_info],
                 ujuno_info,
-                vec![(1, Decimal::percent(50)), (2, Decimal::one())],
+                vec![(1, Decimal256::percent(50)), (2, Decimal256::one())],
             )
             .unwrap();
 
@@ -113,7 +114,7 @@ mod staking {
             )
             .unwrap();
 
-        assert_eq!(1000, resp.stake.u128());
+        assert_eq!(Uint256::new(1000), resp.stake);
     }
 
     #[test]
@@ -188,8 +189,8 @@ mod staking {
         let mut suite = SuiteBuilder::new()
             .with_stake_config(DefaultStakeConfig {
                 staking_code_id: 0,
-                tokens_per_power: Uint128::new(1),
-                min_bond: Uint128::new(1),
+                tokens_per_power: Uint256::new(1),
+                min_bond: Uint256::new(1),
                 unbonding_periods: vec![1],
                 max_distributions: 3,
                 converter: None,
@@ -206,17 +207,17 @@ mod staking {
                 vec![
                     DistributionFlow {
                         asset: ujuno_info.clone(),
-                        rewards: vec![(1, Decimal::one())],
+                        rewards: vec![(1, Decimal256::one())],
                         reward_duration: 100,
                     },
                     DistributionFlow {
                         asset: uluna_info.clone(),
-                        rewards: vec![(1, Decimal::one())],
+                        rewards: vec![(1, Decimal256::one())],
                         reward_duration: 100,
                     },
                     DistributionFlow {
                         asset: test_info,
-                        rewards: vec![(1, Decimal::one())],
+                        rewards: vec![(1, Decimal256::one())],
                         reward_duration: 100,
                     },
                 ],

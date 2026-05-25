@@ -132,7 +132,7 @@ impl<Chain: MutCwEnv, Moneymarket: MockMoneyMarket> MoneyMarketTester<Chain, Mon
             new_account.address()?.to_string(),
         )?;
 
-        assert!(user_deposit.amount > Uint128::from(amount).mul_floor(Decimal::from_str("0.95")?));
+        assert!(user_deposit.amount > Uint128::from(amount).mul_floor(Decimal::from_str("0.95").map_err(|e| anyhow::anyhow!("{e}"))?));
         assert_eq!(
             self.abstr_deployment
                 .environment()
@@ -224,7 +224,7 @@ impl<Chain: MutCwEnv, Moneymarket: MockMoneyMarket> MoneyMarketTester<Chain, Mon
 
         assert!(
             user_collateral.amount
-                > Uint128::from(DEPOSIT_VALUE).mul_floor(Decimal::from_str("0.95")?)
+                > Uint128::from(DEPOSIT_VALUE).mul_floor(Decimal::from_str("0.95").map_err(|e| anyhow::anyhow!("{e}"))?)
         );
         assert_eq!(
             self.abstr_deployment
@@ -255,7 +255,7 @@ impl<Chain: MutCwEnv, Moneymarket: MockMoneyMarket> MoneyMarketTester<Chain, Mon
 
         assert!(
             user_collateral.amount
-                > Uint128::from(DEPOSIT_VALUE).mul_floor(Decimal::from_str("0.95")?)
+                > Uint128::from(DEPOSIT_VALUE).mul_floor(Decimal::from_str("0.95").map_err(|e| anyhow::anyhow!("{e}"))?)
         );
 
         self.execute(
@@ -451,6 +451,6 @@ impl<Chain: MutCwEnv, Moneymarket: MockMoneyMarket> MoneyMarketTester<Chain, Mon
             _ => unreachable!(),
         };
 
-        Ok(balance)
+        Ok(Uint128::try_from(balance)?)
     }
 }

@@ -1,9 +1,9 @@
 [package]
 authors = [
-  "CyberHoward <cyberhoward@protonmail.com>",
-  "Adair <adair@abstract.money>",
-  "Andrew <work@andrewpochapsky.com>",
-  "Abstract Money <contact@abstract.money>",
+    "CyberHoward <cyberhoward@protonmail.com>",
+    "Adair <adair@abstract.money>",
+    "Andrew <work@andrewpochapsky.com>",
+    "Abstract Money <contact@abstract.money>",
 ]
 edition = { workspace = true }
 name = "calendar-app"
@@ -13,13 +13,6 @@ exclude = ["contract.wasm", "hash.txt"]
 
 [lib]
 crate-type = ["cdylib", "rlib"]
-
-[[example]]
-name              = "schema"
-required-features = ["schema"]
-
-[[example]]
-name = "deploy"
 
 [features]
 default = ["export"]
@@ -31,20 +24,20 @@ schema     = ["abstract-app/schema"]
 testing    = ["abstract-app/test-utils"]
 
 [dependencies]
-cosmwasm-schema = { workspace = true }
-cosmwasm-std    = { workspace = true }
-cw-asset        = { workspace = true }
-cw-controllers  = { workspace = true }
-cw-storage-plus = { workspace = true }
-thiserror       = { workspace = true }
 
 abstract-app = { workspace = true }
 
 chrono   = { version = "0.4.31", default-features = false }
-cw-utils = { workspace = true }
+cosmwasm-schema = { workspace = true }
+cosmwasm-std    = { workspace = true }
+cw-asset        = { workspace = true }
+cw-controllers  = { workspace = true }
 
 # Dependencies for interface
 cw-orch = { workspace = true }
+cw-storage-plus = { workspace = true }
+cw-utils = { workspace = true }
+thiserror       = { workspace = true }
 
 [dev-dependencies]
 abstract-client    = { workspace = true, features = ["test-utils"] }
@@ -55,3 +48,10 @@ cw-orch            = { workspace = true }
 dotenv             = "0.15.0"
 env_logger         = "0.11.3"
 semver             = { workspace = true }
+
+[[example]]
+name              = "schema"
+required-features = ["schema"]
+
+[[example]]
+name = "deploy"

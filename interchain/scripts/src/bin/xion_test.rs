@@ -29,6 +29,7 @@ use cw_orch_daemon::{
 };
 use networks::ChainKind;
 use tonic::transport::Channel;
+use cosmos_sdk_proto as xion_sdk_proto;
 use xion_sdk_proto::abstract_account::v1::NilPubKey;
 use xion_sdk_proto::cosmos::auth::v1beta1::QueryAccountRequest;
 use xion_sdk_proto::traits::MessageExt;

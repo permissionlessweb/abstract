@@ -133,7 +133,10 @@ impl CwStakingCommand for Astrovault {
                 let msg: CosmosMsg = wasm_execute(
                     token.staking_contract_address.to_string(),
                     &mini_astrovault::AstrovaultStakingExecuteMsg::Withdrawal {
-                        amount: Some(unstake.amount),
+                        amount: Some(
+                            Uint128::try_from(unstake.amount)
+                                .map_err(|e| StdError::msg(e.to_string()))?,
+                        ),
                         direct_pool_withdrawal: None,
                         to: None,
                         not_claim_rewards: Some(false),

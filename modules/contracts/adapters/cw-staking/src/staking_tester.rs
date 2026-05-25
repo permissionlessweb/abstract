@@ -343,6 +343,6 @@ impl<Chain: MutCwEnv, StakingProvider: MockStaking> StakingTester<Chain, Staking
             _ => unreachable!(),
         };
 
-        Ok(balance)
+        Ok(Uint128::try_from(balance)?)
     }
 }

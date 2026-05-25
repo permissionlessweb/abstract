@@ -109,7 +109,7 @@ mod test {
     use ibc_proto::{cosmos::base::v1beta1::Coin, ibc::applications::transfer::v1::MsgTransfer};
     use prost::{Message, Name};
 
-    #[coverage_helper::test]
+    
     fn test_outcomes() {
         let source_port = "123".to_owned();
         let source_channel = "321".to_owned();

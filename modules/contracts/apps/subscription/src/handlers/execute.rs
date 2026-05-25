@@ -1,7 +1,7 @@
 use abstract_app::sdk::{
     cw_helpers::Clearable, AbstractResponse, AccountAction, Execution, TransferInterface,
 };
-use cosmwasm_std::{Addr, Decimal, Deps, DepsMut, Env, MessageInfo, Response, StdResult, Uint128};
+use cosmwasm_std::{Addr, Decimal, Deps, DepsMut, Env, MessageInfo, Response, StdResult, Uint128, Uint256};
 use cw_asset::{Asset, AssetInfoUnchecked};
 
 use crate::{
@@ -86,12 +86,11 @@ pub fn try_pay(
     }
     // Minimum of one period worth to (re)-subscribe.
     // prevents un- and re-subscribing all the time.
-    let required_payment = Uint128::from(twa_data.averaging_period)
+    let required_payment = Uint256::from(Uint128::from(twa_data.averaging_period))
         .checked_mul_ceil(config.subscription_cost_per_second)?;
-    let paid_for_seconds = asset
-        .amount
-        .checked_div_floor(config.subscription_cost_per_second)?
-        .u128() as u64;
+    let paid_for_seconds = Uint128::try_from(
+        asset.amount.checked_div_floor(config.subscription_cost_per_second)?
+    ).map_err(|_| cosmwasm_std::StdError::msg("paid_for_seconds overflow"))?.u128() as u64;
     if let Some(mut active_sub) = SUBSCRIBERS.may_load(deps.storage, &subscriber_addr)? {
         // Subscriber is active, update balance
         active_sub.extend(paid_for_seconds);

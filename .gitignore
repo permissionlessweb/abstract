@@ -43,3 +43,8 @@ modules/contracts/**/schema
 **/snapshots/*.snap.new
 
 **/artifacts
+
+# Nix
+result
+result-*
+.direnv

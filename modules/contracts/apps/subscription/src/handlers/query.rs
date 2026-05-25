@@ -36,7 +36,7 @@ pub fn query_handler(
             to_json_binary(&SubscriptionFeeResponse {
                 fee: Asset {
                     info: config.payment_asset,
-                    amount: minimal_cost,
+                    amount: minimal_cost.into(),
                 },
             })
         }

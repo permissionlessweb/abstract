@@ -3,18 +3,18 @@ edition = "2021"
 name    = "ping-pong"
 version = "0.1.0"
 
+[lib]
+crate-type = ["cdylib", "rlib"]
+
 [features]
 default = ["export"]
 export  = []
 schema  = ["abstract-app/schema"]
-
-[lib]
-crate-type = ["cdylib", "rlib"]
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
 abstract-app        = { workspace = true }
-abstract-ibc-client = { version = "0.26.1", default-features = false, path = "../../../../framework/contracts/native/ibc-client" }
+abstract-ibc-client = { workspace = true }
 cosmwasm-schema     = { workspace = true }
 cosmwasm-std        = { workspace = true }
 cw-asset            = { workspace = true }
@@ -29,7 +29,7 @@ abstract-interface = { workspace = true, features = ["daemon"] }
 clap.workspace     = true
 cw-orch            = { workspace = true, features = ["daemon"] }
 cw-orch-interchain = { workspace = true, features = ["daemon"] }
-cw-orch-polytone   = { package = "abstract-cw-orch-polytone", version = "6.0.0" }
+cw-orch-polytone   = { workspace = true }
 dotenv             = "0.15.0"
 env_logger         = "0.11"
 semver.workspace   = true

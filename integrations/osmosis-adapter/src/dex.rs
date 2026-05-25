@@ -162,7 +162,7 @@ impl DexCommand for Osmosis {
                 non_zero_offer_asset.info.clone(),
                 non_zero_offer_asset
                     .amount
-                    .checked_div(Uint128::from(2u128))
+                    .checked_div(Uint128::from(2u128).into())
                     .unwrap(),
             );
 

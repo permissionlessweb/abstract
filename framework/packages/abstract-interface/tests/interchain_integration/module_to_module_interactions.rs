@@ -184,8 +184,9 @@ pub const fn mock_app(id: &'static str, version: &'static str) -> MockAppContrac
                         callback: Callback {
                             msg: to_json_binary(&MockCallbackMsg::BalanceQuery)?,
                         },
+                        // TODO: BankQuery::AllBalances removed in cosmwasm-std v3
                         queries: vec![cosmwasm_std::QueryRequest::Bank(
-                            cosmwasm_std::BankQuery::AllBalances { address },
+                            cosmwasm_std::BankQuery::Balance { address, denom: "ujuno".to_string() },
                         )],
                     },
                     vec![],
@@ -252,10 +253,11 @@ pub const fn mock_app(id: &'static str, version: &'static str) -> MockAppContrac
                 } => {
                     match from_json(callback.msg)? {
                         MockCallbackMsg::BalanceQuery => {
-                            let result = results.clone().unwrap()[0].clone();
-                            let deser: AllBalanceResponse = from_json(result)?;
+                            let result = result.get_query_result(0)?.1;
+                            // TODO: AllBalancesResponse removed in cosmwasm-std v3, using BalanceResponse
+                            let deser: cosmwasm_std::BalanceResponse = from_json(&result)?;
                             IBC_CALLBACK_QUERY_RECEIVED
-                                .save(deps.storage, &deser.amount)
+                                .save(deps.storage, &vec![Coin::new(deser.amount.amount, deser.amount.denom)])
                                 .unwrap();
                         }
                         MockCallbackMsg::ModuleQuery => {

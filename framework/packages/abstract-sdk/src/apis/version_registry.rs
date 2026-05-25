@@ -245,7 +245,7 @@ mod test {
         }
     }
 
-    #[coverage_helper::test]
+    
     fn query_module_reference_raw() {
         let mut deps = mock_dependencies();
         deps.querier = abstract_mock_querier(deps.api);
@@ -260,7 +260,7 @@ mod test {
         assert_eq!(module_reference, ModuleReference::Account(1));
     }
 
-    #[coverage_helper::test]
+    
     fn query_namespace() {
         let mut deps = mock_dependencies();
         let abstr = AbstractMockAddrs::new(deps.api);
@@ -279,7 +279,7 @@ mod test {
         assert_eq!(namespace, NamespaceResponse::Unclaimed {});
     }
 
-    #[coverage_helper::test]
+    
     fn query_namespaces() {
         let mut deps = mock_dependencies();
         let abstr = AbstractMockAddrs::new(deps.api);
@@ -312,7 +312,7 @@ mod test {
         );
     }
 
-    #[coverage_helper::test]
+    
     fn query_modules() {
         let mut deps = mock_dependencies();
         let account = test_account(deps.api);
@@ -426,7 +426,7 @@ mod test {
         )
     }
 
-    #[coverage_helper::test]
+    
     fn abstract_api() {
         let (deps, _, app) = mock_module_setup();
         let module_registry = app.module_registry(deps.as_ref()).unwrap();

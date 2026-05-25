@@ -24,8 +24,8 @@ use ::{
         std::objects::{ans_host::AnsHostError, AssetEntry, ContractEntry},
     },
     cosmwasm_std::{
-        coins, wasm_execute, Addr, CosmosMsg, Decimal, Deps, GrpcQuery, QuerierWrapper, StdError,
-        StdResult, Uint128,
+        coins, wasm_execute, Addr, CosmosMsg, Decimal, Deps, QuerierWrapper, StdError, StdResult,
+        Uint128, Uint256,
     },
     cw_asset::{Asset, AssetInfo},
     kujira::ghost::{
@@ -71,13 +71,15 @@ impl MoneyMarketCommand for Ghost {
         let vault_msg =
             receipt_vault::ExecuteMsg::Withdraw(receipt_vault::WithdrawMsg { callback: None });
 
+        // Convert v2 Decimal from kujira to v3 Decimal for arithmetic
+        let redemption_ratio: Decimal = json_convert!(&status.deposit_redemption_ratio)?;
+        let amount_u128 = Uint128::try_from(asset.amount)?;
         let msg = wasm_execute(
             contract_addr,
             &vault_msg,
             coins(
-                ((Decimal::from_ratio(asset.amount, 1u128) / status.deposit_redemption_ratio)
-                    .to_uint_floor())
-                .u128(),
+                ((Decimal::from_ratio(amount_u128, 1u128) / redemption_ratio).to_uint_floor())
+                    .u128(),
                 config.receipt_denom,
             ),
         )?;
@@ -107,7 +109,7 @@ impl MoneyMarketCommand for Ghost {
         asset: Asset,
     ) -> Result<Vec<CosmosMsg>, MoneyMarketError> {
         let vault_msg = market::ExecuteMsg::Withdraw(market::WithdrawMsg {
-            amount: asset.amount,
+            amount: json_convert!(&asset.amount)?,
             withdraw_to: None,
         });
 
@@ -123,7 +125,7 @@ impl MoneyMarketCommand for Ghost {
         asset: Asset,
     ) -> Result<Vec<CosmosMsg>, MoneyMarketError> {
         let vault_msg = market::ExecuteMsg::Borrow(market::BorrowMsg {
-            amount: asset.amount,
+            amount: json_convert!(&asset.amount)?,
         });
 
         let msg = wasm_execute(contract_addr, &vault_msg, vec![])?;
@@ -166,7 +168,7 @@ impl MoneyMarketCommand for Ghost {
         let quote_price = raw_quote_price.normalize(6);
 
         // This is how much 1 unit of base is in terms of quote
-        Ok((base_price / quote_price).inner())
+        Ok(json_convert!(&(base_price / quote_price).inner())?)
     }
 
     fn user_deposit(
@@ -184,7 +186,7 @@ impl MoneyMarketCommand for Ghost {
         // We get the balance of that token denom
         let balance = deps.querier.query_balance(user, config.receipt_denom)?;
 
-        Ok(balance.amount)
+        Ok(Uint128::try_from(balance.amount)?)
     }
 
     fn user_collateral(
@@ -195,16 +197,21 @@ impl MoneyMarketCommand for Ghost {
         _borrowed_asset: AssetInfo, // market_addr is already borrowed asset specific
         _collateral_asset: AssetInfo, // market_addr is already collateral asset specific
     ) -> Result<Uint128, MoneyMarketError> {
-        let market_msg = market::QueryMsg::Position { holder: user };
+        let market_msg = market::QueryMsg::Position {
+            holder: json_convert!(&user)?,
+        };
 
         let query_response: StdResult<market::PositionResponse> =
             deps.querier.query_wasm_smart(market_addr, &market_msg);
 
         // harpoon returns error if user doesn't have position,
         // in order to match other implementation we default error to zero
-        Ok(query_response
-            .map(|response| response.collateral_amount)
-            .unwrap_or_default())
+        // Convert from kujira's v2 Uint128 to our v3 Uint128 via JSON bridge
+        Ok(json_convert!(
+            &query_response
+                .map(|response| response.collateral_amount)
+                .unwrap_or_default()
+        )?)
     }
 
     fn user_borrow(
@@ -215,16 +222,21 @@ impl MoneyMarketCommand for Ghost {
         _borrowed_asset: AssetInfo, // market_addr is already borrowed asset specific
         _collateral_asset: AssetInfo, // market_addr is already collateral asset specific
     ) -> Result<Uint128, MoneyMarketError> {
-        let market_msg = market::QueryMsg::Position { holder: user };
+        let market_msg = market::QueryMsg::Position {
+            holder: json_convert!(&user)?,
+        };
 
         let query_response: StdResult<market::PositionResponse> =
             deps.querier.query_wasm_smart(contract_addr, &market_msg);
 
         // harpoon returns error if user doesn't have position,
         // in order to match other implementation we default error to zero
-        Ok(query_response
-            .map(|response| response.debt_shares)
-            .unwrap_or_default())
+        // Convert from kujira's v2 Uint128 to our v3 Uint128 via JSON bridge
+        Ok(json_convert!(
+            &query_response
+                .map(|response| response.debt_shares)
+                .unwrap_or_default()
+        )?)
     }
 
     fn current_ltv(
@@ -275,7 +287,7 @@ impl MoneyMarketCommand for Ghost {
         let query_response: market::ConfigResponse =
             deps.querier.query_wasm_smart(market_addr, &market_msg)?;
 
-        Ok(query_response.max_ltv)
+        Ok(json_convert!(&query_response.max_ltv)?)
     }
 
     fn lending_address(

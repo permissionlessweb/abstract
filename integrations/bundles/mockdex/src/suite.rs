@@ -1,9 +1,8 @@
 //! adapted from https://github.com/cosmorama/wynddex/blob/main/tests/src/suite.rs to suite our needs
 use std::cell::RefMut;
 
-use anyhow::Result as AnyResult;
 use cosmwasm_schema::serde::Serialize;
-use cosmwasm_std::{coin, to_json_binary, Decimal, Uint128};
+use cosmwasm_std::{coin, to_json_binary, Decimal, StdResult,Decimal256, Uint128};
 use cw20::{BalanceResponse, Cw20ExecuteMsg, Cw20QueryMsg};
 use cw_orch::{mock::MockAppBech32, prelude::*};
 
@@ -107,8 +106,8 @@ impl SuiteBuilder {
             max_referral_commission: Decimal::one(),
             stake_config: DefaultStakeConfig {
                 staking_code_id: 0, // will be set in build()
-                tokens_per_power: Uint128::new(1000),
-                min_bond: Uint128::new(1000),
+                tokens_per_power: Uint128::new(1000).into(),
+                min_bond: Uint128::new(1000).into(),
                 unbonding_periods: vec![60 * 60 * 24 * 7, 60 * 60 * 24 * 14, 60 * 60 * 24 * 21],
                 max_distributions: 6,
                 converter: None,
@@ -169,7 +168,7 @@ impl SuiteBuilder {
                     token_code_id: cw20_code_id,
                     fee_address: None,
                     owner: owner.to_string(),
-                    max_referral_commission: self.max_referral_commission,
+                    max_referral_commission: self.max_referral_commission.into(),
                     default_stake_config: DefaultStakeConfig {
                         staking_code_id,
                         ..self.stake_config
@@ -259,7 +258,7 @@ impl Suite {
         tokens: [AssetInfo; 2],
         staking_config: Option<PartialStakeConfig>,
         total_fee_bps: Option<u16>,
-    ) -> AnyResult<Addr> {
+    ) -> StdResult<Addr> {
         self.app().execute_contract(
             Addr::unchecked(sender),
             self.factory.clone(),
@@ -290,7 +289,7 @@ impl Suite {
         asset_infos: Vec<AssetInfo>,
         staking_config: Option<PartialStakeConfig>,
         distribution_flows: Vec<DistributionFlow>,
-    ) -> AnyResult<AppResponse> {
+    ) -> StdResult<AppResponse> {
         self.app().execute_contract(
             Addr::unchecked(sender),
             self.factory.clone(),
@@ -312,7 +311,7 @@ impl Suite {
         pair: &Addr,
         assets: [Asset; 2],
         send_funds: &[Coin],
-    ) -> AnyResult<AppResponse> {
+    ) -> StdResult<AppResponse> {
         self.app().execute_contract(
             owner.clone(),
             pair.clone(),
@@ -331,7 +330,7 @@ impl Suite {
         contract: &Addr,
         spender: &Addr,
         amount: u128,
-    ) -> AnyResult<AppResponse> {
+    ) -> StdResult<AppResponse> {
         self.app().execute_contract(
             owner.clone(),
             contract.clone(),
@@ -352,7 +351,7 @@ impl Suite {
         first_asset: (AssetInfo, u128),
         second_asset: (AssetInfo, u128),
         native_tokens: Vec<Coin>,
-    ) -> AnyResult<Addr> {
+    ) -> StdResult<Addr> {
         let owner = self.owner.clone();
         let whale = self.app().api().addr_make("whale");
 
@@ -427,8 +426,8 @@ impl Suite {
         sender: &Addr,
         asset_infos: Vec<AssetInfo>,
         asset: AssetInfo,
-        rewards: Vec<(UnbondingPeriod, Decimal)>,
-    ) -> AnyResult<AppResponse> {
+        rewards: Vec<(UnbondingPeriod, Decimal256)>,
+    ) -> StdResult<AppResponse> {
         self.app().execute_contract(
             Addr::unchecked(sender),
             self.factory.clone(),
@@ -446,7 +445,7 @@ impl Suite {
         staking_contract: Addr,
         sender: &Addr,
         funds: &[Coin],
-    ) -> AnyResult<AppResponse> {
+    ) -> StdResult<AppResponse> {
         self.app().execute_contract(
             Addr::unchecked(sender),
             staking_contract,
@@ -461,7 +460,7 @@ impl Suite {
         token: &Addr,
         amount: u128,
         recipient: &Addr,
-    ) -> AnyResult<AppResponse> {
+    ) -> StdResult<AppResponse> {
         self.app().execute_contract(
             owner.clone(),
             token.clone(),
@@ -480,7 +479,7 @@ impl Suite {
         amount: u128,
         contract: &Addr,
         msg: impl Serialize,
-    ) -> AnyResult<AppResponse> {
+    ) -> StdResult<AppResponse> {
         self.app().execute_contract(
             owner.clone(),
             token.clone(),
@@ -498,7 +497,7 @@ impl Suite {
         sender: &Addr,
         amount: Coin,
         operations: Vec<SwapOperation>,
-    ) -> AnyResult<AppResponse> {
+    ) -> StdResult<AppResponse> {
         self.swap_operations_ref(sender, amount, operations, None, None)
     }
 
@@ -508,8 +507,8 @@ impl Suite {
         amount: Coin,
         operations: Vec<SwapOperation>,
         referral_address: impl Into<Option<String>>,
-        referral_commission: impl Into<Option<Decimal>>,
-    ) -> AnyResult<AppResponse> {
+        referral_commission: impl Into<Option<Decimal256>>,
+    ) -> StdResult<AppResponse> {
         self.app().execute_contract(
             Addr::unchecked(sender),
             self.multi_hop.clone(),
@@ -531,7 +530,7 @@ impl Suite {
         token_in: &Addr,
         amount: u128,
         operations: Vec<SwapOperation>,
-    ) -> AnyResult<AppResponse> {
+    ) -> StdResult<AppResponse> {
         self.swap_operations_cw20_ref(sender, token_in, amount, operations, None, None)
     }
 
@@ -542,8 +541,8 @@ impl Suite {
         amount: u128,
         operations: Vec<SwapOperation>,
         referral_address: impl Into<Option<String>>,
-        referral_commission: impl Into<Option<Decimal>>,
-    ) -> AnyResult<AppResponse> {
+        referral_commission: impl Into<Option<Decimal256>>,
+    ) -> StdResult<AppResponse> {
         self.app().execute_contract(
             Addr::unchecked(sender),
             token_in.clone(),
@@ -569,54 +568,54 @@ impl Suite {
         receiver: &Addr,
         asset_info: AssetInfo,
         minimum_receive: impl Into<Uint128>,
-    ) -> AnyResult<AppResponse> {
+    ) -> StdResult<AppResponse> {
         self.app().execute_contract(
             Addr::unchecked(receiver),
             self.multi_hop.clone(),
             &ExecuteMsg::AssertMinimumReceive {
                 asset_info,
-                prev_balance: Uint128::zero(),
-                minimum_receive: minimum_receive.into(),
+                prev_balance: Uint128::zero().into(),
+                minimum_receive: minimum_receive.into().into(),
                 receiver: receiver.into(),
             },
             &[],
         )
     }
 
-    pub fn query_balance(&self, sender: &Addr, denom: &str) -> AnyResult<u128> {
+    pub fn query_balance(&self, sender: &Addr, denom: &str) -> StdResult<u128> {
         let amount = self
             .app()
             .wrap()
             .query_balance(Addr::unchecked(sender), denom)?
             .amount;
-        Ok(amount.into())
+        Ok(Uint128::try_from(amount).unwrap().u128())
     }
 
-    pub fn query_cw20_balance(&self, sender: &Addr, address: &Addr) -> AnyResult<u128> {
+    pub fn query_cw20_balance(&self, sender: &Addr, address: &Addr) -> StdResult<u128> {
         let balance: BalanceResponse = self.app().wrap().query_wasm_smart(
             address,
             &Cw20QueryMsg::Balance {
                 address: sender.to_string(),
             },
         )?;
-        Ok(balance.balance.into())
+        Ok(Uint128::try_from(balance.balance).unwrap().u128())
     }
 
     pub fn query_simulate_swap_operations(
         &self,
         offer_amount: impl Into<Uint128>,
         operations: Vec<SwapOperation>,
-    ) -> AnyResult<u128> {
+    ) -> StdResult<u128> {
         let amount: SimulateSwapOperationsResponse = self.app().wrap().query_wasm_smart(
             self.multi_hop.clone(),
             &QueryMsg::SimulateSwapOperations {
-                offer_amount: offer_amount.into(),
+                offer_amount: Into::<Uint128>::into(offer_amount).into(),
                 operations,
                 referral: false,
                 referral_commission: None,
             },
         )?;
-        Ok(amount.amount.into())
+        Ok(Uint128::try_from(amount.amount).unwrap().u128())
     }
 
     pub fn query_simulate_swap_operations_ref(
@@ -624,21 +623,21 @@ impl Suite {
         offer_amount: impl Into<Uint128>,
         operations: Vec<SwapOperation>,
         referral_commission: impl Into<Option<Decimal>>,
-    ) -> AnyResult<u128> {
+    ) -> StdResult<u128> {
         let amount: SimulateSwapOperationsResponse = self.app().wrap().query_wasm_smart(
             self.multi_hop.clone(),
             &QueryMsg::SimulateSwapOperations {
-                offer_amount: offer_amount.into(),
+                offer_amount: Into::<Uint128>::into(offer_amount).into(),
                 operations,
                 referral: true,
-                referral_commission: referral_commission.into(),
+                referral_commission: referral_commission.into().map(Into::into),
             },
         )?;
-        Ok(amount.amount.into())
+        Ok(Uint128::try_from(amount.amount).unwrap().u128())
     }
 
     /// Queries the info of the given pair from the factory
-    pub fn query_pair(&self, asset_infos: Vec<AssetInfo>) -> AnyResult<PairInfo> {
+    pub fn query_pair(&self, asset_infos: Vec<AssetInfo>) -> StdResult<PairInfo> {
         Ok(self
             .app()
             .wrap()
@@ -646,7 +645,7 @@ impl Suite {
     }
 
     // returns address' balance on staking contract
-    pub fn query_balance_staking_contract(&self, asset_infos: Vec<AssetInfo>) -> AnyResult<u128> {
+    pub fn query_balance_staking_contract(&self, asset_infos: Vec<AssetInfo>) -> StdResult<u128> {
         let pair_info = self.query_pair(asset_infos)?;
         let balance: BalanceResponse = self.app().wrap().query_wasm_smart(
             pair_info.liquidity_token.clone(),
@@ -654,14 +653,14 @@ impl Suite {
                 address: pair_info.staking_addr.to_string(),
             },
         )?;
-        Ok(balance.balance.u128())
+        Ok(Uint128::try_from(balance.balance).unwrap().u128())
     }
 
     pub fn query_all_staked(
         &self,
         asset_infos: Vec<AssetInfo>,
         address: &Addr,
-    ) -> AnyResult<AllStakedResponse> {
+    ) -> StdResult<AllStakedResponse> {
         let pair_info = self.query_pair(asset_infos)?;
         let staked: AllStakedResponse = self.app().wrap().query_wasm_smart(
             pair_info.staking_addr,
@@ -677,7 +676,7 @@ impl Suite {
         asset_infos: Vec<AssetInfo>,
         address: &Addr,
         unbonding_period: impl Into<Option<u64>>,
-    ) -> AnyResult<u128> {
+    ) -> StdResult<u128> {
         let pair_info = self.query_pair(asset_infos)?;
         let staked: StakedResponse = self.app().wrap().query_wasm_smart(
             pair_info.staking_addr,
@@ -686,13 +685,13 @@ impl Suite {
                 unbonding_period: self.unbonding_period_or_default(unbonding_period),
             },
         )?;
-        Ok(staked.stake.u128())
+        Ok(Uint128::try_from(staked.stake).unwrap().u128())
     }
 
     pub fn query_staked_periods(
         &self,
         asset_infos: Vec<AssetInfo>,
-    ) -> AnyResult<Vec<BondingPeriodInfo>> {
+    ) -> StdResult<Vec<BondingPeriodInfo>> {
         let pair_info = self.query_pair(asset_infos)?;
         let info: BondingInfoResponse = self
             .app()
@@ -701,20 +700,20 @@ impl Suite {
         Ok(info.bonding)
     }
 
-    pub fn query_total_staked(&self, asset_infos: Vec<AssetInfo>) -> AnyResult<u128> {
+    pub fn query_total_staked(&self, asset_infos: Vec<AssetInfo>) -> StdResult<u128> {
         let pair_info = self.query_pair(asset_infos)?;
         let total_staked: TotalStakedResponse = self
             .app()
             .wrap()
             .query_wasm_smart(pair_info.staking_addr, &StakeQueryMsg::TotalStaked {})?;
-        Ok(total_staked.total_staked.u128())
+        Ok(Uint128::try_from(total_staked.total_staked).unwrap().u128())
     }
 
     pub fn query_claims(
         &self,
         asset_infos: Vec<AssetInfo>,
         address: &Addr,
-    ) -> AnyResult<Vec<Claim>> {
+    ) -> StdResult<Vec<Claim>> {
         let pair_info = self.query_pair(asset_infos)?;
         let claims: ClaimsResponse = self.app().wrap().query_wasm_smart(
             pair_info.staking_addr,
@@ -729,7 +728,7 @@ impl Suite {
     pub fn query_annualized_rewards(
         &self,
         asset_infos: Vec<AssetInfo>,
-    ) -> AnyResult<Vec<(UnbondingPeriod, Vec<AnnualizedReward>)>> {
+    ) -> StdResult<Vec<(UnbondingPeriod, Vec<AnnualizedReward>)>> {
         let pair_info = self.query_pair(asset_infos)?;
         let apr: AnnualizedRewardsResponse = self
             .app()
@@ -742,7 +741,7 @@ impl Suite {
         &self,
         asset_infos: Vec<AssetInfo>,
         address: &Addr,
-    ) -> AnyResult<Vec<(AssetInfoValidated, u128)>> {
+    ) -> StdResult<Vec<(AssetInfoValidated, u128)>> {
         let pair_info = self.query_pair(asset_infos)?;
         let rewards: RewardsPowerResponse = self.app().wrap().query_wasm_smart(
             pair_info.staking_addr,
@@ -754,7 +753,7 @@ impl Suite {
         Ok(rewards
             .rewards
             .into_iter()
-            .map(|(a, p)| (a, p.u128()))
+            .map(|(a, p)| (a, Uint128::try_from(p).unwrap().u128()))
             .filter(|(_, p)| *p > 0)
             .collect())
     }
@@ -762,7 +761,7 @@ impl Suite {
     pub fn query_total_rewards_power(
         &self,
         asset_infos: Vec<AssetInfo>,
-    ) -> AnyResult<Vec<(AssetInfoValidated, u128)>> {
+    ) -> StdResult<Vec<(AssetInfoValidated, u128)>> {
         let pair_info = self.query_pair(asset_infos)?;
         let rewards: RewardsPowerResponse = self
             .app()
@@ -772,7 +771,7 @@ impl Suite {
         Ok(rewards
             .rewards
             .into_iter()
-            .map(|(a, p)| (a, p.u128()))
+            .map(|(a, p)| (a, Uint128::try_from(p).unwrap().u128()))
             .filter(|(_, p)| *p > 0)
             .collect())
     }

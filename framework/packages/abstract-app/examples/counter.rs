@@ -103,7 +103,7 @@ mod handlers {
         Ok(Response::new().set_data(msg.result.unwrap().data.unwrap()))
     };
     pub const migrate: MigrateHandlerFn<CounterApp, CounterMigrateMsg, CounterError> =
-        |_, _, _, _| Ok(Response::new().set_data("counter_migrate".as_bytes()));
+        |_, _, _, _, _| Ok(Response::new().set_data("counter_migrate".as_bytes()));
     // ANCHOR: execute
     pub fn execute(
         deps: DepsMut,

@@ -5,7 +5,7 @@ use abstract_std::{
     objects::{AccountId, TruncatedChainId},
     ABSTRACT_EVENT_TYPE,
 };
-use cosmwasm_std::{to_json_binary, StdResult, SubMsgResponse};
+use cosmwasm_std::{to_json_binary, Binary, Empty, Response, StdResult, SubMsgResponse};
 use cw_orch::{core::serde_json, mock::MockBech32, prelude::*, take_storage_snapshot};
 
 type AResult = StdResult<()>; // alias for Result<(), anyhow::Error>
@@ -18,14 +18,9 @@ fn multihop_account_snapshot() -> AResult {
         .upload_custom(
             "note",
             Box::new(ContractWrapper::new(
-                |_, _, _, _: serde_json::Value| StdResult::Ok(cosmwasm_std::Response::new()),
-                |_, _, _, _: Empty| StdResult::Ok(cosmwasm_std::Response::new()),
-                |_,
-                 _,
-                 _: cosmwasm_std::Empty|
-                 -> Result<cosmwasm_std::Binary, cosmwasm_std::Never> {
-                    unreachable!()
-                },
+                |_, _, _, _: serde_json::Value| -> StdResult<Response> { Ok(Response::new()) },
+                |_, _, _, _: Empty| -> StdResult<Response> { Ok(Response::new()) },
+                |_, _, _: Empty| -> StdResult<Binary> { unreachable!() },
             )),
         )?
         .uploaded_code_id()?;
@@ -52,12 +47,14 @@ fn multihop_account_snapshot() -> AResult {
         .callback(CallbackMessage {
             initiator: deployment.ibc.client.address()?,
             initiator_msg: to_json_binary(&IbcClientCallback::WhoAmI {})?,
-            result: abstract_std::ibc::polytone_callbacks::Callback::Execute(Ok(
-                abstract_std::ibc::polytone_callbacks::ExecutionResponse {
-                    executed_by: "host".to_owned(),
-                    result: vec![],
-                },
-            )),
+            result: abstract_std::ibc::polytone_callbacks::Callback::Execute(
+                abstract_std::ibc::polytone_callbacks::ExecutionCallbackResult::Success(
+                    abstract_std::ibc::polytone_callbacks::ExecutionResponse {
+                        executed_by: "host".to_owned(),
+                        result: vec![],
+                    },
+                ),
+            ),
         })?;
 
     let multihop_account_id = AccountId::new(
@@ -77,18 +74,20 @@ fn multihop_account_snapshot() -> AResult {
             initiator_msg: to_json_binary(&IbcClientCallback::CreateAccount {
                 account_id: multihop_account_id.clone(),
             })?,
-            result: abstract_std::ibc::polytone_callbacks::Callback::Execute(Ok(
-                abstract_std::ibc::polytone_callbacks::ExecutionResponse {
-                    executed_by: "host".to_owned(),
-                    #[allow(deprecated)]
-                    result: vec![SubMsgResponse {
-                        events: vec![cosmwasm_std::Event::new(ABSTRACT_EVENT_TYPE)
-                            .add_attribute("account_address", "remote_account")],
-                        data: None,
-                        msg_responses: vec![],
-                    }],
-                },
-            )),
+            result: abstract_std::ibc::polytone_callbacks::Callback::Execute(
+                abstract_std::ibc::polytone_callbacks::ExecutionCallbackResult::Success(
+                    abstract_std::ibc::polytone_callbacks::ExecutionResponse {
+                        executed_by: "host".to_owned(),
+                        #[allow(deprecated)]
+                        result: vec![SubMsgResponse {
+                            events: vec![cosmwasm_std::Event::new(ABSTRACT_EVENT_TYPE)
+                                .add_attribute("account_address", "remote_account")],
+                            data: None,
+                            msg_responses: vec![],
+                        }],
+                    },
+                ),
+            ),
         })?;
     let accounts = deployment.ibc.client.list_accounts(None, None)?;
     // Make sure we have in state exactly what we did put

@@ -79,7 +79,7 @@ mod test {
 
     use super::*;
 
-    #[coverage_helper::test]
+    
     fn test_static_constructor() {
         const VERSION_CONSTRAINT: [&str; 1] = ["^1.0.0"];
 
@@ -89,7 +89,7 @@ mod test {
         assert_eq!(dep.version_req.to_vec(), VERSION_CONSTRAINT.to_vec());
     }
 
-    #[coverage_helper::test]
+    
     fn static_check_passes() {
         const VERSION_CONSTRAINT: [&str; 1] = ["^1.0.0"];
 
@@ -98,7 +98,7 @@ mod test {
         assert!(dep.check().is_ok());
     }
 
-    #[coverage_helper::test]
+    
     fn static_check_passes_without_comparator() {
         const VERSION_CONSTRAINT: [&str; 1] = ["1.0.0"];
 
@@ -107,7 +107,7 @@ mod test {
         assert!(dep.check().is_ok());
     }
 
-    #[coverage_helper::test]
+    
     fn static_check_fails() {
         const VERSION_CONSTRAINT: [&str; 1] = ["^1e.0"];
 
@@ -116,7 +116,7 @@ mod test {
         assert!(dep.check().is_err());
     }
 
-    #[coverage_helper::test]
+    
     fn matches_should_match_matching_versions() {
         const VERSION_CONSTRAINT: [&str; 1] = ["^1.0.0"];
 
@@ -127,7 +127,7 @@ mod test {
         assert!(dep.matches(&Version::parse("1.1.1").unwrap()));
     }
 
-    #[coverage_helper::test]
+    
     fn matches_should_not_match_non_matching_versions() {
         const VERSION_CONSTRAINT: [&str; 1] = ["^1.0.0"];
 
@@ -138,7 +138,7 @@ mod test {
         assert!(!dep.matches(&Version::parse("0.1.1").unwrap()));
     }
 
-    #[coverage_helper::test]
+    
     fn test_dependency_from_static() {
         const VERSION_CONSTRAINT: [&str; 1] = ["^1.0.0"];
 

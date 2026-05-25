@@ -12,7 +12,7 @@ use abstract_app::std::{
 };
 use abstract_dex_adapter::DexInterface;
 use cosmwasm_std::{
-    Addr, CosmosMsg, Decimal, DepsMut, Env, MessageInfo, Response, Storage, Uint128,
+    Addr, CosmosMsg, Decimal, DepsMut, Env, MessageInfo, Response, Storage, Uint256,
 };
 use cw_asset::{Asset, AssetList};
 
@@ -94,7 +94,7 @@ pub fn tip(
     let exchange_strs: HashSet<&str> = config.exchanges.iter().map(AsRef::as_ref).collect();
 
     // For tip history
-    let mut desired_asset_amount = Uint128::zero();
+    let mut desired_asset_amount = Uint256::zero();
     // For updating tipper history
     let mut assets_to_add = vec![];
 
@@ -130,9 +130,10 @@ pub fn tip(
             swap_msgs.push(trigger_swap_msg);
             attrs.push(("swap", format!("{} for {}", pay_asset.name, desired_asset)));
 
-            desired_asset_amount += dex
-                .simulate_swap(pay_asset.clone(), desired_asset.clone())?
-                .return_amount;
+            desired_asset_amount += Uint256::from(
+                dex.simulate_swap(pay_asset.clone(), desired_asset.clone())?
+                    .return_amount,
+            );
         } else {
             // If swap not found just accept payment
             assets_to_add.push(pay_asset);

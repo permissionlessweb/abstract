@@ -8,7 +8,6 @@ readme      = "README.md"
 repository  = "https://github.com/AbstractSDK/abstract"
 version     = { workspace = true }
 
-
 [dependencies]
 abstract-std    = { workspace = true }
 cosmwasm-std    = { workspace = true, features = ["iterator"] }
@@ -18,9 +17,6 @@ cw2             = { workspace = true }
 derive_builder  = "0.12.0"
 serde           = { workspace = true }
 serde_json      = "1.0.79"
-
-[target.'cfg(not(target_arch = "wasm32"))'.dependencies]
-workspace-hack = { version = "0.1", path = "../../workspace-hack" }
 
 [dev-dependencies]
 abstract-sdk = { path = "../abstract-sdk", features = ["test-utils"] }

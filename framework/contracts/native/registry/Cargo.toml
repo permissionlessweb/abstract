@@ -10,9 +10,6 @@ version     = { workspace = true }
 
 exclude = ["contract.wasm", "hash.txt"]
 
-[lints]
-workspace = true
-
 [lib]
 crate-type = ["cdylib", "rlib"]
 
@@ -32,9 +29,6 @@ cw2             = { workspace = true }
 semver          = { workspace = true }
 thiserror       = { workspace = true }
 
-[target.'cfg(not(target_arch = "wasm32"))'.dependencies]
-workspace-hack = { version = "0.1", path = "../../../workspace-hack" }
-
 [dev-dependencies]
 abstract-interface = { workspace = true }
 abstract-testing   = { workspace = true }
@@ -42,6 +36,9 @@ anyhow             = { workspace = true }
 cosmwasm-schema    = { workspace = true }
 coverage-helper    = { workspace = true }
 cw-orch            = { workspace = true }
+
+[lints]
+workspace = true
 
 [profile.release]
 overflow-checks = true

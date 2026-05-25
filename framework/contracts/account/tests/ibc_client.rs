@@ -7,7 +7,7 @@ use cw_orch::prelude::*;
 pub fn ibc_client_installed<Chain: CwEnv>(account: &AccountI<Chain>) -> AResult {
     let ibc_addr = account.module_addresses(vec![IBC_CLIENT.to_string()])?;
     if ibc_addr.modules.is_empty() {
-        bail!("IBC client not installed")
+        bail!("IBC client not installed");
     }
     Ok(())
 }

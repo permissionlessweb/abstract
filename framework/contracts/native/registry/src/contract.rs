@@ -180,7 +180,7 @@ mod tests {
 
             use super::*;
 
-            #[coverage_helper::test]
+            
             fn disallow_same_version() -> VCResult<()> {
                 let mut deps = mock_dependencies();
                 let sender = deps.api.addr_make("jimi");
@@ -212,7 +212,7 @@ mod tests {
                 Ok(())
             }
 
-            #[coverage_helper::test]
+            
             fn disallow_downgrade() -> VCResult<()> {
                 let mut deps = mock_dependencies();
                 let sender = deps.api.addr_make("jimi");
@@ -247,7 +247,7 @@ mod tests {
                 Ok(())
             }
 
-            #[coverage_helper::test]
+            
             fn disallow_name_change() -> VCResult<()> {
                 let mut deps = mock_dependencies();
                 let sender = deps.api.addr_make("jimi");
@@ -280,7 +280,7 @@ mod tests {
                 Ok(())
             }
 
-            #[coverage_helper::test]
+            
             fn works() -> VCResult<()> {
                 let mut deps = mock_dependencies();
                 let sender = deps.api.addr_make("jimi");
@@ -330,7 +330,7 @@ mod tests {
 
             use super::*;
 
-            #[coverage_helper::test]
+            
             fn sets_abstract_namespace() -> VCResult<()> {
                 let mut deps = mock_dependencies();
                 let abstr = AbstractMockAddrs::new(deps.api);

@@ -1,10 +1,10 @@
 use abstract_app::std::objects::{AssetEntry, DexName};
-use cosmwasm_std::{Addr, Uint128};
+use cosmwasm_std::{Addr, Uint256};
 use cw_storage_plus::{Item, SnapshotMap, Strategy};
 
 pub const CONFIG: Item<Config> = Item::new("cfg");
 // The sender address is used here for querying by tipper
-pub const TIPPERS: SnapshotMap<(&Addr, &AssetEntry), Uint128> =
+pub const TIPPERS: SnapshotMap<(&Addr, &AssetEntry), Uint256> =
     SnapshotMap::new("tps", "tps__chckp", "tps_chnglg", Strategy::EveryBlock);
 pub const TIP_COUNT: Item<u32> = Item::new("tip-count");
 pub const TIPPER_COUNT: SnapshotMap<&Addr, u32> = SnapshotMap::new(

@@ -7,9 +7,6 @@ readme      = "README.md"
 repository  = "https://github.com/AbstractSDK/abstract"
 version     = { workspace = true }
 
-[lints]
-workspace = true
-
 [lib]
 crate-type = ["cdylib", "rlib"]
 
@@ -26,17 +23,14 @@ abstract-sdk    = { workspace = true }
 abstract-std    = { workspace = true }
 cosmwasm-schema = { workspace = true }
 cosmwasm-std    = { workspace = true, features = ["stargate"] }
-cw-orch         = { workspace = true }
+cw-orch = { workspace = true }
 cw-ownable      = { workspace = true }
-cw-paginate     = { version = "3.0.0", git = "https://github.com/permissionlessweb/cw-plus-plus" }
+cw-paginate     = { git = "https://github.com/permissionlessweb/cw-plus-plus", branch = "feat/mvp" }
 cw-storage-plus = { workspace = true }
 cw-utils        = { workspace = true }
 cw2             = { workspace = true }
 semver          = { workspace = true }
 thiserror       = { workspace = true }
-
-[target.'cfg(not(target_arch = "wasm32"))'.dependencies]
-workspace-hack = { version = "0.1", path = "../../../workspace-hack" }
 
 [dev-dependencies]
 abstract-adapter   = { workspace = true, features = ["test-utils"] }
@@ -45,4 +39,7 @@ abstract-std       = { workspace = true }
 abstract-testing   = { workspace = true }
 anyhow.workspace   = true
 coverage-helper    = { workspace = true }
-cw-orch            = { workspace = true }
+cw-orch = { workspace = true }
+
+[lints]
+workspace = true

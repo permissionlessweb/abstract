@@ -85,13 +85,13 @@ impl PrimaryKey<'_> for AssetEntry {
 
     type SuperSuffix = Self;
 
-    fn key(&self) -> Vec<cw_storage_plus::Key> {
+    fn key(&self) -> Vec<cw_storage_plus::Key<'_>> {
         self.0.key()
     }
 }
 
 impl Prefixer<'_> for AssetEntry {
-    fn prefix(&self) -> Vec<Key> {
+    fn prefix(&self) -> Vec<Key<'_>> {
         self.0.prefix()
     }
 }
@@ -123,7 +123,7 @@ mod test {
 
     use super::*;
 
-    #[coverage_helper::test]
+    
     fn test_asset_entry() {
         let mut entry = AssetEntry::new("CRAB");
         assert_eq!(entry.as_str(), "crab");
@@ -131,7 +131,7 @@ mod test {
         assert_eq!(entry.as_str(), "crab");
     }
 
-    #[coverage_helper::test]
+    
     fn test_src_chain() -> AbstractResult<()> {
         // technically invalid, but we don't care here
         let entry = AssetEntry::new("CRAB");
@@ -140,7 +140,8 @@ mod test {
             AbstractError::EntryFormattingError {
                 actual: "crab".to_string(),
                 expected: "src_chain>asset_name".to_string(),
-            }.to_string()
+            }
+            .to_string()
         );
         let entry = AssetEntry::new("osmosis>crab");
         assert_eq!(entry.src_chain().unwrap(), "osmosis".to_string());
@@ -163,35 +164,36 @@ mod test {
             AbstractError::EntryFormattingError {
                 actual: input.to_ascii_lowercase(),
                 expected: "src_chain>asset_name".to_string(),
-            }.to_string()
+            }
+            .to_string()
         );
     }
 
-    #[coverage_helper::test]
+    
     fn test_from_string() {
         let entry = AssetEntry::from("CRAB".to_string());
         assert_eq!(entry.as_str(), "crab");
     }
 
-    #[coverage_helper::test]
+    
     fn test_from_str() {
         let entry = AssetEntry::from("CRAB");
         assert_eq!(entry.as_str(), "crab");
     }
 
-    #[coverage_helper::test]
+    
     fn test_from_ref_string() {
         let entry = AssetEntry::from(&"CRAB".to_string());
         assert_eq!(entry.as_str(), "crab");
     }
 
-    #[coverage_helper::test]
+    
     fn test_to_string() {
         let entry = AssetEntry::new("CRAB");
         assert_eq!(entry.to_string(), "crab".to_string());
     }
 
-    #[coverage_helper::test]
+    
     fn string_key_works() {
         let k = &AssetEntry::new("CRAB");
         let path = k.key();

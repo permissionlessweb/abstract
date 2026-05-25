@@ -59,7 +59,7 @@ pub fn migrate_from_xion_account(
     new_code_id: u64,
 ) -> AccountResult {
     use crate::modules::{_install_modules, MIGRATE_CONTEXT};
-    use ::{
+    use {
         abstract_sdk::feature_objects::RegistryContract,
         abstract_sdk::std::account::state::ACCOUNT_ID,
         abstract_std::account::ModuleInstallConfig,
@@ -149,7 +149,7 @@ mod tests {
     use abstract_std::{account::MigrateMsg, AbstractError};
     use cw2::get_contract_version;
 
-    #[coverage_helper::test]
+    
     fn disallow_same_version() -> AccountResult<()> {
         let mut deps = mock_dependencies();
         deps.querier = abstract_mock_querier(deps.api);
@@ -158,31 +158,31 @@ mod tests {
 
         let version: Version = CONTRACT_VERSION.parse().unwrap();
 
+        let migrate_info = MigrateInfo {
+            sender: deps.api.addr_make("jimi"),
+            old_migrate_version: None,
+        };
         let res = super::migrate(
             deps.as_mut(),
             env,
             MigrateMsg { code_id: None },
-            MigrateInfo {
-                sender: deps.api.addr_make("jimi"),
-                old_migrate_version: None,
-            },
+            migrate_info,
         );
 
         assert_eq!(
             res.unwrap_err().to_string(),
-            AccountError::Abstract(
-                AbstractError::CannotDowngradeContract {
-                    contract: ACCOUNT.to_string(),
-                    from: version.clone(),
-                    to: version,
-                },
-            ).to_string()
+            AccountError::Abstract(AbstractError::CannotDowngradeContract {
+                contract: ACCOUNT.to_string(),
+                from: version.clone(),
+                to: version,
+            },)
+            .to_string()
         );
 
         Ok(())
     }
 
-    #[coverage_helper::test]
+    
     fn disallow_downgrade() -> AccountResult<()> {
         let mut deps = mock_dependencies();
         deps.querier = abstract_mock_querier(deps.api);
@@ -194,31 +194,31 @@ mod tests {
 
         let version: Version = CONTRACT_VERSION.parse().unwrap();
 
+        let migrate_info = MigrateInfo {
+            sender: deps.api.addr_make("bob"),
+            old_migrate_version: None,
+        };
         let res = super::migrate(
             deps.as_mut(),
             env,
             MigrateMsg { code_id: None },
-            MigrateInfo {
-                sender: deps.api.addr_make("bob"),
-                old_migrate_version: None,
-            },
+            migrate_info,
         );
 
         assert_eq!(
             res.unwrap_err().to_string(),
-            AccountError::Abstract(
-                AbstractError::CannotDowngradeContract {
-                    contract: ACCOUNT.to_string(),
-                    from: big_version.parse().unwrap(),
-                    to: version,
-                },
-            ).to_string()
+            AccountError::Abstract(AbstractError::CannotDowngradeContract {
+                contract: ACCOUNT.to_string(),
+                from: big_version.parse().unwrap(),
+                to: version,
+            },)
+            .to_string()
         );
 
         Ok(())
     }
 
-    #[coverage_helper::test]
+    
     fn disallow_name_change() -> AccountResult<()> {
         let mut deps = mock_dependencies();
         deps.querier = abstract_mock_querier(deps.api);
@@ -229,30 +229,30 @@ mod tests {
         let old_name = "old:contract";
         set_contract_version(deps.as_mut().storage, old_name, old_version)?;
 
+        let migrate_info = MigrateInfo {
+            sender: deps.api.addr_make("oz"),
+            old_migrate_version: None,
+        };
         let res = super::migrate(
             deps.as_mut(),
             env,
             MigrateMsg { code_id: None },
-            MigrateInfo {
-                sender: deps.api.addr_make("oz"),
-                old_migrate_version: None,
-            },
+            migrate_info,
         );
 
         assert_eq!(
             res.unwrap_err().to_string(),
-            AccountError::Abstract(
-                AbstractError::ContractNameMismatch {
-                    from: old_name.parse().unwrap(),
-                    to: ACCOUNT.parse().unwrap(),
-                },
-            ).to_string()
+            AccountError::Abstract(AbstractError::ContractNameMismatch {
+                from: old_name.parse().unwrap(),
+                to: ACCOUNT.parse().unwrap(),
+            },)
+            .to_string()
         );
 
         Ok(())
     }
 
-    #[coverage_helper::test]
+    
     fn works() -> AccountResult<()> {
         let mut deps = mock_dependencies();
         deps.querier = abstract_mock_querier(deps.api);
@@ -269,14 +269,15 @@ mod tests {
 
         set_contract_version(deps.as_mut().storage, ACCOUNT, small_version)?;
 
+        let migrate_info = MigrateInfo {
+            sender: deps.api.addr_make("billie"),
+            old_migrate_version: None,
+        };
         let res = super::migrate(
             deps.as_mut(),
             env,
             MigrateMsg { code_id: None },
-            MigrateInfo {
-                sender: deps.api.addr_make("billie"),
-                old_migrate_version: None,
-            },
+            migrate_info,
         )?;
         assert!(res.messages.is_empty());
 

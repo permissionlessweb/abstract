@@ -1,14 +1,14 @@
 [workspace]
 exclude = ["contracts/apps/croncat", "contracts/apps/dca"]
-members = ["contracts/apps/*", "contracts/adapters/*", "contracts/standalones/*"]
+members = ["contracts/adapters/*", "contracts/apps/*", "contracts/standalones/*"]
 
 resolver = "2"
 
 [workspace.package]
 authors = [
-  "CyberHoward <cyberhoward@protonmail.com>",
-  "Riada <riada@abstract.money>",
-  "Abstract Money <contact@abstract.money>",
+    "CyberHoward <cyberhoward@protonmail.com>",
+    "Riada <riada@abstract.money>",
+    "Abstract Money <contact@abstract.money>",
 ]
 documentation = "https://docs.abstract.money/"
 edition = "2021"
@@ -19,95 +19,107 @@ repository = "https://github.com/AbstractSDK/abstract"
 version = "0.26.1"
 
 [workspace.dependencies]
-
-
-cosmwasm-schema = { version = "3.0.1" }
-cosmwasm-std    = { version = "3.0.1" }
-cw-address-like = { version = "3.0.1", git = "https://github.com/permissionlessweb/cw-plus-plus" }
-cw-asset        = { version = "4.0",  git = "https://github.com/permissionlessweb/cw-asset" }
-cw-controllers  = { version = "3.0.0", git = "https://github.com/permissionlessweb/cw-minus" }
-cw-ownable      = { version = "2.0", git = "https://github.com/permissionlessweb/cw-plus-plus" }
-cw-plus-orch    = { version = "0.25.0",  git = "https://github.com/permissionlessweb/cw-orchestrator" }
-cw-storage-plus = "3.0.0"
-cw-utils        = { version = "3.0.0"   }
-cw2             = { version = "2.0" }
-cw20            = { version = "3.0.0", git = "https://github.com/permissionlessweb/cw-plus" }
-cw20-base       = { version = "3.0.0", features = ["library"], git = "https://github.com/permissionlessweb/cw-plus" }
-
-protobuf  = { version = "2", features = ["with-bytes"] }
-schemars  = { version = "0.8.4" }
-serde     = { version = "1.0", default-features = false, features = ["derive"] }
-thiserror = { version = "1.0.50" }
-
-chrono = { version = "0.4.31", default-features = false }
-clap   = { version = "4.0.32", features = ["derive"] }
-semver = "1.0"
-
-cw-orch            = { version = "0.30.0", git = "https://github.com/permissionlessweb/cw-orchestrator" }
-cw-orch-interchain = { version = "0.8.1", git = "https://github.com/permissionlessweb/cw-orchestrator" }
-cw-orch-neutron-test-tube = { version = "0.2.0", git = "https://github.com/permissionlessweb/cw-orchestrator" }
-cw-orch-osmosis-test-tube = { version = "0.5.0", git = "https://github.com/permissionlessweb/cw-orchestrator" }
-tokio                     = { version = "1.4", features = ["full"] }
-
 ## crates in order of publishing ## see docs/Publishing.md
 
 # abstract-adapter           = { version = "0.26.1" }
-abstract-adapter    = { path = "../framework/packages/abstract-adapter", version = "0.26.1" }
+abstract-adapter    = { path = "../framework/packages/abstract-adapter" }
 
-abstract-app               = { path = "../framework/packages/abstract-app", version = "0.26.1" }
-abstract-client            = { path = "../framework/packages/abstract-client", version = "0.26.1" }
-abstract-interface         = { path = "../framework/packages/abstract-interface", version = "0.26.1" }
-abstract-macros            = { path = "../framework/packages/abstract-macros", version = "0.26.1" }
-abstract-standalone        = { path = "../framework/packages/abstract-standalone", version = "0.26.1" }
-abstract-testing           = { path = "../framework/packages/abstract-testing", version = "0.26.1" }
-abstract-integration-tests = { path = "../framework/packages/abstract-integration-tests" }
-
-
-abstract-adapter-utils         = { version = "0.26.1",path = "../framework/packages/standards/utils" }
-abstract-dex-standard          = { path = "../framework/packages/standards/dex", version = "0.26.1" }
-abstract-money-market-standard = { path = "../framework/packages/standards/money-market", version = "0.26.1" }
-abstract-staking-standard      = { path = "../framework/packages/standards/staking", version = "0.26.1" }
-
+abstract-adapter-utils         = { path = "../framework/packages/standards/utils" }
+abstract-app               = { path = "../framework/packages/abstract-app" }
 
 # Integrations
 abstract-astroport-adapter   = { path = "../integrations/astroport-adapter", default-features = false }
-abstract-astrovault-adapter  = { path = "../integrations/astrovault-adapter", default-features = false }
-abstract-kujira-adapter      = { path = "../integrations/kujira-adapter", default-features = false }
-abstract-mars-adapter        = { path = "../integrations/mars-adapter", default-features = false }
-abstract-neutron-dex-adapter = { path = "../integrations/neutron-dex-adapter", default-features = false }
-abstract-osmosis-adapter     = { path = "../integrations/osmosis-adapter", default-features = false }
-abstract-wyndex-adapter      = { path = "../integrations/wyndex-adapter", default-features = false }
-
-mockdex-bundle = { path = "../integrations/bundles/mockdex" }
+abstract-client            = { path = "../framework/packages/abstract-client" }
 
 ## Modules
 abstract-cw-staking  = { path = "./contracts/adapters/cw-staking", default-features = false }
 abstract-dex-adapter = { path = "./contracts/adapters/dex", default-features = false }
-challenge-app        = { path = "./contracts/apps/challenge", default-features = false }
-croncat-app          = { path = "./contracts/apps/croncat", default-features = false }
-dca-app              = { path = "./contracts/apps/dca", default-features = false }
+abstract-dex-standard          = { path = "../framework/packages/standards/dex" }
+abstract-ibc-client = { path = "../framework/contracts/native/ibc-client", default-features = false }
+abstract-integration-tests = { path = "../framework/packages/abstract-integration-tests" }
+abstract-interface         = { path = "../framework/packages/abstract-interface" }
+abstract-macros            = { path = "../framework/packages/abstract-macros" }
+# abstract-astrovault-adapter  = { path = "../integrations/astrovault-adapter", default-features = false }
+# abstract-kujira-adapter      = { path = "../integrations/kujira-adapter", default-features = false }
+abstract-mars-adapter        = { path = "../integrations/mars-adapter", default-features = false }
+abstract-money-market-standard = { path = "../framework/packages/standards/money-market" }
+abstract-neutron-dex-adapter = { path = "../integrations/neutron-dex-adapter", default-features = false }
+abstract-osmosis-adapter     = { path = "../integrations/osmosis-adapter", default-features = false }
+abstract-staking-standard      = { path = "../framework/packages/standards/staking" }
+abstract-standalone        = { path = "../framework/packages/abstract-standalone" }
+abstract-testing           = { path = "../framework/packages/abstract-testing" }
+abstract-wyndex-adapter      = { path = "../integrations/wyndex-adapter", default-features = false }
 
 ## Testing
 anyhow = "1"
-rstest = "0.17.0"
+challenge-app        = { path = "./contracts/apps/challenge", default-features = false }
+chrono = { version = "0.4.31", default-features = false }
+clap   = { version = "4.0.32", features = ["derive"] }
 
-# this ensures local compatability when compiling locally
-[patch.crates-io]
-abstract-adapter               = { path = "../framework/packages/abstract-adapter" }
-abstract-adapter-utils         = { path = "../framework/packages/standards/utils" }
-abstract-app                   = { path = "../framework/packages/abstract-app" }
-abstract-client                = { path = "../framework/packages/abstract-client" }
-abstract-dex-standard          = { path = "../framework/packages/standards/dex" }
-abstract-interface             = { path = "../framework/packages/abstract-interface" }
-abstract-macros                = { path = "../framework/packages/abstract-macros" }
-abstract-money-market-standard = { path = "../framework/packages/standards/money-market" }
-abstract-sdk                   = { path = "../framework/packages/abstract-sdk" }
-abstract-staking-standard      = { path = "../framework/packages/standards/staking" }
-abstract-standalone            = { path = "../framework/packages/abstract-standalone" }
-abstract-std                   = { path = "../framework/packages/abstract-std" }
-abstract-testing               = { path = "../framework/packages/abstract-testing" }
+cosmwasm-schema = { git = "https://github.com/permissionlessweb/cosmwasm", branch = "mvp" }
+cosmwasm-std = { git = "https://github.com/permissionlessweb/cosmwasm", branch = "mvp" }
+croncat-app          = { path = "./contracts/apps/croncat", default-features = false }
+cw-address-like = { git = "https://github.com/permissionlessweb/cw-plus-plus", branch = "feat/mvp" }
+cw-asset = { git = "https://github.com/permissionlessweb/cw-asset", branch = "main" }
+cw-controllers = { git = "https://github.com/permissionlessweb/cw-minus", branch = "main" }
+cw-ica-controller = { git = "https://github.com/permissionlessweb/cw-ica-controller", branch = "bump/cw3", default-features = false }
+cw-orch = { git = "https://github.com/permissionlessweb/cw-orchestrator", branch = "cw3" }
+cw-orch-interchain   = { git = "https://github.com/permissionlessweb/cw-orchestrator", branch = "cw3" }
+cw-orch-neutron-test-tube = { git = "https://github.com/permissionlessweb/cw-orchestrator", branch = "cw3" }
+cw-orch-osmosis-test-tube = { git = "https://github.com/permissionlessweb/cw-orchestrator", branch = "cw3" }
+cw-orch-polytone = { package = "abstract-cw-orch-polytone", git = "https://github.com/permissionlessweb/polytone", branch = "bump/cw3" }
+cw-ownable = { git = "https://github.com/permissionlessweb/cw-plus-plus", branch = "feat/mvp" }
+cw-plus-orch = { git = "https://github.com/permissionlessweb/cw-orchestrator", branch = "cw3" }
+cw-storage-plus = { git = "https://github.com/permissionlessweb/cw-storage-plus", branch = "mvp" }
+cw-utils = { git = "https://github.com/permissionlessweb/cw-minus", branch = "main" }
+cw2 = { git = "https://github.com/permissionlessweb/cw-minus", branch = "main" }
+cw20 = { git = "https://github.com/permissionlessweb/cw-plus", branch = "main" }
+cw20-base = { git = "https://github.com/permissionlessweb/cw-plus", branch = "main" }
+dca-app              = { path = "./contracts/apps/dca", default-features = false }
+
+mockdex-bundle = { path = "../integrations/bundles/mockdex" }
+neutron-std = { git = "https://github.com/permissionlessweb/neutron-std", branch = "feat/cw3" }
+osmosis-std = { git = "https://github.com/permissionlessweb/osmosis-rust", branch = "cw3" }
+protobuf  = { version = "2", features = ["with-bytes"] }
+rstest = "0.17.0"
+schemars  = { version = "0.8.22" }
+semver = "1.0"
+serde     = { version = "1.0", default-features = false, features = ["derive"] }
+thiserror = { version = "1.0.50" }
+tokio                     = { version = "1.4", features = ["full"] }
+abstract-std = { path = "../framework/packages/abstract-std" }
+abstract-sdk = { path = "../framework/packages/abstract-sdk" }
+cw-orch-core = { git = "https://github.com/permissionlessweb/cw-orchestrator", branch = "cw3" }
+cw-orch-mock = { git = "https://github.com/permissionlessweb/cw-orchestrator", branch = "cw3" }
+cw-orch-traits = { git = "https://github.com/permissionlessweb/cw-orchestrator", branch = "cw3" }
+cosmrs = { git = "https://github.com/permissionlessweb/cosmos-rust", branch = "main" }
+cosmos-sdk-proto = { git = "https://github.com/permissionlessweb/cosmos-rust", branch = "main" }
+ibc-proto = { git = "https://github.com/permissionlessweb/ibc-proto-rs", branch = "main" }
+tendermint = { git = "https://github.com/permissionlessweb/tendermint-rs", branch = "main" }
+tendermint-proto = { git = "https://github.com/permissionlessweb/tendermint-rs", branch = "main" }
+tendermint-rpc = { git = "https://github.com/permissionlessweb/tendermint-rs", branch = "main" }
+abstract-cw-multi-test = { git = "https://github.com/permissionlessweb/cw-multi-test-fork", branch = "bump/cw3/official-ibc-fork" }
+clone-cw-multi-test = { git = "https://github.com/permissionlessweb/cw-multi-test-fork", branch = "cw3/adapt_for_local_execution" }
+abstract-polytone = { git = "https://github.com/permissionlessweb/polytone", branch = "bump/cw3" }
+abstract-polytone-note = { git = "https://github.com/permissionlessweb/polytone", branch = "bump/cw3" }
+abstract-polytone-voice = { git = "https://github.com/permissionlessweb/polytone", branch = "bump/cw3" }
+abstract-polytone-proxy = { git = "https://github.com/permissionlessweb/polytone", branch = "bump/cw3" }
+abstract-cw-orch-polytone = { git = "https://github.com/permissionlessweb/polytone", branch = "bump/cw3" }
+osmosis-test-tube = { git = "https://github.com/permissionlessweb/osmosis-test-tube", branch = "cw3" }
+neutron-test-tube = { git = "https://github.com/permissionlessweb/neutron-test-tube", branch = "dev" }
+simple-ica = { git = "https://github.com/permissionlessweb/cw-ibc-demo", branch = "cosmwasm3" }
+simple-ica-controller = { git = "https://github.com/permissionlessweb/cw-ibc-demo", branch = "cosmwasm3" }
+simple-ica-host = { git = "https://github.com/permissionlessweb/cw-ibc-demo", branch = "cosmwasm3" }
 
 # Backup release profile, will result in warnings during optimization
+[patch.crates-io]
+
+# Fork patches (managed by dep-switch.py)
+
+# Fork patches (managed by dep-switch.py)
+
+# Fork patches (managed by dep-switch.py)
+nam-blst = { git = "https://github.com/permissionlessweb/blst", branch = "master" }
 [profile.release]
 codegen-units    = 1
 debug            = false

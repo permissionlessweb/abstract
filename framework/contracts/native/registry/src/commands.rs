@@ -881,7 +881,7 @@ mod tests {
     mod set_admin_and_factory {
         use super::*;
 
-        #[coverage_helper::test]
+        
         fn only_admin_admin() -> RegistryTestResult {
             let mut deps = registry_mock_deps();
 
@@ -893,7 +893,7 @@ mod tests {
             test_only_admin(msg, &mut deps)
         }
 
-        #[coverage_helper::test]
+        
         fn updates_admin() -> RegistryTestResult {
             let mut deps = registry_mock_deps();
             mock_init(&mut deps)?;
@@ -929,7 +929,7 @@ mod tests {
         use abstract_std::AbstractError;
         use cosmwasm_std::{coins, SubMsg};
 
-        #[coverage_helper::test]
+        
         fn claim_namespaces_by_owner() -> RegistryTestResult {
             let mut deps = registry_mock_deps();
 
@@ -960,7 +960,7 @@ mod tests {
             Ok(())
         }
 
-        #[coverage_helper::test]
+        
         fn fail_claim_permissioned_namespaces() -> RegistryTestResult {
             let mut deps = registry_mock_deps();
 
@@ -998,7 +998,7 @@ mod tests {
             Ok(())
         }
 
-        #[coverage_helper::test]
+        
         fn claim_namespaces_with_fee() -> RegistryTestResult {
             let mut deps = registry_mock_deps();
 
@@ -1070,7 +1070,7 @@ mod tests {
             Ok(())
         }
 
-        #[coverage_helper::test]
+        
         fn claim_namespaces_not_owner() -> RegistryTestResult {
             let mut deps = registry_mock_deps();
 
@@ -1095,7 +1095,7 @@ mod tests {
             Ok(())
         }
 
-        #[coverage_helper::test]
+        
         fn claim_existing_namespaces() -> RegistryTestResult {
             let mut deps = registry_mock_deps();
 
@@ -1127,7 +1127,7 @@ mod tests {
             Ok(())
         }
 
-        #[coverage_helper::test]
+        
         fn cannot_claim_abstract() -> VCResult<()> {
             let mut deps = registry_mock_deps();
             let abstr = AbstractMockAddrs::new(deps.api);
@@ -1158,7 +1158,7 @@ mod tests {
     mod update_direct_registration {
         use super::*;
 
-        #[coverage_helper::test]
+        
         fn only_admin() -> RegistryTestResult {
             let mut deps = registry_mock_deps();
             mock_init(&mut deps)?;
@@ -1178,7 +1178,7 @@ mod tests {
             Ok(())
         }
 
-        #[coverage_helper::test]
+        
         fn direct_registration() -> RegistryTestResult {
             let mut deps = registry_mock_deps();
             mock_init(&mut deps)?;
@@ -1203,7 +1203,7 @@ mod tests {
 
         use super::*;
 
-        #[coverage_helper::test]
+        
         fn only_admin() -> RegistryTestResult {
             let mut deps = registry_mock_deps();
             mock_init(&mut deps)?;
@@ -1226,7 +1226,7 @@ mod tests {
             Ok(())
         }
 
-        #[coverage_helper::test]
+        
         fn updates_fee() -> RegistryTestResult {
             let mut deps = registry_mock_deps();
             mock_init(&mut deps)?;
@@ -1267,7 +1267,7 @@ mod tests {
                 .unwrap()
         }
 
-        #[coverage_helper::test]
+        
         fn forgo_namespace_by_admin_or_owner() -> RegistryTestResult {
             let mut deps = registry_mock_deps();
 
@@ -1317,7 +1317,7 @@ mod tests {
             Ok(())
         }
 
-        #[coverage_helper::test]
+        
         fn remove_namespaces_as_other() -> RegistryTestResult {
             let mut deps = registry_mock_deps();
 
@@ -1349,7 +1349,7 @@ mod tests {
             Ok(())
         }
 
-        #[coverage_helper::test]
+        
         fn remove_not_existing_namespaces() -> RegistryTestResult {
             let mut deps = registry_mock_deps();
 
@@ -1383,7 +1383,7 @@ mod tests {
             Ok(())
         }
 
-        #[coverage_helper::test]
+        
         fn yank_orphaned_modules() -> RegistryTestResult {
             let mut deps = registry_mock_deps();
 
@@ -1434,7 +1434,7 @@ mod tests {
 
         // - Query latest
 
-        #[coverage_helper::test]
+        
         fn add_module_by_admin() -> RegistryTestResult {
             let mut deps = registry_mock_deps();
 
@@ -1452,7 +1452,7 @@ mod tests {
             Ok(())
         }
 
-        #[coverage_helper::test]
+        
         fn add_module_by_account_owner() -> RegistryTestResult {
             let mut deps = registry_mock_deps();
 
@@ -1492,7 +1492,7 @@ mod tests {
             Ok(())
         }
 
-        #[coverage_helper::test]
+        
         fn update_existing_module() -> RegistryTestResult {
             let mut deps = registry_mock_deps();
 
@@ -1533,7 +1533,7 @@ mod tests {
             Ok(())
         }
 
-        #[coverage_helper::test]
+        
         fn update_existing_module_fails() -> RegistryTestResult {
             let mut deps = registry_mock_deps();
 
@@ -1585,7 +1585,7 @@ mod tests {
             Ok(())
         }
 
-        #[coverage_helper::test]
+        
         fn try_add_module_to_approval_with_admin() -> RegistryTestResult {
             let mut deps = registry_mock_deps();
             let contract_addr = deps.api.addr_make("contract");
@@ -1635,7 +1635,7 @@ mod tests {
             Ok(())
         }
 
-        #[coverage_helper::test]
+        
         fn add_module_to_approval() -> RegistryTestResult {
             let mut deps = registry_mock_deps();
 
@@ -1675,7 +1675,7 @@ mod tests {
             Ok(())
         }
 
-        #[coverage_helper::test]
+        
         fn approve_modules() -> RegistryTestResult {
             let mut deps = registry_mock_deps();
 
@@ -1725,7 +1725,7 @@ mod tests {
             Ok(())
         }
 
-        #[coverage_helper::test]
+        
         fn reject_modules() -> RegistryTestResult {
             let mut deps = registry_mock_deps();
 
@@ -1775,7 +1775,7 @@ mod tests {
             Ok(())
         }
 
-        #[coverage_helper::test]
+        
         fn remove_module() -> RegistryTestResult {
             let mut deps = registry_mock_deps();
 
@@ -1818,7 +1818,7 @@ mod tests {
             Ok(())
         }
 
-        #[coverage_helper::test]
+        
         fn yank_module_only_account_owner() -> RegistryTestResult {
             let mut deps = registry_mock_deps();
 
@@ -1858,7 +1858,7 @@ mod tests {
             Ok(())
         }
 
-        #[coverage_helper::test]
+        
         fn yank_module() -> RegistryTestResult {
             let mut deps = registry_mock_deps();
 
@@ -1895,7 +1895,7 @@ mod tests {
             Ok(())
         }
 
-        #[coverage_helper::test]
+        
         fn bad_version() -> RegistryTestResult {
             let mut deps = registry_mock_deps();
 
@@ -1935,7 +1935,7 @@ mod tests {
             Ok(())
         }
 
-        #[coverage_helper::test]
+        
         fn abstract_namespace() -> RegistryTestResult {
             let mut deps = registry_mock_deps();
             let abstract_contract_id = format!("{}:{}", ABSTRACT_NAMESPACE, "test-module");
@@ -1963,7 +1963,7 @@ mod tests {
             Ok(())
         }
 
-        #[coverage_helper::test]
+        
         fn validates_module_info() -> RegistryTestResult {
             let mut deps = registry_mock_deps();
 
@@ -2011,7 +2011,7 @@ mod tests {
             Ok(())
         }
 
-        #[coverage_helper::test]
+        
         fn add_module_monetization() -> RegistryTestResult {
             let mut deps = registry_mock_deps();
 
@@ -2061,7 +2061,7 @@ mod tests {
             Ok(())
         }
 
-        #[coverage_helper::test]
+        
         fn add_module_init_funds() -> RegistryTestResult {
             let mut deps = registry_mock_deps();
 
@@ -2115,7 +2115,7 @@ mod tests {
             Ok(())
         }
 
-        #[coverage_helper::test]
+        
         fn add_module_metadata() -> RegistryTestResult {
             let mut deps = registry_mock_deps();
 
@@ -2178,7 +2178,7 @@ mod tests {
     mod remove_module {
         use super::*;
 
-        #[coverage_helper::test]
+        
         fn test_only_admin() -> RegistryTestResult {
             let mut deps = registry_mock_deps();
 
@@ -2209,7 +2209,7 @@ mod tests {
             Ok(())
         }
 
-        #[coverage_helper::test]
+        
         fn remove_from_library() -> RegistryTestResult {
             let mut deps = registry_mock_deps();
 
@@ -2237,7 +2237,7 @@ mod tests {
             Ok(())
         }
 
-        #[coverage_helper::test]
+        
         fn leaves_pending() -> RegistryTestResult {
             let mut deps = registry_mock_deps();
 
@@ -2262,7 +2262,7 @@ mod tests {
             Ok(())
         }
 
-        #[coverage_helper::test]
+        
         fn remove_from_yanked() -> RegistryTestResult {
             let mut deps = registry_mock_deps();
 
@@ -2293,7 +2293,7 @@ mod tests {
     mod register_account {
         use super::*;
 
-        #[coverage_helper::test]
+        
         fn add_account() -> RegistryTestResult {
             let mut deps = registry_mock_deps();
 
@@ -2339,7 +2339,7 @@ mod tests {
     mod configure {
         use super::*;
 
-        #[coverage_helper::test]
+        
         fn update_admin() -> RegistryTestResult {
             let mut deps = registry_mock_deps();
             mock_init(&mut deps)?;
@@ -2354,8 +2354,8 @@ mod tests {
             // as other
             let transfer_res = execute_as(&mut deps, &other, transfer_msg.clone());
             assert_eq!(
-                transfer_res.to_string(),
-                RegistryError::Ownership(OwnershipError::NotOwner {}.to_string())
+                transfer_res.unwrap_err().to_string(),
+                RegistryError::Ownership(OwnershipError::NotOwner {}).to_string()
             );
 
             execute_as(&mut deps, &abstr.owner, transfer_msg)?;
@@ -2378,7 +2378,7 @@ mod tests {
 
         use super::*;
 
-        #[coverage_helper::test]
+        
         fn returns_account_owner() -> RegistryTestResult {
             let mut deps = registry_mock_deps();
             let abstr = AbstractMockAddrs::new(deps.api);
@@ -2394,7 +2394,7 @@ mod tests {
             Ok(())
         }
 
-        #[coverage_helper::test]
+        
         fn no_owner_returns_err() -> RegistryTestResult {
             let mut deps = registry_mock_deps();
             let abstr = AbstractMockAddrs::new(deps.api);

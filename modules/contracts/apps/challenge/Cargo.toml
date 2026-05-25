@@ -1,9 +1,9 @@
 [package]
 authors = [
-  "CyberHoward <cyberhoward@protonmail.com>",
-  "Adair <adair@abstract.money>",
-  "Abstract Money <contact@abstract.money>",
-  "0xmovses <richard@abstract.money>",
+    "CyberHoward <cyberhoward@protonmail.com>",
+    "Adair <adair@abstract.money>",
+    "Abstract Money <contact@abstract.money>",
+    "0xmovses <richard@abstract.money>",
 ]
 documentation = ""
 edition = "2021"
@@ -20,28 +20,24 @@ exclude = ["contract.wasm", "hash.txt"]
 [lib]
 crate-type = ["cdylib", "rlib"]
 
-[[example]]
-name              = "schema"
-required-features = ["schema"]
-
 [features]
 default = ["export"]
 export  = []
 schema  = ["abstract-app/schema"]
 
 [dependencies]
+
+abstract-app = { workspace = true }
 cosmwasm-schema = { workspace = true }
 cosmwasm-std    = { workspace = true }
 cw-address-like = { workspace = true }
 cw-asset        = { workspace = true }
 cw-controllers  = { workspace = true }
-cw-storage-plus = { workspace = true }
-thiserror       = { workspace = true }
-
-abstract-app = { workspace = true }
 
 # Dependencies for interface
 cw-orch = { workspace = true }
+cw-storage-plus = { workspace = true }
+thiserror       = { workspace = true }
 
 [dev-dependencies]
 abstract-app       = { workspace = true, features = ["test-utils"] }
@@ -52,3 +48,7 @@ cw-orch            = { workspace = true, features = ["daemon"] }
 dotenv             = "0.15.0"
 env_logger         = "0.11.3"
 semver             = "1.0"
+
+[[example]]
+name              = "schema"
+required-features = ["schema"]

@@ -9,32 +9,25 @@ exclude = ["contract.wasm", "hash.txt"]
 [lib]
 crate-type = ["cdylib", "rlib"]
 
-[[example]]
-name              = "schema"
-required-features = ["schema"]
-
-[[example]]
-name = "deploy"
-
 [features]
 default = ["export"]
 export  = []
 schema  = ["abstract-app/schema"]
 
 [dependencies]
+
+abstract-app = { workspace = true }
 cosmwasm-schema = { workspace = true }
 cosmwasm-std    = { workspace = true }
+
+cw-address-like = { workspace = true }
 cw-asset        = { workspace = true }
 cw-controllers  = { workspace = true }
+cw-orch      = { workspace = true }
 cw-storage-plus = { workspace = true }
 cw20            = { workspace = true }
 semver          = { workspace = true }
 thiserror       = { workspace = true }
-
-abstract-app = { workspace = true }
-cw-orch      = { workspace = true }
-
-cw-address-like = { workspace = true }
 
 [dev-dependencies]
 abstract-client = { workspace = true, features = ["test-utils"] }
@@ -43,3 +36,11 @@ abstract-interface = { workspace = true, features = ["daemon"] }
 clap               = { workspace = true }
 dotenv             = "0.15.0"
 env_logger         = "0.11.3"
+schemars         = { workspace = true }
+
+[[example]]
+name              = "schema"
+required-features = ["schema"]
+
+[[example]]
+name = "deploy"

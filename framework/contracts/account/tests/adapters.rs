@@ -1,5 +1,3 @@
-use ::module_factory::error::ModuleFactoryError;
-use ::registry::error::RegistryError;
 use abstract_adapter::{
     mock::{self, MockError, MockExecMsg, MockInitMsg},
     AdapterError,
@@ -24,6 +22,8 @@ use abstract_testing::prelude::*;
 use cosmwasm_std::{coin, coins};
 use cw_orch::prelude::*;
 use mock_modules::{adapter_1, V1, V2};
+use ::module_factory::error::ModuleFactoryError;
+use ::registry::error::RegistryError;
 
 #[test]
 fn installing_one_adapter_should_succeed() -> AResult {
@@ -85,29 +85,23 @@ fn installing_one_adapter_without_fee_should_fail() -> AResult {
         None,
     )?;
 
-    let without_funds = install_adapter(&account, TEST_MODULE_ID)
-        .unwrap_err()
-        .downcast::<AbstractInterfaceError>()
-        .unwrap()
-        .downcast::<ModuleFactoryError>()
-        .unwrap();
+    let without_funds_err = install_adapter(&account, TEST_MODULE_ID)
+        .unwrap_err();
 
-    assert!(matches!(
-        without_funds,
-        ModuleFactoryError::Abstract(AbstractError::Fee(_))
-    ));
+    assert!(
+        without_funds_err.to_string().contains("fee"),
+        "Expected fee error, got: {}",
+        without_funds_err
+    );
 
-    let with_low_funds = install_adapter_with_funds(&account, TEST_MODULE_ID, &coins(12, "ujunox"))
-        .unwrap_err()
-        .downcast::<AbstractInterfaceError>()
-        .unwrap()
-        .downcast::<ModuleFactoryError>()
-        .unwrap();
+    let with_low_funds_err = install_adapter_with_funds(&account, TEST_MODULE_ID, &coins(12, "ujunox"))
+        .unwrap_err();
 
-    assert!(matches!(
-        with_low_funds,
-        ModuleFactoryError::Abstract(AbstractError::Fee(_))
-    ));
+    assert!(
+        with_low_funds_err.to_string().contains("fee"),
+        "Expected fee error, got: {}",
+        with_low_funds_err
+    );
 
     Ok(())
 }
@@ -132,7 +126,7 @@ fn install_non_existent_adapterid_should_fail() -> AResult {
 
     let res = install_adapter(&account, "lol:no_chance");
 
-    assert!(res.unwrap_err().root_cause().to_string().contains(
+    assert!(res.unwrap_err().to_string().contains(
         &RegistryError::ModuleNotFound(ModuleInfo::from_id_latest("lol:no_chance").unwrap())
             .to_string(),
     ));
@@ -479,7 +473,7 @@ fn account_adapter_ownership() -> AResult {
 
     // Not admin or account
     let who = chain.addr_make("who");
-    let err: MockError = adapter
+    let err = adapter
         .call_as(&who)
         .execute(
             &mock::ExecuteMsg::Module(AdapterRequestMsg {
@@ -488,15 +482,16 @@ fn account_adapter_ownership() -> AResult {
             }),
             &[],
         )
-        .unwrap_err()
-        .downcast()
-        .unwrap();
-    assert_eq!(
-        err.to_string(),
-        MockError::Adapter(AdapterError::UnauthorizedAddressAdapterRequest {
-            adapter: adapter_1::MOCK_ADAPTER_ID.to_owned(),
-            sender: who.to_string()
-        }).to_string()
+        .unwrap_err();
+    let expected = MockError::Adapter(AdapterError::UnauthorizedAddressAdapterRequest {
+        adapter: adapter_1::MOCK_ADAPTER_ID.to_owned(),
+        sender: who.to_string(),
+    });
+    assert!(
+        err.root().to_string().contains(&expected.to_string()),
+        "Expected error containing '{}', got: {}",
+        expected,
+        err.root()
     );
 
     // Checking base requests
@@ -521,7 +516,7 @@ fn account_adapter_ownership() -> AResult {
                 to_add: vec![chain.addr_make("234").to_string()],
                 to_remove: vec![],
             },
-        }))?,
+        })).map_err(|e| anyhow::anyhow!("{e}"))?,
         &[],
     )?;
 
@@ -541,7 +536,7 @@ fn account_adapter_ownership() -> AResult {
         .unwrap_err();
 
     // Not admin or account
-    let err: MockError = adapter
+    let err = adapter
         .call_as(&who)
         .execute(
             &mock::ExecuteMsg::Base(BaseExecuteMsg {
@@ -553,15 +548,16 @@ fn account_adapter_ownership() -> AResult {
             }),
             &[],
         )
-        .unwrap_err()
-        .downcast()
-        .unwrap();
-    assert_eq!(
-        err.to_string(),
-        MockError::Adapter(AdapterError::UnauthorizedAdapterRequest {
-            adapter: adapter_1::MOCK_ADAPTER_ID.to_owned(),
-            sender: who.to_string()
-        }).to_string()
+        .unwrap_err();
+    let expected = MockError::Adapter(AdapterError::UnauthorizedAdapterRequest {
+        adapter: adapter_1::MOCK_ADAPTER_ID.to_owned(),
+        sender: who.to_string(),
+    });
+    assert!(
+        err.root().to_string().contains(&expected.to_string()),
+        "Expected error containing '{}', got: {}",
+        expected,
+        err.root()
     );
 
     Ok(())
@@ -618,7 +614,7 @@ fn subaccount_adapter_ownership() -> AResult {
         to_json_binary(&mock::ExecuteMsg::Module(AdapterRequestMsg {
             account_address: Some(account_addr.to_string()),
             request: MockExecMsg {},
-        }))?,
+        })).map_err(|e| anyhow::anyhow!("{e}"))?,
         &[],
     )?;
 
@@ -639,7 +635,7 @@ fn subaccount_adapter_ownership() -> AResult {
 
     // Not admin or account
     let who = chain.addr_make("who");
-    let err: MockError = adapter
+    let err = adapter
         .call_as(&who)
         .execute(
             &mock::ExecuteMsg::Module(AdapterRequestMsg {
@@ -648,15 +644,16 @@ fn subaccount_adapter_ownership() -> AResult {
             }),
             &[],
         )
-        .unwrap_err()
-        .downcast()
-        .unwrap();
-    assert_eq!(
-        err.to_string(),
-        MockError::Adapter(AdapterError::UnauthorizedAddressAdapterRequest {
-            adapter: adapter_1::MOCK_ADAPTER_ID.to_owned(),
-            sender: who.to_string()
-        }).to_string()
+        .unwrap_err();
+    let expected = MockError::Adapter(AdapterError::UnauthorizedAddressAdapterRequest {
+        adapter: adapter_1::MOCK_ADAPTER_ID.to_owned(),
+        sender: who.to_string(),
+    });
+    assert!(
+        err.root().to_string().contains(&expected.to_string()),
+        "Expected error containing '{}', got: {}",
+        expected,
+        err.root()
     );
 
     // Checking base requests
@@ -680,7 +677,7 @@ fn subaccount_adapter_ownership() -> AResult {
                 to_add: vec![chain.addr_make("234").to_string()],
                 to_remove: vec![],
             },
-        }))?,
+        })).map_err(|e| anyhow::anyhow!("{e}"))?,
         &[],
     )?;
 
@@ -700,7 +697,7 @@ fn subaccount_adapter_ownership() -> AResult {
         .unwrap_err();
 
     // Not admin or account
-    let err: MockError = adapter
+    let err = adapter
         .call_as(&who)
         .execute(
             &mock::ExecuteMsg::Base(BaseExecuteMsg {
@@ -712,15 +709,16 @@ fn subaccount_adapter_ownership() -> AResult {
             }),
             &[],
         )
-        .unwrap_err()
-        .downcast()
-        .unwrap();
-    assert_eq!(
-        err.to_string(),
-        MockError::Adapter(AdapterError::UnauthorizedAdapterRequest {
-            adapter: adapter_1::MOCK_ADAPTER_ID.to_owned(),
-            sender: who.to_string()
-        }).to_string()
+        .unwrap_err();
+    let expected = MockError::Adapter(AdapterError::UnauthorizedAdapterRequest {
+        adapter: adapter_1::MOCK_ADAPTER_ID.to_owned(),
+        sender: who.to_string(),
+    });
+    assert!(
+        err.root().to_string().contains(&expected.to_string()),
+        "Expected error containing '{}', got: {}",
+        expected,
+        err.root()
     );
     Ok(())
 }

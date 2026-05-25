@@ -3,7 +3,7 @@ use cosmrs::proto::cosmwasm::wasm::v1::{AccessConfig, AccessType, MsgUpdateParam
 use cw_orch::prelude::*;
 use networks::COSMOS_HUB_TESTNET;
 use prost::Name;
-use xionrs::tx::MessageExt;
+use cosmos_sdk_proto::traits::MessageExt;
 
 fn main() -> cw_orch::anyhow::Result<()> {
     dotenv::dotenv()?;

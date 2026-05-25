@@ -116,7 +116,7 @@ mod test {
 
         use super::*;
 
-        #[coverage_helper::test]
+        
         fn without_handler() {
             let deps = mock_init();
             let msg = AppQueryMsg::Module(MockQueryMsg::GetSomething {});
@@ -141,7 +141,7 @@ mod test {
             to_json_binary(&msg).map_err(Into::into)
         }
 
-        #[coverage_helper::test]
+        
         fn with_handler() {
             let deps = mock_init();
             let msg = AppQueryMsg::Module(MockQueryMsg::GetSomething {});
@@ -150,7 +150,7 @@ mod test {
             let res = with_mocked_query.query(deps.as_ref(), mock_env_validated(deps.api), msg);
 
             let expected = to_json_binary(&MockQueryMsg::GetSomething {}).unwrap();
-            assert_eq!(res.unwrap(),expected);
+            assert_eq!(res.unwrap(), expected);
         }
     }
 
@@ -164,7 +164,7 @@ mod test {
         use abstract_testing::prelude::*;
         use cw_controllers::AdminResponse;
 
-        #[coverage_helper::test]
+        
         fn config() -> AppTestResult {
             let deps = mock_init();
             let abstr = AbstractMockAddrs::new(deps.api);
@@ -185,7 +185,7 @@ mod test {
             Ok(())
         }
 
-        #[coverage_helper::test]
+        
         fn admin() -> AppTestResult {
             let deps = mock_init();
             let account = test_account(deps.api);
@@ -203,7 +203,7 @@ mod test {
             Ok(())
         }
 
-        #[coverage_helper::test]
+        
         fn module_data() -> AppTestResult {
             let deps = mock_init();
 

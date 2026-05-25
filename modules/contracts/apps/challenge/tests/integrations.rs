@@ -18,7 +18,7 @@ use challenge_app::{
     state::{AdminStrikes, ChallengeEntryUpdate, StrikeStrategy, UpdateFriendsOpKind},
     *,
 };
-use cosmwasm_std::{coin, Uint128, Uint64};
+use cosmwasm_std::{Uint64, Uint128, Uint256, coin};
 use cw_asset::AssetInfo;
 use cw_orch::{anyhow, prelude::*};
 
@@ -448,8 +448,9 @@ fn test_update_friends_during_proposal() -> anyhow::Result<()> {
         .downcast()
         .unwrap();
     assert_eq!(
-        err,
+        err.to_string(),
         AppError::FriendsEditDuringProposal(mock.block_info()?.time.plus_seconds(1_000))
+            .to_string()
     );
 
     Ok(())
@@ -512,7 +513,7 @@ fn test_not_charge_penalty_for_voting_false() -> anyhow::Result<()> {
 
     let balance = mock.query_balance(&account.address()?, DENOM)?;
     // if no one voted true, no penalty should be charged, so balance will be 50_000_000
-    assert_eq!(balance, Uint128::new(INITIAL_BALANCE));
+    assert_eq!(balance, Uint256::new(INITIAL_BALANCE));
     Ok(())
 }
 
@@ -549,7 +550,7 @@ fn test_charge_penalty_for_voting_true() -> anyhow::Result<()> {
 
     let balance = mock.query_balance(&account.address()?, DENOM)?;
     // Initial balance - strike
-    assert_eq!(balance, Uint128::new(INITIAL_BALANCE - 30_000_000));
+    assert_eq!(balance, Uint256::new(INITIAL_BALANCE - 30_000_000));
     Ok(())
 }
 
@@ -641,7 +642,7 @@ fn test_vetoed() -> anyhow::Result<()> {
 
     // balance unchanged
     let balance = mock.query_balance(&account.address()?, DENOM)?;
-    assert_eq!(balance, Uint128::new(INITIAL_BALANCE));
+    assert_eq!(balance, Uint256::new(INITIAL_BALANCE));
     Ok(())
 }
 
@@ -701,7 +702,7 @@ fn test_veto_expired() -> anyhow::Result<()> {
 
     // balance updated
     let balance = mock.query_balance(&account.address()?, DENOM)?;
-    assert_eq!(balance, Uint128::new(INITIAL_BALANCE - 30_000_000));
+    assert_eq!(balance, Uint256::new(INITIAL_BALANCE - 30_000_000));
     Ok(())
 }
 
@@ -718,7 +719,7 @@ fn test_duplicate_friends() -> anyhow::Result<()> {
         .unwrap_err()
         .downcast()
         .unwrap();
-    assert_eq!(err, error::AppError::DuplicateFriends {});
+    assert_eq!(err.to_string(), error::AppError::DuplicateFriends {}.to_string());
 
     // Add duplicate (Alice already exists)
     apps.challenge_app
@@ -733,7 +734,7 @@ fn test_duplicate_friends() -> anyhow::Result<()> {
         .unwrap_err()
         .downcast()
         .unwrap();
-    assert_eq!(err, error::AppError::DuplicateFriends {});
+    assert_eq!(err.to_string(), error::AppError::DuplicateFriends {}.to_string());
     Ok(())
 }
 

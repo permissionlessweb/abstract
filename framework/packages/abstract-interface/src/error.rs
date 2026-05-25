@@ -35,17 +35,17 @@ impl AbstractInterfaceError {
     pub fn root(&self) -> &dyn std::error::Error {
         match self {
             AbstractInterfaceError::Orch(e) => e.root(),
-            _ => panic!("Unexpected error type"),
+            _ => self,
         }
     }
 
-    pub fn downcast<E>(self) -> StdResult<E>
+    pub fn downcast<E>(self) -> anyhow::Result<E>
     where
         E: std::fmt::Display + std::fmt::Debug + Send + Sync + 'static,
     {
         match self {
             AbstractInterfaceError::Orch(e) => e.downcast(),
-            _ => panic!("Unexpected error type"),
+            other => Err(anyhow::anyhow!(other)),
         }
     }
 }

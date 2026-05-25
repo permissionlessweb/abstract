@@ -97,7 +97,11 @@ pub mod ica_controller {
                     cw_ica_controller::contract::instantiate,
                     cw_ica_controller::contract::query,
                 )
-                .with_migrate(cw_ica_controller::contract::migrate),
+                .with_migrate(
+                    |deps, env, msg: msg::MigrateMsg, _migrate_info: cosmwasm_std::MigrateInfo| {
+                        cw_ica_controller::contract::migrate(deps, env, msg)
+                    },
+                ),
             )
         }
     }

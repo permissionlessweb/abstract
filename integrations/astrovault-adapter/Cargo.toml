@@ -26,5 +26,5 @@ cw20                      = { workspace = true, optional = true }
 
 [dev-dependencies]
 abstract-dex-standard = { workspace = true, features = ["testing"] }
-astrovault            = { version = "2.0.1" }
+#astrovault            = { version = "2.0.1" }
 cw-orch               = { workspace = true }

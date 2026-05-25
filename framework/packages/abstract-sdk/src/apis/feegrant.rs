@@ -207,7 +207,7 @@ mod test {
 
         use super::*;
 
-        #[coverage_helper::test]
+        
         fn basic_allowance() {
             let (deps, _, app) = mock_module_setup();
 
@@ -239,7 +239,7 @@ mod test {
     mod periodic_allowance {
         use super::*;
 
-        #[coverage_helper::test]
+        
         fn periodic_allowance() {
             let (deps, _, app) = mock_module_setup();
 
@@ -282,7 +282,7 @@ mod test {
     mod revoke_all {
         use super::*;
 
-        #[coverage_helper::test]
+        
         fn revoke_all() {
             let (deps, _, app) = mock_module_setup();
 

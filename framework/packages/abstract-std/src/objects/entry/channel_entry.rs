@@ -66,7 +66,7 @@ impl PrimaryKey<'_> for &ChannelEntry {
 
     type SuperSuffix = Self;
 
-    fn key(&self) -> Vec<cw_storage_plus::Key> {
+    fn key(&self) -> Vec<cw_storage_plus::Key<'_>> {
         let mut keys = self.connected_chain.str_ref().key();
         keys.extend(self.protocol.key());
         keys
@@ -74,7 +74,7 @@ impl PrimaryKey<'_> for &ChannelEntry {
 }
 
 impl Prefixer<'_> for &ChannelEntry {
-    fn prefix(&self) -> Vec<Key> {
+    fn prefix(&self) -> Vec<Key<'_>> {
         let mut res = self.connected_chain.str_ref().prefix();
         res.extend(self.protocol.prefix());
         res
@@ -146,7 +146,7 @@ mod test {
         )
     }
 
-    #[coverage_helper::test]
+    
     fn storage_key_works() {
         let mut deps = mock_dependencies();
         let key = mock_key();
@@ -165,7 +165,7 @@ mod test {
         assert_eq!(items[0], (key, 42069));
     }
 
-    #[coverage_helper::test]
+    
     fn composite_key_works() {
         let mut deps = mock_dependencies();
         let key = mock_key();
@@ -196,7 +196,7 @@ mod test {
         assert_eq!(items[1], (Addr::unchecked("larry"), 42069));
     }
 
-    #[coverage_helper::test]
+    
     fn partial_key_works() {
         let mut deps = mock_dependencies();
         let (key1, key2, key3) = mock_keys();

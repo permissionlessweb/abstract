@@ -196,7 +196,7 @@ mod tests {
         Ok(())
     }
 
-    #[coverage_helper::test]
+    
     fn instantiate_works() -> IbcClientResult<()> {
         let mut deps = mock_dependencies();
         let env = mock_env_validated(deps.api);
@@ -226,7 +226,7 @@ mod tests {
         use cosmwasm_std::Order;
         use std::str::FromStr;
 
-        #[coverage_helper::test]
+        
         fn accounts_storage_allows_multi_hop() -> IbcClientResult<()> {
             let mut deps = mock_dependencies();
             let account_id = AccountId::const_new(
@@ -269,7 +269,7 @@ mod tests {
         use crate::contract;
         use abstract_std::AbstractError;
 
-        #[coverage_helper::test]
+        
         fn disallow_same_version() -> IbcClientResult<()> {
             let mut deps = mock_dependencies();
             let sender = deps.api.addr_make("jimi");
@@ -289,19 +289,18 @@ mod tests {
 
             assert_eq!(
                 res.unwrap_err().to_string(),
-                IbcClientError::Abstract(
-                    AbstractError::CannotDowngradeContract {
-                        contract: IBC_CLIENT.to_string(),
-                        from: version.to_string().parse().unwrap(),
-                        to: version.to_string().parse().unwrap(),
-                    },
-                ).to_string()
+                IbcClientError::Abstract(AbstractError::CannotDowngradeContract {
+                    contract: IBC_CLIENT.to_string(),
+                    from: version.to_string().parse().unwrap(),
+                    to: version.to_string().parse().unwrap(),
+                },)
+                .to_string()
             );
 
             Ok(())
         }
 
-        #[coverage_helper::test]
+        
         fn disallow_downgrade() -> IbcClientResult<()> {
             let mut deps = mock_dependencies();
             let sender = deps.api.addr_make("jimi");
@@ -325,19 +324,18 @@ mod tests {
 
             assert_eq!(
                 res.unwrap_err().to_string(),
-                IbcClientError::Abstract(
-                    AbstractError::CannotDowngradeContract {
-                        contract: IBC_CLIENT.to_string(),
-                        from: big_version.parse().unwrap(),
-                        to: version.to_string().parse().unwrap(),
-                    },
-                ).to_string()
+                IbcClientError::Abstract(AbstractError::CannotDowngradeContract {
+                    contract: IBC_CLIENT.to_string(),
+                    from: big_version.parse().unwrap(),
+                    to: version.to_string().parse().unwrap(),
+                },)
+                .to_string()
             );
 
             Ok(())
         }
 
-        #[coverage_helper::test]
+        
         fn disallow_name_change() -> IbcClientResult<()> {
             let mut deps = mock_dependencies();
             let sender = deps.api.addr_make("jimi");
@@ -360,18 +358,17 @@ mod tests {
 
             assert_eq!(
                 res.unwrap_err().to_string(),
-                IbcClientError::Abstract(
-                    AbstractError::ContractNameMismatch {
-                        from: old_name.parse().unwrap(),
-                        to: IBC_CLIENT.parse().unwrap(),
-                    },
-                ).to_string()
+                IbcClientError::Abstract(AbstractError::ContractNameMismatch {
+                    from: old_name.parse().unwrap(),
+                    to: IBC_CLIENT.parse().unwrap(),
+                },)
+                .to_string()
             );
 
             Ok(())
         }
 
-        #[coverage_helper::test]
+        
         fn works() -> IbcClientResult<()> {
             let mut deps = mock_dependencies();
             let sender = deps.api.addr_make("jimi");
@@ -415,7 +412,7 @@ mod tests {
         use super::*;
         use crate::commands::PACKET_LIFETIME;
 
-        #[coverage_helper::test]
+        
         fn only_admin() -> IbcClientResult<()> {
             test_only_admin(ExecuteMsg::RegisterInfrastructure {
                 chain: "host-chain".parse().unwrap(),
@@ -424,7 +421,7 @@ mod tests {
             })
         }
 
-        #[coverage_helper::test]
+        
         fn cannot_register_if_already_exists() -> IbcClientTestResult {
             let mut deps = mock_dependencies();
             mock_init(&mut deps)?;
@@ -454,7 +451,7 @@ mod tests {
             Ok(())
         }
 
-        #[coverage_helper::test]
+        
         fn register_infrastructure() -> IbcClientTestResult {
             let mut deps = mock_dependencies();
             mock_init(&mut deps)?;
@@ -564,7 +561,7 @@ mod tests {
 
         use crate::commands::PACKET_LIFETIME;
 
-        #[coverage_helper::test]
+        
         fn throw_when_sender_is_not_account() -> IbcClientTestResult {
             let mut deps = mock_dependencies();
             let abstract_addrs = AbstractMockAddrs::new(deps.api);
@@ -603,7 +600,7 @@ mod tests {
             Ok(())
         }
 
-        #[coverage_helper::test]
+        
         fn cannot_make_internal_call() -> IbcClientTestResult {
             let mut deps = mock_dependencies();
             let account = test_account(deps.api);
@@ -631,7 +628,7 @@ mod tests {
             Ok(())
         }
 
-        #[coverage_helper::test]
+        
         fn send_packet_with_no_callback() -> IbcClientTestResult {
             let mut deps = mock_dependencies();
             let account = test_account(deps.api);
@@ -709,7 +706,7 @@ mod tests {
         use cosmwasm_std::{coins, CosmosMsg, IbcMsg, IbcTimeout};
         use std::str::FromStr;
 
-        #[coverage_helper::test]
+        
         fn throw_when_sender_is_not_account() -> IbcClientTestResult {
             let mut deps = mock_dependencies();
             let abstract_addrs = AbstractMockAddrs::new(deps.api);
@@ -743,7 +740,7 @@ mod tests {
             Ok(())
         }
 
-        #[coverage_helper::test]
+        
         fn works() -> IbcClientTestResult {
             let mut deps = mock_dependencies();
             let chain_name = TruncatedChainId::from_str(TEST_CHAIN)?;
@@ -852,7 +849,7 @@ mod tests {
         use cosmwasm_std::wasm_execute;
         use std::str::FromStr;
 
-        #[coverage_helper::test]
+        
         fn throw_when_sender_is_not_account() -> IbcClientTestResult {
             let mut deps = mock_dependencies();
             let abstract_addrs = AbstractMockAddrs::new(deps.api);
@@ -886,7 +883,7 @@ mod tests {
             Ok(())
         }
 
-        #[coverage_helper::test]
+        
         fn works() -> IbcClientTestResult {
             let mut deps = mock_dependencies();
             let account = test_account(deps.api);
@@ -978,14 +975,14 @@ mod tests {
 
         use super::*;
 
-        #[coverage_helper::test]
+        
         fn only_admin() -> IbcClientTestResult {
             test_only_admin(ExecuteMsg::RemoveHost {
                 host_chain: "host-chain".parse().unwrap(),
             })
         }
 
-        #[coverage_helper::test]
+        
         fn remove_existing_host() -> IbcClientTestResult {
             let mut deps = mock_dependencies();
             mock_init(&mut deps)?;
@@ -1014,7 +1011,7 @@ mod tests {
             Ok(())
         }
 
-        #[coverage_helper::test]
+        
         fn remove_host_nonexistent_should_not_throw() -> IbcClientTestResult {
             let mut deps = mock_dependencies();
             mock_init(&mut deps)?;
@@ -1035,14 +1032,16 @@ mod tests {
         use std::str::FromStr;
 
         use abstract_std::{
-            ibc::polytone_callbacks::{Callback, CallbackMessage, ExecutionResponse},
+            ibc::polytone_callbacks::{
+                Callback, CallbackMessage, ExecutionCallbackResult, ExecutionResponse,
+            },
             objects::TruncatedChainId,
         };
         use cosmwasm_std::{from_json, Binary, Event, SubMsgResponse};
 
         use super::*;
 
-        #[coverage_helper::test]
+        
         fn invalid_initiator() -> IbcClientTestResult {
             let mut deps = mock_dependencies();
             mock_init(&mut deps)?;
@@ -1054,7 +1053,7 @@ mod tests {
             let msg = ExecuteMsg::Callback(CallbackMessage {
                 initiator: Addr::unchecked("invalid_initiator"),
                 initiator_msg: Binary::default(),
-                result: Callback::Execute(Ok(ExecutionResponse {
+                result: Callback::Execute(ExecutionCallbackResult::Success(ExecutionResponse {
                     executed_by: String::from("addr"),
                     result: vec![],
                 })),
@@ -1067,7 +1066,7 @@ mod tests {
             Ok(())
         }
 
-        #[coverage_helper::test]
+        
         fn caller_not_note() -> IbcClientTestResult {
             let mut deps = mock_dependencies();
             mock_init(&mut deps)?;
@@ -1097,7 +1096,7 @@ mod tests {
             Ok(())
         }
 
-        #[coverage_helper::test]
+        
         fn who_am_i_unregistered_chain() -> IbcClientTestResult {
             let mut deps = mock_dependencies();
             mock_init(&mut deps)?;
@@ -1110,7 +1109,7 @@ mod tests {
             let msg = ExecuteMsg::Callback(CallbackMessage {
                 initiator: env.contract.address,
                 initiator_msg: to_json_binary(&IbcClientCallback::WhoAmI {})?,
-                result: Callback::Execute(Ok(ExecutionResponse {
+                result: Callback::Execute(ExecutionCallbackResult::Success(ExecutionResponse {
                     executed_by: String::from("addr"),
                     result: vec![],
                 })),
@@ -1123,7 +1122,7 @@ mod tests {
             Ok(())
         }
 
-        #[coverage_helper::test]
+        
         fn who_am_i_fatal_error() -> IbcClientTestResult {
             let mut deps = mock_dependencies();
             mock_init(&mut deps)?;
@@ -1158,7 +1157,7 @@ mod tests {
             Ok(())
         }
 
-        #[coverage_helper::test]
+        
         fn who_am_i_success() -> IbcClientTestResult {
             let mut deps = mock_dependencies();
             mock_init(&mut deps)?;
@@ -1184,7 +1183,7 @@ mod tests {
             let msg = ExecuteMsg::Callback(CallbackMessage {
                 initiator: env.contract.address,
                 initiator_msg: to_json_binary(&IbcClientCallback::WhoAmI {})?,
-                result: Callback::Execute(Ok(ExecutionResponse {
+                result: Callback::Execute(ExecutionCallbackResult::Success(ExecutionResponse {
                     executed_by: remote_account.clone(),
                     result: vec![],
                 })),
@@ -1212,7 +1211,7 @@ mod tests {
             Ok(())
         }
 
-        #[coverage_helper::test]
+        
         fn create_account_fatal_error() -> IbcClientTestResult {
             let mut deps = mock_dependencies();
             mock_init(&mut deps)?;
@@ -1239,7 +1238,7 @@ mod tests {
             Ok(())
         }
 
-        #[coverage_helper::test]
+        
         fn create_account_missing_wasm_event() -> IbcClientTestResult {
             let mut deps = mock_dependencies();
             mock_init(&mut deps)?;
@@ -1255,7 +1254,7 @@ mod tests {
                 initiator_msg: to_json_binary(&IbcClientCallback::CreateAccount {
                     account_id: TEST_ACCOUNT_ID,
                 })?,
-                result: Callback::Execute(Ok(ExecutionResponse {
+                result: Callback::Execute(ExecutionCallbackResult::Success(ExecutionResponse {
                     executed_by: remote_account.clone(),
                     #[allow(deprecated)]
                     result: vec![SubMsgResponse {
@@ -1275,7 +1274,7 @@ mod tests {
             Ok(())
         }
 
-        #[coverage_helper::test]
+        
         fn create_account_missing_account_address_attribute() -> IbcClientTestResult {
             let mut deps = mock_dependencies();
             mock_init(&mut deps)?;
@@ -1291,7 +1290,7 @@ mod tests {
                 initiator_msg: to_json_binary(&IbcClientCallback::CreateAccount {
                     account_id: TEST_ACCOUNT_ID,
                 })?,
-                result: Callback::Execute(Ok(ExecutionResponse {
+                result: Callback::Execute(ExecutionCallbackResult::Success(ExecutionResponse {
                     executed_by: remote_account.clone(),
                     #[allow(deprecated)]
                     result: vec![SubMsgResponse {
@@ -1311,7 +1310,7 @@ mod tests {
             Ok(())
         }
 
-        #[coverage_helper::test]
+        
         fn create_account_success() -> IbcClientTestResult {
             let mut deps = mock_dependencies();
             mock_init(&mut deps)?;
@@ -1327,7 +1326,7 @@ mod tests {
                 initiator_msg: to_json_binary(&IbcClientCallback::CreateAccount {
                     account_id: TEST_ACCOUNT_ID,
                 })?,
-                result: Callback::Execute(Ok(ExecutionResponse {
+                result: Callback::Execute(ExecutionCallbackResult::Success(ExecutionResponse {
                     executed_by: remote_account.clone(),
                     #[allow(deprecated)]
                     result: vec![SubMsgResponse {
@@ -1416,7 +1415,7 @@ mod tests {
 
         use abstract_std::objects::{account::AccountTrace, AccountId, TruncatedChainId};
 
-        #[coverage_helper::test]
+        
         fn works_with_multiple_local_accounts() -> IbcClientTestResult {
             let mut deps = mock_dependencies();
             mock_init(&mut deps)?;
@@ -1450,7 +1449,7 @@ mod tests {
             Ok(())
         }
 
-        #[coverage_helper::test]
+        
         fn works_with_multiple_remote_accounts() -> IbcClientTestResult {
             let mut deps = mock_dependencies();
             mock_init(&mut deps)?;

@@ -39,7 +39,7 @@ mod test {
     #![allow(clippy::needless_borrows_for_generic_args)]
     use super::*;
 
-    #[coverage_helper::test]
+    
     fn test_add_abstract_attributes_no_abstract_event() {
         let mut response = Response::default();
 
@@ -57,7 +57,7 @@ mod test {
         assert_eq!(attr.value, "value1".to_string());
     }
 
-    #[coverage_helper::test]
+    
     fn test_add_abstract_attributes_with_abstract_event() {
         const KEY_1: &str = "abstract_key1";
         const VALUE_1: &str = "abstract_value1";

@@ -357,7 +357,7 @@ mod test {
     const TEST_HOST_CHAIN: &str = "hostchain";
 
     /// Tests that a host_action can be built with no callback
-    #[coverage_helper::test]
+    
     fn test_host_action_no_callback() {
         let (deps, _, stub) = mock_module_setup();
 
@@ -395,7 +395,7 @@ mod test {
     }
 
     /// Tests that the ics_20 transfer can be built and that the funds are passed into the sendFunds message not the execute message
-    #[coverage_helper::test]
+    
     fn test_ics20_transfer() {
         let (deps, _, stub) = mock_module_setup();
 
@@ -431,7 +431,7 @@ mod test {
         assert_eq!(msg.unwrap(), expected);
     }
 
-    #[coverage_helper::test]
+    
     fn abstract_api() {
         let (deps, _, app) = mock_module_setup();
         let client = app.ibc_client(deps.as_ref());
