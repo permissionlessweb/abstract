@@ -25,8 +25,8 @@ cosmwasm-std    = { workspace = true, features = ["stargate", "staking"] }
 cw-ownable      = { workspace = true }
 cw2             = { workspace = true }
 
-evm-note     = { version = "0.3.1", features = ["library"], git = "https://github.com/permissionlessweb/polytone", branch = "bump/cw3-evm" }
-polytone-evm = { version = "2.0.0", git = "https://github.com/permissionlessweb/polytone", branch = "bump/cw3-evm" }
+evm-note     = { workspace = true, features = ["library"] }
+polytone-evm = { workspace = true }
 semver          = { workspace = true }
 thiserror       = { workspace = true }
 

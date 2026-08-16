@@ -161,23 +161,26 @@ pub fn send_all_back(
         protocol: ICS20.to_string(),
     };
     let ics20_channel_id = ics20_channel_entry.resolve(&deps.querier, &ans)?;
-    // TODO: retrieve all possible tokens an account may have given the channel, return msgs to transfer back if account has balance
-    // get all the coins for the account
-    // let coins = deps.querier.query_all_balances(account.addr())?;
-    // Construct ics20 messages to send all the coins back
+    // Bank-truth, not a local fund ledger: std v3 dropped BankQuery::AllBalances,
+    // so we hit /cosmos.bank.v1beta1.Query/AllBalances over gRPC. That includes
+    // coins third parties sent to the remote account.
+    let coins = crate::bank_balances::query_all_bank_balances(
+        &deps.querier,
+        account.addr().as_str(),
+    )?;
     let mut msgs: Vec<CosmosMsg> = vec![];
-    // for coin in coins {
-    //     msgs.push(
-    //         IbcMsg::Transfer {
-    //             channel_id: ics20_channel_id.clone(),
-    //             to_address: client_account_address.to_string(),
-    //             amount: coin,
-    //             timeout: env.block.time.plus_seconds(PACKET_LIFETIME).into(),
-    //             memo: None,
-    //         }
-    //         .into(),
-    //     )
-    // }
+    for coin in coins {
+        msgs.push(
+            IbcMsg::Transfer {
+                channel_id: ics20_channel_id.clone(),
+                to_address: client_account_address.to_string(),
+                amount: coin,
+                timeout: env.block.time.plus_seconds(PACKET_LIFETIME).into(),
+                memo: None,
+            }
+            .into(),
+        )
+    }
     // call the message to send everything back through the account
     let account_msg = wasm_execute(
         account.into_addr(),

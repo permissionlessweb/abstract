@@ -65,7 +65,7 @@ rstest                     = { workspace = true }
 
 ## For xion tests, with signatures
 serial_test = "3.2.0"
-xionrs      = { version = "0.19.0-pre", package = "cosmrs", git = "https://github.com/CyberHoward/cosmos-rust.git", branch = "patch-1" }
+xionrs      = { package = "cosmrs", path = "../../../../cosmos-rust/cosmrs" }
 
 [lints]
 workspace = true

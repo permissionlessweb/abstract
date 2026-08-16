@@ -119,14 +119,16 @@ pub struct InstantiateMsg<Authenticator = Empty> {
     /// Code id of the account
     pub code_id: u64,
     /// The ownership structure of the Account.
+    #[serde(default)]
     pub owner: Option<GovernanceDetails<String>>,
     /// Optionally specify an account-id for this account.
     /// If provided must be between (u32::MAX/2)..u32::MAX range.
+    /// Omitted or null (upstream main deser test): assigned from registry LOCAL_ACCOUNT_SEQUENCE.
+    #[serde(default)]
     pub account_id: Option<AccountId>,
-    /// Optional authenticator for use with the `abstractaccount` cosmos-sdk module.
+    #[serde(default)]
     pub authenticator: Option<Authenticator>,
-    /// Optionally claim a namespace on instantiation.
-    /// Any fees will be deducted from the account and should be provided on instantiation.
+    #[serde(default)]
     pub namespace: Option<String>,
     /// Optionally install modules on instantiation.
     /// Any fees will be deducted from the account and should be provided on instantiation.

@@ -90,7 +90,15 @@ pub fn instantiate(
     let account_id = match account_id {
         Some(account_id) => account_id,
         None => {
-            AccountId::local(LOCAL_ACCOUNT_SEQUENCE.query(&deps.querier, registry.address.clone())?)
+            let seq = LOCAL_ACCOUNT_SEQUENCE
+                .query(&deps.querier, registry.address.clone())
+                .map_err(|e| {
+                    cosmwasm_std::StdError::generic_err(format!(
+                        "registry LOCAL_ACCOUNT_SEQUENCE (u32) missing at {} — Abstract natives must be instantiate2+blob (salt reg). {e}",
+                        registry.address
+                    ))
+                })?;
+            AccountId::local(seq)
         }
     };
 

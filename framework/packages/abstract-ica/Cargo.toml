@@ -21,7 +21,7 @@ cw-ownable      = { workspace = true }
 map-macro       = "0.3.0"
 
 # EVM
-polytone-evm = { version = "2.0.0", git = "https://github.com/permissionlessweb/polytone", branch = "bump/cw3-evm" }
+polytone-evm = { workspace = true }
 
 [target.'cfg(not(target_arch = "wasm32"))'.dependencies]
 workspace-hack = { version = "0.1", path = "../../workspace-hack" }

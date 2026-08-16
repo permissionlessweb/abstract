@@ -19,13 +19,14 @@ schema  = []
 
 [dependencies]
 abstract-macros = { workspace = true }
+anybuf          = { workspace = true }
 abstract-sdk    = { workspace = true }
 abstract-std    = { workspace = true }
 cosmwasm-schema = { workspace = true }
 cosmwasm-std    = { workspace = true, features = ["stargate"] }
 cw-orch = { workspace = true }
 cw-ownable      = { workspace = true }
-cw-paginate     = { version = "3.0.0", git = "https://github.com/permissionlessweb/cw-plus-plus" }
+cw-paginate     = { path = "../../../../../cw-plus-plus/packages/paginate" }
 cw-storage-plus = { workspace = true }
 cw-utils        = { workspace = true }
 cw2             = { workspace = true }

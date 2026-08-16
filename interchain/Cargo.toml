@@ -58,10 +58,10 @@ challenge-app = { path = "../modules/contracts/apps/challenge" }
 clap   = { version = "4.0.32", features = ["derive"] }
 cosmwasm-schema = { version = "3.0.1" }
 cosmwasm-std    = { version = "3.0.1" }
-cw-address-like = { version = "3.0.1", git = "https://github.com/permissionlessweb/cw-plus-plus" }
-cw-asset        = { version = "4.0", git = "https://github.com/permissionlessweb/cw-asset" }
+cw-address-like = { path = "../../cw-plus-plus/packages/address-like" }
+cw-asset        = { path = "../../cw-asset" }
 cw-blob          = { features = ["library"], path = "../../cw-packages/contracts/cw-blob" }
-cw-controllers  = { version = "3.0.0", git = "https://github.com/permissionlessweb/cw-minus" }
+cw-controllers  = { path = "../../cw-minus/packages/controllers" }
 #polytone         = { package = "abstract-polytone", version = "2.0.0", git = "https://github.com/permissionlessweb/polytone", branch = "bump/cw3"  }
 #polytone-note    = { package = "abstract-polytone-note", version = "5.0.0", git = "https://github.com/permissionlessweb/polytone", branch = "bump/cw3"  }
 #cw-orch            = { version = "0.30.0", path = "../../../cw-orchestrator/cw-orch"}
@@ -77,12 +77,12 @@ cw-orch-daemon    = { path = "../../cw-orchestrator/cw-orch-daemon" }
 cw-orch-interchain = { path = "../../cw-orchestrator/cw-orch-interchain" }
 cw-orch-polytone = { package = "abstract-cw-orch-polytone", version = "6.0.0", path = "../../polytone/packages/cw-orch-polytone" }
 cw-orch-proto    = { path = "../../cw-orchestrator/packages/interchain/proto" }
-cw-ownable      = { version = "3.0.1", git = "https://github.com/permissionlessweb/cw-plus-plus" }
+cw-ownable      = { path = "../../cw-plus-plus/packages/ownable" }
 cw-storage-plus = "3.0.0"
-cw-utils        = { version = "3.0.0", git = "https://github.com/permissionlessweb/cw-minus" }
+cw-utils        = { path = "../../cw-minus/packages/cw-utils" }
 cw2             = { version = "3.0.0" }
-cw20            = { version = "3.0.0", git = "https://github.com/permissionlessweb/cw-plus" }
-cw20-base       = { version = "3.0.0", features = ["library"], git = "https://github.com/permissionlessweb/cw-plus" }
+cw20            = { path = "../../cw-plus/packages/cw20" }
+cw20-base       = { path = "../../cw-plus/contracts/cw20-base", features = ["library"] }
 polytone         = { package = "abstract-polytone", version = "2.0.0", path = "../../polytone/packages/polytone" }
 polytone-note    = { package = "abstract-polytone-note", version = "5.0.0", path = "../../polytone/contracts/main/note" }
 # cw20            = { version = "2.0.0" }# cw20-base       = { version = "2.0.0", features = ["library"] }
@@ -113,7 +113,7 @@ abstract-sdk                   = { path = "../framework/packages/abstract-sdk" }
 abstract-staking-standard      = { path = "../framework/packages/standards/staking" }
 abstract-std                   = { path = "../framework/packages/abstract-std" }
 abstract-testing               = { path = "../framework/packages/abstract-testing" }
-cw-utils                       = { git = "https://github.com/permissionlessweb/cw-minus" }
+cw-utils                       = { path = "../../cw-minus/packages/cw-utils" }
 
 # Backup release profile, will result in warnings during optimization
 [profile.release]

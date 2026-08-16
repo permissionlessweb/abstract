@@ -15,7 +15,7 @@ use abstract_std::{
     },
     ACCOUNT, ICS20, REGISTRY,
 };
-use cosmwasm_std::Event;
+use cosmwasm_std::{coins, Event};
 use cw_orch::prelude::*;
 use cw_ownable::OwnershipError;
 
@@ -408,12 +408,33 @@ fn execute_send_all_back_action() -> anyhow::Result<()> {
         HostAction::Helpers(abstract_std::ibc_host::HelperAction::SendAllBack {}),
     )?;
 
-    // Possible to verify that funds have been sent?
+    // Empty account: gRPC AllBalances returns [] so Execute { msgs: [] } still succeeds.
     assert!(account_action_response.has_event(
         &Event::new("wasm-abstract")
             .add_attribute("contract", ACCOUNT)
             .add_attribute("action", "execute_module_action")
     ));
+
+    // External deposit (not tracked by any contract ledger) must still be seen.
+    let remote_id = AccountId::new(
+        account_sequence,
+        AccountTrace::Remote(vec![TruncatedChainId::from_chain_id(chain)]),
+    )?;
+    let remote_account = abstr.registry.account(remote_id)?;
+    mock.add_balance(remote_account.addr(), coins(1_000, "uthiol"))?;
+
+    let funded = abstr.ibc.host.call_as(&polytone_proxy).ibc_execute(
+        proxy_addr.to_string(),
+        AccountId::local(account_sequence),
+        HostAction::Helpers(abstract_std::ibc_host::HelperAction::SendAllBack {}),
+    );
+    // Channel "juno" is only an ANS name here — IBC handshake was never opened.
+    // What we prove is AllBalances saw the third-party coins and built ICS20 transfers.
+    let err = funded.unwrap_err().to_string();
+    assert!(
+        err.contains("channel") || err.contains("ibc") || err.contains("juno") || err.contains("transfer"),
+        "SendAllBack with external funds should attempt ICS20, got: {err}"
+    );
 
     Ok(())
 }

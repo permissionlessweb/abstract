@@ -61,25 +61,25 @@ anybuf    = { version = "1.0.0" }
 ## Testing
 anyhow          = "1"
 clap               = { version = "4.0.32", features = ["derive"] }
-cosmwasm-schema = { version = "3.0.4" }
-cosmwasm-std    = { version = "3.0.4", features = ["cosmwasm_3_0"] }
+cosmwasm-schema = { path = "../../cosmwasm/packages/schema" }
+cosmwasm-std    = { path = "../../cosmwasm/packages/std", features = ["cosmwasm_3_0"] }
 coverage-helper = { version = "0.2.2" }
-cw-address-like = { version = "3.0.1", git = "https://github.com/permissionlessweb/cw-plus-plus" }
-cw-asset        = { version = "4.0", git = "https://github.com/permissionlessweb/cw-asset" }
+cw-address-like = { path = "../../cw-plus-plus/packages/address-like" }
+cw-asset        = { path = "../../cw-asset" }
 cw-blob = { features = ["library"], path = "../../cw-packages/contracts/cw-blob" }
-cw-clearable    = { version = "0.2.0", git = "https://github.com/permissionlessweb/cw-packages" }
-cw-controllers     = { version = "3.0.0" }
+cw-clearable    = { path = "../../cw-packages/cw-clearable" }
+cw-controllers     = { path = "../../cw-minus/packages/controllers" }
 cw-orch            = { version = "0.30.0", path = "../../cw-orchestrator/cw-orch" }
 cw-orch-interchain = { version = "0.8.0", path = "../../cw-orchestrator/cw-orch-interchain" }
 cw-orch-polytone = { package = "abstract-cw-orch-polytone", version = "6.0.0", path = "../../polytone/packages/cw-orch-polytone" }
-cw-ownable      = { version = "3.0.1", git = "https://github.com/permissionlessweb/cw-plus-plus" }
-cw-storage-plus = { version = "3.0.1" }
-cw-utils        = { version = "3.0.0" }
+cw-ownable      = { path = "../../cw-plus-plus/packages/ownable" }
+cw-storage-plus = { path = "../../cw-storage-plus" }
+cw-utils        = { path = "../../cw-minus/packages/cw-utils" }
 
-cw2             = { version = "3.0.0" }
+cw2             = { path = "../../cw-minus/packages/cw2" }
 
-cw20            = { version = "3.0.0", git = "https://github.com/permissionlessweb/cw-plus" }
-cw20-base       = { version = "3.0.0", features = ["library"], git = "https://github.com/permissionlessweb/cw-plus" }
+cw20            = { path = "../../cw-plus/packages/cw20" }
+cw20-base       = { path = "../../cw-plus/contracts/cw20-base", features = ["library"] }
 
 # Ibc
 ibc-client = { package = "abstract-ibc-client", path = "contracts/native/ibc-client" }
@@ -87,6 +87,8 @@ ibc-host   = { package = "abstract-ibc-host", path = "contracts/native/ibc-host"
 module-factory     = { package = "abstract-module-factory", path = "contracts/native/module-factory" }
 polytone         = { package = "abstract-polytone", version = "2.0.0", path = "../../polytone/packages/polytone" }
 polytone-note    = { package = "abstract-polytone-note", version = "5.0.0", path = "../../polytone/contracts/main/note" }
+polytone-evm     = { path = "../../polytone-evm/packages/polytone-evm" }
+evm-note         = { path = "../../polytone-evm/contracts/main/evm-note" }
 protobuf  = { version = "2", features = ["with-bytes"] }
 registry           = { package = "abstract-registry", path = "contracts/native/registry" }
 rstest          = "0.17.0"
@@ -122,3 +124,34 @@ opt-level        = 's'
 overflow-checks  = true
 panic            = 'abort'
 rpath            = false
+
+[patch."https://github.com/permissionlessweb/polytone"]
+polytone-evm = { path = "../../polytone-evm/packages/polytone-evm" }
+evm-note = { path = "../../polytone-evm/contracts/main/evm-note" }
+
+[patch."https://github.com/CyberHoward/cosmos-rust.git"]
+cosmrs = { path = "../../cosmos-rust/cosmrs" }
+cosmos-sdk-proto = { path = "../../cosmos-rust/cosmos-sdk-proto" }
+
+[patch."https://github.com/permissionlessweb/cw-plus"]
+cw20 = { path = "../../cw-plus/packages/cw20" }
+cw20-base = { path = "../../cw-plus/contracts/cw20-base" }
+
+[patch."https://github.com/permissionlessweb/cw-plus-plus"]
+cw-address-like = { path = "../../cw-plus-plus/packages/address-like" }
+cw-ownable = { path = "../../cw-plus-plus/packages/ownable" }
+cw-paginate = { path = "../../cw-plus-plus/packages/paginate" }
+
+[patch."https://github.com/permissionlessweb/cw-minus"]
+cw-utils = { path = "../../cw-minus/packages/cw-utils" }
+cw-controllers = { path = "../../cw-minus/packages/controllers" }
+cw2 = { path = "../../cw-minus/packages/cw2" }
+
+[patch."https://github.com/permissionlessweb/cw-asset"]
+cw-asset = { path = "../../cw-asset" }
+
+[patch."https://github.com/permissionlessweb/cw-orchestrator"]
+cw-plus-orch = { path = "../../abstract-cw-plus/packages/cw-plus-orch" }
+
+[patch."https://github.com/permissionlessweb/cosmos-rust"]
+cosmrs = { path = "../../cosmos-rust/cosmrs" }
