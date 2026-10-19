@@ -55,22 +55,22 @@ challenge-app        = { path = "./contracts/apps/challenge", default-features =
 chrono = { version = "0.4.31", default-features = false }
 clap   = { version = "4.0.32", features = ["derive"] }
 
-cosmwasm-schema = { version = "3.0.1" }
-cosmwasm-std    = { version = "3.0.1" }
+cosmwasm-schema = { path = "../../cosmwasm/packages/schema" }
+cosmwasm-std    = { path = "../../cosmwasm/packages/std", features = ["cosmwasm_3_0"] }
 croncat-app          = { path = "./contracts/apps/croncat", default-features = false }
 cw-address-like = { path = "../../cw-plus-plus/packages/address-like" }
 cw-asset        = { path = "../../cw-asset" }
 cw-controllers  = { path = "../../cw-minus/packages/controllers" }
 cw-ica-controller = { path = "../../cw-ica-controller", default-features = false }
-cw-orch = { path = "../../cw-orchestrator/cw-orch" }
-cw-orch-interchain   = { path = "../../cw-orchestrator/cw-orch-interchain" }
-cw-orch-neutron-test-tube = { path = "../../cw-orchestrator/packages/cw-orch-neutron-test-tube" }
-cw-orch-osmosis-test-tube = { path = "../../cw-orchestrator/packages/cw-orch-osmosis-test-tube" }
+cw-orch = { git = "https://github.com/permissionlessweb/cw-orchestrator", rev = "ec4d693aad80ee70ddbd77c3b78c9807bedb6be0" }
+cw-orch-interchain   = { git = "https://github.com/permissionlessweb/cw-orchestrator", rev = "ec4d693aad80ee70ddbd77c3b78c9807bedb6be0" }
+cw-orch-neutron-test-tube = { git = "https://github.com/permissionlessweb/cw-orchestrator", rev = "ec4d693aad80ee70ddbd77c3b78c9807bedb6be0" }
+cw-orch-osmosis-test-tube = { git = "https://github.com/permissionlessweb/cw-orchestrator", rev = "ec4d693aad80ee70ddbd77c3b78c9807bedb6be0" }
 cw-ownable = { path = "../../cw-plus-plus/packages/ownable" }
 cw-plus-orch = { path = "../../abstract-cw-plus/packages/cw-plus-orch" }
-cw-storage-plus = "3.0.0"
-cw-utils        = { version = "3.0.0" }
-cw2             = { version = "3.0.0" }
+cw-storage-plus = { path = "../../cw-storage-plus" }
+cw-utils        = { path = "../../cw-minus/packages/cw-utils" }
+cw2             = { path = "../../cw-minus/packages/cw2" }
 cw20 = { path = "../../cw-plus/packages/cw20" }
 cw20-base = { path = "../../cw-plus/contracts/cw20-base", features = ["library"] }
 dca-app              = { path = "./contracts/apps/dca", default-features = false }
@@ -100,6 +100,23 @@ abstract-standalone            = { path = "../framework/packages/abstract-standa
 abstract-std                   = { path = "../framework/packages/abstract-std" }
 abstract-testing               = { path = "../framework/packages/abstract-testing" }
 cw-ica-controller              = { path = "../../cw-ica-controller" }
+cosmwasm-std = { path = "../../cosmwasm/packages/std" }
+cosmwasm-schema = { path = "../../cosmwasm/packages/schema" }
+cw-storage-plus = { path = "../../cw-storage-plus" }
+
+[patch."https://github.com/permissionlessweb/cw-orchestrator"]
+cw-orch = { path = "../../cw-orchestrator/cw-orch" }
+cw-orch-interchain = { path = "../../cw-orchestrator/cw-orch-interchain" }
+cw-orch-neutron-test-tube = { path = "../../cw-orchestrator/packages/cw-orch-neutron-test-tube" }
+cw-orch-osmosis-test-tube = { path = "../../cw-orchestrator/packages/cw-orch-osmosis-test-tube" }
+cw-orch-core = { path = "../../cw-orchestrator/packages/cw-orch-core" }
+cw-orch-daemon = { path = "../../cw-orchestrator/cw-orch-daemon" }
+cw-orch-mock = { path = "../../cw-orchestrator/packages/cw-orch-mock" }
+cw-orch-traits = { path = "../../cw-orchestrator/packages/cw-orch-traits" }
+
+[patch."https://github.com/permissionlessweb/cosmwasm"]
+cosmwasm-std = { path = "../../cosmwasm/packages/std" }
+cosmwasm-schema = { path = "../../cosmwasm/packages/schema" }
 
 # Backup release profile, will result in warnings during optimization
 [profile.release]

@@ -66,11 +66,11 @@ cosmwasm-std    = { path = "../../cosmwasm/packages/std", features = ["cosmwasm_
 coverage-helper = { version = "0.2.2" }
 cw-address-like = { path = "../../cw-plus-plus/packages/address-like" }
 cw-asset        = { path = "../../cw-asset" }
-cw-blob = { features = ["library"], path = "../../cw-packages/contracts/cw-blob" }
+cw-blob = { features = ["library", "interface"], path = "../../cw-packages/contracts/cw-blob" }
 cw-clearable    = { path = "../../cw-packages/cw-clearable" }
 cw-controllers     = { path = "../../cw-minus/packages/controllers" }
-cw-orch            = { version = "0.30.0", path = "../../cw-orchestrator/cw-orch" }
-cw-orch-interchain = { version = "0.8.0", path = "../../cw-orchestrator/cw-orch-interchain" }
+cw-orch            = { git = "https://github.com/permissionlessweb/cw-orchestrator", rev = "ec4d693aad80ee70ddbd77c3b78c9807bedb6be0" }
+cw-orch-interchain = { git = "https://github.com/permissionlessweb/cw-orchestrator", rev = "ec4d693aad80ee70ddbd77c3b78c9807bedb6be0" }
 cw-orch-polytone = { package = "abstract-cw-orch-polytone", version = "6.0.0", path = "../../polytone/packages/cw-orch-polytone" }
 cw-ownable      = { path = "../../cw-plus-plus/packages/ownable" }
 cw-storage-plus = { path = "../../cw-storage-plus" }
@@ -151,7 +151,28 @@ cw2 = { path = "../../cw-minus/packages/cw2" }
 cw-asset = { path = "../../cw-asset" }
 
 [patch."https://github.com/permissionlessweb/cw-orchestrator"]
+cw-orch = { path = "../../cw-orchestrator/cw-orch" }
+cw-orch-core = { path = "../../cw-orchestrator/packages/cw-orch-core" }
+cw-orch-daemon = { path = "../../cw-orchestrator/cw-orch-daemon" }
+cw-orch-interchain = { path = "../../cw-orchestrator/cw-orch-interchain" }
+cw-orch-interchain-core = { path = "../../cw-orchestrator/packages/interchain/interchain-core" }
+cw-orch-interchain-daemon = { path = "../../cw-orchestrator/packages/interchain/interchain-daemon" }
+cw-orch-interchain-mock = { path = "../../cw-orchestrator/packages/interchain/interchain-mock" }
+cw-orch-mock = { path = "../../cw-orchestrator/packages/cw-orch-mock" }
+cw-orch-networks = { path = "../../cw-orchestrator/packages/cw-orch-networks" }
+cw-orch-starship = { path = "../../cw-orchestrator/packages/interchain/starship" }
+cw-orch-traits = { path = "../../cw-orchestrator/packages/cw-orch-traits" }
 cw-plus-orch = { path = "../../abstract-cw-plus/packages/cw-plus-orch" }
+
+[patch."https://github.com/permissionlessweb/cosmwasm"]
+cosmwasm-std = { path = "../../cosmwasm/packages/std" }
+cosmwasm-schema = { path = "../../cosmwasm/packages/schema" }
+cosmwasm-schema-derive = { path = "../../cosmwasm/packages/schema-derive" }
+cosmwasm-core = { path = "../../cosmwasm/packages/core" }
+cosmwasm-crypto = { path = "../../cosmwasm/packages/crypto" }
+cosmwasm-derive = { path = "../../cosmwasm/packages/derive" }
+cw-schema = { path = "../../cosmwasm/packages/cw-schema" }
+cw-schema-derive = { path = "../../cosmwasm/packages/cw-schema-derive" }
 
 [patch."https://github.com/permissionlessweb/cosmos-rust"]
 cosmrs = { path = "../../cosmos-rust/cosmrs" }

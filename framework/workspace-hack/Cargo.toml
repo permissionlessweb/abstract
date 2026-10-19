@@ -18,10 +18,10 @@ anstream = { version = "0.6" }
 anyhow = { version = "1" }
 byteorder = { version = "1", features = ["i128"] }
 bytes = { version = "1", default-features = false, features = ["serde"] }
-cosmwasm-std = { version = "3", features = ["cosmwasm_2_0", "staking", "stargate"] }
-cw-orch = { version = "0.30.0", features = ["daemon", "snapshot-testing"], path = "../../../cw-orchestrator/cw-orch" }
-cw-orch-interchain = { version = "0.8", features = ["daemon"] }
-cw20-base = { version = "2", default-features = false, features = ["library"] }
+cosmwasm-std = { path = "../../../cosmwasm/packages/std", features = ["cosmwasm_2_0", "staking", "stargate"] }
+cw-orch = { git = "https://github.com/permissionlessweb/cw-orchestrator", rev = "ec4d693aad80ee70ddbd77c3b78c9807bedb6be0", features = ["daemon", "snapshot-testing"] }
+cw-orch-interchain = { git = "https://github.com/permissionlessweb/cw-orchestrator", rev = "ec4d693aad80ee70ddbd77c3b78c9807bedb6be0", features = ["daemon"] }
+cw20-base = { path = "../../../cw-plus/contracts/cw20-base", default-features = false, features = ["library"] }
 der = { version = "0.7", default-features = false, features = ["oid", "pem", "std"] }
 deranged = { version = "0.3", default-features = false, features = ["powerfmt", "std"] }
 digest = { version = "0.10", features = ["mac", "oid", "std"] }
@@ -54,10 +54,10 @@ anstream = { version = "0.6" }
 anyhow = { version = "1" }
 byteorder = { version = "1", features = ["i128"] }
 bytes = { version = "1", default-features = false, features = ["serde"] }
-cosmwasm-std = { version = "3", features = ["cosmwasm_2_0", "staking", "stargate"] }
-cw-orch = { version = "0.30.0", features = ["daemon", "snapshot-testing"], path = "../../../cw-orchestrator/cw-orch" }
-cw-orch-interchain = { version = "0.8", features = ["daemon"] }
-cw20-base = { version = "2", default-features = false, features = ["library"] }
+cosmwasm-std = { path = "../../../cosmwasm/packages/std", features = ["cosmwasm_2_0", "staking", "stargate"] }
+cw-orch = { git = "https://github.com/permissionlessweb/cw-orchestrator", rev = "ec4d693aad80ee70ddbd77c3b78c9807bedb6be0", features = ["daemon", "snapshot-testing"] }
+cw-orch-interchain = { git = "https://github.com/permissionlessweb/cw-orchestrator", rev = "ec4d693aad80ee70ddbd77c3b78c9807bedb6be0", features = ["daemon"] }
+cw20-base = { path = "../../../cw-plus/contracts/cw20-base", default-features = false, features = ["library"] }
 der = { version = "0.7", default-features = false, features = ["oid", "pem", "std"] }
 deranged = { version = "0.3", default-features = false, features = ["powerfmt", "std"] }
 digest = { version = "0.10", features = ["mac", "oid", "std"] }
@@ -103,7 +103,7 @@ cosmos-sdk-proto = { version = "0.27", default-features = false, features = ["co
 cosmrs = { version = "0.22.0", features = ["cosmwasm", "dev", "grpc"] }
 crossbeam-epoch = { version = "0.9" }
 crunchy = { version = "0.2", features = ["std"] }
-cw1-whitelist = { version = "2", default-features = false, features = ["library"] }
+cw1-whitelist = { path = "../../../cw-plus/contracts/cw1-whitelist", default-features = false, features = ["library"] }
 ed25519 = { version = "2", features = ["alloc", "serde"] }
 ed25519-dalek = { version = "2", features = ["rand_core", "serde"] }
 either = { version = "1" }
@@ -171,7 +171,7 @@ cosmos-sdk-proto = { version = "0.27", default-features = false, features = ["co
 cosmrs = { version = "0.22.0", features = ["cosmwasm", "dev", "grpc"] }
 crossbeam-epoch = { version = "0.9" }
 crunchy = { version = "0.2", features = ["std"] }
-cw1-whitelist = { version = "2", default-features = false, features = ["library"] }
+cw1-whitelist = { path = "../../../cw-plus/contracts/cw1-whitelist", default-features = false, features = ["library"] }
 ed25519 = { version = "2", features = ["alloc", "serde"] }
 ed25519-dalek = { version = "2", features = ["rand_core", "serde"] }
 either = { version = "1" }
@@ -239,7 +239,7 @@ cosmos-sdk-proto = { version = "0.27", default-features = false, features = ["co
 cosmrs = { version = "0.22.0", features = ["cosmwasm", "dev", "grpc"] }
 crossbeam-epoch = { version = "0.9" }
 crunchy = { version = "0.2", features = ["std"] }
-cw1-whitelist = { version = "2", default-features = false, features = ["library"] }
+cw1-whitelist = { path = "../../../cw-plus/contracts/cw1-whitelist", default-features = false, features = ["library"] }
 ed25519 = { version = "2", features = ["alloc", "serde"] }
 ed25519-dalek = { version = "2", features = ["rand_core", "serde"] }
 either = { version = "1" }
@@ -306,7 +306,7 @@ cosmos-sdk-proto = { version = "0.27", default-features = false, features = ["co
 cosmrs = { version = "0.22.0", features = ["cosmwasm", "dev", "grpc"] }
 crossbeam-epoch = { version = "0.9" }
 crunchy = { version = "0.2", features = ["std"] }
-cw1-whitelist = { version = "2", default-features = false, features = ["library"] }
+cw1-whitelist = { path = "../../../cw-plus/contracts/cw1-whitelist", default-features = false, features = ["library"] }
 ed25519 = { version = "2", features = ["alloc", "serde"] }
 ed25519-dalek = { version = "2", features = ["rand_core", "serde"] }
 either = { version = "1" }

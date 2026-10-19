@@ -39,17 +39,17 @@ abstract-std = { version = "0.26.1" }
 anyhow = "1.0"
 chrono = { version = "0.4.31", default-features = false }
 clap = { version = "4.0.32", features = ["derive"] }
-cosmwasm-schema = { version = "3.0.1" }
-cosmwasm-std = { version = "3.0.1" }
+cosmwasm-schema = { path = "../../cosmwasm/packages/schema" }
+cosmwasm-std = { path = "../../cosmwasm/packages/std", features = ["cosmwasm_3_0"] }
 cw-address-like = { path = "../../cw-plus-plus/packages/cw-address-like" }
 cw-asset = { path = "../../cw-asset" }
 cw-controllers = { path = "../../cw-minus/packages/controllers" }
-cw-orch = { path = "../../cw-orchestrator/cw-orch" }
+cw-orch = { git = "https://github.com/permissionlessweb/cw-orchestrator", rev = "ec4d693aad80ee70ddbd77c3b78c9807bedb6be0" }
 cw-ownable = { path = "../../cw-plus-plus" }
 cw-plus-orch = { path = "../../cw-orchestrator/cw-orch" }
-cw-storage-plus = { version = "3.0.0" }
+cw-storage-plus = { path = "../../cw-storage-plus" }
 cw-utils = { path = "../../cw-minus/packages/cw-utils" }
-cw2 = { version = "3.0.0" }
+cw2 = { path = "../../cw-minus/packages/cw2" }
 cw20 = { path = "../../cw-plus/packages/cw20" }
 cw20-base = { path = "../../cw-plus/contracts/cw20-base" }
 protobuf = { version = "2", features = ["with-bytes"] }
@@ -73,6 +73,19 @@ abstract-money-market-standard = { path = "../framework/packages/standards/money
 abstract-sdk                   = { path = "../framework/packages/abstract-sdk" }
 abstract-staking-standard      = { path = "../framework/packages/standards/staking" }
 abstract-std                   = { path = "../framework/packages/abstract-std" }
+cosmwasm-std = { path = "../../cosmwasm/packages/std" }
+cosmwasm-schema = { path = "../../cosmwasm/packages/schema" }
+cw-storage-plus = { path = "../../cw-storage-plus" }
+
+[patch."https://github.com/permissionlessweb/cw-orchestrator"]
+cw-orch = { path = "../../cw-orchestrator/cw-orch" }
+cw-orch-core = { path = "../../cw-orchestrator/packages/cw-orch-core" }
+cw-orch-daemon = { path = "../../cw-orchestrator/cw-orch-daemon" }
+cw-orch-traits = { path = "../../cw-orchestrator/packages/cw-orch-traits" }
+
+[patch."https://github.com/permissionlessweb/cosmwasm"]
+cosmwasm-std = { path = "../../cosmwasm/packages/std" }
+cosmwasm-schema = { path = "../../cosmwasm/packages/schema" }
 
 [patch."https://github.com/abstractsdk/wynddex"]
 wyndex           = { path = "../../wynddex/packages/wyndex" }

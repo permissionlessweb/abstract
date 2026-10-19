@@ -277,7 +277,7 @@ dependencies = [
 
 [[package]]
 name = "abstract-ibc-host"
-version = "0.26.1"
+version = "0.26.2"
 dependencies = [
  "abstract-adapter",
  "abstract-interface",
