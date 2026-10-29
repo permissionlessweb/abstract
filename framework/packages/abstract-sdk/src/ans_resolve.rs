@@ -3,7 +3,7 @@
 
 use abstract_std::objects::ans_host::AnsHostError;
 use abstract_std::objects::{ans_host::AnsHostResult, AnsEntryConvertor};
-use cosmwasm_std::{Addr, QuerierWrapper, Uint128, Uint256};
+use cosmwasm_std::{Addr, QuerierWrapper, Uint256};
 use cw_asset::{Asset, AssetInfo};
 
 use crate::std::objects::{
@@ -189,7 +189,6 @@ mod tests {
     mod is_registered {
         use super::*;
 
-        
         fn exists() {
             let mock_api = MockApi::default();
             let ans_host = mock_ans_host(mock_api);
@@ -212,7 +211,6 @@ mod tests {
             assert!(assert_registered.is_ok())
         }
 
-        
         fn does_not_exist() {
             let mock_api = MockApi::default();
             let ans_host = mock_ans_host(mock_api);
@@ -231,7 +229,6 @@ mod tests {
     mod asset_entry {
         use super::*;
 
-        
         fn exists() {
             let mock_api = MockApi::default();
             let ans_host = mock_ans_host(mock_api);
@@ -258,7 +255,6 @@ mod tests {
             );
         }
 
-        
         fn does_not_exist() {
             let deps = mock_deps_with_default_querier();
             let ans_host = mock_ans_host(deps.api);
@@ -268,7 +264,6 @@ mod tests {
             test_dne(&ans_host, &not_exist_asset);
         }
 
-        
         fn array() {
             let mock_api = MockApi::default();
             let ans_host = mock_ans_host(mock_api);
@@ -305,7 +300,6 @@ mod tests {
     mod lp_token {
         use super::*;
 
-        
         fn exists() {
             let mock_api = MockApi::default();
             let ans_host = mock_ans_host(mock_api);
@@ -328,7 +322,6 @@ mod tests {
             assert_eq!(res.unwrap(), expected_value);
         }
 
-        
         fn does_not_exist() {
             let mock_api = MockApi::default();
             let ans_host = mock_ans_host(mock_api);
@@ -343,7 +336,6 @@ mod tests {
         use super::*;
         use crate::std::objects::PoolType;
 
-        
         fn exists() {
             let mock_api = MockApi::default();
             let ans_host = mock_ans_host(mock_api);
@@ -382,7 +374,6 @@ mod tests {
             assert_eq!(res.unwrap(), expected_value);
         }
 
-        
         fn does_not_exist() {
             let mock_api = MockApi::default();
             let ans_host = mock_ans_host(mock_api);
@@ -403,7 +394,6 @@ mod tests {
         use super::*;
         use crate::std::objects::{PoolAddress, PoolType};
 
-        
         fn exists() {
             let mock_api = MockApi::default();
             let ans_host = mock_ans_host(mock_api);
@@ -435,7 +425,6 @@ mod tests {
             assert_eq!(unique_pool_id_res.unwrap(), pool_metadata);
         }
 
-        
         fn does_not_exist() {
             let mock_api = MockApi::default();
             let ans_host = mock_ans_host(mock_api);
@@ -450,7 +439,6 @@ mod tests {
         use super::*;
         use crate::std::ans_host::state::CONTRACT_ADDRESSES;
 
-        
         fn exists() {
             let mock_api = MockApi::default();
             let ans_host = mock_ans_host(mock_api);
@@ -474,7 +462,6 @@ mod tests {
             assert_eq!(res.unwrap(), expected_value);
         }
 
-        
         fn does_not_exist() {
             let mock_api = MockApi::default();
             let ans_host = mock_ans_host(mock_api);
@@ -487,7 +474,6 @@ mod tests {
             test_dne(&ans_host, &not_exist_contract);
         }
 
-        
         fn array() {
             let mock_api = MockApi::default();
             let ans_host = mock_ans_host(mock_api);
@@ -536,7 +522,6 @@ mod tests {
         use super::*;
         use crate::std::ans_host::state::CHANNELS;
 
-        
         fn exists() {
             let mock_api = MockApi::default();
             let ans_host = mock_ans_host(mock_api);
@@ -560,7 +545,6 @@ mod tests {
             assert_eq!(res.unwrap(), expected_value);
         }
 
-        
         fn does_not_exist() {
             let mock_api = MockApi::default();
             let ans_host = mock_ans_host(mock_api);
@@ -578,7 +562,6 @@ mod tests {
         use super::*;
         use crate::std::ans_host::state::REV_ASSET_ADDRESSES;
 
-        
         fn exists() {
             let mock_api = MockApi::default();
             let ans_host = mock_ans_host(mock_api);
@@ -609,7 +592,6 @@ mod tests {
             );
         }
 
-        
         fn does_not_exist() {
             let mock_api = MockApi::default();
             let ans_host = mock_ans_host(mock_api);
@@ -619,7 +601,6 @@ mod tests {
             test_dne(&ans_host, &not_exist_asset_info);
         }
 
-        
         fn array() {
             let mock_api = MockApi::default();
             let ans_host = mock_ans_host(mock_api);

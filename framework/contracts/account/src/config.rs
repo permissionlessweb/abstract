@@ -14,7 +14,7 @@ use abstract_std::{
         validation::{validate_description, validate_link, validate_name},
     },
 };
-use cosmwasm_std::{Addr, DepsMut, MessageInfo, Response, StdError, StdResult};
+use cosmwasm_std::{Addr, DepsMut, MessageInfo, Response, StdError};
 
 pub fn update_account_status(
     deps: DepsMut,
@@ -133,7 +133,6 @@ mod tests {
 
         use super::*;
 
-        
         fn only_owner() -> StdResult<()> {
             let test_owner = MockApi::default().addr_make("test_owner");
 
@@ -147,7 +146,6 @@ mod tests {
             test_only_owner(msg)
         }
 
-        
         fn validates_new_owner_address() -> StdResult<()> {
             let mut deps = mock_dependencies();
             deps.querier = abstract_mock_querier(deps.api);
@@ -173,7 +171,6 @@ mod tests {
             Ok(())
         }
 
-        
         fn updates_owner() -> StdResult<()> {
             let mut deps = mock_dependencies();
             deps.querier = abstract_mock_querier(deps.api);
@@ -207,7 +204,6 @@ mod tests {
             Ok(())
         }
 
-        
         fn updates_governance_type() -> StdResult<()> {
             let mut deps = mock_dependencies();
             deps.querier = abstract_mock_querier(deps.api);
@@ -258,7 +254,6 @@ mod tests {
 
         use super::*;
 
-
         fn only_owner() -> StdResult<()> {
             let msg = ExecuteMsg::UpdateInfo {
                 name: None,
@@ -269,7 +264,7 @@ mod tests {
             test_only_owner(msg)
         }
         // integration tests
-        
+
         fn updates() -> StdResult<()> {
             let mut deps = mock_dependencies();
             deps.querier = abstract_mock_querier(deps.api);
@@ -299,7 +294,6 @@ mod tests {
             Ok(())
         }
 
-        
         fn removals() -> StdResult<()> {
             let mut deps = mock_dependencies();
             deps.querier = abstract_mock_querier(deps.api);
@@ -335,7 +329,6 @@ mod tests {
             Ok(())
         }
 
-        
         fn validates_name() -> StdResult<()> {
             let mut deps = mock_dependencies();
             deps.querier = abstract_mock_querier(deps.api);
@@ -374,7 +367,6 @@ mod tests {
             Ok(())
         }
 
-        
         fn validates_link() -> StdResult<()> {
             let mut deps = mock_dependencies();
             deps.querier = abstract_mock_querier(deps.api);
@@ -418,7 +410,6 @@ mod tests {
     mod update_suspension_status {
         use super::*;
 
-        
         fn only_owner() -> StdResult<()> {
             let mut deps = mock_dependencies();
             deps.querier = abstract_mock_querier(deps.api);
@@ -432,7 +423,6 @@ mod tests {
             test_only_owner(msg)
         }
 
-        
         fn exec_fails_when_suspended() -> StdResult<()> {
             let mut deps = mock_dependencies();
             deps.querier = abstract_mock_querier(deps.api);
@@ -465,7 +455,6 @@ mod tests {
             Ok(())
         }
 
-        
         fn suspend_account() -> StdResult<()> {
             let mut deps = mock_dependencies();
             deps.querier = abstract_mock_querier(deps.api);
@@ -485,7 +474,6 @@ mod tests {
             Ok(())
         }
 
-        
         fn unsuspend_account() -> StdResult<()> {
             let mut deps = mock_dependencies();
             deps.querier = abstract_mock_querier(deps.api);
@@ -514,7 +502,6 @@ mod tests {
 
         use super::*;
 
-        
         fn only_account_owner() -> StdResult<()> {
             let mut deps = mock_dependencies();
             deps.querier = abstract_mock_querier(deps.api);
@@ -546,7 +533,6 @@ mod tests {
             Ok(())
         }
 
-        
         fn whitelist_size_limit() -> StdResult<()> {
             let mut deps = mock_dependencies();
             deps.querier = abstract_mock_querier(deps.api);
@@ -599,7 +585,6 @@ mod tests {
             Ok(())
         }
 
-        
         fn whitelist_duplicates() -> StdResult<()> {
             let mut deps = mock_dependencies();
             deps.querier = abstract_mock_querier(deps.api);
@@ -640,7 +625,6 @@ mod tests {
             Ok(())
         }
 
-        
         fn whitelist_remove() -> StdResult<()> {
             let mut deps = mock_dependencies();
             deps.querier = abstract_mock_querier(deps.api);
@@ -696,7 +680,6 @@ mod tests {
 
         use super::*;
 
-        
         fn allows_ownership_acceptance() -> StdResult<()> {
             let mut deps = mock_dependencies();
             deps.querier = abstract_mock_querier(deps.api);

@@ -5,8 +5,8 @@ use abstract_std::{
     ICA_CLIENT,
 };
 use cosmwasm_std::{
-    Addr, Binary, Coin, CosmosMsg, DepsMut, Empty, Env, MessageInfo, StdError, StdResult, SubMsg,
-    WasmMsg, WasmQuery,
+    Addr, Binary, Coin, CosmosMsg, DepsMut, Empty, Env, MessageInfo, StdError, SubMsg, WasmMsg,
+    WasmQuery,
 };
 
 use crate::{
@@ -196,7 +196,6 @@ mod test {
     use cosmwasm_std::{testing::*, Addr};
     use cw_storage_plus::Item;
 
-    
     fn abstract_account_can_execute_on_itself() -> StdResult<()> {
         let mut deps = mock_dependencies();
         deps.querier = abstract_mock_querier(deps.api);
@@ -233,7 +232,7 @@ mod test {
         use super::*;
 
         #[cfg(feature = "xion")]
-        
+
         fn admin_actions_not_chained() -> StdResult<()> {
             use crate::contract::AccountResult;
             use abstract_sdk::namespaces::OWNERSHIP_STORAGE_KEY;
@@ -298,7 +297,6 @@ mod test {
             Ok(())
         }
 
-        
         fn only_whitelisted_can_execute() -> StdResult<()> {
             let mut deps = mock_dependencies();
             deps.querier = abstract_mock_querier(deps.api);
@@ -317,7 +315,6 @@ mod test {
             Ok(())
         }
 
-        
         fn forwards_action() -> StdResult<()> {
             let mut deps = mock_dependencies();
             deps.querier = abstract_mock_querier(deps.api);
@@ -364,7 +361,6 @@ mod test {
 
         use super::*;
 
-        
         fn add_module() -> StdResult<()> {
             let mut deps = mock_dependencies();
             deps.querier = abstract_mock_querier(deps.api);
@@ -438,7 +434,6 @@ mod test {
             Ok(())
         }
 
-        
         fn send_funds() -> StdResult<()> {
             let mut deps = mock_dependencies();
             deps.querier = abstract_mock_querier(deps.api);
@@ -522,7 +517,6 @@ mod test {
 
         use super::*;
 
-        
         fn ica_action() -> StdResult<()> {
             let mut deps = mock_dependencies();
             deps.querier = abstract_mock_querier(deps.api);

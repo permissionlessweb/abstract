@@ -5,7 +5,7 @@ use crate::features::ModuleIdentification;
 pub trait AbstractApi<T: ModuleIdentification> {
     const API_ID: &'static str;
     fn base(&self) -> &T;
-    fn deps(&self) -> Deps;
+    fn deps(&self) -> Deps<'_>;
     /// Get the api identifier.
     fn api_id() -> String {
         Self::API_ID.to_owned()

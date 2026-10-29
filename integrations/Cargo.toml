@@ -39,19 +39,19 @@ abstract-std = { version = "0.26.1" }
 anyhow = "1.0"
 chrono = { version = "0.4.31", default-features = false }
 clap = { version = "4.0.32", features = ["derive"] }
-cosmwasm-schema = { path = "../../cosmwasm/packages/schema" }
-cosmwasm-std = { path = "../../cosmwasm/packages/std", features = ["cosmwasm_3_0"] }
-cw-address-like = { path = "../../cw-plus-plus/packages/cw-address-like" }
+cosmwasm-schema = { version = "=4.1.0" }
+cosmwasm-std = { version = "=4.1.0", features = ["cosmwasm_3_0"] }
+cw-address-like = { version = "3.0.1" }
 cw-asset = { path = "../../cw-asset" }
-cw-controllers = { path = "../../cw-minus/packages/controllers" }
-cw-orch = { git = "https://github.com/permissionlessweb/cw-orchestrator", rev = "ec4d693aad80ee70ddbd77c3b78c9807bedb6be0" }
-cw-ownable = { path = "../../cw-plus-plus" }
-cw-plus-orch = { path = "../../cw-orchestrator/cw-orch" }
-cw-storage-plus = { path = "../../cw-storage-plus" }
-cw-utils = { path = "../../cw-minus/packages/cw-utils" }
-cw2 = { path = "../../cw-minus/packages/cw2" }
-cw20 = { path = "../../cw-plus/packages/cw20" }
-cw20-base = { path = "../../cw-plus/contracts/cw20-base" }
+cw-controllers = { version = "3.0.0" }
+cw-orch = { version = "0.30.0" }
+cw-ownable = { version = "3.0.1" }
+cw-plus-orch = { version = "0.25.0" }
+cw-storage-plus = { version = "3.0.1" }
+cw-utils = { version = "3.0.0" }
+cw2 = { version = "3.0.0" }
+cw20 = { version = "3.0.0" }
+cw20-base = { version = "3.0.0" }
 protobuf = { version = "2", features = ["with-bytes"] }
 schemars = { version = "0.8.22" }
 semver = "1.0"
@@ -73,10 +73,85 @@ abstract-money-market-standard = { path = "../framework/packages/standards/money
 abstract-sdk                   = { path = "../framework/packages/abstract-sdk" }
 abstract-staking-standard      = { path = "../framework/packages/standards/staking" }
 abstract-std                   = { path = "../framework/packages/abstract-std" }
+
+cw-storage-plus = { path = "../../cw-storage-plus" }
 cosmwasm-std = { path = "../../cosmwasm/packages/std" }
 cosmwasm-schema = { path = "../../cosmwasm/packages/schema" }
-cw-storage-plus = { path = "../../cw-storage-plus" }
-
+cosmos-sdk-proto = { path = "../../cosmos-rust/cosmos-sdk-proto" }
+cosmrs = { path = "../../cosmos-rust/cosmrs" }
+cw-address-like = { path = "../../cw-plus-plus/packages/address-like" }
+cw-controllers = { path = "../../cw-minus/packages/controllers" }
+cw-orch = { path = "../../cw-orchestrator/cw-orch" }
+cw-ownable = { path = "../../cw-plus-plus/packages/ownable" }
+cw-plus-orch = { path = "../../cw-orchestrator/packages/integrations/cw-plus" }
+cw-utils = { path = "../../cw-minus/packages/cw-utils" }
+cw2 = { path = "../../cw-minus/packages/cw2" }
+cw20 = { path = "../../cw-plus/packages/cw20" }
+cw20-base = { path = "../../cw-plus/contracts/cw20-base" }
+neutron-std = { path = "../../neutron-std/packages/neutron-std" }
+osmosis-std = { path = "../../osmosis-rust/packages/osmosis-std" }
+cw1 = { path = "../../cw-plus/packages/cw1" }
+cw1-subkeys = { path = "../../cw-plus/contracts/cw1-subkeys" }
+cw1-whitelist = { path = "../../cw-plus/contracts/cw1-whitelist" }
+cw20-ics20 = { path = "../../cw-plus/contracts/cw20-ics20" }
+cw3 = { path = "../../cw-plus/packages/cw3" }
+cw3-fixed-multisig = { path = "../../cw-plus/contracts/cw3-fixed-multisig" }
+cw3-flex-multisig = { path = "../../cw-plus/contracts/cw3-flex-multisig" }
+cw4 = { path = "../../cw-plus/packages/cw4" }
+cw4-group = { path = "../../cw-plus/contracts/cw4-group" }
+cw4-stake = { path = "../../cw-plus/contracts/cw4-stake" }
+cosmwasm-core = { path = "../../cosmwasm/packages/core" }
+cosmwasm-crypto = { path = "../../cosmwasm/packages/crypto" }
+cosmwasm-derive = { path = "../../cosmwasm/packages/derive" }
+cosmwasm-schema-derive = { path = "../../cosmwasm/packages/schema-derive" }
+cosmwasm-vm = { path = "../../cosmwasm/packages/vm" }
+cw-schema = { path = "../../cosmwasm/packages/cw-schema" }
+cw-schema-derive = { path = "../../cosmwasm/packages/cw-schema-derive" }
+zk-cosmwasm = { path = "../../cosmwasm/packages/zk" }
+abstract-cw-multi-test = { path = "../../cw-multi-test-fork" }
+cw-multi-test = { path = "../../clone-cw-multi-test" }
+simple-ica = { path = "../../cw-ibc-demo/packages/simple-ica" }
+simple-ica-controller = { path = "../../cw-ibc-demo/contracts/simple-ica-controller" }
+simple-ica-host = { path = "../../cw-ibc-demo/contracts/simple-ica-host" }
+ibc-chain-registry = { path = "../../hermes/crates/chain-registry" }
+ibc-proto = { path = "../../ibc-proto-rs" }
+ibc-relayer = { path = "../../hermes/crates/relayer" }
+ibc-relayer-cli = { path = "../../hermes/crates/relayer-cli" }
+ibc-relayer-types = { path = "../../hermes/crates/relayer-types" }
+ics23 = { path = "../../ics23/rust" }
+tendermint = { path = "../../tendermint-rs/tendermint" }
+tendermint-proto = { path = "../../tendermint-rs/proto" }
+tendermint-rpc = { path = "../../tendermint-rs/rpc" }
+tendermint-light-client-verifier = { path = "../../tendermint-rs/light-client-verifier" }
+informalsystems-pbjson = { path = "../../pbjson/pbjson" }
+zakura-halo2-gadgets = { path = "../../zakura-common/crates/halo2_gadgets" }
+zakura-halo2-poseidon = { path = "../../zakura-common/crates/halo2_poseidon" }
+zakura-halo2-proofs = { path = "../../zakura-common/crates/halo2_proofs" }
+zakura-pasta-curves = { path = "../../zakura-common/crates/pasta_curves" }
+zakura-reddsa = { path = "../../zakura-common/crates/reddsa" }
+wasmer-compiler-singlepass = { git = "https://github.com/permissionlessweb/wasmer", rev = "e1edbf4ff55b0e0ccb61015ee1015d8283689fd5" }
+tendermint-testgen = { path = "../../tendermint-rs/testgen" }
+informalsystems-pbjson-types = { path = "../../pbjson/pbjson-types" }
+penumbra-sdk-custody = { path = "../../penumbra/crates/custody" }
+penumbra-sdk-fee = { path = "../../penumbra/crates/core/component/fee" }
+penumbra-sdk-ibc = { path = "../../penumbra/crates/core/component/ibc" }
+penumbra-sdk-keys = { path = "../../penumbra/crates/core/keys" }
+penumbra-sdk-proto = { path = "../../penumbra/crates/proto" }
+penumbra-sdk-transaction = { path = "../../penumbra/crates/core/transaction" }
+penumbra-sdk-view = { path = "../../penumbra/crates/view" }
+penumbra-sdk-wallet = { path = "../../penumbra/crates/wallet" }
+namada_sdk = { path = "../../namada/crates/sdk" }
+tendermint-light-client = { path = "../../tendermint-rs/light-client" }
+tendermint-light-client-detector = { path = "../../tendermint-rs/light-client-detector" }
+zcash_encoding = { version = "0.4.0", path = "../../librustzcash/components/zcash_encoding" }
+cnidarium = { path = "../../cnidarium" }
+ibc-types = { path = "../../ibc-types/crates/ibc-types" }
+jmt = { path = "../../jmt" }
+tower-abci = { path = "../../tower-abci" }
+cw-clearable = { path = "../../cw-packages/cw-clearable" }
+cw-orch-interchain = { path = "../../cw-orchestrator/cw-orch-interchain" }
+abstract-cw-orch-polytone = { path = "../../polytone/packages/cw-orch-polytone" }
+cw-paginate = { path = "../../cw-plus-plus/packages/paginate" }
 [patch."https://github.com/permissionlessweb/cw-orchestrator"]
 cw-orch = { path = "../../cw-orchestrator/cw-orch" }
 cw-orch-core = { path = "../../cw-orchestrator/packages/cw-orch-core" }

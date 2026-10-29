@@ -2,8 +2,6 @@ use std::{fmt, str::FromStr};
 
 use cosmwasm_std::StdError;
 use cw_asset::AssetInfo;
-use schemars::JsonSchema;
-use serde::{Deserialize, Serialize};
 
 use crate::{
     constants::{ASSET_DELIMITER, ATTRIBUTE_DELIMITER, TYPE_DELIMITER},

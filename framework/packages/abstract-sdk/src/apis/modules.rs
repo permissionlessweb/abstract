@@ -42,7 +42,7 @@ impl<T: ModuleInterface> AbstractApi<T> for Modules<'_, T> {
     fn base(&self) -> &T {
         self.base
     }
-    fn deps(&self) -> Deps {
+    fn deps(&self) -> Deps<'_> {
         self.deps
     }
 }

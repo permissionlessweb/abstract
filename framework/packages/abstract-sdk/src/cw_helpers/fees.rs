@@ -1,7 +1,7 @@
 //! # Fee helpers
 //! Helper trait that lets you easily charge fees on assets
 
-use cosmwasm_std::{CosmosMsg, Uint128, Uint256};
+use cosmwasm_std::{CosmosMsg, Uint256};
 use cw_asset::Asset;
 
 use crate::{
@@ -46,7 +46,6 @@ mod tests {
 
     // test that we can charge fees on assets
 
-    
     fn test_charge_fee() {
         let info = AssetInfo::native("uusd");
         let mut asset = Asset::new(info, 1000u128);
@@ -56,7 +55,7 @@ mod tests {
         assert_eq!(&charged.to_string(), "100");
     }
     // test transfer fee
-    
+
     fn test_charge_transfer_fee() {
         let info = AssetInfo::native("uusd");
         let mut asset: Asset = Asset::new(info.clone(), 1000u128);

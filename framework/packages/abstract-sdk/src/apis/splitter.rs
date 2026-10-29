@@ -25,7 +25,7 @@ impl<T: SplitterInterface> AbstractApi<T> for Splitter<'_, T> {
     fn base(&self) -> &T {
         self.base
     }
-    fn deps(&self) -> Deps {
+    fn deps(&self) -> Deps<'_> {
         self.deps
     }
 }

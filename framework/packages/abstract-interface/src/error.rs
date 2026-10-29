@@ -1,5 +1,5 @@
 use abstract_std::{objects::dependency::StaticDependency, AbstractError};
-use cosmwasm_std::{StdError, StdResult};
+use cosmwasm_std::StdError;
 use cw_orch::prelude::CwOrchError;
 use thiserror::Error;
 

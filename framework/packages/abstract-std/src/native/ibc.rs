@@ -17,8 +17,7 @@ use crate::{
     objects::{module::ModuleInfo, TruncatedChainId},
 };
 use polytone_callbacks::{
-    Callback as PolytoneCallback, ErrorResponse, ExecutionCallbackResult, ExecutionResponse,
-    QueryCallbackResult,
+    Callback as PolytoneCallback, ExecutionCallbackResult, QueryCallbackResult,
 };
 
 pub const PACKET_LIFETIME: u64 = 60 * 60;
@@ -245,7 +244,7 @@ impl PrimaryKey<'_> for ICS20PacketIdentifier {
     // sequence
     type SuperSuffix = u64;
 
-    fn key(&self) -> Vec<cw_storage_plus::Key> {
+    fn key(&self) -> Vec<cw_storage_plus::Key<'_>> {
         let mut keys = self.channel_id.key();
         keys.extend(self.sequence.key());
         keys

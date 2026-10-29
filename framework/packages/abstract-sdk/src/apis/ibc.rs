@@ -59,7 +59,7 @@ impl<T: IbcInterface> AbstractApi<T> for IbcClient<'_, T> {
     fn base(&self) -> &T {
         self.base
     }
-    fn deps(&self) -> Deps {
+    fn deps(&self) -> Deps<'_> {
         self.deps
     }
 }

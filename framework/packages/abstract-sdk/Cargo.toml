@@ -23,7 +23,7 @@ abstract-std     = { workspace = true }
 
 # test-utils feature
 abstract-testing = { workspace = true, optional = true }
-cosmos-sdk-proto = { version = "0.27", optional = true, default-features = false, features = ["cosmwasm"] }
+cosmos-sdk-proto = { version = "0.28.0", default-features = false, optional = true, features = ["cosmwasm"] }
 cosmwasm-schema  = { workspace = true, optional = true }
 cosmwasm-std     = { workspace = true, features = ["iterator", "staking"] }
 cw-asset         = { workspace = true }

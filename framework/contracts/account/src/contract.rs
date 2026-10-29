@@ -93,7 +93,7 @@ pub fn instantiate(
             let seq = LOCAL_ACCOUNT_SEQUENCE
                 .query(&deps.querier, registry.address.clone())
                 .map_err(|e| {
-                    cosmwasm_std::StdError::generic_err(format!(
+                    cosmwasm_std::StdError::msg(format!(
                         "registry LOCAL_ACCOUNT_SEQUENCE (u32) missing at {} — Abstract natives must be instantiate2+blob (salt reg). {e}",
                         registry.address
                     ))
