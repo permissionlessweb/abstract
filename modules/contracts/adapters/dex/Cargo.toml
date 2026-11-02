@@ -99,7 +99,6 @@ abstract-integration-tests  = { workspace = true }
 abstract-interface = { workspace = true, features = ["daemon"] }
 anyhow             = { workspace = true }
 
-bip32 = { version = "0.5.2" }
 clap               = { workspace = true }
 
 cw-orch                     = { workspace = true, features = ["daemon"] }

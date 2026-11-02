@@ -88,7 +88,6 @@ abstract-adapter = { workspace = true, features = ["test-utils"] }
 abstract-client = { workspace = true, features = ["test-utils"] }
 abstract-integration-tests = { workspace = true }
 anyhow = { workspace = true }
-bip32 = { version = "0.5.2" }
 clap = { workspace = true }
 cw-orch = { workspace = true, features = ["daemon"] }
 cw-staking = { path = ".", package = "abstract-cw-staking", features = [
