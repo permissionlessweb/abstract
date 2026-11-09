@@ -24,7 +24,7 @@ base64                    = "0.22.1"
 cosmwasm-schema.workspace = true
 cosmwasm-std       = { workspace = true }
 # Testing contract
-counter-contract = { version = "0.27.0" } # Use tag if breaks
+counter-contract = { path = "../../../cw-orchestrator/contracts-ws/contracts/counter" }
 cw-controllers            = { workspace = true }
 cw-orch            = { workspace = true, features = ["daemon"] }
 cw-orch-interchain = { workspace = true, features = ["daemon"] }

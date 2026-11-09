@@ -7,8 +7,9 @@ members = [
     # "mars-adapter",
     "neutron-dex-adapter",
     "osmosis-adapter",
-    "wyndex-adapter",
+    # wyndex-adapter omitted: wynddex is unmaintained on CosmWasm 2
 ]
+exclude = ["bundles/mockdex"]
 
 resolver = "2"
 
@@ -57,12 +58,6 @@ schemars = { version = "0.8.22" }
 semver = "1.0"
 serde = { version = "1.0", default-features = false, features = ["derive"] }
 thiserror = { version = "1.0.50" }
-wyndex = { path = "../../wynddex/packages/wyndex" }
-wyndex-factory = { path = "../../wynddex/contracts/factory" }
-wyndex-multi-hop = { path = "../../wynddex/contracts/multi-hop" }
-wyndex-pair = { path = "../../wynddex/contracts/pair" }
-wyndex-stake = { path = "../../wynddex/contracts/stake", features = ["library"] }
-# TODO: REMOVE As soon as new dex-standard published
 [patch.crates-io]
 abstract-adapter               = { path = "../framework/packages/abstract-adapter" }
 abstract-adapter-utils         = { path = "../framework/packages/standards/utils" }
@@ -161,13 +156,6 @@ cw-orch-traits = { path = "../../cw-orchestrator/packages/cw-orch-traits" }
 [patch."https://github.com/permissionlessweb/cosmwasm"]
 cosmwasm-std = { path = "../../cosmwasm/packages/std" }
 cosmwasm-schema = { path = "../../cosmwasm/packages/schema" }
-
-[patch."https://github.com/abstractsdk/wynddex"]
-wyndex           = { path = "../../wynddex/packages/wyndex" }
-wyndex-factory   = { path = "../../wynddex/contracts/factory" }
-wyndex-multi-hop = { path = "../../wynddex/contracts/multi-hop" }
-wyndex-pair      = { path = "../../wynddex/contracts/pair" }
-wyndex-stake     = { path = "../../wynddex/contracts/stake" }
 
 # Backup release profile, will result in warnings during optimization
 [profile.release]

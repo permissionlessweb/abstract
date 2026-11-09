@@ -8,31 +8,13 @@ use cosmwasm_std::Env;
 /// This allows erroring the execution before sending any IBC message to another chain
 /// This provides superior UX in case of an IBC execution
 pub(crate) fn identify_money_market(value: &str) -> Result<Box<dyn Identify>, MoneyMarketError> {
-    match value {
-        // abstract_kujira_adapter::money_market::GHOST => {
-        //     Ok(Box::<abstract_kujira_adapter::money_market::Ghost>::default())
-        // }
-        // abstract_mars_adapter::MARS => {
-        //     Ok(Box::<abstract_mars_adapter::money_market::Mars>::default())
-        // }
-        _ => Err(MoneyMarketError::UnknownMoneyMarket(value.to_owned())),
-    }
+    Err(MoneyMarketError::UnknownMoneyMarket(value.to_owned()))
 }
 
 pub(crate) fn resolve_money_market(
     value: &str,
 ) -> Result<Box<dyn MoneyMarketCommand>, MoneyMarketError> {
-    match value {
-        #[cfg(feature = "ghost")]
-        abstract_kujira_adapter::money_market::GHOST => {
-            Ok(Box::<abstract_kujira_adapter::money_market::Ghost>::default())
-        }
-        #[cfg(feature = "mars")]
-        abstract_mars_adapter::MARS => {
-            Ok(Box::<abstract_mars_adapter::money_market::Mars>::default())
-        }
-        _ => Err(MoneyMarketError::ForeignMoneyMarket(value.to_owned())),
-    }
+    Err(MoneyMarketError::ForeignMoneyMarket(value.to_owned()))
 }
 
 /// Given a FULL provider nam (e.g. juno>wyndex), returns whether the request is local or over IBC

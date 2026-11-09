@@ -1,5 +1,9 @@
 [workspace]
-exclude = ["contracts/apps/croncat", "contracts/apps/dca"]
+exclude = [
+    "contracts/apps/croncat",
+    "contracts/apps/dca",
+    "contracts/standalones/ica-owner",
+]
 members = ["contracts/adapters/*", "contracts/apps/*", "contracts/standalones/*"]
 
 resolver = "2"
@@ -28,7 +32,6 @@ abstract-adapter-utils         = { version = "0.26.1", path = "../framework/pack
 abstract-app               = { path = "../framework/packages/abstract-app", version = "0.26.1" }
 
 # Integrations
-abstract-astroport-adapter   = { path = "../integrations/astroport-adapter", default-features = false }
 abstract-client            = { path = "../framework/packages/abstract-client", version = "0.26.1" }
 
 ## Modules
@@ -40,14 +43,12 @@ abstract-interface         = { path = "../framework/packages/abstract-interface"
 abstract-macros            = { path = "../framework/packages/abstract-macros", version = "0.26.1" }
 # abstract-astrovault-adapter  = { path = "../integrations/astrovault-adapter", default-features = false }
 # abstract-kujira-adapter      = { path = "../integrations/kujira-adapter", default-features = false }
-abstract-mars-adapter        = { path = "../integrations/mars-adapter", default-features = false }
 abstract-money-market-standard = { path = "../framework/packages/standards/money-market", version = "0.26.1" }
 abstract-neutron-dex-adapter = { path = "../integrations/neutron-dex-adapter", default-features = false }
 abstract-osmosis-adapter     = { path = "../integrations/osmosis-adapter", default-features = false }
 abstract-staking-standard      = { path = "../framework/packages/standards/staking", version = "0.26.1" }
 abstract-standalone        = { path = "../framework/packages/abstract-standalone", version = "0.26.1" }
 abstract-testing           = { path = "../framework/packages/abstract-testing", version = "0.26.1" }
-abstract-wyndex-adapter      = { path = "../integrations/wyndex-adapter", default-features = false }
 
 ## Testing
 anyhow = "1"
@@ -61,11 +62,10 @@ croncat-app          = { path = "./contracts/apps/croncat", default-features = f
 cw-address-like = { version = "3.0.1" }
 cw-asset        = { path = "../../cw-asset" }
 cw-controllers = { version = "3.0.0" }
-cw-ica-controller = { path = "../../cw-ica-controller", default-features = false }
 cw-orch = { version = "0.30.0" }
 cw-orch-interchain = { version = "0.8.0" }
-cw-orch-neutron-test-tube = { version = "0.1.0" }
-cw-orch-osmosis-test-tube = { version = "0.4.0" }
+cw-orch-neutron-test-tube = { version = "=0.2.2" }
+cw-orch-osmosis-test-tube = { version = "=0.5.1" }
 cw-ownable = { version = "3.0.1" }
 cw-plus-orch = { version = "0.25.0" }
 cw-storage-plus = { version = "3.0.1" }
@@ -75,7 +75,6 @@ cw20 = { version = "3.0.0" }
 cw20-base = { version = "3.0.0", features = ["library"] }
 dca-app              = { path = "./contracts/apps/dca", default-features = false }
 
-mockdex-bundle = { path = "../integrations/bundles/mockdex" }
 protobuf  = { version = "2", features = ["with-bytes"] }
 rstest = "0.17.0"
 schemars  = { version = "0.8.22" }
@@ -99,7 +98,6 @@ abstract-staking-standard      = { path = "../framework/packages/standards/staki
 abstract-standalone            = { path = "../framework/packages/abstract-standalone" }
 abstract-std                   = { path = "../framework/packages/abstract-std" }
 abstract-testing               = { path = "../framework/packages/abstract-testing" }
-cw-ica-controller              = { path = "../../cw-ica-controller" }
 
 cw-storage-plus = { path = "../../cw-storage-plus" }
 cosmwasm-std = { path = "../../cosmwasm/packages/std" }
@@ -110,7 +108,10 @@ abstract-cw-orch-polytone = { path = "../../polytone/packages/cw-orch-polytone" 
 cw-address-like = { path = "../../cw-plus-plus/packages/address-like" }
 cw-controllers = { path = "../../cw-minus/packages/controllers" }
 cw-orch = { path = "../../cw-orchestrator/cw-orch" }
+cw-orch-core = { path = "../../cw-orchestrator/packages/cw-orch-core" }
+cw-orch-daemon = { path = "../../cw-orchestrator/cw-orch-daemon" }
 cw-orch-interchain = { path = "../../cw-orchestrator/cw-orch-interchain" }
+cw-orch-mock = { path = "../../cw-orchestrator/packages/cw-orch-mock" }
 cw-orch-neutron-test-tube = { path = "../../cw-orchestrator/packages/cw-orch-neutron-test-tube" }
 cw-orch-osmosis-test-tube = { path = "../../cw-orchestrator/packages/cw-orch-osmosis-test-tube" }
 cw-ownable = { path = "../../cw-plus-plus/packages/ownable" }

@@ -13,23 +13,17 @@ resolver = "2"
 # Builds
 [package.metadata.optimizer]
 builds = [
-    { name = "juno", features = ["wynd"] },
-    # { name = "terra2", features = [
-    #   "astroport",
-    # ] },
     { name = "neutron", features = ["neutron"] },
     # { name = "neutron", features = [
     #   "astroport",
     # ] },
     { name = "osmosis", features = ["osmosis"] },
-    { name = "kujira", features = ["fin"] },
     # { name = "injective", features = [
     #   "astroport",
     # ] },
     # { name = "sei", features = [
     #   "astroport",
     # ] },
-    { name = "archway", features = ["astrovault"] },
 ]
 
 [lib]
@@ -45,14 +39,10 @@ testing = [
     "dep:serde_json",
     "abstract-adapter/test-utils",
 ]
-local = ["abstract-wyndex-adapter/local", "abstract-neutron-dex-adapter/local"]
+local = ["abstract-neutron-dex-adapter/local"]
 
 # Supported Dexes
 osmosis = ["abstract-osmosis-adapter/full_integration"]
-wynd    = ["abstract-wyndex-adapter/full_integration"]
-# astroport = ["abstract-astroport-adapter/full_integration"]
-# astrovault = ["abstract-astrovault-adapter/full_integration"]
-# fin        = ["abstract-kujira-adapter/full_integration"]
 neutron    = ["abstract-neutron-dex-adapter/full_integration"]
 
 neutron-test = ["dep:cw-orch-neutron-test-tube"]
@@ -79,9 +69,6 @@ abstract-neutron-dex-adapter = { workspace = true }
 
 # Osmosis #
 abstract-osmosis-adapter = { workspace = true }
-
-# # Wyndex #
-abstract-wyndex-adapter = { workspace = true }
 cosmwasm-schema           = { workspace = true }
 cosmwasm-std              = { workspace = true }
 cw-asset                  = { workspace = true }
@@ -110,14 +97,13 @@ cw-utils  = { workspace = true }
 cw20      = { workspace = true }
 cw20-base = { workspace = true }
 dex = { path = ".", features = [
-  "wynd",
   "osmosis",
+  "neutron",
   "testing",
   "local"
 ], package = "abstract-dex-adapter" }
 dotenv             = "0.15.0"
 env_logger         = "0.11.3"
-mockdex-bundle     = { workspace = true }
 neutron-std = { version = "6.0.0" }
 # osmosis-std = { version = "0.26.0", git = "https://github.com/permissionlessweb/osmosis-rust" }
 osmosis-std = { version = "0.26.0" }

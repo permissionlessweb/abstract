@@ -9,23 +9,11 @@ use cosmwasm_std::Env;
 /// This provides superior UX in case of an IBC execution
 pub(crate) fn identify_exchange(value: &str) -> Result<Box<dyn Identify>, DexError> {
     match value {
-        abstract_wyndex_adapter::WYNDEX => {
-            Ok(Box::<abstract_wyndex_adapter::dex::WynDex>::default())
-        }
         abstract_neutron_dex_adapter::NEUTRON => {
             Ok(Box::<abstract_neutron_dex_adapter::dex::Neutron>::default())
         }
-        // abstract_astroport_adapter::ASTROPORT => {
-        //     Ok(Box::<abstract_astroport_adapter::dex::Astroport>::default())
-        // }
-        // abstract_kujira_adapter::dex::FIN => {
-        //     Ok(Box::<abstract_kujira_adapter::dex::Fin>::default())
-        // }
         abstract_osmosis_adapter::OSMOSIS => {
             Ok(Box::<abstract_osmosis_adapter::dex::Osmosis>::default())
-        }
-        abstract_astrovault_adapter::ASTROVAULT => {
-            Ok(Box::<abstract_astrovault_adapter::dex::Astrovault>::default())
         }
         _ => Err(DexError::UnknownDex(value.to_owned())),
     }
@@ -33,10 +21,6 @@ pub(crate) fn identify_exchange(value: &str) -> Result<Box<dyn Identify>, DexErr
 
 pub(crate) fn resolve_exchange(value: &str) -> Result<Box<dyn DexCommand>, DexError> {
     match value {
-        #[cfg(feature = "wynd")]
-        abstract_wyndex_adapter::WYNDEX => {
-            Ok(Box::<abstract_wyndex_adapter::dex::WynDex>::default())
-        }
         #[cfg(feature = "neutron")]
         abstract_neutron_dex_adapter::NEUTRON => {
             Ok(Box::<abstract_neutron_dex_adapter::dex::Neutron>::default())
@@ -44,18 +28,6 @@ pub(crate) fn resolve_exchange(value: &str) -> Result<Box<dyn DexCommand>, DexEr
         #[cfg(feature = "osmosis")]
         abstract_osmosis_adapter::OSMOSIS => {
             Ok(Box::<abstract_osmosis_adapter::dex::Osmosis>::default())
-        }
-        #[cfg(feature = "astroport")]
-        abstract_astroport_adapter::ASTROPORT => {
-            Ok(Box::<abstract_astroport_adapter::dex::Astroport>::default())
-        }
-        // #[cfg(feature = "fin")]
-        // abstract_kujira_adapter::dex::FIN => {
-        //     Ok(Box::<abstract_kujira_adapter::dex::Fin>::default())
-        // }
-        #[cfg(feature = "astrovault")]
-        abstract_astrovault_adapter::ASTROVAULT => {
-            Ok(Box::<abstract_astrovault_adapter::dex::Astrovault>::default())
         }
         _ => Err(DexError::ForeignDex(value.to_owned())),
     }
